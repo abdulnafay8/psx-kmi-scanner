@@ -69,9 +69,15 @@ def load_config():
         CONFIG_FILE.write_text(json.dumps(DEFAULT_CONFIG, indent=2))
     config = {**DEFAULT_CONFIG, **json.loads(CONFIG_FILE.read_text())}
     for key, env in (("ntfy_topic", "NTFY_TOPIC"), ("app_url", "APP_URL")):
-        if os.environ.get(env):
-            config[key] = os.environ[env]
+        if clean_env(env):
+            config[key] = clean_env(env)
     return config
+
+
+def clean_env(name):
+    """An environment value without stray whitespace or a byte-order mark
+    (PowerShell can add one when a secret is piped in)."""
+    return os.environ.get(name, "").replace("﻿", "").strip()
 
 
 def market_state(now):
@@ -162,7 +168,7 @@ def push_fcm(title, message, log, click=None):
     """Firebase Cloud Messaging (HTTP v1). Needs two GitHub secrets:
     FCM_SERVICE_ACCOUNT (the service-account JSON key) and FCM_TOKENS (one
     device code per line, from the app's Settings page)."""
-    key, tokens = os.environ.get("FCM_SERVICE_ACCOUNT"), os.environ.get("FCM_TOKENS", "")
+    key, tokens = clean_env("FCM_SERVICE_ACCOUNT"), clean_env("FCM_TOKENS")
     tokens = [t.strip() for t in tokens.split() if t.strip()]
     if not key or not tokens:
         log("Firebase push skipped: FCM_SERVICE_ACCOUNT or FCM_TOKENS not set")
