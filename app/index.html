@@ -438,7 +438,7 @@ async function render() {
   const v = document.getElementById("view");
   const screens = { hot, stock: () => stock(arg), check: () => check(arg), log: logView, record,
                     settings: settingsView, about, status, research };
-  v.innerHTML = await (screens[route] || hot)();
+  v.innerHTML = fcmBanner() + await (screens[route] || hot)();
   window.scrollTo(0, 0);
   wire(route, arg);
 }
@@ -513,7 +513,8 @@ async function enableFcm(out) {
     const reg = await navigator.serviceWorker.register("firebase-messaging-sw.js");
     const token = await firebase.messaging().getToken({ vapidKey: self.FIREBASE_VAPID_KEY, serviceWorkerRegistration: reg });
     store.set("fcmToken", token);
-    say(`<b>Alerts are on for this device.</b> Copy this code and save it as the GitHub secret <code>FCM_TOKENS</code>:
+    store.set("fcmChanged", false);
+    say(`<b>Alerts are on for this device.</b> Copy this code and save it as the GitHub secret <code>FCM_TOKENS</code> (replace the old one):
       <textarea id="fcm-token" readonly style="width:100%;height:90px;margin-top:6px;font-size:11px">${esc(token)}</textarea>
       <button class="btn ghost wide" id="fcm-copy">Copy code</button>`);
     document.getElementById("fcm-copy").onclick = async () => {
@@ -525,8 +526,33 @@ async function enableFcm(out) {
   }
 }
 
+// Chrome sometimes replaces a phone's push subscription; then the saved
+// FCM_TOKENS code stops working. Check quietly on each visit.
+async function checkFcmToken() {
+  try {
+    const saved = store.get("fcmToken", null);
+    if (!saved || !("Notification" in window) || Notification.permission !== "granted" || !self.FIREBASE_CONFIG.apiKey) return;
+    await loadScript(FB + "firebase-app-compat.js");
+    await loadScript(FB + "firebase-messaging-compat.js");
+    if (!firebase.apps.length) firebase.initializeApp(self.FIREBASE_CONFIG);
+    const reg = await navigator.serviceWorker.register("firebase-messaging-sw.js");
+    const now = await firebase.messaging().getToken({ vapidKey: self.FIREBASE_VAPID_KEY, serviceWorkerRegistration: reg });
+    if (now && now !== saved) {
+      store.set("fcmToken", now);
+      store.set("fcmChanged", true);
+      render();
+    }
+  } catch {}
+}
+
+function fcmBanner() {
+  return store.get("fcmChanged", false)
+    ? `<div class="note lock">Chrome changed this phone's alert code, so Firebase alerts to it will stop. Open <a href="#settings">Settings</a>, tap "Turn on alerts on this device" and save the new code as <code>FCM_TOKENS</code>.</div>`
+    : "";
+}
+
 window.addEventListener("hashchange", render);
-load().then(render);
+load().then(render).then(checkFcmToken);
 </script>
 </body>
 </html>
