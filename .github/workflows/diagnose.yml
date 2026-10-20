@@ -1,0 +1,23 @@
+# One-off check: can GitHub's machines reach the PSX data portal at all?
+name: Diagnose PSX access
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Where is this machine?
+        run: curl -s --max-time 15 https://ipinfo.io/json | grep -E '"(country|org|city)"' || true
+      - name: DNS
+        run: getent hosts dps.psx.com.pk || true
+      - name: PSX data portal (HTTPS)
+        run: curl -sS -o /dev/null -w "HTTP %{http_code} in %{time_total}s\n" --max-time 30 https://dps.psx.com.pk/ || true
+      - name: PSX historical endpoint
+        run: curl -sS -o /dev/null -w "HTTP %{http_code} in %{time_total}s\n" --max-time 30 -X POST -d "symbol=OGDC" https://dps.psx.com.pk/historical || true
+      - name: PSX main site
+        run: curl -sS -o /dev/null -w "HTTP %{http_code} in %{time_total}s\n" --max-time 30 https://www.psx.com.pk/ || true
+      - name: TCP connect to port 443
+        run: timeout 20 bash -c '</dev/tcp/dps.psx.com.pk/443' && echo "port 443 open" || echo "port 443 connect FAILED"
