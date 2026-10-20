@@ -197,8 +197,16 @@ def push_fcm(title, message, log, click=None):
             urllib.request.urlopen(req, timeout=20).read()
             sent += 1
         except urllib.error.HTTPError as e:
-            log(f"Firebase push FAILED for device {i}: HTTP {e.code} "
-                f"{'(device code expired: turn alerts on again in the app)' if e.code in (400, 404) else ''}")
+            try:
+                err = json.loads(e.read().decode("utf-8"))["error"]
+                detail = err.get("status", "") + ": " + err.get("message", "")
+                codes = [d.get("errorCode") for d in err.get("details", []) if d.get("errorCode")]
+                detail += f" [{', '.join(codes)}]" if codes else ""
+            except Exception:
+                detail = ""
+            hint = (" (this phone's code is no longer valid: turn alerts on again in the app "
+                    "and update FCM_TOKENS)" if e.code == 404 else "")
+            log(f"Firebase push FAILED for device {i}: HTTP {e.code} {detail}{hint}")
         except Exception as e:
             log(f"Firebase push FAILED for device {i}: {type(e).__name__}")
     if sent:
