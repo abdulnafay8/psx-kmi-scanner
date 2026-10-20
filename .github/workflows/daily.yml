@@ -36,6 +36,8 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     env:
       NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
+      FCM_TOKENS: ${{ secrets.FCM_TOKENS }}
       APP_URL: ${{ vars.APP_URL }}
       PYTHONIOENCODING: utf-8
     steps:
@@ -53,11 +55,13 @@ jobs:
         run: python -W ignore run_daily.py --test-push
 
       - name: Run the daily scan
+        id: scan
         if: ${{ !inputs.test_push }}
+        continue-on-error: true
         run: python -W ignore run_daily.py
 
       - name: Save prices, ledger and app data
-        if: ${{ !inputs.test_push }}
+        if: ${{ !inputs.test_push && always() }}
         run: |
           git config user.name "kmi-scanner-bot"
           git config user.email "kmi-scanner-bot@users.noreply.github.com"
@@ -80,3 +84,11 @@ jobs:
       - id: deploy
         if: ${{ !inputs.test_push }}
         uses: actions/deploy-pages@v4
+
+      # after saving and publishing, make a failed scan show as a red X
+      # (GitHub then emails you)
+      - name: Fail the run if the scan failed
+        if: ${{ steps.scan.outcome == 'failure' }}
+        run: |
+          echo "The daily scan failed (see 'Run the daily scan' above). Most often PSX was unreachable."
+          exit 1

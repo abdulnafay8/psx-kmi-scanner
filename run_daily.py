@@ -27,6 +27,7 @@ import json
 import os
 import sys
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -102,28 +103,40 @@ def merge_new_bars(old, new, keep_today):
     return merged
 
 
-def update_prices(symbols, keep_today, log):
-    ok = failed = 0
-    for symbol in symbols:
-        path = DAILY_DIR / f"{symbol}.csv"
-        old = pd.read_csv(path, parse_dates=["date"]) if path.exists() else pd.DataFrame()
-        start = (old["date"].max() - pd.Timedelta(days=10)).date() if len(old) else bt.TRAIN_START.date()
-        try:
-            new = psxdata.stocks(symbol, start=start, cache=False)
-        except Exception as e:
-            log(f"fetch failed {symbol}: {e}")
-            failed += 1
-            continue
-        if new is None or new.empty:
-            log(f"no data returned for {symbol}")
-            failed += 1
-            continue
-        merged = merge_new_bars(old, new, keep_today)
-        if merged.empty:                              # nothing ever traded: don't save
-            continue
+def fetch_one(symbol, keep_today):
+    """Update one stock's CSV. Returns None on success, else the reason."""
+    path = DAILY_DIR / f"{symbol}.csv"
+    old = pd.read_csv(path, parse_dates=["date"]) if path.exists() else pd.DataFrame()
+    start = (old["date"].max() - pd.Timedelta(days=10)).date() if len(old) else bt.TRAIN_START.date()
+    try:
+        new = psxdata.stocks(symbol, start=start, cache=False)
+    except Exception as e:
+        return str(e)
+    if new is None or new.empty:
+        return "no data returned"
+    merged = merge_new_bars(old, new, keep_today)
+    if not merged.empty:                              # nothing ever traded: don't save
         merged.to_csv(path, index=False)
-        ok += 1
+    return None
+
+
+def update_prices(symbols, keep_today, log):
+    failed = {}
+    for symbol in symbols:
+        reason = fetch_one(symbol, keep_today)
+        if reason:
+            failed[symbol] = reason
         time.sleep(0.3)
+    if failed:                                        # PSX hiccups: one more try
+        log(f"{len(failed)} fetches failed; retrying them in 2 minutes")
+        time.sleep(120)
+        for symbol in list(failed):
+            if fetch_one(symbol, keep_today) is None:
+                del failed[symbol]
+            time.sleep(0.5)
+    for symbol, reason in failed.items():
+        log(f"fetch failed {symbol}: {reason}")
+    ok = len(symbols) - len(failed)
     try:
         k = psxdata.stocks("KSE100", start="2025-01-01", cache=False)
         k["date"] = pd.to_datetime(k["date"])
@@ -135,13 +148,62 @@ def update_prices(symbols, keep_today, log):
             .to_csv(INDEX_FILE, index=False)
     except Exception as e:
         log(f"KSE-100 fetch failed: {e}")
-    return ok, failed
+    return ok, len(failed)
 
 
 def push(config, title, message, log, click=None):
+    """Send one alert through every channel that is set up. True if any worked."""
+    sent_ntfy = push_ntfy(config, title, message, log, click)
+    sent_fcm = push_fcm(title, message, log, click)
+    return sent_ntfy or sent_fcm
+
+
+def push_fcm(title, message, log, click=None):
+    """Firebase Cloud Messaging (HTTP v1). Needs two GitHub secrets:
+    FCM_SERVICE_ACCOUNT (the service-account JSON key) and FCM_TOKENS (one
+    device code per line, from the app's Settings page)."""
+    key, tokens = os.environ.get("FCM_SERVICE_ACCOUNT"), os.environ.get("FCM_TOKENS", "")
+    tokens = [t.strip() for t in tokens.split() if t.strip()]
+    if not key or not tokens:
+        log("Firebase push skipped: FCM_SERVICE_ACCOUNT or FCM_TOKENS not set")
+        return False
+    try:
+        from google.oauth2 import service_account
+        from google.auth.transport.requests import Request
+        info = json.loads(key)
+        creds = service_account.Credentials.from_service_account_info(
+            info, scopes=["https://www.googleapis.com/auth/firebase.messaging"])
+        creds.refresh(Request())
+    except Exception as e:
+        log(f"Firebase push FAILED: could not sign in with the service account ({type(e).__name__})")
+        return False
+    url = f"https://fcm.googleapis.com/v1/projects/{info['project_id']}/messages:send"
+    sent = 0
+    for i, token in enumerate(tokens, 1):
+        msg = {"message": {"token": token,
+                           "notification": {"title": title, "body": message},
+                           "webpush": {"notification": {"icon": "icon.svg"},
+                                       **({"fcm_options": {"link": click}} if click else {})}}}
+        req = urllib.request.Request(url, data=json.dumps(msg).encode("utf-8"), method="POST",
+                                     headers={"Authorization": f"Bearer {creds.token}",
+                                              "Content-Type": "application/json"})
+        try:
+            urllib.request.urlopen(req, timeout=20).read()
+            sent += 1
+        except urllib.error.HTTPError as e:
+            log(f"Firebase push FAILED for device {i}: HTTP {e.code} "
+                f"{'(device code expired: turn alerts on again in the app)' if e.code in (400, 404) else ''}")
+        except Exception as e:
+            log(f"Firebase push FAILED for device {i}: {type(e).__name__}")
+    if sent:
+        log(f"Firebase push sent to {sent} of {len(tokens)} devices: {title}")
+    return sent > 0
+
+
+def push_ntfy(config, title, message, log, click=None):
     topic = config.get("ntfy_topic")
     if not topic:
-        log("push skipped: no ntfy_topic in config.json")
+        log("ntfy push skipped: no ntfy topic set")
         return False
     req = urllib.request.Request(f"{config['ntfy_server'].rstrip('/')}/{topic}",
                                  data=message.encode("utf-8"), method="POST")
@@ -150,16 +212,15 @@ def push(config, title, message, log, click=None):
         req.add_header("Click", click)
     try:
         urllib.request.urlopen(req, timeout=20).read()
-        log(f"push sent: {title}")
+        log(f"ntfy push sent: {title}")
         return True
     except Exception as e:
-        log(f"push FAILED: {e}")
+        log(f"ntfy push FAILED: {type(e).__name__}")
         return False
 
 
-def alert_text(entry, plan, kmi_date):
-    lines = [f"{entry['setup_label']}",
-             f"{plan['order']} - valid next trading session only",
+def alert_text(entry, plan, kmi_date, session):
+    lines = [f"{plan['order']} - valid {session} only",
              f"Stop {plan['stop_pct']:.0%} below your fill (about Rs {plan['stop_price_est']:,})"]
     if plan["target_pct"]:
         lines.append(f"Target {plan['target_pct']:.0%} above your fill (about Rs {plan['target_price_est']:,})")
@@ -269,7 +330,8 @@ def main():
     for e in new:
         plan = next(p for p in by_symbol[e["symbol"]]["plans"] if p["setup"] == e["setup"])
         click = f"{config['app_url'].rstrip('/')}/#stock/{e['symbol']}" if config.get("app_url") else None
-        push(config, f"{e['symbol']}: {e['setup_label']}", alert_text(e, plan, kmi_date), log, click)
+        push(config, f"{e['symbol']}: {e['setup_label']}",
+             alert_text(e, plan, kmi_date, f"{opens:%a %d %b}"), log, click)
 
     lg.save(lg.LEDGER_FILE, ledger_rows)
     lg.save(lg.RESEARCH_FILE, research)
@@ -300,8 +362,13 @@ def main():
         history = json.loads(status_file.read_text()).get("runs", [])[:29]
     (APP_DATA / "status.json").write_text(json.dumps({"runs": [
         {"at": meta["generated_at"], "state": state, "as_of": signals["date"],
-         "new_alerts": len(new), "log": log.lines}] + history}, indent=1))
+         "new_alerts": len(new), "fetch_failed": fetched[1], "log": log.lines}] + history},
+        indent=1))
     log("done")
+    if fetched[1] > len(symbols) / 2:
+        # files are saved above; a non-zero exit makes the GitHub run show red
+        print(f"ERROR: {fetched[1]} of {len(symbols)} price downloads failed")
+        sys.exit(2)
 
 
 if __name__ == "__main__":

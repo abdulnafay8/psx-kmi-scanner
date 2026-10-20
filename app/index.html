@@ -8,6 +8,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
+<script src="firebase-config.js"></script>
 <style>
 :root {
   --bg: #f6f7f5; --card: #ffffff; --ink: #18201c; --muted: #5d6a63; --line: #e2e6e3;
@@ -175,7 +176,7 @@ function hot() {
   return `
   ${tested ? "" : `<div class="note lock">No setup has passed the backtest, so there are no Buy plans. Everything shown is for context only.</div>`}
   ${DATA.alerts_made ? `<div class="note">Plans below are for the session of <b>${esc(DATA.plans_for_session)}</b>, from the ${esc(DATA.as_of)} close.</div>`
-    : `<div class="note lock">These plans have expired: ${esc(DATA.no_alert_reason)}. Wait for the next run after the close.</div>`}
+    : `<div class="note lock">No new alerts from this run: ${esc(DATA.no_alert_reason)}. Plans below are from the ${esc(DATA.as_of)} close; check the Track record for which are still live.</div>`}
   <div class="filters">
     <select id="f">${["all", "buy_plan", "in_plan", "running", "fading", "no_setup"].map((k) =>
       `<option value="${k}" ${k === f ? "selected" : ""}>${k === "all" ? "All statuses" : STATUS_LABEL[k]} ${k === "all" ? "" : "(" + (counts[k] || 0) + ")"}</option>`).join("")}</select>
@@ -385,12 +386,12 @@ function settingsView() {
     <button class="btn wide" id="s-save">Save</button>
     <p class="small muted">Saved on this device only.</p>
   </div>
-  <div class="card"><h2>Phone alerts</h2>
-    <ol class="small" style="padding-left:18px;margin:0">
-      <li>Install the free <b>ntfy</b> app on your phone.</li>
-      <li>Subscribe to the topic name written in <code>config.json</code> on the computer.</li>
-      <li>On the computer, run <code>python run_daily.py --test-push</code>. A test alert should arrive.</li>
-    </ol></div>
+  <div class="card"><h2>Alerts on this phone (Firebase)</h2>
+    <p class="small" style="margin-top:0">Open this page in Chrome on your phone, then tap the button. Copy the code it shows and save it as the GitHub secret <code>FCM_TOKENS</code>.</p>
+    <button class="btn wide" id="fcm-on">Turn on alerts on this device</button>
+    <div id="fcm-out" class="small" style="margin-top:10px"></div></div>
+  <div class="card"><h2>Alerts through the ntfy app</h2>
+    <p class="small" style="margin:0">Install the free <b>ntfy</b> app and subscribe to your private topic name (kept in <code>ntfy_topic.txt</code> on the computer).</p></div>
   <div class="card"><h2>Use start-up</h2>
     <p class="small" style="margin:0">Start with a small fixed amount per trade until about 30 live trades match the backtest. Write down before trade 1: "I judge this after 20 trades, and compare live results with the backtest after 30."</p></div>
   <p class="small"><a href="#about">About</a> · <a href="#status">Run log</a></p>`;
@@ -476,6 +477,7 @@ function wire(route, arg) {
     });
   }
   if (route === "settings") {
+    $("fcm-on").onclick = () => enableFcm($("fcm-out"));
     $("s-save").onclick = () => {
       store.set("settings", { risk: +$("s-risk").value || 2000, dailyLoss: +$("s-dl").value || 6000,
         minValue: +$("s-mv").value || 0, minPrice: +$("s-pmin").value || 0, maxPrice: +$("s-pmax").value || 0 });
@@ -485,6 +487,41 @@ function wire(route, arg) {
   if (route === "about") {
     const upd = () => $("pu-r").textContent = pkr((+$("pu-d").value || 0) * (+$("pu-p").value || 0) / 100);
     $("pu-d").oninput = upd; $("pu-p").oninput = upd;
+  }
+}
+
+// ---------- Firebase push (Step 5) ----------
+const FB = "https://www.gstatic.com/firebasejs/10.14.1/";
+const loadScript = (src) => new Promise((ok, fail) => {
+  if (document.querySelector(`script[src="${src}"]`)) return ok();
+  const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = fail;
+  document.head.appendChild(s);
+});
+async function enableFcm(out) {
+  const say = (html) => out.innerHTML = html;
+  try {
+    if (!self.FIREBASE_CONFIG || !self.FIREBASE_CONFIG.apiKey || !self.FIREBASE_VAPID_KEY)
+      return say("Firebase isn't set up yet: firebase-config.js is empty.");
+    if (!("serviceWorker" in navigator) || !("Notification" in window))
+      return say("This browser can't receive push alerts. Use Chrome on Android.");
+    say("Asking for permission…");
+    if (await Notification.requestPermission() !== "granted")
+      return say("Notifications are blocked. Allow them in Chrome's site settings for this page, then try again.");
+    await loadScript(FB + "firebase-app-compat.js");
+    await loadScript(FB + "firebase-messaging-compat.js");
+    if (!firebase.apps.length) firebase.initializeApp(self.FIREBASE_CONFIG);
+    const reg = await navigator.serviceWorker.register("firebase-messaging-sw.js");
+    const token = await firebase.messaging().getToken({ vapidKey: self.FIREBASE_VAPID_KEY, serviceWorkerRegistration: reg });
+    store.set("fcmToken", token);
+    say(`<b>Alerts are on for this device.</b> Copy this code and save it as the GitHub secret <code>FCM_TOKENS</code>:
+      <textarea id="fcm-token" readonly style="width:100%;height:90px;margin-top:6px;font-size:11px">${esc(token)}</textarea>
+      <button class="btn ghost wide" id="fcm-copy">Copy code</button>`);
+    document.getElementById("fcm-copy").onclick = async () => {
+      try { await navigator.clipboard.writeText(token); document.getElementById("fcm-copy").textContent = "Copied"; }
+      catch { document.getElementById("fcm-token").select(); }
+    };
+  } catch (e) {
+    say("Couldn't turn on alerts: " + esc(e.message || e));
   }
 }
 
