@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KMI Scanner</title>
+<meta name="theme-color" content="#0f6b4f">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<style>
+:root {
+  --bg: #f6f7f5; --card: #ffffff; --ink: #18201c; --muted: #5d6a63; --line: #e2e6e3;
+  --brand: #0f6b4f; --brand-ink: #ffffff; --good: #1f8a4c; --bad: #c0392b; --warn: #b7791f;
+  --chip-buy: #0f6b4f; --chip-run: #b7791f; --chip-fade: #8a3b3b; --chip-none: #8a948f; --chip-plan: #2b5d8a;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1412; --card: #182019; --ink: #e8eee9; --muted: #9aa8a0; --line: #26302a;
+    --brand: #34a57a; --brand-ink: #08130e; --good: #4cc27f; --bad: #ef6b5b; --warn: #e3a948;
+    --chip-buy: #34a57a; --chip-run: #c89135; --chip-fade: #b65a5a; --chip-none: #6f7b75; --chip-plan: #4f8cc4;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1412; --card: #182019; --ink: #e8eee9; --muted: #9aa8a0; --line: #26302a;
+  --brand: #34a57a; --brand-ink: #08130e; --good: #4cc27f; --bad: #ef6b5b; --warn: #e3a948;
+  --chip-buy: #34a57a; --chip-run: #c89135; --chip-fade: #b65a5a; --chip-none: #6f7b75; --chip-plan: #4f8cc4;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+header { position: sticky; top: 0; z-index: 5; background: var(--brand); color: var(--brand-ink);
+  padding: 12px 16px 10px; }
+header h1 { font-size: 17px; margin: 0; }
+header .sub { font-size: 12px; opacity: .9; }
+main { max-width: 720px; margin: 0 auto; padding: 12px 16px 96px; }
+nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 5; display: flex; background: var(--card);
+  border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); }
+nav a { flex: 1; text-align: center; padding: 10px 2px; font-size: 12px; color: var(--muted);
+  text-decoration: none; }
+nav a.on { color: var(--brand); font-weight: 600; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px; margin: 10px 0; }
+.row { display: flex; align-items: center; gap: 10px; }
+.row.between { justify-content: space-between; }
+.muted { color: var(--muted); }
+.small { font-size: 12.5px; }
+h2 { font-size: 16px; margin: 4px 0 8px; }
+h3 { font-size: 14px; margin: 14px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.chip { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 12px; font-weight: 600;
+  color: #fff; white-space: nowrap; }
+.chip.buy_plan { background: var(--chip-buy); } .chip.running { background: var(--chip-run); }
+.chip.fading { background: var(--chip-fade); } .chip.no_setup { background: var(--chip-none); }
+.chip.in_plan { background: var(--chip-plan); }
+.dots { display: flex; gap: 4px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bad); }
+.dot.on { background: var(--good); }
+.stock { display: block; color: inherit; text-decoration: none; }
+.stock .sym { font-weight: 700; }
+.up { color: var(--good); } .down { color: var(--bad); }
+.banner { border-radius: var(--radius); padding: 14px; color: #fff; margin: 10px 0; }
+.banner.buy_plan { background: var(--chip-buy); } .banner.running { background: var(--chip-run); }
+.banner.fading { background: var(--chip-fade); } .banner.no_setup { background: var(--chip-none); }
+.banner.in_plan { background: var(--chip-plan); }
+.check { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.check:last-child { border-bottom: 0; }
+.ok { color: var(--good); font-weight: 700; } .no { color: var(--bad); font-weight: 700; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+td, th { text-align: left; padding: 5px 4px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+input, select, button { font: inherit; }
+input[type=number], input[type=text], input[type=date], select { width: 100%; padding: 9px 10px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); }
+label.field { display: block; margin: 8px 0; font-size: 13px; color: var(--muted); }
+label.tick { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line); }
+label.tick input { width: 22px; height: 22px; margin-top: 1px; }
+.btn { display: inline-block; padding: 11px 16px; border-radius: 12px; border: 0; background: var(--brand);
+  color: var(--brand-ink); font-weight: 600; text-decoration: none; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--brand); border: 1px solid var(--brand); }
+.btn.wide { display: block; width: 100%; text-align: center; margin-top: 10px; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.filters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.note { border-left: 3px solid var(--warn); padding: 8px 10px; background: var(--card); border-radius: 8px;
+  font-size: 13px; margin: 10px 0; }
+.lock { border-left-color: var(--bad); }
+.bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.bar > div { height: 100%; background: var(--brand); }
+.kv { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; font-size: 14px; }
+.kv div:nth-child(even) { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+pre { white-space: pre-wrap; font-size: 12px; background: var(--bg); padding: 10px; border-radius: 8px; }
+.empty { text-align: center; padding: 26px 10px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>KMI Scanner</h1>
+  <div class="sub" id="sub">Loading…</div>
+</header>
+<main id="view"></main>
+<nav id="nav">
+  <a href="#hot" data-r="hot">Hot list</a>
+  <a href="#log" data-r="log">My trades</a>
+  <a href="#record" data-r="record">Track record</a>
+  <a href="#settings" data-r="settings">Settings</a>
+</nav>
+<script>
+"use strict";
+// ---------- storage (per device; the page works without it) ----------
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("kmi." + k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem("kmi." + k, JSON.stringify(v)); } catch {} },
+};
+const settings = () => ({ risk: 2000, dailyLoss: 6000, minPrice: 0, maxPrice: 0, minValue: 2000000,
+                          ...store.get("settings", {}) });
+const trades = () => store.get("trades", []);
+const saveTrades = (t) => store.set("trades", t);
+
+// ---------- costs: same formula as backtest.py (AKD Trade tiers) ----------
+const sideCost = (price) => (price < 5 ? 0.03 / price : Math.max(0.0015, 0.05 / price)) * 1.15 + 0.00009;
+function tradePKR(t) {
+  const buy = t.entry * t.shares, sell = t.exit * t.shares;
+  return sell - buy - buy * sideCost(t.entry) - sell * sideCost(t.exit);
+}
+
+// ---------- helpers ----------
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const pkr = (x) => x == null ? "–" : (x < 0 ? "−" : "") + "PKR " + Math.abs(Math.round(x)).toLocaleString("en-PK");
+const rs = (x) => x == null ? "–" : "Rs " + Number(x).toLocaleString("en-PK", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const pct = (x, d = 1) => x == null ? "–" : (x * 100).toFixed(d) + "%";
+const today = () => new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Karachi" });
+const STATUS_LABEL = { buy_plan: "Buy plan", in_plan: "Plan active", running: "Running", fading: "Fading", no_setup: "No setup" };
+const ORDER = { buy_plan: 0, in_plan: 1, running: 2, fading: 3, no_setup: 4 };
+
+let DATA = null, LEDGER = null, STATUS = null, RESEARCH = null;
+async function load() {
+  const get = (f) => fetch("data/" + f, { cache: "no-store" }).then((r) => r.ok ? r.json() : null).catch(() => null);
+  [DATA, LEDGER, STATUS] = await Promise.all([get("signals.json"), get("ledger.json"), get("status.json")]);
+  const sub = document.getElementById("sub");
+  if (!DATA) { sub.textContent = "No data yet: run python run_daily.py"; return; }
+  const state = { after_close: "after the close", before_final: "today's candle not final yet", weekend: "weekend, PSX closed" }[DATA.market_state] || DATA.market_state;
+  sub.textContent = `Prices as of ${DATA.as_of} · ${state} · KMI All Share list of ${DATA.kmi_list_date}`;
+}
+
+// ---------- risk rules (Step 8) ----------
+function riskState() {
+  const s = settings(), all = trades(), closed = all.filter((t) => t.exit != null);
+  const t0 = today();
+  const todayPKR = closed.filter((t) => t.exitDate === t0).reduce((a, t) => a + tradePKR(t), 0);
+  let streak = 0;
+  for (const t of [...closed].sort((a, b) => (b.exitDate + b.id).localeCompare(a.exitDate + a.id))) {
+    if (tradePKR(t) <= 0) streak++; else break;
+  }
+  const lastLossToday = closed.some((t) => t.exitDate === t0 && tradePKR(t) <= 0);
+  const reasons = [];
+  if (todayPKR <= -s.dailyLoss) reasons.push(`Daily loss lock: today's result is ${pkr(todayPKR)}, your limit is ${pkr(s.dailyLoss)}. No new trades until tomorrow.`);
+  if (streak >= 3 && lastLossToday) reasons.push(`${streak} losses in a row: done for the day.`);
+  return { todayPKR, streak, blocked: reasons.length > 0, reasons, closed: closed.length };
+}
+
+// ---------- screens ----------
+function hot() {
+  if (!DATA) return `<div class="empty">No signals yet. Run <b>python run_daily.py</b> on the computer.</div>`;
+  const s = settings(), f = store.get("filter", "all"), q = store.get("q", "");
+  let list = DATA.stocks.filter((x) => !x.stale);
+  if (s.minPrice) list = list.filter((x) => x.close >= s.minPrice);
+  if (s.maxPrice) list = list.filter((x) => x.close <= s.maxPrice);
+  if (s.minValue) list = list.filter((x) => (x.traded_value_pkr || 0) >= s.minValue || x.status === "in_plan");
+  if (f !== "all") list = list.filter((x) => x.status === f);
+  if (q) list = list.filter((x) => (x.symbol + " " + (x.name || "")).toLowerCase().includes(q.toLowerCase()));
+  list.sort((a, b) => ORDER[a.status] - ORDER[b.status] || (b.traded_value_pkr || 0) - (a.traded_value_pkr || 0));
+  const counts = {}; DATA.stocks.forEach((x) => counts[x.status] = (counts[x.status] || 0) + 1);
+  const tested = Object.keys(DATA.tested_setups || {}).length;
+  return `
+  ${tested ? "" : `<div class="note lock">No setup has passed the backtest, so there are no Buy plans. Everything shown is for context only.</div>`}
+  ${DATA.alerts_made ? `<div class="note">Plans below are for the session of <b>${esc(DATA.plans_for_session)}</b>, from the ${esc(DATA.as_of)} close.</div>`
+    : `<div class="note lock">These plans have expired: ${esc(DATA.no_alert_reason)}. Wait for the next run after the close.</div>`}
+  <div class="filters">
+    <select id="f">${["all", "buy_plan", "in_plan", "running", "fading", "no_setup"].map((k) =>
+      `<option value="${k}" ${k === f ? "selected" : ""}>${k === "all" ? "All statuses" : STATUS_LABEL[k]} ${k === "all" ? "" : "(" + (counts[k] || 0) + ")"}</option>`).join("")}</select>
+    <input id="q" type="text" placeholder="Search symbol or name" value="${esc(q)}">
+  </div>
+  <div class="small muted" style="margin-top:6px">${list.length} stocks · traded value ≥ ${pkr(s.minValue)}/day${s.minPrice ? " · price ≥ Rs " + s.minPrice : ""}${s.maxPrice ? " · price ≤ Rs " + s.maxPrice : ""} · change filters in Settings</div>
+  ${list.slice(0, 200).map((x) => `
+    <a class="card stock" href="#stock/${esc(x.symbol)}">
+      <div class="row between">
+        <div><span class="sym">${esc(x.symbol)}</span> <span class="small muted">${esc(x.name || "")}</span></div>
+        <span class="chip ${x.status}">${STATUS_LABEL[x.status]}</span>
+      </div>
+      <div class="row between small" style="margin-top:6px">
+        <div>${rs(x.close)} <span class="${x.change_pct >= 0 ? "up" : "down"}">${x.change_pct >= 0 ? "+" : ""}${pct(x.change_pct)}</span>
+          ${x.plans.length && x.status === "buy_plan" ? ` · <b>${esc(x.plans[0].setup_label)}</b>` : ""}</div>
+        <div class="dots">${x.lights.map((l) => `<span class="dot ${l.on ? "on" : ""}" title="${esc(l.name)}: ${esc(l.text)}"></span>`).join("")}</div>
+      </div>
+    </a>`).join("") || `<div class="empty">Nothing matches these filters.</div>`}`;
+}
+
+function planCard(p, risk) {
+  const pos = risk / p.stop_pct, ref = p.order_price || p.stop_price_est / (1 - p.stop_pct);
+  const shares = Math.floor(pos / ref);
+  const bt = p.backtest;
+  return `
+  <div class="card">
+    <h2>Trade plan: ${esc(p.setup_label)}</h2>
+    <div class="kv">
+      <div>Order</div><div>${esc(p.order)}</div>
+      <div>Valid</div><div>Next session only</div>
+      <div>Stop</div><div>${pct(p.stop_pct, 0)} below fill (≈ ${rs(ref * (1 - p.stop_pct))})</div>
+      <div>Target</div><div>${p.target_pct ? pct(p.target_pct, 0) + " above fill (≈ " + rs(ref * (1 + p.target_pct)) + ")" : "none"}</div>
+      <div>Max hold</div><div>${p.max_hold_days} trading days</div>
+      <div>You can lose</div><div>${pkr(risk)}</div>
+      <div>Position</div><div>${pkr(pos)} ≈ ${shares.toLocaleString()} shares</div>
+    </div>
+    ${p.skip_if ? `<p class="small muted">Skip if ${esc(p.skip_if)}.</p>` : ""}
+    <h3>How to handle it</h3>
+    <ol style="margin:0;padding-left:20px">${p.how_to.map((h) => `<li>${esc(h)}</li>`).join("")}</ol>
+    <p class="small muted">Backtest 2024–26: ${pkr(bt.test_pkr_per_trade)} per PKR 100,000 trade after costs and tax, wins ${pct(bt.test_win_rate, 0)}, ${bt.test_trades} trades (${bt.test_trades_per_month}/month across all KMI stocks).</p>
+  </div>`;
+}
+
+function stock(sym) {
+  const x = DATA && DATA.stocks.find((s) => s.symbol === sym);
+  if (!x) return `<div class="empty">${esc(sym)} is not on the KMI All Share list, so the scanner never shows it.</div>`;
+  const s = settings();
+  const handle = {
+    running: ["Don't chase: buying after a strong run is not a tested setup.", "If you already own it, stick to your own exit plan.", "Check again after it cools down."],
+    fading: ["Avoid new buys: it has lost its trend.", "If you own it, consider exiting.", "This status is for context only; it has not been tested."],
+    no_setup: ["Nothing to do today.", "It will show a Buy plan only if a tested setup fires."],
+    in_plan: ["A plan for this stock is already running: follow that one.", "Don't add a second position."],
+  };
+  const ap = x.active_plan;
+  return `
+  <a href="#hot" class="small">← Hot list</a>
+  <div class="banner ${x.status}">
+    <div class="row between"><b style="font-size:18px">${esc(x.symbol)}</b><span>${rs(x.close)}
+      <span>${x.change_pct >= 0 ? "+" : ""}${pct(x.change_pct)}</span></span></div>
+    <div class="small">${esc(x.name || "")} · ${esc(x.sector || "")}</div>
+    <div style="margin-top:6px;font-weight:600">${esc(x.status_text)}</div>
+    <div class="small">KMI All Share, list of ${esc(DATA.kmi_list_date)} · prices of ${esc(x.date)}</div>
+  </div>
+  ${x.tested ? "" : `<div class="note">${x.status === "in_plan" ? "Tracking a tested plan." : "For context only: this status is not a tested setup and never a buy signal."}</div>`}
+  ${x.status === "buy_plan" ? x.plans.map((p) => planCard(p, s.risk)).join("") +
+     `<a class="btn wide" href="#check/${esc(x.symbol)}">Pre-trade check</a>` : ""}
+  ${ap ? `<div class="card"><h2>Active plan (alerted ${esc(ap.signal_date)})</h2><div class="kv">
+      <div>Setup</div><div>${esc(ap.setup_label)}</div>
+      <div>Order</div><div>${esc(ap.order)}</div>
+      <div>State</div><div>${esc(ap.result.state)}</div>
+      ${ap.result.fill_price ? `<div>Filled</div><div>${rs(ap.result.fill_price)} on ${esc(ap.result.fill_date)}</div>
+      <div>Stop / target</div><div>${rs(ap.result.stop_price)} / ${ap.result.target_price ? rs(ap.result.target_price) : "none"}</div>
+      <div>Day</div><div>${ap.result.days_held} of ${ap.max_hold_days}</div>` : ""}
+    </div></div>` : ""}
+  ${handle[x.status] ? `<div class="card"><h2>How to handle it</h2><ol style="margin:0;padding-left:20px">${handle[x.status].map((h) => `<li>${esc(h)}</li>`).join("")}</ol></div>` : ""}
+  <div class="card"><h2>Why this status</h2>
+    ${Object.entries(x.reasons).map(([k, rows]) => `
+      <h3>${esc((DATA.tested_setups[k] || {}).label || k)}</h3>
+      ${rows.map((r) => `<div class="check"><span class="${r.ok ? "ok" : "no"}">${r.ok ? "✓" : "✗"}</span>
+        <div>${esc(r.check)} <span class="muted small">(${esc(r.rule)})</span></div></div>`).join("")}`).join("")}
+    ${x.context.length ? `<p class="small muted">${x.context.map(esc).join(" · ")}</p>` : ""}
+  </div>
+  <div class="card"><h2>Lights</h2><p class="small muted" style="margin-top:0">They explain the picture; they don't trigger trades.</p>
+    ${x.lights.map((l) => `<div class="check"><span class="dot ${l.on ? "on" : ""}" style="margin-top:6px"></span>
+      <div><b>${esc(l.name)}</b> <span class="muted">${esc(l.text)}</span></div></div>`).join("")}
+  </div>
+  <div class="card"><h2>Key levels</h2><div class="kv">
+    <div>20-day average</div><div>${rs(x.levels.sma20)}</div>
+    <div>50-day average</div><div>${rs(x.levels.sma50)}</div>
+    <div>200-day average</div><div>${rs(x.levels.sma200)}</div>
+    <div>60-day high (close)</div><div>${rs(x.levels.high60)}</div>
+    <div>60-day low (close)</div><div>${rs(x.levels.low60)}</div>
+    <div>Traded per day</div><div>${pkr(x.traded_value_pkr)}</div>
+  </div>
+  <a class="btn ghost wide" href="${esc(x.news_url)}" target="_blank" rel="noopener">Company page and news on PSX</a></div>`;
+}
+
+function check(sym) {
+  const x = DATA && DATA.stocks.find((s) => s.symbol === sym);
+  if (!x || x.status !== "buy_plan") return `<div class="empty">No Buy plan for ${esc(sym)} today. Trades can only start from a tested plan.</div>`;
+  const p = x.plans[0], s = settings(), r = riskState();
+  const ref = p.order_price || x.close;
+  const shares = Math.floor((s.risk / p.stop_pct) / ref);
+  const n = r.closed % 20;
+  return `
+  <a href="#stock/${esc(sym)}" class="small">← ${esc(sym)}</a>
+  <h2 style="margin-top:10px">Pre-trade check: ${esc(sym)}</h2>
+  ${r.reasons.map((m) => `<div class="note lock">${esc(m)}</div>`).join("")}
+  <div class="card">
+    <label class="tick"><input type="checkbox" class="c"> <span>This is the tested setup: <b>${esc(p.setup_label)}</b>, ${esc(p.order)}.</span></label>
+    <label class="tick"><input type="checkbox" class="c"> <span>I accept losing <b>${pkr(s.risk)}</b> if the stop is hit.</span></label>
+    <label class="tick"><input type="checkbox" class="c"> <span>I'm not chasing or trying to win back a loss.</span></label>
+    <label class="field">My fill price (Rs)<input id="fill" type="number" step="0.01" value="${ref.toFixed(2)}"></label>
+    <label class="field">Shares<input id="shares" type="number" step="1" value="${shares}"></label>
+    <button class="btn wide" id="in" disabled>I'm in</button>
+  </div>
+  <div class="card small"><div class="kv">
+    <div>Today's result</div><div>${pkr(r.todayPKR)}</div>
+    <div>Losses in a row</div><div>${r.streak}</div>
+    <div>Daily loss limit</div><div>${pkr(s.dailyLoss)}</div>
+    <div>This block of 20</div><div>${n} of 20</div>
+  </div><div class="bar" style="margin-top:8px"><div style="width:${n * 5}%"></div></div></div>`;
+}
+
+function logView() {
+  const all = trades(), r = riskState();
+  const closed = all.filter((t) => t.exit != null).sort((a, b) => (a.exitDate + a.id).localeCompare(b.exitDate + b.id));
+  const open = all.filter((t) => t.exit == null);
+  const blocks = [];
+  for (let i = 0; i < closed.length; i += 20) {
+    const b = closed.slice(i, i + 20), sum = b.reduce((a, t) => a + tradePKR(t), 0);
+    blocks.push(`<tr><td>Trades ${i + 1}–${i + b.length}</td><td class="num">${b.filter((t) => tradePKR(t) > 0).length}/${b.length}</td><td class="num">${pkr(sum)}</td></tr>`);
+  }
+  const split = (yes) => { const b = closed.filter((t) => t.followed === yes); const sum = b.reduce((a, t) => a + tradePKR(t), 0);
+    return `<tr><td>${yes ? "Followed the plan" : "Didn't follow"}</td><td class="num">${b.length}</td><td class="num">${b.length ? pkr(sum / b.length) : "–"}</td></tr>`; };
+  const n = closed.length % 20;
+  return `
+  <h2>My trades</h2>
+  ${r.reasons.map((m) => `<div class="note lock">${esc(m)}</div>`).join("")}
+  <div class="card"><div class="row between small"><span>Judge after 20, not after 1</span><b>${n} of 20</b></div>
+    <div class="bar" style="margin-top:6px"><div style="width:${n * 5}%"></div></div></div>
+  ${open.map((t) => `
+    <div class="card">
+      <div class="row between"><b>${esc(t.symbol)}</b><span class="small muted">${esc(t.setup)} · in ${esc(t.entryDate)}</span></div>
+      <div class="small">${t.shares} shares at ${rs(t.entry)} · stop ${rs(t.stop)}${t.target ? " · target " + rs(t.target) : ""}</div>
+      <label class="field">Exit price (Rs)<input type="number" step="0.01" id="x-${t.id}"></label>
+      <label class="field">Did you follow the plan?<select id="fp-${t.id}"><option value="yes">Yes</option><option value="no">No</option></select></label>
+      <button class="btn wide" data-close="${t.id}">Close trade</button>
+    </div>`).join("")}
+  <div class="card"><h2>Results per 20 trades</h2>
+    <table><tr><th>Block</th><th class="num">Wins</th><th class="num">PKR</th></tr>${blocks.join("") || `<tr><td colspan="3" class="muted">No closed trades yet.</td></tr>`}</table>
+    <h3>By "followed the plan?"</h3>
+    <table><tr><th></th><th class="num">Trades</th><th class="num">Avg PKR</th></tr>${split(true)}${split(false)}</table>
+  </div>
+  <div class="card"><h2>Closed trades</h2>
+    <table><tr><th>Stock</th><th>Out</th><th class="num">PKR</th><th>Plan?</th></tr>
+    ${[...closed].reverse().map((t) => { const p = tradePKR(t);
+      return `<tr><td>${esc(t.symbol)}</td><td>${esc(t.exitDate)}</td><td class="num ${p > 0 ? "up" : "down"}">${pkr(p)}</td><td>${t.followed ? "yes" : "no"}</td></tr>`; }).join("") ||
+      `<tr><td colspan="4" class="muted">None yet.</td></tr>`}</table>
+    <p class="small muted">PKR after brokerage (AKD Trade rates), sales tax and exchange fees, before capital gains tax.</p></div>`;
+}
+
+function record() {
+  const T = DATA && DATA.tested_setups || {};
+  const st = LEDGER && LEDGER.stats;
+  return `
+  <h2>Track record</h2>
+  <p class="small muted">Every Buy plan alert is locked when it is sent and graded automatically from real prices, losers included. A limit buy that never fills counts as "not filled", not as a win.</p>
+  <div class="card"><div class="kv">
+    <div>Alerts</div><div>${st ? st.total_alerts : 0}</div>
+    <div>Filled / not filled</div><div>${st ? st.filled + " / " + st.not_filled : "–"}</div>
+    <div>Open now</div><div>${st ? st.open : 0}</div>
+    <div>Win rate (closed)</div><div>${st && st.win_rate != null ? pct(st.win_rate, 0) : "–"}</div>
+    <div>Average per trade</div><div>${st ? pkr(st.avg_pkr_per_trade) : "–"}</div>
+  </div><p class="small muted">Per PKR 100,000 trade, after trading costs, before capital gains tax.</p></div>
+  ${Object.entries(T).map(([k, v]) => `
+    <div class="card"><h2>${esc(v.label)}: backtest</h2>
+      <table><tr><th>Years</th><th class="num">Trades</th><th class="num">PKR/trade</th><th class="num">Wins</th></tr>
+      <tr><td>2019–23 (settings chosen here)</td><td class="num">${v.train.trades}</td><td class="num">${pkr(v.train.pkr_per_trade)}</td><td class="num">${pct(v.train.win_rate, 0)}</td></tr>
+      <tr><td><b>2024–26 (unseen test)</b></td><td class="num">${v.test.trades}</td><td class="num"><b>${pkr(v.test.pkr_per_trade)}</b></td><td class="num">${pct(v.test.win_rate, 0)}</td></tr>
+      ${Object.entries(v.by_year || {}).map(([y, r]) => `<tr><td class="muted">${y}</td><td class="num muted">${r.trades}</td><td class="num ${r.pkr_per_trade > 0 ? "up" : "down"}">${pkr(r.pkr_per_trade)}</td><td class="num muted">${pct(r.win_rate, 0)}</td></tr>`).join("")}
+      </table>
+      <p class="small muted">Test years at double cost: ${pkr(v.test_double_cost_pkr_per_trade)}/trade · without the best 1% of trades: ${pkr(v.test.pkr_per_trade_without_best_1pct)} · worst losing streak ${v.test.worst_losing_streak} · biggest drop ${pkr(v.test.biggest_drop_pkr)} · neighbouring settings positive: ${esc(v.neighbours_positive_in_test)}</p>
+    </div>`).join("")}
+  <div class="card"><h2>Alerts, newest first</h2>
+    ${(LEDGER && LEDGER.alerts.length) ? `<table><tr><th>Date</th><th>Stock</th><th>State</th><th class="num">PKR</th></tr>
+      ${LEDGER.alerts.map((e) => `<tr><td>${esc(e.signal_date)}</td><td><a href="#stock/${esc(e.symbol)}">${esc(e.symbol)}</a> <span class="small muted">${esc(e.setup)}</span></td>
+        <td>${esc(e.result.state.replace("_", " "))}${e.result.exit_reason ? " (" + esc(e.result.exit_reason) + ")" : ""}</td>
+        <td class="num ${(e.result.pkr ?? e.result.pkr_if_sold_now ?? 0) > 0 ? "up" : "down"}">${e.result.pkr != null ? pkr(e.result.pkr) : e.result.pkr_if_sold_now != null ? pkr(e.result.pkr_if_sold_now) + "*" : "–"}</td></tr>`).join("")}</table>
+      <p class="small muted">* still open: value if sold at the last close.</p>` : `<div class="empty">No live alerts yet. The first ones come after a trading day's close.</div>`}
+  </div>
+  <p class="small"><a href="#status">Run log</a> · <a href="#about">About</a></p>`;
+}
+
+function settingsView() {
+  const s = settings();
+  return `
+  <h2>Settings</h2>
+  <div class="card">
+    <label class="field">PKR I'm willing to lose per trade<input id="s-risk" type="number" step="500" value="${s.risk}"></label>
+    <label class="field">Daily loss limit (PKR): no new trades after this<input id="s-dl" type="number" step="500" value="${s.dailyLoss}"></label>
+    <label class="field">Minimum traded value per day (PKR). The tested setups need 2,000,000.<input id="s-mv" type="number" step="500000" value="${s.minValue}"></label>
+    <div class="filters">
+      <label class="field">Min price (Rs, 0 = any)<input id="s-pmin" type="number" value="${s.minPrice}"></label>
+      <label class="field">Max price (Rs, 0 = any)<input id="s-pmax" type="number" value="${s.maxPrice}"></label>
+    </div>
+    <button class="btn wide" id="s-save">Save</button>
+    <p class="small muted">Saved on this device only.</p>
+  </div>
+  <div class="card"><h2>Phone alerts</h2>
+    <ol class="small" style="padding-left:18px;margin:0">
+      <li>Install the free <b>ntfy</b> app on your phone.</li>
+      <li>Subscribe to the topic name written in <code>config.json</code> on the computer.</li>
+      <li>On the computer, run <code>python run_daily.py --test-push</code>. A test alert should arrive.</li>
+    </ol></div>
+  <div class="card"><h2>Use start-up</h2>
+    <p class="small" style="margin:0">Start with a small fixed amount per trade until about 30 live trades match the backtest. Write down before trade 1: "I judge this after 20 trades, and compare live results with the backtest after 30."</p></div>
+  <p class="small"><a href="#about">About</a> · <a href="#status">Run log</a></p>`;
+}
+
+function about() {
+  return `
+  <h2>About</h2>
+  <div class="card small">
+    <p style="margin-top:0"><b>Halal screening.</b> Only stocks on the KMI All Share Index list (list of ${esc(DATA ? DATA.kmi_list_date : "–")}) ever appear here. That list is a screening against SECP's Shariah criteria, <b>not a fatwa</b>. Ask a scholar you trust about your own situation.</p>
+    <p><b>Purification.</b> Many scholars require giving away the small non-compliant part of dividend income. Ask your scholar for the right percentage for each company.</p>
+    <label class="field">Dividend received (PKR)<input id="pu-d" type="number" value="0"></label>
+    <label class="field">Non-compliant share (%), from your scholar or the company's screening data<input id="pu-p" type="number" step="0.1" value="0"></label>
+    <div><b>Give away: <span id="pu-r">PKR 0</span></b></div>
+  </div>
+  <div class="card small">
+    <p style="margin-top:0"><b>How signals are made.</b> A Buy plan appears only when a setup that passed an honest backtest fires: settings chosen on 2019–23, judged on 2024–26 at full PSX costs and at double cost, with the luck check and neighbouring settings. Everything else is for context only.</p>
+    <p><b>Timing.</b> PSX trades Mon–Thu 09:32–15:30 and Friday 09:17–12:00 and 14:32–16:30 (Pakistan time). Plans are made from the final daily close and are valid for the next session only.</p>
+    <p><b>Limits.</b> Prices come from the PSX data portal (via psxdata) and can lag or have gaps. The backtest has no delisted stocks and uses today's KMI list for past years, which flatters results. A backtest describes the past; live results usually come in below it. Not investment advice. Start small.</p>
+  </div>`;
+}
+
+function status() {
+  if (!STATUS) return `<div class="empty">No runs logged yet.</div>`;
+  return `<h2>Run log</h2>${STATUS.runs.map((r) => `
+    <div class="card"><div class="row between"><b>${esc(r.at.replace("T", " "))}</b><span class="small muted">${esc(r.state)} · ${r.new_alerts} new alerts</span></div>
+    <pre>${esc(r.log.join("\n"))}</pre></div>`).join("")}`;
+}
+
+async function research() {
+  RESEARCH = RESEARCH || await fetch("data/research.json", { cache: "no-store" }).then((r) => r.ok ? r.json() : null).catch(() => null);
+  if (!RESEARCH) return `<div class="empty">No research list yet.</div>`;
+  return `<h2>Research list (admin)</h2>
+  <p class="small muted">"If you had bought at the next open and sold after 5 days" for untested statuses. This is how untested ideas are proven wrong with live data.</p>
+  ${Object.entries(RESEARCH.by_status).map(([k, s]) => `<div class="card"><b>${STATUS_LABEL[k]}</b><div class="kv small">
+    <div>Entries</div><div>${s.total_alerts}</div><div>Closed</div><div>${s.closed}</div>
+    <div>Win rate</div><div>${s.win_rate != null ? pct(s.win_rate, 0) : "–"}</div><div>Avg PKR</div><div>${pkr(s.avg_pkr_per_trade)}</div></div></div>`).join("")}`;
+}
+
+// ---------- router ----------
+async function render() {
+  const [route, arg] = (location.hash.slice(1) || "hot").split("/");
+  document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("on", a.dataset.r === route));
+  const v = document.getElementById("view");
+  const screens = { hot, stock: () => stock(arg), check: () => check(arg), log: logView, record,
+                    settings: settingsView, about, status, research };
+  v.innerHTML = await (screens[route] || hot)();
+  window.scrollTo(0, 0);
+  wire(route, arg);
+}
+
+function wire(route, arg) {
+  const $ = (id) => document.getElementById(id);
+  if (route === "hot" || !route) {
+    $("f") && ($("f").onchange = (e) => { store.set("filter", e.target.value); render(); });
+    $("q") && ($("q").onchange = (e) => { store.set("q", e.target.value.trim()); render(); });
+  }
+  if (route === "check") {
+    const boxes = [...document.querySelectorAll("input.c")], btn = $("in");
+    if (!btn) return;
+    const blocked = riskState().blocked;
+    const upd = () => btn.disabled = blocked || !boxes.every((b) => b.checked);
+    boxes.forEach((b) => b.onchange = upd);
+    btn.onclick = () => {
+      const x = DATA.stocks.find((s) => s.symbol === arg), p = x.plans[0];
+      const entry = parseFloat($("fill").value), shares = parseInt($("shares").value, 10);
+      if (!(entry > 0 && shares > 0)) return alert("Enter your fill price and shares.");
+      const all = trades();
+      all.push({ id: Date.now().toString(36), symbol: arg, setup: p.setup_label, entry, shares,
+        stop: +(entry * (1 - p.stop_pct)).toFixed(2), target: p.target_pct ? +(entry * (1 + p.target_pct)).toFixed(2) : null,
+        entryDate: today(), exit: null, exitDate: null, followed: null, noChase: true });
+      saveTrades(all);
+      location.hash = "#log";
+    };
+  }
+  if (route === "log") {
+    document.querySelectorAll("[data-close]").forEach((b) => b.onclick = () => {
+      const id = b.dataset.close, px = parseFloat($("x-" + id).value);
+      if (!(px > 0)) return alert("Enter the exit price.");
+      const all = trades(), t = all.find((t) => t.id === id);
+      t.exit = px; t.exitDate = today(); t.followed = $("fp-" + id).value === "yes";
+      saveTrades(all); render();
+    });
+  }
+  if (route === "settings") {
+    $("s-save").onclick = () => {
+      store.set("settings", { risk: +$("s-risk").value || 2000, dailyLoss: +$("s-dl").value || 6000,
+        minValue: +$("s-mv").value || 0, minPrice: +$("s-pmin").value || 0, maxPrice: +$("s-pmax").value || 0 });
+      location.hash = "#hot";
+    };
+  }
+  if (route === "about") {
+    const upd = () => $("pu-r").textContent = pkr((+$("pu-d").value || 0) * (+$("pu-p").value || 0) / 100);
+    $("pu-d").oninput = upd; $("pu-p").oninput = upd;
+  }
+}
+
+window.addEventListener("hashchange", render);
+load().then(render);
+</script>
+</body>
+</html>

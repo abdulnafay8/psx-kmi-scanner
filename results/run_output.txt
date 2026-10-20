@@ -1,0 +1,47 @@
+﻿307 KMI stocks, data to 2026-10-20. Costs: AKD Trade brokerage + tax + fees (about 0.36% round trip at Rs 100, 1.17% at Rs 10), 15% CGT on yearly net gains, PKR 100,000 per trade.
+
+Testing washout...
+  chosen on 2019-23: drop=0.3, target=0.1, stop=0.12, hold=15
+  train: 127 trades, PKR 1,945/trade, win 68%
+  test:  205 trades, PKR 1,039/trade, win 56%, 6.1/month, without best 1%: PKR 749, at 2x cost: PKR 565
+  neighbours positive in test: 4/5
+  -> PASS
+
+Testing pullback...
+  chosen on 2019-23: light_vol=0.8, target=0.1, stop=0.1, hold=10
+  train: 1886 trades, PKR -246/trade, win 47%
+  test:  2380 trades, PKR -561/trade, win 42%, 70.8/month, without best 1%: PKR -721, at 2x cost: PKR -1063
+  neighbours positive in test: 0/7
+  -> FAIL: test positive at full cost; test positive at double cost; survives luck check (test, no best 1%); neighbours positive in test >= 75%
+
+Testing breakout...
+  chosen on 2019-23: vol_mult=2.0, target=0.1, stop=0.12, hold=15
+  train: 1642 trades, PKR 83/trade, win 52%
+  test:  1838 trades, PKR -486/trade, win 48%, 54.7/month, without best 1%: PKR -680, at 2x cost: PKR -988
+  neighbours positive in test: 0/5
+  -> FAIL: test positive at full cost; test positive at double cost; survives luck check (test, no best 1%); neighbours positive in test >= 75%
+
+Testing momentum...
+  chosen on 2019-23: min_rise=0.06, target=None, stop=0.08, hold=20
+  train: 2253 trades, PKR -171/trade, win 34%
+  test:  3126 trades, PKR -27/trade, win 29%, 93.0/month, without best 1%: PKR -1376, at 2x cost: PKR -530
+  neighbours positive in test: 1/4
+  -> FAIL: test positive at full cost; test positive at double cost; survives luck check (test, no best 1%); neighbours positive in test >= 75%
+
+Testing dip_uptrend...
+  chosen on 2019-23: depth=0.05, target=0.1, stop=0.12, hold=15
+  train: 325 trades, PKR 1,855/trade, win 62%
+  test:  646 trades, PKR 278/trade, win 53%, 19.2/month, without best 1%: PKR -1, at 2x cost: PKR -227
+  neighbours positive in test: 4/4
+  -> FAIL: test positive at double cost; survives luck check (test, no best 1%)
+
+Testing trend_hold...
+  chosen on 2019-23: min_gap=0.0, target=None, stop=0.15, hold=60
+  train: 445 trades, PKR 4,672/trade, win 46%
+  test:  683 trades, PKR 5,644/trade, win 45%, 20.3/month, without best 1%: PKR 3413, at 2x cost: PKR 5190
+  neighbours positive in test: 5/5
+  -> PASS
+
+Survivorship: the data has no delisted stocks, and the KMI list is today's list applied to past years. Both flatter the results.
+
+PASSED: washout, trend_hold

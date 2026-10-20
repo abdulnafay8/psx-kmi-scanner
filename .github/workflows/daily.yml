@@ -1,0 +1,82 @@
+# Runs the scanner on GitHub's computers, so your laptop can stay off.
+#  - 12:00 UTC = 17:00 Pakistan time, Mon-Fri: after every PSX close
+#    (Friday closes at 16:30)
+#  - 02:30 UTC = 07:30 Pakistan time, Mon-Fri: backup run, still before the
+#    09:15 open, in case the evening run failed or PSX published late
+# Then it saves the new prices and ledger to the repository and publishes
+# the app to GitHub Pages.
+name: Daily scan
+
+on:
+  schedule:
+    - cron: "0 12 * * 1-5"
+    - cron: "30 2 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      test_push:
+        description: "Only send a test alert to the phone"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      APP_URL: ${{ vars.APP_URL }}
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Test alert only
+        if: ${{ inputs.test_push }}
+        run: python -W ignore run_daily.py --test-push
+
+      - name: Run the daily scan
+        if: ${{ !inputs.test_push }}
+        run: python -W ignore run_daily.py
+
+      - name: Save prices, ledger and app data
+        if: ${{ !inputs.test_push }}
+        run: |
+          git config user.name "kmi-scanner-bot"
+          git config user.email "kmi-scanner-bot@users.noreply.github.com"
+          git add data app/data
+          if git diff --cached --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "Daily scan $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+        if: ${{ !inputs.test_push }}
+
+      - uses: actions/upload-pages-artifact@v3
+        if: ${{ !inputs.test_push }}
+        with:
+          path: app
+
+      - id: deploy
+        if: ${{ !inputs.test_push }}
+        uses: actions/deploy-pages@v4

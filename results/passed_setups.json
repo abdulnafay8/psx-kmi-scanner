@@ -1,0 +1,151 @@
+{
+  "tested_on": "2026-10-20",
+  "setups": {
+    "washout": {
+      "label": "Washout dip in a hot stock",
+      "params": {
+        "drop": 0.3,
+        "target": 0.1,
+        "stop": 0.12,
+        "hold": 15
+      },
+      "test": {
+        "trades": 205,
+        "pkr_per_trade": 1039,
+        "win_rate": 0.561,
+        "trades_per_month": 6.1,
+        "worst_losing_streak": 6,
+        "biggest_drop_pkr": 229363,
+        "pkr_per_trade_without_best_1pct": 749,
+        "total_pkr": 212914
+      },
+      "train": {
+        "trades": 127,
+        "pkr_per_trade": 1945,
+        "win_rate": 0.685,
+        "trades_per_month": 2.1,
+        "worst_losing_streak": 11,
+        "biggest_drop_pkr": 234274,
+        "pkr_per_trade_without_best_1pct": 1758,
+        "total_pkr": 247017
+      },
+      "by_year": {
+        "2019": {
+          "trades": 23,
+          "pkr_per_trade": 1860,
+          "win_rate": 0.652
+        },
+        "2020": {
+          "trades": 75,
+          "pkr_per_trade": 2977,
+          "win_rate": 0.733
+        },
+        "2021": {
+          "trades": 12,
+          "pkr_per_trade": -1487,
+          "win_rate": 0.5
+        },
+        "2022": {
+          "trades": 6,
+          "pkr_per_trade": 1384,
+          "win_rate": 0.667
+        },
+        "2023": {
+          "trades": 11,
+          "pkr_per_trade": -862,
+          "win_rate": 0.636
+        },
+        "2024": {
+          "trades": 30,
+          "pkr_per_trade": 508,
+          "win_rate": 0.567
+        },
+        "2025": {
+          "trades": 64,
+          "pkr_per_trade": 3510,
+          "win_rate": 0.641
+        },
+        "2026": {
+          "trades": 111,
+          "pkr_per_trade": -279,
+          "win_rate": 0.514
+        }
+      },
+      "test_double_cost_pkr_per_trade": 565,
+      "neighbours_positive_in_test": "4/5"
+    },
+    "trend_hold": {
+      "label": "Trend hold (weeks)",
+      "params": {
+        "min_gap": 0.0,
+        "target": null,
+        "stop": 0.15,
+        "hold": 60
+      },
+      "test": {
+        "trades": 683,
+        "pkr_per_trade": 5644,
+        "win_rate": 0.448,
+        "trades_per_month": 20.3,
+        "worst_losing_streak": 27,
+        "biggest_drop_pkr": 952169,
+        "pkr_per_trade_without_best_1pct": 3413,
+        "total_pkr": 3854772
+      },
+      "train": {
+        "trades": 445,
+        "pkr_per_trade": 4672,
+        "win_rate": 0.465,
+        "trades_per_month": 7.4,
+        "worst_losing_streak": 19,
+        "biggest_drop_pkr": 744918,
+        "pkr_per_trade_without_best_1pct": 2212,
+        "total_pkr": 2079158
+      },
+      "by_year": {
+        "2019": {
+          "trades": 38,
+          "pkr_per_trade": -8058,
+          "win_rate": 0.211
+        },
+        "2020": {
+          "trades": 189,
+          "pkr_per_trade": 8167,
+          "win_rate": 0.556
+        },
+        "2021": {
+          "trades": 53,
+          "pkr_per_trade": -3520,
+          "win_rate": 0.302
+        },
+        "2022": {
+          "trades": 24,
+          "pkr_per_trade": -8067,
+          "win_rate": 0.167
+        },
+        "2023": {
+          "trades": 141,
+          "pkr_per_trade": 8468,
+          "win_rate": 0.525
+        },
+        "2024": {
+          "trades": 244,
+          "pkr_per_trade": 10936,
+          "win_rate": 0.557
+        },
+        "2025": {
+          "trades": 295,
+          "pkr_per_trade": 6102,
+          "win_rate": 0.471
+        },
+        "2026": {
+          "trades": 144,
+          "pkr_per_trade": -5565,
+          "win_rate": 0.215
+        }
+      },
+      "test_double_cost_pkr_per_trade": 5190,
+      "neighbours_positive_in_test": "5/5"
+    }
+  }
+}
