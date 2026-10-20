@@ -21,3 +21,29 @@ jobs:
         run: curl -sS -o /dev/null -w "HTTP %{http_code} in %{time_total}s\n" --max-time 30 https://www.psx.com.pk/ || true
       - name: TCP connect to port 443
         run: timeout 20 bash -c '</dev/tcp/dps.psx.com.pk/443' && echo "port 443 open" || echo "port 443 connect FAILED"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q psxdata==1.2.0
+      - name: psxdata and plain requests, with full errors
+        run: |
+          python - <<'EOF'
+          import logging, time, traceback, requests
+          from psxdata import constants as C
+          print("psxdata headers:", getattr(C, "DEFAULT_HEADERS", None) or getattr(C, "HEADERS", None))
+          for label, kw in [("plain POST", {}),
+                            ("POST with psxdata headers", {"headers": getattr(C, "DEFAULT_HEADERS", None) or getattr(C, "HEADERS", {})})]:
+              t = time.time()
+              try:
+                  r = requests.post("https://dps.psx.com.pk/historical", data={"symbol": "OGDC"}, timeout=30, **kw)
+                  print(f"{label}: HTTP {r.status_code}, {len(r.content)} bytes, {time.time()-t:.1f}s")
+              except Exception as e:
+                  print(f"{label}: {type(e).__name__}: {e} after {time.time()-t:.1f}s")
+          logging.basicConfig(level=logging.DEBUG)
+          import psxdata
+          try:
+              d = psxdata.stocks("OGDC", start="2026-10-01", cache=False)
+              print("psxdata OK:", d.shape)
+          except Exception:
+              traceback.print_exc()
+          EOF
