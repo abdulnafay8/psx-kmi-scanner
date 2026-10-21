@@ -7,9 +7,10 @@ ntfy_topic.txt
 # large backtest detail files: re-made by python backtest.py
 results/trades_*.csv
 results/grid_*.csv
-app/_tmp/
+# research detail: re-made by python research.py
+results/research_dividends.csv
+results/research_seasonal_by_year.csv
+# price files copied in by the online run for the charts
 app/daily/
-worker/node_modules/
-worker/.wrangler/
-worker/.dev.vars
+# local tool caches (may hold this computer's location)
 node_modules/
