@@ -24,6 +24,7 @@ from kmi import DATA_DIR, load_all_prices, load_kmi_list
 
 RESULTS = bt.RESULTS_DIR
 PAYOUTS_FILE = DATA_DIR / "payouts.csv"
+PAYOUTS_STAMP = DATA_DIR / "payouts_fetched.txt"
 
 
 def daily_returns():
@@ -113,7 +114,16 @@ def fetch_payouts():
         time.sleep(0.4)
     p = pd.concat(rows, ignore_index=True)
     p.to_csv(PAYOUTS_FILE, index=False)
+    PAYOUTS_STAMP.write_text(pd.Timestamp.now().date().isoformat())
     return p
+
+
+def payouts_age_days():
+    """Days since the payout list was downloaded (file dates can't be trusted:
+    a fresh git checkout makes every file look new)."""
+    if not PAYOUTS_FILE.exists() or not PAYOUTS_STAMP.exists():
+        return 999
+    return (pd.Timestamp.now().normalize() - pd.Timestamp(PAYOUTS_STAMP.read_text().strip())).days
 
 
 def parse_payouts(p):

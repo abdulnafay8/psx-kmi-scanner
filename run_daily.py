@@ -353,8 +353,7 @@ def main():
         fetched = update_prices(symbols, keep_today, log)
         log(f"prices updated for {fetched[0]} stocks, {fetched[1]} failed")
         # dividend dates change slowly: refresh the payout list once a week
-        pf = studies.PAYOUTS_FILE
-        if not pf.exists() or time.time() - pf.stat().st_mtime > 6 * 86400:
+        if studies.payouts_age_days() > 6:
             try:
                 studies.fetch_payouts()
                 log("dividend payout list refreshed")
