@@ -155,18 +155,48 @@ details summary { cursor: pointer; color: var(--brand); font-size: 13px; margin-
 .tip .r { display: flex; align-items: center; gap: 6px; }
 .tip .r b { font-variant-numeric: tabular-nums; }
 .tip .r .k { width: 12px; border-top: 2px solid; }
+/* daily tip, above the menu */
+.toast { position: fixed; left: 12px; right: 12px; bottom: calc(66px + env(safe-area-inset-bottom)); z-index: 6;
+  max-width: 696px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brand);
+  border-radius: 14px; padding: 11px 40px 10px 13px; box-shadow: 0 6px 24px rgba(0, 0, 0, .16); font-size: 13.5px; }
+.toast .t-title { font-weight: 700; font-size: 12px; color: var(--brand); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
+.toast .t-actions { display: flex; gap: 14px; margin-top: 6px; font-size: 12.5px; }
+.toast .t-actions button { border: 0; background: none; color: var(--brand); padding: 4px 0; cursor: pointer; font-weight: 600; }
+.toast .t-actions button.quiet { color: var(--muted); font-weight: 400; }
+.toast .x { position: absolute; top: 6px; right: 6px; width: 32px; height: 32px; border: 0; background: none;
+  color: var(--muted); font-size: 20px; cursor: pointer; border-radius: 8px; }
+main.has-toast { padding-bottom: calc(190px + env(safe-area-inset-bottom)); }
+/* welcome pop-up */
+.overlay { position: fixed; inset: 0; z-index: 20; background: rgba(0, 0, 0, .5); display: flex; align-items: flex-end;
+  justify-content: center; padding: 16px; }
+@media (min-width: 560px) { .overlay { align-items: center; } }
+.modal { background: var(--card); color: var(--ink); border-radius: 20px; width: 100%; max-width: 520px; max-height: 86vh;
+  overflow-y: auto; padding: 18px 18px 14px; box-shadow: 0 10px 40px rgba(0, 0, 0, .3); }
+.modal h2 { font-size: 18px; margin: 0 0 4px; }
+.gloss { display: grid; grid-template-columns: auto 1fr; gap: 10px 12px; align-items: start; margin: 12px 0; }
+.gloss .chip { margin-top: 1px; }
+.gloss p { margin: 0; font-size: 13.5px; }
+.gloss p b { display: block; font-size: 13.5px; }
+.help-sec { margin-top: 4px; }
+.help-sec dt { font-weight: 650; margin-top: 10px; }
+.help-sec dd { margin: 2px 0 0; color: var(--ink-2); font-size: 13.5px; }
+.switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; }
+.switch input { width: 22px; height: 22px; accent-color: var(--brand); }
 </style>
 </head>
 <body>
 <header>
   <div class="bar">
     <h1>KMI Scanner</h1>
+    <a class="iconbtn" href="#help" title="Help guide" aria-label="Help guide" style="text-decoration:none;font-weight:700">?</a>
     <button class="iconbtn" id="refresh" title="Refresh" aria-label="Refresh data"><span>↻</span></button>
     <button class="iconbtn" id="theme" title="Light / dark" aria-label="Switch light or dark mode">◐</button>
   </div>
   <div class="sub" id="sub">Loading…</div>
 </header>
 <main id="view"><div class="loading">Loading today's signals…</div></main>
+<div id="toast-slot"></div>
+<div id="modal-slot"></div>
 <nav id="nav">
   <a href="#hot" data-r="hot"><span class="ico">◎</span>Today</a>
   <a href="#log" data-r="log"><span class="ico">✎</span>My trades</a>
@@ -704,6 +734,10 @@ function settingsView() {
     <button class="btn wide" id="s-save">Save</button>
     <p class="small muted">Saved on this device only.</p>
   </div>
+  <div class="card">
+    <label class="switch"><span>Show a daily tip</span><input type="checkbox" id="s-tips" ${store.get("tipsOff", false) ? "" : "checked"}></label>
+    <a class="small" href="#help">Open the help guide</a>
+  </div>
   <div class="card"><h2>Alerts on this phone (Firebase)</h2>
     <p class="small" style="margin-top:0">Open this page in Chrome on your phone, then tap the button. Copy the code it shows and save it as the GitHub secret <code>FCM_TOKENS</code>.</p>
     <button class="btn wide" id="fcm-on">Turn on alerts on this device</button>
@@ -755,7 +789,7 @@ async function render() {
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("on", a.dataset.r === route || (route === "stock" || route === "check") && a.dataset.r === "hot"));
   const v = document.getElementById("view");
   const screens = { hot, stock: () => stock(arg), check: () => check(arg), log: logView, record,
-                    settings: settingsView, about, status, research };
+                    settings: settingsView, about, status, research, help };
   v.innerHTML = fcmBanner() + await (screens[route] || hot)();
   if (store.get("lastRoute", "") !== location.hash) window.scrollTo(0, 0);
   store.set("lastRoute", location.hash);
@@ -813,6 +847,12 @@ function wire(route, arg) {
         minValue: +$("s-mv").value || 0, minPrice: +$("s-pmin").value || 0, maxPrice: +$("s-pmax").value || 0 });
       location.hash = "#hot";
     };
+  }
+  if (route === "help") {
+    $("h-welcome").onclick = () => showWelcome(true);
+  }
+  if (route === "settings") {
+    $("s-tips").onchange = (e) => { store.set("tipsOff", !e.target.checked); store.set("tipDismissed", ""); showTip(); };
   }
   if (route === "about") {
     const upd = () => $("pu-r").textContent = pkr((+$("pu-d").value || 0) * (+$("pu-p").value || 0) / 100);
@@ -896,6 +936,205 @@ function fcmBanner() {
     : "";
 }
 
+// ---------- help: status glossary, welcome pop-up, guide, daily tip ----------
+const GLOSSARY = [
+  ["buy_plan", "A tested setup fired", "The only status that means \"consider buying\". It comes with a full plan: order price, stop, target, hold time and shares. Valid for the next trading session only."],
+  ["in_plan", "Already alerted", "A plan for this stock was sent on an earlier day and is still running (waiting to fill, or held). Follow that plan; don't buy a second time."],
+  ["running", "Strong move up", "Up 10%+ in 5 days and above its 20-day average. Don't chase it: buying after a big run was tested and lost money."],
+  ["fading", "Lost its trend", "Below a falling 20-day average. Avoid new buys; if you own it, think about exiting. For context only: not a tested sell signal."],
+  ["no_setup", "Nothing to do", "No tested setup fired. That's the normal state for most stocks on most days."],
+];
+
+function glossaryHTML() {
+  return `<div class="gloss">${GLOSSARY.map(([k, t, d]) => `${chip(k)}<p><b>${esc(t)}</b>${esc(d)}</p>`).join("")}</div>`;
+}
+
+const TIPS = [
+  "Only <b>Buy plan</b> is a buy signal. Running, Fading and No setup are for context only.",
+  "A plan is valid for <b>one session</b>. If your limit buy doesn't fill, let it go: \"not filled\" is part of the tested plan.",
+  "Set the stop and target from <b>your actual fill price</b>, not the alert's estimate.",
+  "Judge the scanner after <b>20 trades</b>, not after one. Single trades win only about half the time.",
+  "Tap <b>Pre-trade check</b> before every trade. It sizes the position so a stop-out loses only your chosen amount.",
+  "The <b>daily loss lock</b> stops new trades after your limit. Change the limit in Settings.",
+  "The four dots are: above 20-day average · volume vs normal · KSE-100 trend · room to the 60-day high. They explain, they don't trigger trades.",
+  "Plans come from the <b>final close</b>. New ones appear after about 17:00 on trading days.",
+  "PSX prices aren't adjusted for bonus shares or splits, so charts start after the latest one.",
+  "The <b>Track record</b> grades every alert automatically, losers included. Compare it with the backtest after 20–30 trades.",
+  "KMI All Share is a Shariah <b>screening</b>, not a fatwa. See About for the purification calculator.",
+  "Trend hold trades can last up to <b>60 trading days</b>. Expect long waits and some long losing runs.",
+];
+
+function tipIndex() {
+  const day = Math.floor(Date.now() / 86400000);
+  return (day + store.get("tipOffset", 0)) % TIPS.length;
+}
+
+function showTip() {
+  const slot = document.getElementById("toast-slot"), main = document.getElementById("view");
+  const off = store.get("tipsOff", false) || store.get("tipDismissed", "") === today() || !store.get("seenGuide", false);
+  if (off) { slot.innerHTML = ""; main.classList.remove("has-toast"); return; }
+  slot.innerHTML = `
+    <div class="toast" role="status" aria-live="polite">
+      <div class="t-title">Tip</div>
+      <div>${TIPS[tipIndex()]}</div>
+      <div class="t-actions"><button id="t-next">Next tip</button><a href="#help" style="padding:4px 0;font-weight:600">Help guide</a>
+        <button class="quiet" id="t-off">Turn off tips</button></div>
+      <button class="x" id="t-x" aria-label="Dismiss tip for today">×</button>
+    </div>`;
+  main.classList.add("has-toast");
+  document.getElementById("t-next").onclick = () => { store.set("tipOffset", store.get("tipOffset", 0) + 1); showTip(); };
+  document.getElementById("t-x").onclick = () => { store.set("tipDismissed", today()); showTip(); };
+  document.getElementById("t-off").onclick = () => { store.set("tipsOff", true); showTip(); };
+}
+
+// First-launch tutorial: six short steps, Back/Next, skippable, replayable.
+function tutorialSteps() {
+  const s = settings();
+  const example = `
+    <div class="card plan-card" style="margin:10px 0;box-shadow:none">
+      <div class="row between"><div><div class="sym">ASTM</div><div class="small muted">Asim Textile Mills</div></div>
+        <div style="text-align:right"><div class="num" style="font-weight:650">Rs 55.29</div><div class="small down">−6.6%</div></div></div>
+      <div class="small" style="margin-top:6px"><b>Washout dip in a hot stock</b> · Limit buy at Rs 54.74</div>
+      <div class="plan-grid"><div><span>Stop</span><b>48.17</b><span>−12%</span></div>
+        <div><span>Target</span><b>60.21</b><span>+10%</span></div>
+        <div><span>Shares</span><b>304</b><span>risk Rs 2,000</span></div></div>
+    </div>`;
+  return [
+    { title: "Welcome to KMI Scanner", body: `
+        <p>After every PSX close it checks all <b>KMI All Share</b> stocks (the halal-screened list; nothing outside it ever appears) and looks for two trade setups that passed years of honest testing.</p>
+        <p>When one fires, you get a <b>Buy plan</b> on your phone: what to buy, at what price, where to stop out, where to take profit, and how many shares.</p>
+        <p class="small muted">This short tour takes a minute. You can skip it and replay it later from the ? button.</p>` },
+    { title: "What the statuses mean", body: `
+        <p class="small muted" style="margin:0">Every stock gets one of these each day:</p>${glossaryHTML()}` },
+    { title: "Reading a Buy plan", body: `
+        <p style="margin-bottom:0">Each plan on the <b>Today</b> screen looks like this:</p>${example}
+        <dl class="help-sec" style="margin-top:0">
+          <dt>Limit buy at Rs 54.74</dt><dd>Your order price. If it never trades that low, you simply don't buy.</dd>
+          <dt>Stop 48.17 / Target 60.21</dt><dd>Sell at the stop to cap the loss, or at the target to take the profit. Set them from <b>your</b> fill price.</dd>
+          <dt>Shares 304</dt><dd>Sized so a stop-out loses about your chosen risk.</dd>
+        </dl>` },
+    { title: "How to trade a plan", body: `
+        <ol style="padding-left:20px;margin:6px 0">
+          <li><b>Get the alert</b> after the close (about 17:00 on trading days).</li>
+          <li><b>Open the plan</b>: tap <i>Details &amp; chart</i> to see why it fired.</li>
+          <li><b>Do the pre-trade check</b>: three ticks, then <i>I'm in</i> logs the trade.</li>
+          <li><b>Place the order in AKD Trade</b> for the next session only. Add the stop and target once filled.</li>
+          <li><b>Close it</b> in <i>My trades</i> when the stop, the target or the hold time is reached.</li>
+        </ol>
+        <p class="small muted">The app never trades for you. The plan is only valid for the session it names.</p>` },
+    { title: "Your risk and the safety rules", body: `
+        <label class="field" style="color:var(--ink)">How much are you willing to lose on one trade (PKR)?
+          <input id="tut-risk" type="number" inputmode="numeric" step="500" value="${s.risk}"></label>
+        <ul style="padding-left:20px;margin:8px 0" class="small">
+          <li><b>Daily loss lock:</b> after a set loss in one day (now ${pkr(s.dailyLoss)}), new trades are blocked until tomorrow.</li>
+          <li><b>Three losses in a row</b> end the day.</li>
+          <li><b>Judge after 20 trades</b>, not after one: single trades win only about half the time.</li>
+          <li>Start small until about 30 live trades match the backtest. Not investment advice.</li>
+        </ul>` },
+    { title: "Last step: alerts on your phone", body: `
+        <ol style="padding-left:20px;margin:6px 0">
+          <li><b>Add to home screen:</b> in Chrome, tap ⋮ → <i>Add to Home screen</i>, so the app opens like any other.</li>
+          <li><b>Turn on alerts:</b> open <i>Settings</i> → <i>Turn on alerts on this device</i> and allow notifications.</li>
+        </ol>
+        <p class="small muted">Tips will appear at the bottom now and then; tap × to hide one. The full guide is always behind the <b>?</b> button.</p>` },
+  ];
+}
+
+function showWelcome(force = false) {
+  if (!force && store.get("seenGuide", false)) return;
+  const slot = document.getElementById("modal-slot");
+  let steps = tutorialSteps();
+  let i = 0;
+  const saveRisk = () => {
+    const el = document.getElementById("tut-risk");
+    if (el && +el.value > 0) store.set("settings", { ...settings(), risk: Math.round(+el.value) });
+  };
+  const close = () => {
+    saveRisk();
+    store.set("seenGuide", true);
+    slot.innerHTML = "";
+    document.removeEventListener("keydown", onKey);
+    showTip();
+    render();
+  };
+  const onKey = (e) => { if (e.key === "Escape") close(); };
+  const draw = () => {
+    steps = tutorialSteps();                     // rebuilt so the risk field shows the saved value
+    const st = steps[i], last = i === steps.length - 1;
+    slot.innerHTML = `
+      <div class="overlay" id="w-overlay">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="w-title">
+          <div class="row between" style="margin-bottom:6px">
+            <span class="small muted">Step ${i + 1} of ${steps.length}</span>
+            <button class="quiet" id="w-skip" style="border:0;background:none;color:var(--muted);cursor:pointer;padding:4px">${last ? "Close" : "Skip tour"}</button>
+          </div>
+          <h2 id="w-title">${st.title}</h2>
+          <div style="font-size:14px">${st.body}</div>
+          <div class="row" style="justify-content:center;gap:6px;margin:12px 0 4px" aria-hidden="true">
+            ${steps.map((_, k) => `<span style="width:${k === i ? 18 : 7}px;height:7px;border-radius:99px;background:${k === i ? "var(--brand)" : "var(--line)"}"></span>`).join("")}
+          </div>
+          <div class="row" style="gap:8px;margin-top:8px">
+            ${i > 0 ? `<button class="btn ghost" style="flex:1" id="w-back">Back</button>` : ""}
+            <button class="btn" style="flex:2" id="w-next">${last ? "Start using the app" : "Next"}</button>
+          </div>
+          ${last ? `<a class="btn ghost wide" href="#settings" id="w-alerts">Go to Settings to turn on alerts</a>` : ""}
+        </div>
+      </div>`;
+    const modal = slot.querySelector(".modal");
+    modal.scrollTop = 0;
+    document.getElementById("w-skip").onclick = close;
+    document.getElementById("w-next").onclick = () => { saveRisk(); if (last) close(); else { i++; draw(); } };
+    if (i > 0) document.getElementById("w-back").onclick = () => { saveRisk(); i--; draw(); };
+    if (last) document.getElementById("w-alerts").onclick = close;
+    document.getElementById("w-next").focus({ preventScroll: true });
+  };
+  document.addEventListener("keydown", onKey);
+  draw();
+}
+
+function help() {
+  return `
+  <h2>Help guide</h2>
+  <div class="card"><h2>Statuses</h2>${glossaryHTML()}</div>
+  <div class="card"><h2>The four dots (lights)</h2>
+    <dl class="help-sec">
+      <dt>1 · Above 20-day average</dt><dd>Green when today's close is above the average of the last 20 closes.</dd>
+      <dt>2 · Volume vs normal</dt><dd>Green when today's volume is at least the 20-day average volume.</dd>
+      <dt>3 · KSE-100 trend</dt><dd>Green when the KSE-100 index is above its 50-day average.</dd>
+      <dt>4 · Room to 60-day high</dt><dd>Green when the price is at least 5% below its 60-day high (room to rise before old highs).</dd>
+    </dl>
+    <p class="small muted">They explain the picture. They never create a Buy plan by themselves.</p></div>
+  <div class="card"><h2>Reading a Buy plan</h2>
+    <dl class="help-sec">
+      <dt>Limit buy at Rs X</dt><dd>Enter a limit order at that price in AKD Trade. If the price never comes down to it, you don't buy, and that's fine.</dd>
+      <dt>Buy at the opening price</dt><dd>Buy when the market opens. Skip it if the stock opens locked at its upper limit.</dd>
+      <dt>Stop</dt><dd>Sell if the price falls this far below your fill. It caps the loss. If one day touches both stop and target, the record counts the stop.</dd>
+      <dt>Target</dt><dd>Sell when the price rises this far above your fill. Trend hold has no fixed target.</dd>
+      <dt>Max hold</dt><dd>If neither is hit, sell at the close after this many trading days.</dd>
+      <dt>Shares</dt><dd>Worked out so that hitting the stop loses about your chosen risk (Settings, default PKR 2,000).</dd>
+      <dt>Valid next session only</dt><dd>The plan is for the named day. After that session opens, a new plan is needed.</dd>
+    </dl></div>
+  <div class="card"><h2>The two tested setups</h2>
+    <dl class="help-sec">
+      <dt>Washout dip in a hot stock</dt><dd>A stock that ran up on heavy volume, then fell 30%+ from its recent high. Limit buy 1% under the close, +10% target, −12% stop, up to 15 days.</dd>
+      <dt>Trend hold (weeks)</dt><dd>A new 60-day high while the 50-day average is above the 200-day average. Buy at the open, −15% stop, hold up to 60 days. Works in rising markets; loses in flat or falling ones.</dd>
+    </dl></div>
+  <div class="card"><h2>When things happen</h2>
+    <dl class="help-sec">
+      <dt>Daily scan</dt><dd>After every PSX close, about 17:00 Pakistan time (Mon–Fri), with a backup run at 07:30. New plans arrive as phone alerts.</dd>
+      <dt>PSX hours</dt><dd>Mon–Thu 09:32–15:30; Friday 09:17–12:00 and 14:32–16:30. Closed on weekends and holidays.</dd>
+      <dt>No plans today?</dt><dd>Normal. Most days have few or none.</dd>
+    </dl></div>
+  <div class="card"><h2>Track record and safety rules</h2>
+    <dl class="help-sec">
+      <dt>Track record</dt><dd>Every alert is locked when sent and graded from real prices after AKD's costs: filled or not, then stop, target or time exit.</dd>
+      <dt>Pre-trade check</dt><dd>Three ticks before "I'm in": it's the tested setup, you accept the loss at the stop, you're not chasing.</dd>
+      <dt>Daily loss lock</dt><dd>After your daily loss limit, new trades are blocked until tomorrow. Three losses in a row also end the day.</dd>
+    </dl></div>
+  <button class="btn ghost wide" id="h-welcome">Replay the tutorial</button>
+  <p class="small"><a href="#about">About, halal screening and purification</a></p>`;
+}
+
 window.addEventListener("hashchange", render);
 let resizeTimer;
 window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => {
@@ -903,7 +1142,7 @@ window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer
   const x = route === "stock" && DATA && DATA.stocks.find((s) => s.symbol === arg);
   if (x) renderChart(x);
 }, 200); });
-load().then(render).then(checkFcmToken);
+load().then(render).then(() => { showWelcome(); showTip(); }).then(checkFcmToken);
 </script>
 </body>
 </html>
