@@ -162,30 +162,6 @@ details summary { cursor: pointer; color: var(--brand); font-size: 13px; margin-
 .tip .r { display: flex; align-items: center; gap: 6px; }
 .tip .r b { font-variant-numeric: tabular-nums; }
 .tip .r .k { width: 12px; border-top: 2px solid; }
-/* market watch */
-.mkt-sum { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 6px 0 10px; }
-.mkt-sum div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; }
-.mkt-sum b { display: block; font-size: 16px; font-variant-numeric: tabular-nums; }
-.mkt-sum span { font-size: 11.5px; color: var(--muted); }
-.pill { display: inline-block; min-width: 64px; text-align: center; padding: 3px 8px; border-radius: 8px; font-weight: 650;
-  font-size: 13px; font-variant-numeric: tabular-nums; }
-.pill.up { background: color-mix(in srgb, var(--good) 16%, transparent); }
-.pill.down { background: color-mix(in srgb, var(--bad) 16%, transparent); }
-.live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--good); margin-right: 5px;
-  vertical-align: middle; }
-.live-dot.off { background: var(--muted); }
-/* chat */
-.chat { display: flex; flex-direction: column; gap: 8px; }
-.bubble { max-width: 88%; padding: 9px 12px; border-radius: 16px; font-size: 14px; line-height: 1.45; white-space: pre-wrap; word-wrap: break-word; }
-.bubble.user { align-self: flex-end; background: var(--brand); color: var(--brand-ink); border-bottom-right-radius: 5px; }
-.bubble.ai { align-self: flex-start; background: var(--card); border: 1px solid var(--line); border-bottom-left-radius: 5px; }
-.chat-input { position: sticky; bottom: calc(62px + env(safe-area-inset-bottom)); display: flex; gap: 8px; padding: 10px 0 4px;
-  background: var(--bg); }
-.chat-input textarea { flex: 1; resize: none; min-height: 44px; max-height: 120px; padding: 11px 12px; border-radius: 14px;
-  border: 1px solid var(--line); background: var(--card); color: var(--ink); font: inherit; }
-.suggest { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
-.suggest button { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 99px;
-  padding: 6px 11px; font-size: 12.5px; cursor: pointer; }
 /* daily tip, above the menu */
 .toast { position: fixed; left: 12px; right: 12px; bottom: calc(66px + env(safe-area-inset-bottom)); z-index: 6;
   max-width: 696px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brand);
@@ -224,7 +200,6 @@ main.has-toast { padding-bottom: calc(190px + env(safe-area-inset-bottom)); }
     <h1>KMI <span>Scanner</span></h1>
     <div class="right">
       <button class="iconbtn" id="refresh" title="Refresh" aria-label="Refresh data"><span>↻</span></button>
-      <a class="iconbtn" href="#settings" title="Settings" aria-label="Settings" style="text-decoration:none">⚙</a>
     </div>
   </div>
   <div class="sub" id="sub">Loading…</div>
@@ -234,10 +209,9 @@ main.has-toast { padding-bottom: calc(190px + env(safe-area-inset-bottom)); }
 <div id="modal-slot"></div>
 <nav id="nav">
   <a href="#hot" data-r="hot"><span class="ico">◎</span>Today</a>
-  <a href="#market" data-r="market"><span class="ico">≋</span>Market</a>
-  <a href="#ask" data-r="ask"><span class="ico">✦</span>Ask AI</a>
-  <a href="#log" data-r="log"><span class="ico">✎</span>Trades</a>
-  <a href="#record" data-r="record"><span class="ico">▤</span>Record</a>
+  <a href="#log" data-r="log"><span class="ico">✎</span>My trades</a>
+  <a href="#record" data-r="record"><span class="ico">▤</span>Track record</a>
+  <a href="#settings" data-r="settings"><span class="ico">⚙</span>Settings</a>
 </nav>
 <script>
 "use strict";
@@ -460,10 +434,6 @@ function stock(sym) {
   ${x.status === "buy_plan" ? x.plans.map((p) => planCard(p, s.risk)).join("") +
      `<a class="btn wide" href="#check/${esc(x.symbol)}">Pre-trade check</a>` : ""}
   ${chartCard(x)}
-  <div class="row" style="gap:8px">
-    <a class="btn ghost" style="flex:1" href="#quote/${esc(x.symbol)}">Live chart</a>
-    <a class="btn ghost" style="flex:1" href="#ask/${esc(x.symbol)}">Ask AI about ${esc(x.symbol)}</a>
-  </div>
   ${(x.notes || []).length ? `<div class="card"><h2>Context notes</h2>
     ${x.notes.map((n) => `<div class="check"><span class="muted">ⓘ</span><div class="small">${esc(n)}</div></div>`).join("")}
     <p class="small muted" style="margin-bottom:0">Patterns from history. They don't create Buy plans.</p></div>` : ""}
@@ -793,14 +763,7 @@ function settingsView() {
     <label class="switch"><span>Show a daily tip</span><input type="checkbox" id="s-tips" ${store.get("tipsOff", false) ? "" : "checked"}></label>
     <div class="switch"><span>Light / dark</span><button class="btn ghost" id="s-theme" style="padding:7px 14px">Switch</button></div>
     <a class="small" href="#help">Open the help guide</a>
-  </div>
-  <div class="card"><h2>Live market &amp; Ask AI server</h2>
-    <p class="small muted" style="margin-top:0">Your private server. The passcode keeps PSX data and the AI chat for you only (PSX data can't be republished publicly without a licence).</p>
-    <label class="field">Passcode<input id="s-pass" type="password" autocomplete="off" value="${esc(passcode())}"></label>
-    <label class="field">Server address<input id="s-api" type="text" inputmode="url" value="${esc(apiBase())}"></label>
-    <button class="btn wide" id="s-test">Save and test connection</button>
-    <div id="s-test-out" class="small" style="margin-top:8px"></div></div>
-  <div class="card"><h2>Alerts on this phone (Firebase)</h2>
+  </div>  <div class="card"><h2>Alerts on this phone (Firebase)</h2>
     <p class="small" style="margin-top:0">Open this page in Chrome on your phone, then tap the button. Copy the code it shows and save it as the GitHub secret <code>FCM_TOKENS</code>.</p>
     <button class="btn wide" id="fcm-on">Turn on alerts on this device</button>
     <div id="fcm-out" class="small" style="margin-top:10px"></div></div>
@@ -845,229 +808,14 @@ async function research() {
     <div>Win rate</div><div>${s.win_rate != null ? pct(s.win_rate, 0) : "–"}</div><div>Avg PKR</div><div>${pkr(s.avg_pkr_per_trade)}</div></div></div>`).join("")}`;
 }
 
-// ---------- live server (Cloudflare Worker): market watch + AI chat ----------
-const DEFAULT_API = "https://kmi-scanner-api.abdul-nafay8.workers.dev";
-const apiBase = () => (store.get("apiBase", "") || DEFAULT_API).replace(/\/+$/, "");
-const passcode = () => store.get("passcode", "");
-async function api(path, body) {
-  if (!passcode()) throw new Error("Enter your passcode in Settings to use live data and Ask AI.");
-  const r = await fetch(apiBase() + path, {
-    method: body ? "POST" : "GET",
-    headers: { "X-Passcode": passcode(), ...(body ? { "Content-Type": "application/json" } : {}) },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  const j = await r.json().catch(() => ({}));
-  if (r.status === 401) throw new Error("Wrong passcode. Check it in Settings.");
-  if (!r.ok) throw new Error(j.error || `Server error ${r.status}`);
-  return j;
-}
-
-// PSX session window in Pakistan time, for deciding when to auto-refresh
-function marketOpenNow() {
-  const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Karachi" }));
-  const d = now.getDay(), m = now.getHours() * 60 + now.getMinutes();
-  if (d === 0 || d === 6) return false;
-  if (d === 5) return (m >= 555 && m <= 720) || (m >= 870 && m <= 990);   // Fri 09:15-12:00, 14:30-16:30
-  return m >= 555 && m <= 935;                                            // 09:15-15:35
-}
-
-let LIVE_TIMER = null;
-const stopLive = () => { if (LIVE_TIMER) { clearInterval(LIVE_TIMER); LIVE_TIMER = null; } };
-let MARKET = null;
-
-function marketScreen() {
-  if (!passcode()) return `<h2>Market watch</h2><div class="card empty">Live prices need your server passcode.<br><a class="btn wide" href="#settings">Enter it in Settings</a></div>`;
-  return `<div class="row between"><h2 style="margin:4px 0">Market watch</h2><span class="small muted" id="m-upd"></span></div>
-    <div class="mkt-sum" id="m-sum"></div>
-    <div class="filters">
-      <select id="m-sort" aria-label="Sort">${[["pct", "Top gainers"], ["-pct", "Top losers"], ["vol", "Most active"], ["s", "A–Z"]].map(([v, l]) =>
-        `<option value="${v}" ${store.get("mSort", "vol") === v ? "selected" : ""}>${l}</option>`).join("")}</select>
-      <input id="m-q" type="search" placeholder="Search symbol or name" value="${esc(store.get("mQ", ""))}" aria-label="Search">
-    </div>
-    <div class="list" id="m-list" style="margin-top:8px"><div class="loading">Loading live prices…</div></div>
-    <p class="small muted" style="margin:8px 2px">KMI All Share stocks only. Prices come from the PSX data portal and may be a little delayed. Tap a stock for its chart.</p>`;
-}
-
-function drawMarket() {
-  const list = document.getElementById("m-list");
-  if (!list || !MARKET) return;
-  const q = store.get("mQ", "").toLowerCase(), sort = store.get("mSort", "vol");
-  let rows = MARKET.stocks.filter((m) => m.cur != null && (!q || (m.s + " " + m.name).toLowerCase().includes(q)));
-  const key = sort.replace("-", ""), dir = sort.startsWith("-") ? 1 : -1;
-  rows.sort((a, b) => key === "s" ? a.s.localeCompare(b.s) : dir * ((a[key] ?? 0) - (b[key] ?? 0)));
-  const up = MARKET.stocks.filter((m) => m.chg > 0).length, down = MARKET.stocks.filter((m) => m.chg < 0).length;
-  const vol = MARKET.stocks.reduce((t, m) => t + (m.vol || 0), 0);
-  document.getElementById("m-sum").innerHTML = `<div><b class="up">${up}</b><span>advancing</span></div>
-    <div><b class="down">${down}</b><span>declining</span></div><div><b>${(vol / 1e6).toFixed(0)}M</b><span>shares traded</span></div>`;
-  const open = marketOpenNow();
-  document.getElementById("m-upd").innerHTML = `<span class="live-dot ${open ? "" : "off"}"></span>${open ? "live · " : "closed · "}${new Date(MARKET.at).toLocaleTimeString("en-GB", { timeZone: "Asia/Karachi", hour: "2-digit", minute: "2-digit" })}`;
-  list.innerHTML = rows.slice(0, 320).map((m) => `
-    <a class="item" href="#quote/${esc(m.s)}">
-      <div class="who"><b>${esc(m.s)}</b><span class="name">${esc(m.name)}</span></div>
-      <div class="px">${num2(m.cur)}<div class="small muted">vol ${(m.vol || 0).toLocaleString("en-PK")}</div></div>
-      <span class="pill ${m.pct >= 0 ? "up" : "down"}">${m.pct >= 0 ? "+" : "−"}${Math.abs(m.pct || 0).toFixed(2)}%</span>
-    </a>`).join("") || `<div class="empty">No stocks match.</div>`;
-}
-
-async function loadMarket() {
-  const list = document.getElementById("m-list");
-  try { MARKET = await api("/api/market"); drawMarket(); }
-  catch (e) { if (list) list.innerHTML = `<div class="empty">${esc(e.message)}</div>`; }
-}
-
-const RANGES = [["1D", 0], ["1W", 5], ["1M", 21], ["3M", 63], ["6M", 126], ["1Y", 248], ["5Y", 1240]];
-function quoteScreen(sym) {
-  const x = DATA && DATA.stocks.find((s) => s.symbol === sym);
-  const r = store.get("qRange", "1D");
-  return `<a href="#market" class="back">← Market</a>
-    <div class="card">
-      <div class="row between"><div><div style="font-size:20px;font-weight:750">${esc(sym)}</div>
-        <div class="small muted">${esc(x ? x.name : "")}</div></div>
-        <div style="text-align:right"><div class="num" style="font-size:19px;font-weight:700" id="q-px">–</div><div class="small" id="q-chg"></div></div></div>
-      <div class="seg" role="group" aria-label="Chart range" style="margin-top:12px;display:flex">${RANGES.map(([l]) =>
-        `<button data-qr="${l}" class="${l === r ? "on" : ""}" style="flex:1">${l}</button>`).join("")}</div>
-      <div class="chart-box" id="q-chart" style="margin-top:10px"><div class="loading" style="padding:50px 0">Loading chart…</div></div>
-      <div class="small muted" id="q-note" style="margin-top:6px"></div>
-    </div>
-    ${x ? `<div class="card"><div class="row between">${chip(x.status)}<span class="small muted">scanner, ${esc(fmtDay(x.date))} close</span></div>
-      <div class="row" style="gap:8px;margin-top:10px"><a class="btn ghost" style="flex:1" href="#stock/${esc(sym)}">Scanner view</a>
-      <a class="btn ghost" style="flex:1" href="#ask/${esc(sym)}">Ask AI about ${esc(sym)}</a></div></div>` : ""}`;
-}
-
-function lineChart(box, pts, { base = null, timeFmt }) {
-  const W = Math.max(280, Math.round(box.clientWidth || 340)), H = 220, L = 6, R = 54, T = 10, B = 22;
-  if (pts.length < 2) { box.innerHTML = `<div class="empty">Not enough data for this range yet.</div>`; return; }
-  const vals = pts.map((p) => p.v).concat(base != null ? [base] : []);
-  let lo = Math.min(...vals), hi = Math.max(...vals);
-  const pad = (hi - lo) * 0.08 || hi * 0.01 || 1; lo = Math.max(0, lo - pad); hi += pad;
-  const X = (i) => L + i * (W - L - R) / (pts.length - 1), Y = (v) => T + (hi - v) / (hi - lo) * (H - T - B);
-  const last = pts[pts.length - 1].v, upDay = base != null ? last >= base : last >= pts[0].v;
-  const color = upDay ? "var(--good)" : "var(--bad)";
-  const step = niceStep(hi - lo, 4);
-  let g = "";
-  for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) {
-    v = Math.round(v / step) * step || 0;
-    const y = Y(v).toFixed(1);
-    g += `<line x1="${L}" x2="${W - R}" y1="${y}" y2="${y}" stroke="var(--grid)"/><text x="${W - R + 6}" y="${(+y + 3.5).toFixed(1)}">${num2(v).replace(/\.00$/, "")}</text>`;
-  }
-  const n = 4;
-  for (let k = 0; k < n; k++) {
-    const i = Math.round(k * (pts.length - 1) / (n - 1));
-    g += `<text x="${X(i).toFixed(1)}" y="${H - 6}" text-anchor="${k === 0 ? "start" : k === n - 1 ? "end" : "middle"}">${esc(timeFmt(pts[i].t))}</text>`;
-  }
-  pts.forEach((p, i) => { if (p.brk) g += `<line x1="${X(i)}" x2="${X(i)}" y1="${T}" y2="${H - B}" stroke="var(--axis)" stroke-dasharray="2 3"/><text x="${X(i) + 3}" y="${T + 9}">split/bonus?</text>`; });
-  if (base != null) g += `<line x1="${L}" x2="${W - R}" y1="${Y(base).toFixed(1)}" y2="${Y(base).toFixed(1)}" stroke="var(--axis)" stroke-dasharray="4 4"/>`;
-  const d = pts.map((p, i) => (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(p.v).toFixed(1)).join("");
-  g += `<path d="${d}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round"/>`;
-  g += `<line id="qx" y1="${T}" y2="${H - B}" stroke="var(--axis)" visibility="hidden"/><circle id="qd" r="4" fill="${color}" stroke="var(--card)" stroke-width="2" visibility="hidden"/>`;
-  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Price chart">${g}</svg><div class="tip" id="q-tip"></div>`;
-  const svg = box.querySelector("svg"), tip = box.querySelector("#q-tip"), xh = svg.querySelector("#qx"), xd = svg.querySelector("#qd");
-  const show = (cx) => {
-    const rect = svg.getBoundingClientRect(), sx = (cx - rect.left) * W / rect.width;
-    const i = Math.max(0, Math.min(pts.length - 1, Math.round((sx - L) * (pts.length - 1) / (W - L - R))));
-    const x = X(i);
-    xh.setAttribute("x1", x); xh.setAttribute("x2", x); xh.setAttribute("visibility", "visible");
-    xd.setAttribute("cx", x); xd.setAttribute("cy", Y(pts[i].v)); xd.setAttribute("visibility", "visible");
-    tip.replaceChildren();
-    const a = document.createElement("div"); a.className = "d"; a.textContent = timeFmt(pts[i].t, true);
-    const b = document.createElement("b"); b.textContent = "Rs " + num2(pts[i].v);
-    tip.append(a, b); tip.style.display = "block";
-    const px = x * rect.width / W, tw = tip.offsetWidth;
-    tip.style.left = Math.max(0, Math.min(rect.width - tw, px + (px > rect.width / 2 ? -tw - 12 : 12))) + "px";
-  };
-  svg.addEventListener("pointermove", (e) => show(e.clientX));
-  svg.addEventListener("pointerdown", (e) => show(e.clientX));
-  svg.addEventListener("pointerleave", () => { tip.style.display = "none"; xh.setAttribute("visibility", "hidden"); xd.setAttribute("visibility", "hidden"); });
-}
-
-async function loadQuote(sym) {
-  const box = document.getElementById("q-chart");
-  if (!box) return;
-  const range = store.get("qRange", "1D");
-  const days = RANGES.find(([l]) => l === range)[1];
-  const pkTime = (t, long) => new Date(t * 1000).toLocaleString("en-GB", { timeZone: "Asia/Karachi",
-    ...(long ? { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" } : { hour: "2-digit", minute: "2-digit" }) });
-  const pkDay = (t, long) => new Date(t * 1000).toLocaleDateString("en-GB", { timeZone: "Asia/Karachi",
-    ...(long ? { weekday: "short", day: "numeric", month: "short", year: "numeric" } : days > 260 ? { month: "short", year: "2-digit" } : { day: "numeric", month: "short" }) });
-  try {
-    if (!MARKET) MARKET = await api("/api/market");
-    const m = MARKET.stocks.find((s) => s.s === sym);
-    if (m) {
-      document.getElementById("q-px").textContent = rs(m.cur);
-      const c = document.getElementById("q-chg");
-      c.className = "small " + (m.chg >= 0 ? "up" : "down");
-      c.textContent = `${m.chg >= 0 ? "+" : "−"}${Math.abs(m.chg).toFixed(2)} (${signPct(m.pct / 100)}) today`;
-    }
-    if (days === 0) {
-      const j = await api(`/api/ts/int/${encodeURIComponent(sym)}`);
-      const pts = j.data.map((d) => ({ t: d[0], v: d[1] }));
-      lineChart(box, pts, { base: m ? m.ldcp : null, timeFmt: pkTime });
-      document.getElementById("q-note").textContent = pts.length
-        ? `${pts.length} trades today. Dashed line: yesterday's close (Rs ${num2(m && m.ldcp)}).` : "";
-    } else {
-      const j = await api(`/api/ts/eod/${encodeURIComponent(sym)}`);
-      const all = j.data.map((d) => ({ t: d[0], v: d[1] }));
-      all.forEach((p, i) => { const prev = i ? all[i - 1].v : null; p.brk = !!prev && Math.abs(p.v / prev - 1) > Math.max(0.10, 1 / prev) + 0.01; });
-      const pts = all.slice(-days);
-      lineChart(box, pts, { timeFmt: pkDay });
-      const first = pts[0], last = pts[pts.length - 1];
-      document.getElementById("q-note").textContent = pts.length > 1
-        ? `${range}: ${signPct(last.v / first.v - 1)} (Rs ${num2(first.v)} → ${num2(last.v)}).${pts.some((p) => p.brk) ? " Dashed line: likely split or bonus (prices not adjusted)." : ""}${days > all.length + 20 ? " Less history than this range is available." : ""}` : "";
-    }
-  } catch (e) {
-    box.innerHTML = `<div class="empty">${esc(e.message)}</div>`;
-  }
-}
-
-// ---------- Ask AI ----------
-const CHAT_KEY = "chat";
-function askScreen(sym) {
-  const hist = store.get(CHAT_KEY, []);
-  const suggestions = sym ? [`Should I buy ${sym} today?`, `Why does ${sym} have this status?`, `What do the lights say about ${sym}?`]
-    : ["What are today's buy plans?", "Explain the washout setup simply", "How does KMI screening work?", "What happens on a dividend ex-date?"];
-  return `<div class="row between"><h2 style="margin:4px 0">Ask AI</h2>
-      ${hist.length ? `<button class="quiet" id="c-clear" style="border:0;background:none;color:var(--muted);cursor:pointer">Clear chat</button>` : ""}</div>
-    <p class="small muted" style="margin:0 0 8px">Answers come from a free AI model, given the scanner's data${sym ? ` about <b>${esc(sym)}</b>` : ""}. It can be wrong; it never knows tomorrow's price. Not investment advice.</p>
-    ${!passcode() ? `<div class="card empty">Ask AI needs your server passcode.<br><a class="btn wide" href="#settings">Enter it in Settings</a></div>` : `
-    <div class="chat" id="c-list">${hist.map((m) => `<div class="bubble ${m.role === "user" ? "user" : "ai"}">${esc(m.content)}</div>`).join("")}</div>
-    ${hist.length ? "" : `<div class="suggest">${suggestions.map((q) => `<button data-q="${esc(q)}">${esc(q)}</button>`).join("")}</div>`}
-    <div class="chat-input"><textarea id="c-in" rows="1" placeholder="Ask about a KMI stock or PSX…"></textarea>
-      <button class="btn" id="c-send" aria-label="Send">Send</button></div>`}`;
-}
-
-async function sendChat(text, sym) {
-  text = text.trim();
-  if (!text) return;
-  const hist = store.get(CHAT_KEY, []);
-  hist.push({ role: "user", content: text });
-  store.set(CHAT_KEY, hist.slice(-30));
-  await render();
-  const list = document.getElementById("c-list");
-  const wait = document.createElement("div"); wait.className = "bubble ai muted"; wait.textContent = "Thinking…";
-  list.appendChild(wait); wait.scrollIntoView({ block: "end" });
-  document.getElementById("c-send").disabled = true;
-  try {
-    const r = await api("/api/chat", { messages: hist.slice(-8), symbol: sym || null });
-    hist.push({ role: "assistant", content: r.reply });
-  } catch (e) {
-    hist.push({ role: "assistant", content: "Couldn't get an answer: " + e.message });
-  }
-  store.set(CHAT_KEY, hist.slice(-30));
-  await render();
-  const l2 = document.getElementById("c-list");
-  if (l2 && l2.lastElementChild) l2.lastElementChild.scrollIntoView({ block: "end" });
-}
-
 // ---------- router ----------
 async function render() {
   const [route, arg] = (location.hash.slice(1) || "hot").split("/");
-  const tab = { stock: "hot", check: "hot", quote: "market" }[route] || route;
+  const tab = { stock: "hot", check: "hot" }[route] || route;
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("on", a.dataset.r === tab));
   const v = document.getElementById("view");
-  stopLive();
   const screens = { hot, stock: () => stock(arg), check: () => check(arg), log: logView, record,
-                    settings: settingsView, about, status, research, help,
-                    market: marketScreen, quote: () => quoteScreen(arg), ask: () => askScreen(arg) };
+                    settings: settingsView, about, status, research, help };
   v.innerHTML = fcmBanner() + await (screens[route] || hot)();
   if (store.get("lastRoute", "") !== location.hash) window.scrollTo(0, 0);
   store.set("lastRoute", location.hash);
@@ -1129,45 +877,9 @@ function wire(route, arg) {
   if (route === "help") {
     $("h-welcome").onclick = () => showWelcome(true);
   }
-  if (route === "market" && passcode()) {
-    if (MARKET) drawMarket();
-    loadMarket();
-    LIVE_TIMER = setInterval(() => { if (marketOpenNow() && !document.hidden) loadMarket(); }, 30000);
-    $("m-sort").onchange = (e) => { store.set("mSort", e.target.value); drawMarket(); };
-    $("m-q").oninput = (e) => { store.set("mQ", e.target.value.trim()); drawMarket(); };
-  }
-  if (route === "quote") {
-    loadQuote(arg);
-    document.querySelectorAll("[data-qr]").forEach((b) => b.onclick = () => {
-      store.set("qRange", b.dataset.qr);
-      document.querySelectorAll("[data-qr]").forEach((o) => o.classList.toggle("on", o === b));
-      loadQuote(arg);
-    });
-    LIVE_TIMER = setInterval(() => {
-      if (marketOpenNow() && !document.hidden && store.get("qRange", "1D") === "1D") { MARKET = null; loadQuote(arg); }
-    }, 30000);
-  }
-  if (route === "ask" && passcode()) {
-    const input = $("c-in");
-    const go = () => { const t = input.value; input.value = ""; sendChat(t, arg); };
-    $("c-send").onclick = go;
-    input.onkeydown = (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); go(); } };
-    document.querySelectorAll("[data-q]").forEach((b) => b.onclick = () => sendChat(b.dataset.q, arg));
-    if ($("c-clear")) $("c-clear").onclick = () => { store.set(CHAT_KEY, []); render(); };
-    const l = $("c-list"); if (l && l.lastElementChild) l.lastElementChild.scrollIntoView({ block: "end" });
-  }
   if (route === "settings") {
     $("s-tips").onchange = (e) => { store.set("tipsOff", !e.target.checked); store.set("tipDismissed", ""); showTip(); };
     $("s-theme").onclick = toggleTheme;
-    $("s-test").onclick = async () => {
-      store.set("passcode", $("s-pass").value.trim());
-      store.set("apiBase", $("s-api").value.trim());
-      MARKET = null;
-      const out = $("s-test-out");
-      out.textContent = "Testing…";
-      try { const m = await api("/api/market"); out.innerHTML = `<span class="ok">✓ Connected.</span> ${m.stocks.length} KMI stocks live.`; }
-      catch (e) { out.innerHTML = `<span class="no">✗</span> ${esc(e.message)}`; }
-    };
   }
   if (route === "about") {
     const upd = () => $("pu-r").textContent = pkr((+$("pu-d").value || 0) * (+$("pu-p").value || 0) / 100);
@@ -1439,10 +1151,8 @@ function help() {
       <dt>PSX hours</dt><dd>Mon–Thu 09:32–15:30; Friday 09:17–12:00 and 14:32–16:30. Closed on weekends and holidays.</dd>
       <dt>No plans today?</dt><dd>Normal. Most days have few or none.</dd>
     </dl></div>
-  <div class="card"><h2>Market, Ask AI and confidence</h2>
+  <div class="card"><h2>Confidence and context notes</h2>
     <dl class="help-sec">
-      <dt>Market</dt><dd>Live prices of every KMI All Share stock, refreshed every 30 seconds during market hours. Tap one for a chart from 1 day to 5 years. Needs your server passcode (Settings).</dd>
-      <dt>Ask AI</dt><dd>A free AI model that answers from the scanner's own data. It explains plans, statuses and PSX basics. It can't know future prices, and it can be wrong. Not investment advice.</dd>
       <dt>Confidence</dt><dd>Each tested setup starts from its backtest. Every graded live alert updates it: weaker live results shrink the suggested size (down to 25%), and a setup is paused only if it clearly loses money after 30+ live trades.</dd>
       <dt>Context notes</dt><dd>Sector seasonality and dividend book closures that held in past years. They were tested and failed as buy signals, so they're shown as information only.</dd>
     </dl></div>
