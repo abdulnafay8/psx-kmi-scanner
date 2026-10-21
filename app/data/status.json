@@ -1,6 +1,24 @@
 {
  "runs": [
   {
+   "at": "2026-10-21T17:37:30+05:00",
+   "state": "after_close",
+   "as_of": "2026-10-21",
+   "new_alerts": 1,
+   "fetch_failed": 0,
+   "log": [
+    "17:37:30  run started Wednesday 2026-10-21 17:37 PKT; market state: after_close",
+    "17:51:09  prices updated for 313 stocks, 0 failed",
+    "17:51:12  plans from the 2026-10-21 close are for the session opening Thu 22 Oct 09:15",
+    "17:51:12  NEW ALERT MACFL washout: Limit buy at Rs 72.41",
+    "17:51:12  checked 307 KMI stocks as of 2026-10-21: {'fading': 191, 'no_setup': 100, 'running': 9, 'in_plan': 6, 'buy_plan': 1}",
+    "17:51:12  washout: 5 stocks miss exactly one check: BUXL, CLOV, FIMM, JDMT, SSOM",
+    "17:51:12  trend_hold: 47 stocks miss exactly one check: ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DADX, DCR, DFSM, DNCC, DWSM, FABL",
+    "17:51:12  ntfy push sent: MACFL: Washout dip in a hot stock",
+    "17:51:13  Firebase push sent to 1 of 1 devices: MACFL: Washout dip in a hot stock"
+   ]
+  },
+  {
    "at": "2026-10-21T08:31:42+05:00",
    "state": "before_final",
    "as_of": "2026-10-20",

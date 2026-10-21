@@ -15,8 +15,14 @@
   "max_hold_days": 60,
   "kmi_list_date": "2026-10-21",
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-10-21",
+   "fill_price": 74.0,
+   "stop_price": 62.9,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 79.4,
+   "pkr_if_sold_now": 6921
   }
  },
  {
@@ -35,8 +41,14 @@
   "max_hold_days": 15,
   "kmi_list_date": "2026-10-21",
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-10-21",
+   "fill_price": 52.53,
+   "stop_price": 46.23,
+   "target_price": 57.78,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 52.86,
+   "pkr_if_sold_now": 264
   }
  },
  {
@@ -55,8 +67,14 @@
   "max_hold_days": 15,
   "kmi_list_date": "2026-10-21",
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-10-21",
+   "fill_price": 18.99,
+   "stop_price": 16.71,
+   "target_price": 20.89,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 18.48,
+   "pkr_if_sold_now": -3300
   }
  },
  {
@@ -75,8 +93,14 @@
   "max_hold_days": 15,
   "kmi_list_date": "2026-10-21",
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-10-21",
+   "fill_price": 11.23,
+   "stop_price": 9.88,
+   "target_price": 12.35,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 11.48,
+   "pkr_if_sold_now": 1184
   }
  },
  {
@@ -95,8 +119,14 @@
   "max_hold_days": 15,
   "kmi_list_date": "2026-10-21",
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-10-21",
+   "fill_price": 29.83,
+   "stop_price": 26.25,
+   "target_price": 32.81,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 29.96,
+   "pkr_if_sold_now": 37
   }
  },
  {
@@ -115,8 +145,14 @@
   "max_hold_days": 60,
   "kmi_list_date": "2026-10-21",
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-10-21",
+   "fill_price": 106.32,
+   "stop_price": 90.37,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 106.32,
+   "pkr_if_sold_now": -363
   }
  },
  {
@@ -133,6 +169,32 @@
   "stop_pct": 0.15,
   "target_pct": null,
   "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "fill_date": "2026-10-21",
+   "fill_price": 59.59,
+   "stop_price": 50.65,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 53.78,
+   "pkr_if_sold_now": -10095
+  }
+ },
+ {
+  "id": "2026-10-21-MACFL-washout",
+  "created_at": "2026-10-21T17:37:30+05:00",
+  "signal_date": "2026-10-21",
+  "symbol": "MACFL",
+  "setup": "washout",
+  "setup_label": "Washout dip in a hot stock",
+  "close_at_signal": 73.14,
+  "order": "Limit buy at Rs 72.41",
+  "order_type": "limit",
+  "order_price": 72.41,
+  "stop_pct": 0.12,
+  "target_pct": 0.1,
+  "max_hold_days": 15,
   "kmi_list_date": "2026-10-21",
   "result": {
    "state": "waiting",
