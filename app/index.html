@@ -9,102 +9,169 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
 <script src="firebase-config.js"></script>
+<script>
+  // apply the saved theme before first paint (no flash)
+  try { const t = localStorage.getItem("kmi.theme"); if (t) document.documentElement.dataset.theme = JSON.parse(t); } catch {}
+</script>
 <style>
 :root {
-  --bg: #f6f7f5; --card: #ffffff; --ink: #18201c; --muted: #5d6a63; --line: #e2e6e3;
-  --brand: #0f6b4f; --brand-ink: #ffffff; --good: #1f8a4c; --bad: #c0392b; --warn: #b7791f;
-  --chip-buy: #0f6b4f; --chip-run: #b7791f; --chip-fade: #8a3b3b; --chip-none: #8a948f; --chip-plan: #2b5d8a;
-  --radius: 14px;
+  color-scheme: light;
+  --bg: #f4f5f2; --card: #ffffff; --ink: #141a17; --ink-2: #3f4a44; --muted: #66736c; --line: #e3e6e2;
+  --brand: #0f6b4f; --brand-ink: #ffffff; --brand-soft: #e3f1eb;
+  --good: #1a7f45; --bad: #c0392b; --warn: #a86a10;
+  --chip-buy: #0f6b4f; --chip-run: #a86a10; --chip-fade: #8a3b3b; --chip-none: #7d8781; --chip-plan: #2b5d8a;
+  --series-1: #2a78d6; --series-2: #eb6834; --series-3: #1baf7a;
+  --grid: #e1e0d9; --axis: #898781; --stop: #d03b3b; --target: #0ca30c; --entry: #141a17;
+  --radius: 16px; --shadow: 0 1px 2px rgba(20, 26, 23, .06), 0 2px 8px rgba(20, 26, 23, .04);
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0f1412; --card: #182019; --ink: #e8eee9; --muted: #9aa8a0; --line: #26302a;
-    --brand: #34a57a; --brand-ink: #08130e; --good: #4cc27f; --bad: #ef6b5b; --warn: #e3a948;
-    --chip-buy: #34a57a; --chip-run: #c89135; --chip-fade: #b65a5a; --chip-none: #6f7b75; --chip-plan: #4f8cc4;
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --bg: #0f1412; --card: #182019; --ink: #e8eee9; --ink-2: #c3cdc6; --muted: #93a199; --line: #26302a;
+    --brand: #34a57a; --brand-ink: #07130d; --brand-soft: #16291f;
+    --good: #4cc27f; --bad: #ef6b5b; --warn: #e3a948;
+    --chip-buy: #2f9c72; --chip-run: #b8862e; --chip-fade: #a85252; --chip-none: #5f6b65; --chip-plan: #3f7bb3;
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70;
+    --grid: #2c2c2a; --axis: #898781; --stop: #e05a5a; --target: #0ca30c; --entry: #e8eee9;
+    --shadow: none;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0f1412; --card: #182019; --ink: #e8eee9; --muted: #9aa8a0; --line: #26302a;
-  --brand: #34a57a; --brand-ink: #08130e; --good: #4cc27f; --bad: #ef6b5b; --warn: #e3a948;
-  --chip-buy: #34a57a; --chip-run: #c89135; --chip-fade: #b65a5a; --chip-none: #6f7b75; --chip-plan: #4f8cc4;
+  color-scheme: dark;
+  --bg: #0f1412; --card: #182019; --ink: #e8eee9; --ink-2: #c3cdc6; --muted: #93a199; --line: #26302a;
+  --brand: #34a57a; --brand-ink: #07130d; --brand-soft: #16291f;
+  --good: #4cc27f; --bad: #ef6b5b; --warn: #e3a948;
+  --chip-buy: #2f9c72; --chip-run: #b8862e; --chip-fade: #a85252; --chip-none: #5f6b65; --chip-plan: #3f7bb3;
+  --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70;
+  --grid: #2c2c2a; --axis: #898781; --stop: #e05a5a; --target: #0ca30c; --entry: #e8eee9;
+  --shadow: none;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--ink);
-  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+a { color: var(--brand); }
 header { position: sticky; top: 0; z-index: 5; background: var(--brand); color: var(--brand-ink);
-  padding: 12px 16px 10px; }
-header h1 { font-size: 17px; margin: 0; }
-header .sub { font-size: 12px; opacity: .9; }
-main { max-width: 720px; margin: 0 auto; padding: 12px 16px 96px; }
+  padding: calc(10px + env(safe-area-inset-top)) 16px 10px; }
+header .bar { max-width: 720px; margin: 0 auto; display: flex; align-items: center; gap: 10px; }
+header h1 { font-size: 17px; margin: 0; flex: 1; letter-spacing: .01em; }
+header .sub { max-width: 720px; margin: 2px auto 0; font-size: 12px; opacity: .92; }
+.iconbtn { width: 38px; height: 38px; border-radius: 12px; border: 0; background: rgba(255, 255, 255, .16);
+  color: inherit; font-size: 17px; cursor: pointer; display: grid; place-items: center; }
+.iconbtn:active { transform: scale(.96); }
+.iconbtn.spin span { display: inline-block; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+main { max-width: 720px; margin: 0 auto; padding: 12px 16px calc(96px + env(safe-area-inset-bottom)); }
 nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 5; display: flex; background: var(--card);
   border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); }
-nav a { flex: 1; text-align: center; padding: 10px 2px; font-size: 12px; color: var(--muted);
-  text-decoration: none; }
-nav a.on { color: var(--brand); font-weight: 600; }
+nav a { flex: 1; text-align: center; padding: 8px 2px 9px; font-size: 11.5px; color: var(--muted); text-decoration: none; }
+nav a .ico { display: block; font-size: 18px; line-height: 1.2; }
+nav a.on { color: var(--brand); font-weight: 650; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 14px; margin: 10px 0; }
+  padding: 14px; margin: 10px 0; box-shadow: var(--shadow); }
 .row { display: flex; align-items: center; gap: 10px; }
 .row.between { justify-content: space-between; }
 .muted { color: var(--muted); }
 .small { font-size: 12.5px; }
+.num { font-variant-numeric: tabular-nums; }
 h2 { font-size: 16px; margin: 4px 0 8px; }
-h3 { font-size: 14px; margin: 14px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
-.chip { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 12px; font-weight: 600;
-  color: #fff; white-space: nowrap; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.section-title { display: flex; align-items: baseline; justify-content: space-between; margin: 18px 2px 6px; }
+.section-title h2 { margin: 0; font-size: 15px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 99px; font-size: 12px;
+  font-weight: 650; color: #fff; white-space: nowrap; }
 .chip.buy_plan { background: var(--chip-buy); } .chip.running { background: var(--chip-run); }
 .chip.fading { background: var(--chip-fade); } .chip.no_setup { background: var(--chip-none); }
 .chip.in_plan { background: var(--chip-plan); }
 .dots { display: flex; gap: 4px; }
-.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bad); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bad); flex: none; }
 .dot.on { background: var(--good); }
-.stock { display: block; color: inherit; text-decoration: none; }
-.stock .sym { font-weight: 700; }
 .up { color: var(--good); } .down { color: var(--bad); }
+/* today's plan cards */
+.plan-card { border: 1px solid var(--line); border-left: 5px solid var(--chip-buy); }
+.plan-card .sym { font-size: 19px; font-weight: 750; letter-spacing: .01em; }
+.plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 10px 0 4px; }
+.plan-grid div { background: var(--bg); border-radius: 10px; padding: 7px 8px; min-width: 0; }
+.plan-grid b { display: block; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+.plan-grid span { font-size: 11px; color: var(--muted); }
+/* compact stock rows */
+.list { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.list a.item { display: flex; align-items: center; gap: 10px; padding: 11px 14px; color: inherit; text-decoration: none;
+  border-top: 1px solid var(--line); }
+.list a.item:first-child { border-top: 0; }
+.list .who { flex: 1; min-width: 0; }
+.list .who b { font-size: 14.5px; }
+.list .who .name { display: block; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.list .px { text-align: right; font-variant-numeric: tabular-nums; font-size: 13.5px; }
 .banner { border-radius: var(--radius); padding: 14px; color: #fff; margin: 10px 0; }
 .banner.buy_plan { background: var(--chip-buy); } .banner.running { background: var(--chip-run); }
 .banner.fading { background: var(--chip-fade); } .banner.no_setup { background: var(--chip-none); }
 .banner.in_plan { background: var(--chip-plan); }
-.check { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.check { display: flex; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--line); }
 .check:last-child { border-bottom: 0; }
 .ok { color: var(--good); font-weight: 700; } .no { color: var(--bad); font-weight: 700; }
 table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-td, th { text-align: left; padding: 5px 4px; border-bottom: 1px solid var(--line); }
-th { color: var(--muted); font-weight: 600; }
-td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td, th { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 600; font-size: 12px; }
+td.num, th.num { text-align: right; }
 input, select, button { font: inherit; }
-input[type=number], input[type=text], input[type=date], select { width: 100%; padding: 9px 10px;
-  border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); }
+input[type=number], input[type=text], input[type=date], select { width: 100%; padding: 10px 11px;
+  border: 1px solid var(--line); border-radius: 11px; background: var(--card); color: var(--ink); }
 label.field { display: block; margin: 8px 0; font-size: 13px; color: var(--muted); }
-label.tick { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line); }
-label.tick input { width: 22px; height: 22px; margin-top: 1px; }
-.btn { display: inline-block; padding: 11px 16px; border-radius: 12px; border: 0; background: var(--brand);
-  color: var(--brand-ink); font-weight: 600; text-decoration: none; cursor: pointer; }
+label.tick { display: flex; gap: 10px; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid var(--line); }
+label.tick input { width: 22px; height: 22px; margin-top: 1px; accent-color: var(--brand); }
+.btn { display: inline-block; padding: 12px 16px; border-radius: 12px; border: 0; background: var(--brand);
+  color: var(--brand-ink); font-weight: 650; text-decoration: none; cursor: pointer; text-align: center; }
 .btn.ghost { background: transparent; color: var(--brand); border: 1px solid var(--brand); }
-.btn.wide { display: block; width: 100%; text-align: center; margin-top: 10px; }
+.btn.wide { display: block; width: 100%; margin-top: 10px; }
 .btn[disabled] { opacity: .45; cursor: not-allowed; }
 .filters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.note { border-left: 3px solid var(--warn); padding: 8px 10px; background: var(--card); border-radius: 8px;
+.note { border-left: 3px solid var(--warn); padding: 9px 11px; background: var(--card); border-radius: 10px;
   font-size: 13px; margin: 10px 0; }
 .lock { border-left-color: var(--bad); }
-.bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
-.bar > div { height: 100%; background: var(--brand); }
-.kv { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; font-size: 14px; }
+.bar-p { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.bar-p > div { height: 100%; background: var(--brand); }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 5px 12px; font-size: 14px; }
 .kv div:nth-child(even) { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
 pre { white-space: pre-wrap; font-size: 12px; background: var(--bg); padding: 10px; border-radius: 8px; }
-.empty { text-align: center; padding: 26px 10px; color: var(--muted); }
+.empty { text-align: center; padding: 22px 12px; color: var(--muted); }
+.loading { text-align: center; padding: 40px 12px; color: var(--muted); }
+.back { display: inline-block; font-size: 13px; text-decoration: none; padding: 4px 0; }
+details summary { cursor: pointer; color: var(--brand); font-size: 13px; margin-top: 8px; }
+/* chart */
+.chart-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.seg button { border: 0; background: transparent; color: var(--muted); padding: 5px 10px; font-size: 12.5px; cursor: pointer; }
+.seg button.on { background: var(--brand-soft); color: var(--ink); font-weight: 650; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink-2); margin: 8px 0 4px; }
+.legend .k { display: inline-block; width: 14px; height: 0; border-top: 2px solid; vertical-align: middle; margin-right: 5px; }
+.legend .k.dash { border-top-style: dashed; }
+.chart-box { position: relative; touch-action: pan-y; }
+.chart-box svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart-box text { font: 10.5px system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--muted); font-variant-numeric: tabular-nums; }
+.chart-box text.lvl { fill: var(--ink-2); font-weight: 600; }
+.tip { position: absolute; top: 4px; pointer-events: none; background: var(--card); border: 1px solid var(--line);
+  border-radius: 10px; padding: 6px 9px; font-size: 12px; box-shadow: 0 4px 14px rgba(0, 0, 0, .12); white-space: nowrap; display: none; }
+.tip .d { color: var(--muted); font-size: 11px; margin-bottom: 2px; }
+.tip .r { display: flex; align-items: center; gap: 6px; }
+.tip .r b { font-variant-numeric: tabular-nums; }
+.tip .r .k { width: 12px; border-top: 2px solid; }
 </style>
 </head>
 <body>
 <header>
-  <h1>KMI Scanner</h1>
+  <div class="bar">
+    <h1>KMI Scanner</h1>
+    <button class="iconbtn" id="refresh" title="Refresh" aria-label="Refresh data"><span>↻</span></button>
+    <button class="iconbtn" id="theme" title="Light / dark" aria-label="Switch light or dark mode">◐</button>
+  </div>
   <div class="sub" id="sub">Loading…</div>
 </header>
-<main id="view"></main>
+<main id="view"><div class="loading">Loading today's signals…</div></main>
 <nav id="nav">
-  <a href="#hot" data-r="hot">Hot list</a>
-  <a href="#log" data-r="log">My trades</a>
-  <a href="#record" data-r="record">Track record</a>
-  <a href="#settings" data-r="settings">Settings</a>
+  <a href="#hot" data-r="hot"><span class="ico">◎</span>Today</a>
+  <a href="#log" data-r="log"><span class="ico">✎</span>My trades</a>
+  <a href="#record" data-r="record"><span class="ico">▤</span>Track record</a>
+  <a href="#settings" data-r="settings"><span class="ico">⚙</span>Settings</a>
 </nav>
 <script>
 "use strict";
@@ -129,19 +196,29 @@ function tradePKR(t) {
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const pkr = (x) => x == null ? "–" : (x < 0 ? "−" : "") + "PKR " + Math.abs(Math.round(x)).toLocaleString("en-PK");
 const rs = (x) => x == null ? "–" : "Rs " + Number(x).toLocaleString("en-PK", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const num2 = (x) => x == null ? "–" : Number(x).toLocaleString("en-PK", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const pct = (x, d = 1) => x == null ? "–" : (x * 100).toFixed(d) + "%";
+const signPct = (x) => x == null ? "" : (x >= 0 ? "+" : "−") + Math.abs(x * 100).toFixed(1) + "%";
 const today = () => new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Karachi" });
+const fmtDay = (iso) => { const d = new Date(iso + "T00:00:00"); return isNaN(d) ? iso : d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" }); };
 const STATUS_LABEL = { buy_plan: "Buy plan", in_plan: "Plan active", running: "Running", fading: "Fading", no_setup: "No setup" };
+const STATUS_ICON = { buy_plan: "▲", in_plan: "●", running: "↗", fading: "↘", no_setup: "–" };
 const ORDER = { buy_plan: 0, in_plan: 1, running: 2, fading: 3, no_setup: 4 };
+const chip = (s) => `<span class="chip ${s}"><span aria-hidden="true">${STATUS_ICON[s]}</span>${STATUS_LABEL[s]}</span>`;
 
-let DATA = null, LEDGER = null, STATUS = null, RESEARCH = null;
+let DATA = null, LEDGER = null, STATUS = null, RESEARCH = null, LOAD_ERROR = null;
+const HIST = {};
 async function load() {
-  const get = (f) => fetch("data/" + f, { cache: "no-store" }).then((r) => r.ok ? r.json() : null).catch(() => null);
+  // a fresh query string on every load: GitHub Pages lets browsers cache files for 10 minutes
+  const stamp = Date.now();
+  const get = (f) => fetch(`data/${f}?t=${stamp}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : null).catch(() => null);
   [DATA, LEDGER, STATUS] = await Promise.all([get("signals.json"), get("ledger.json"), get("status.json")]);
+  RESEARCH = null;
+  for (const k in HIST) delete HIST[k];
+  LOAD_ERROR = DATA ? null : "Couldn't load today's signals. Check your connection, then tap ↻.";
   const sub = document.getElementById("sub");
-  if (!DATA) { sub.textContent = "No data yet: run python run_daily.py"; return; }
-  const state = { after_close: "after the close", before_final: "today's candle not final yet", weekend: "weekend, PSX closed" }[DATA.market_state] || DATA.market_state;
-  sub.textContent = `Prices as of ${DATA.as_of} · ${state} · KMI All Share list of ${DATA.kmi_list_date}`;
+  if (!DATA) { sub.textContent = "Offline or no data yet"; return; }
+  sub.textContent = `Prices of ${fmtDay(DATA.as_of)} close · KMI All Share list of ${fmtDay(DATA.kmi_list_date)}`;
 }
 
 // ---------- risk rules (Step 8) ----------
@@ -161,10 +238,38 @@ function riskState() {
 }
 
 // ---------- screens ----------
+function planHero(x) {
+  const p = x.plans[0], s = settings();
+  const ref = p.order_price || x.close;
+  const pos = s.risk / p.stop_pct, shares = Math.floor(pos / ref);
+  return `
+  <div class="card plan-card">
+    <div class="row between">
+      <div style="min-width:0"><div class="sym">${esc(x.symbol)}</div>
+        <div class="small muted" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(x.name || "")}</div></div>
+      <div style="text-align:right"><div class="num" style="font-weight:650">${rs(x.close)}</div>
+        <div class="small ${x.change_pct >= 0 ? "up" : "down"}">${signPct(x.change_pct)}</div></div>
+    </div>
+    <div class="small" style="margin-top:8px"><b>${esc(p.setup_label)}</b> · ${esc(p.order)}</div>
+    <div class="plan-grid">
+      <div><span>Stop</span><b>${num2(ref * (1 - p.stop_pct))}</b><span>−${pct(p.stop_pct, 0)}</span></div>
+      <div><span>Target</span><b>${p.target_pct ? num2(ref * (1 + p.target_pct)) : "none"}</b><span>${p.target_pct ? "+" + pct(p.target_pct, 0) : "hold " + p.max_hold_days + "d"}</span></div>
+      <div><span>Shares</span><b>${shares.toLocaleString()}</b><span>risk ${pkr(s.risk).replace("PKR ", "Rs ")}</span></div>
+    </div>
+    <div class="row" style="gap:8px">
+      <a class="btn ghost" style="flex:1" href="#stock/${esc(x.symbol)}">Details & chart</a>
+      <a class="btn" style="flex:1" href="#check/${esc(x.symbol)}">Pre-trade check</a>
+    </div>
+  </div>`;
+}
+
 function hot() {
-  if (!DATA) return `<div class="empty">No signals yet. Run <b>python run_daily.py</b> on the computer.</div>`;
+  if (!DATA) return `<div class="empty">${esc(LOAD_ERROR || "No signals yet.")}</div>`;
   const s = settings(), f = store.get("filter", "all"), q = store.get("q", "");
-  let list = DATA.stocks.filter((x) => !x.stale);
+  const tested = Object.keys(DATA.tested_setups || {}).length;
+  const plans = DATA.stocks.filter((x) => x.status === "buy_plan" && !x.stale)
+    .sort((a, b) => (b.traded_value_pkr || 0) - (a.traded_value_pkr || 0));
+  let list = DATA.stocks.filter((x) => !x.stale && x.status !== "buy_plan");
   if (s.minPrice) list = list.filter((x) => x.close >= s.minPrice);
   if (s.maxPrice) list = list.filter((x) => x.close <= s.maxPrice);
   if (s.minValue) list = list.filter((x) => (x.traded_value_pkr || 0) >= s.minValue || x.status === "in_plan");
@@ -172,29 +277,31 @@ function hot() {
   if (q) list = list.filter((x) => (x.symbol + " " + (x.name || "")).toLowerCase().includes(q.toLowerCase()));
   list.sort((a, b) => ORDER[a.status] - ORDER[b.status] || (b.traded_value_pkr || 0) - (a.traded_value_pkr || 0));
   const counts = {}; DATA.stocks.forEach((x) => counts[x.status] = (counts[x.status] || 0) + 1);
-  const tested = Object.keys(DATA.tested_setups || {}).length;
+  const live = DATA.alerts_made;
   return `
   ${tested ? "" : `<div class="note lock">No setup has passed the backtest, so there are no Buy plans. Everything shown is for context only.</div>`}
-  ${DATA.alerts_made ? `<div class="note">Plans below are for the session of <b>${esc(DATA.plans_for_session)}</b>, from the ${esc(DATA.as_of)} close.</div>`
-    : `<div class="note lock">No new alerts from this run: ${esc(DATA.no_alert_reason)}. Plans below are from the ${esc(DATA.as_of)} close; check the Track record for which are still live.</div>`}
+  <div class="section-title"><h2>${live ? "Today's plans" : "Last plans"}</h2>
+    <span class="small muted">${live ? "valid " + esc(DATA.plans_for_session) + " only" : "not live"}</span></div>
+  ${live ? "" : `<div class="note lock">No new alerts from this run: ${esc(DATA.no_alert_reason)}. These are from the ${esc(fmtDay(DATA.as_of))} close; check the Track record for which are still live.</div>`}
+  ${plans.length ? plans.map(planHero).join("") :
+    `<div class="card empty">No tested setup fired at the ${esc(fmtDay(DATA.as_of))} close. That's normal: there are about 26 plans a month across all KMI stocks.</div>`}
+  <div class="section-title"><h2>All KMI stocks</h2><span class="small muted">for context only</span></div>
   <div class="filters">
-    <select id="f">${["all", "buy_plan", "in_plan", "running", "fading", "no_setup"].map((k) =>
-      `<option value="${k}" ${k === f ? "selected" : ""}>${k === "all" ? "All statuses" : STATUS_LABEL[k]} ${k === "all" ? "" : "(" + (counts[k] || 0) + ")"}</option>`).join("")}</select>
-    <input id="q" type="text" placeholder="Search symbol or name" value="${esc(q)}">
+    <select id="f" aria-label="Filter by status">${["all", "in_plan", "running", "fading", "no_setup"].map((k) =>
+      `<option value="${k}" ${k === f ? "selected" : ""}>${k === "all" ? "All statuses" : STATUS_LABEL[k] + " (" + (counts[k] || 0) + ")"}</option>`).join("")}</select>
+    <input id="q" type="search" placeholder="Search symbol or name" value="${esc(q)}" aria-label="Search">
   </div>
-  <div class="small muted" style="margin-top:6px">${list.length} stocks · traded value ≥ ${pkr(s.minValue)}/day${s.minPrice ? " · price ≥ Rs " + s.minPrice : ""}${s.maxPrice ? " · price ≤ Rs " + s.maxPrice : ""} · change filters in Settings</div>
+  <div class="small muted" style="margin:6px 2px">${list.length} stocks trading ≥ ${pkr(s.minValue)}/day · change in Settings</div>
+  <div class="list">
   ${list.slice(0, 200).map((x) => `
-    <a class="card stock" href="#stock/${esc(x.symbol)}">
-      <div class="row between">
-        <div><span class="sym">${esc(x.symbol)}</span> <span class="small muted">${esc(x.name || "")}</span></div>
-        <span class="chip ${x.status}">${STATUS_LABEL[x.status]}</span>
-      </div>
-      <div class="row between small" style="margin-top:6px">
-        <div>${rs(x.close)} <span class="${x.change_pct >= 0 ? "up" : "down"}">${x.change_pct >= 0 ? "+" : ""}${pct(x.change_pct)}</span>
-          ${x.plans.length && x.status === "buy_plan" ? ` · <b>${esc(x.plans[0].setup_label)}</b>` : ""}</div>
-        <div class="dots">${x.lights.map((l) => `<span class="dot ${l.on ? "on" : ""}" title="${esc(l.name)}: ${esc(l.text)}"></span>`).join("")}</div>
-      </div>
-    </a>`).join("") || `<div class="empty">Nothing matches these filters.</div>`}`;
+    <a class="item" href="#stock/${esc(x.symbol)}">
+      <div class="who"><b>${esc(x.symbol)}</b><span class="name">${esc(x.name || "")}</span></div>
+      <div class="dots" aria-hidden="true">${x.lights.map((l) => `<span class="dot ${l.on ? "on" : ""}"></span>`).join("")}</div>
+      <div class="px">${num2(x.close)}<div class="small ${x.change_pct >= 0 ? "up" : "down"}">${signPct(x.change_pct)}</div></div>
+      ${chip(x.status)}
+    </a>`).join("") || `<div class="empty">Nothing matches these filters.</div>`}
+  </div>
+  <p class="small muted" style="margin:8px 2px">Dots: above 20-day average · volume vs normal · KSE-100 trend · room to 60-day high.</p>`;
 }
 
 function planCard(p, risk) {
@@ -206,7 +313,7 @@ function planCard(p, risk) {
     <h2>Trade plan: ${esc(p.setup_label)}</h2>
     <div class="kv">
       <div>Order</div><div>${esc(p.order)}</div>
-      <div>Valid</div><div>Next session only</div>
+      <div>Valid</div><div>${esc(DATA.plans_for_session || "next session")} only</div>
       <div>Stop</div><div>${pct(p.stop_pct, 0)} below fill (≈ ${rs(ref * (1 - p.stop_pct))})</div>
       <div>Target</div><div>${p.target_pct ? pct(p.target_pct, 0) + " above fill (≈ " + rs(ref * (1 + p.target_pct)) + ")" : "none"}</div>
       <div>Max hold</div><div>${p.max_hold_days} trading days</div>
@@ -220,8 +327,39 @@ function planCard(p, risk) {
   </div>`;
 }
 
+function chartLevels(x) {
+  const ap = x.active_plan, out = [];
+  if (x.status === "buy_plan" && x.plans.length) {
+    const p = x.plans[0], ref = p.order_price || x.close;
+    out.push({ v: ref, label: p.order_type === "limit" ? "Buy" : "Buy≈", cls: "entry" });
+    out.push({ v: ref * (1 - p.stop_pct), label: "Stop", cls: "stop" });
+    if (p.target_pct) out.push({ v: ref * (1 + p.target_pct), label: "Target", cls: "target" });
+  } else if (ap && ap.result && ap.result.fill_price) {
+    out.push({ v: ap.result.fill_price, label: "Bought", cls: "entry" });
+    out.push({ v: ap.result.stop_price, label: "Stop", cls: "stop" });
+    if (ap.result.target_price) out.push({ v: ap.result.target_price, label: "Target", cls: "target" });
+  }
+  return out;
+}
+
+function chartCard(x) {
+  const range = store.get("range", 126);
+  return `
+  <div class="card">
+    <div class="chart-head">
+      <h2 style="margin:0">Price</h2>
+      <div class="seg" role="group" aria-label="Chart range">${[[63, "3M"], [126, "6M"], [250, "1Y"]].map(([n, l]) =>
+        `<button data-range="${n}" class="${n === range ? "on" : ""}">${l}</button>`).join("")}</div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="chart-box" id="chart"><div class="loading" style="padding:50px 0">Loading chart…</div></div>
+    <details id="chart-table"><summary>Show as table</summary><div id="chart-rows"></div></details>
+  </div>`;
+}
+
 function stock(sym) {
-  const x = DATA && DATA.stocks.find((s) => s.symbol === sym);
+  if (!DATA) return `<div class="empty">${esc(LOAD_ERROR || "No data yet.")}</div>`;
+  const x = DATA.stocks.find((s) => s.symbol === sym);
   if (!x) return `<div class="empty">${esc(sym)} is not on the KMI All Share list, so the scanner never shows it.</div>`;
   const s = settings();
   const handle = {
@@ -232,21 +370,22 @@ function stock(sym) {
   };
   const ap = x.active_plan;
   return `
-  <a href="#hot" class="small">← Hot list</a>
+  <a href="#hot" class="back">← Today</a>
   <div class="banner ${x.status}">
-    <div class="row between"><b style="font-size:18px">${esc(x.symbol)}</b><span>${rs(x.close)}
-      <span>${x.change_pct >= 0 ? "+" : ""}${pct(x.change_pct)}</span></span></div>
+    <div class="row between"><b style="font-size:20px">${esc(x.symbol)}</b>
+      <span class="num" style="font-weight:650">${rs(x.close)} <span style="opacity:.9">${signPct(x.change_pct)}</span></span></div>
     <div class="small">${esc(x.name || "")} · ${esc(x.sector || "")}</div>
-    <div style="margin-top:6px;font-weight:600">${esc(x.status_text)}</div>
-    <div class="small">KMI All Share, list of ${esc(DATA.kmi_list_date)} · prices of ${esc(x.date)}</div>
+    <div style="margin-top:8px;font-weight:650">${STATUS_ICON[x.status]} ${esc(x.status_text)}</div>
+    <div class="small" style="opacity:.9">KMI All Share, list of ${esc(fmtDay(DATA.kmi_list_date))} · prices of ${esc(fmtDay(x.date))}</div>
   </div>
   ${x.tested ? "" : `<div class="note">${x.status === "in_plan" ? "Tracking a tested plan." : "For context only: this status is not a tested setup and never a buy signal."}</div>`}
   ${x.status === "buy_plan" ? x.plans.map((p) => planCard(p, s.risk)).join("") +
      `<a class="btn wide" href="#check/${esc(x.symbol)}">Pre-trade check</a>` : ""}
-  ${ap ? `<div class="card"><h2>Active plan (alerted ${esc(ap.signal_date)})</h2><div class="kv">
+  ${chartCard(x)}
+  ${ap ? `<div class="card"><h2>Active plan (alerted ${esc(fmtDay(ap.signal_date))})</h2><div class="kv">
       <div>Setup</div><div>${esc(ap.setup_label)}</div>
       <div>Order</div><div>${esc(ap.order)}</div>
-      <div>State</div><div>${esc(ap.result.state)}</div>
+      <div>State</div><div>${esc(ap.result.state.replace("_", " "))}</div>
       ${ap.result.fill_price ? `<div>Filled</div><div>${rs(ap.result.fill_price)} on ${esc(ap.result.fill_date)}</div>
       <div>Stop / target</div><div>${rs(ap.result.stop_price)} / ${ap.result.target_price ? rs(ap.result.target_price) : "none"}</div>
       <div>Day</div><div>${ap.result.days_held} of ${ap.max_hold_days}</div>` : ""}
@@ -274,6 +413,184 @@ function stock(sym) {
   <a class="btn ghost wide" href="${esc(x.news_url)}" target="_blank" rel="noopener">Company page and news on PSX</a></div>`;
 }
 
+// ---------- price chart ----------
+async function loadHistory(sym) {
+  if (HIST[sym]) return HIST[sym];
+  const r = await fetch(`daily/${encodeURIComponent(sym)}.csv?t=${Date.now()}`, { cache: "no-store" });
+  if (!r.ok) throw new Error("no price history");
+  const lines = (await r.text()).trim().split(/\r?\n/);
+  const head = lines[0].split(",");
+  const di = head.indexOf("date"), ci = head.indexOf("close");
+  const rows = [];
+  for (const line of lines.slice(1)) {
+    const p = line.split(",");
+    const c = parseFloat(p[ci]);
+    if (c > 0) rows.push({ d: p[di].slice(0, 10), c });
+  }
+  // averages over the full history, as the engine computes them
+  const sma = (n) => { let s = 0; return rows.map((r, i) => { s += r.c; if (i >= n) s -= rows[i - n].c; return i >= n - 1 ? s / n : null; }); };
+  const s20 = sma(20), s50 = sma(50);
+  rows.forEach((r, i) => {
+    r.s20 = s20[i]; r.s50 = s50[i];
+    const prev = i ? rows[i - 1].c : null;
+    // a move bigger than the circuit limit can't be a trade: split, bonus or data gap
+    r.brk = !!prev && Math.abs(r.c / prev - 1) > Math.max(0.10, 1 / prev) + 0.01;
+  });
+  return HIST[sym] = rows;
+}
+
+function niceStep(span, target) {
+  const raw = span / target, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const f = raw / mag;
+  return (f >= 5 ? 10 : f >= 2 ? 5 : f >= 1 ? 2 : 1) * mag;
+}
+
+const SERIES = [
+  { key: "c", name: "Close", color: "var(--series-1)", w: 2 },
+  { key: "s20", name: "20-day avg", color: "var(--series-2)", w: 1.5 },
+  { key: "s50", name: "50-day avg", color: "var(--series-3)", w: 1.5 },
+];
+const LEVEL_COLOR = { entry: "var(--entry)", stop: "var(--stop)", target: "var(--target)" };
+
+function drawChart(box, all, levels, n) {
+  let data = all.slice(-n);
+  // unadjusted prices can't be compared across a split or bonus issue, so
+  // start after the most recent one (and keep averages only once they're clean)
+  let cut = -1;
+  data.forEach((r, i) => { if (r.brk) cut = i; });
+  if (cut > 0) {
+    data = data.slice(cut).map((r, i) => ({ ...r, s20: i >= 19 ? r.s20 : null, s50: i >= 49 ? r.s50 : null }));
+  }
+  box.dataset.cut = cut > 0 ? data[0].d : "";
+  if (data.length < 2) { box.innerHTML = `<div class="empty">Not enough price history since the last split or bonus issue.</div>`; return; }
+  const W = Math.max(280, Math.round(box.clientWidth || 340)), H = 230;
+  const L = 6, R = 64, T = 10, B = 22;
+  const vals = [];
+  data.forEach((r) => SERIES.forEach((s) => r[s.key] != null && vals.push(r[s.key])));
+  levels.forEach((l) => vals.push(l.v));
+  let lo = Math.min(...vals), hi = Math.max(...vals);
+  const padv = (hi - lo) * 0.06 || hi * 0.05 || 1; lo = Math.max(0, lo - padv); hi += padv;
+  const X = (i) => L + i * (W - L - R) / (data.length - 1);
+  const Y = (v) => T + (hi - v) / (hi - lo) * (H - T - B);
+  const step = niceStep(hi - lo, 4);
+  let g = "";
+  for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) {
+    v = Math.round(v / step) * step || 0;         // no float drift, no "-0"
+    const y = Y(v).toFixed(1);
+    g += `<line x1="${L}" x2="${W - R}" y1="${y}" y2="${y}" stroke="var(--grid)" stroke-width="1"/>`;
+    // skip a tick label that would sit on a plan level line
+    if (!levels.some((l) => Math.abs(Y(l.v) - (+y - 6)) < 9))
+      g += `<text x="${L + 2}" y="${(+y - 3).toFixed(1)}">${num2(v).replace(/\.00$/, "")}</text>`;
+  }
+  // month labels, at least 48px apart
+  let lastX = -99, lastM = "";
+  data.forEach((r, i) => {
+    const m = r.d.slice(0, 7);
+    if (m !== lastM) {
+      lastM = m;
+      const x = X(i);
+      if (i > 0 && x - lastX >= 48 && x < W - R - 14) {
+        g += `<text x="${x.toFixed(1)}" y="${H - 6}" text-anchor="middle">${new Date(r.d + "T00:00:00").toLocaleDateString("en-GB", { month: "short" })}</text>`;
+        lastX = x;
+      }
+    }
+  });
+  g += `<line x1="${L}" x2="${W - R}" y1="${H - B}" y2="${H - B}" stroke="var(--axis)" stroke-width="1"/>`;
+  // splits / bonus issues: the prices aren't adjusted, so mark the jump
+  data.forEach((r, i) => {
+    if (r.brk && i > 0) {
+      const x = X(i).toFixed(1);
+      g += `<line x1="${x}" x2="${x}" y1="${T}" y2="${H - B}" stroke="var(--axis)" stroke-width="1" stroke-dasharray="2 3"/>`;
+      g += `<text x="${(+x + 3).toFixed(1)}" y="${T + 9}">split/bonus?</text>`;
+    }
+  });
+  // series
+  SERIES.slice().reverse().forEach((s) => {
+    let d = "", pen = false;
+    data.forEach((r, i) => {
+      const v = r[s.key];
+      if (v == null) { pen = false; return; }
+      d += (pen ? "L" : "M") + X(i).toFixed(1) + " " + Y(v).toFixed(1);
+      pen = true;
+    });
+    g += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.w}" stroke-linejoin="round" stroke-linecap="round"/>`;
+  });
+  // plan levels, labelled at the right (text in ink, the line carries the colour)
+  const placed = [];
+  levels.slice().sort((a, b) => b.v - a.v).forEach((l) => {
+    const y = Y(l.v);
+    g += `<line x1="${L}" x2="${W - R + 4}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="${LEVEL_COLOR[l.cls]}" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+    let ty = y + 3.5;
+    while (placed.some((p) => Math.abs(p - ty) < 12)) ty += 12;
+    placed.push(ty);
+    g += `<text class="lvl" x="${W - R + 8}" y="${ty.toFixed(1)}">${esc(l.label)} ${num2(l.v)}</text>`;
+  });
+  // last close, labelled at the right if no plan levels sit there
+  const last = data[data.length - 1], ly = Y(last.c) + 3.5;
+  if (!placed.some((p) => Math.abs(p - ly) < 12)) g += `<text x="${W - R + 8}" y="${ly.toFixed(1)}">${num2(last.c)}</text>`;
+  g += `<line id="xh" x1="0" x2="0" y1="${T}" y2="${H - B}" stroke="var(--axis)" stroke-width="1" visibility="hidden"/>`;
+  g += `<circle id="xd" r="4" fill="var(--series-1)" stroke="var(--card)" stroke-width="2" visibility="hidden"/>`;
+  g += `<rect x="${L}" y="${T}" width="${W - L - R}" height="${H - T - B}" fill="transparent" id="hit"/>`;
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Price chart, last ${data.length} trading days">${g}</svg><div class="tip" id="tip"></div>`;
+
+  // crosshair + tooltip (snaps to the nearest trading day)
+  const svg = box.querySelector("svg"), tip = box.querySelector("#tip");
+  const xh = svg.querySelector("#xh"), xd = svg.querySelector("#xd");
+  const show = (clientX) => {
+    const rect = svg.getBoundingClientRect(), sx = (clientX - rect.left) * W / rect.width;
+    const i = Math.max(0, Math.min(data.length - 1, Math.round((sx - L) * (data.length - 1) / (W - L - R))));
+    const r = data[i], x = X(i);
+    xh.setAttribute("x1", x); xh.setAttribute("x2", x); xh.setAttribute("visibility", "visible");
+    xd.setAttribute("cx", x); xd.setAttribute("cy", Y(r.c)); xd.setAttribute("visibility", "visible");
+    tip.replaceChildren();
+    const day = document.createElement("div"); day.className = "d"; day.textContent = fmtDay(r.d); tip.appendChild(day);
+    SERIES.forEach((s) => {
+      const row = document.createElement("div"); row.className = "r";
+      const k = document.createElement("span"); k.className = "k"; k.style.borderColor = s.color;
+      const b = document.createElement("b"); b.textContent = num2(r[s.key]);
+      const n = document.createElement("span"); n.className = "muted"; n.textContent = s.name;
+      row.append(k, b, n); tip.appendChild(row);
+    });
+    tip.style.display = "block";
+    const px = x * rect.width / W, tw = tip.offsetWidth;
+    tip.style.left = Math.max(0, Math.min(rect.width - tw, px + (px > rect.width / 2 ? -tw - 12 : 12))) + "px";
+  };
+  const hide = () => { tip.style.display = "none"; xh.setAttribute("visibility", "hidden"); xd.setAttribute("visibility", "hidden"); };
+  svg.addEventListener("pointermove", (e) => show(e.clientX));
+  svg.addEventListener("pointerdown", (e) => show(e.clientX));
+  svg.addEventListener("pointerleave", hide);
+  return data;
+}
+
+async function renderChart(x) {
+  const box = document.getElementById("chart");
+  if (!box) return;
+  const levels = chartLevels(x);
+  const legend = document.getElementById("legend");
+  try {
+    const rows = await loadHistory(x.symbol);
+    if (!document.body.contains(box)) return;
+    const n = store.get("range", 126);
+    const drawn = drawChart(box, rows, levels, n);
+    const last = drawn ? drawn[drawn.length - 1] : rows[rows.length - 1];
+    legend.innerHTML = SERIES.map((s) => `<span><span class="k" style="border-color:${s.color}"></span>${s.name} <b class="num">${num2(last[s.key])}</b></span>`).join("") +
+      levels.map((l) => `<span><span class="k dash" style="border-color:${LEVEL_COLOR[l.cls]}"></span>${esc(l.label)} <b class="num">${num2(l.v)}</b></span>`).join("");
+    if (box.dataset.cut) {
+      const note = document.createElement("p");
+      note.className = "small muted"; note.style.margin = "6px 0 0";
+      note.textContent = `Chart starts at the split or bonus issue on ${fmtDay(box.dataset.cut)}: PSX prices aren't adjusted, so earlier prices aren't comparable.`;
+      box.appendChild(note);
+    }
+    const shown = rows.slice(-n).slice(-20).reverse();
+    document.getElementById("chart-rows").innerHTML = `<table><tr><th>Date</th><th class="num">Close</th><th class="num">20-day</th><th class="num">50-day</th></tr>
+      ${shown.map((r) => `<tr><td>${esc(r.d)}</td><td class="num">${num2(r.c)}</td><td class="num">${num2(r.s20)}</td><td class="num">${num2(r.s50)}</td></tr>`).join("")}</table>
+      <p class="small muted">Last 20 trading days. Prices are not adjusted for bonus shares or splits.</p>`;
+  } catch {
+    box.innerHTML = `<div class="empty">Price history isn't available yet. It appears after the next daily run.</div>`;
+  }
+}
+
+// ---------- pre-trade check, trades, record, settings ----------
 function check(sym) {
   const x = DATA && DATA.stocks.find((s) => s.symbol === sym);
   if (!x || x.status !== "buy_plan") return `<div class="empty">No Buy plan for ${esc(sym)} today. Trades can only start from a tested plan.</div>`;
@@ -282,15 +599,15 @@ function check(sym) {
   const shares = Math.floor((s.risk / p.stop_pct) / ref);
   const n = r.closed % 20;
   return `
-  <a href="#stock/${esc(sym)}" class="small">← ${esc(sym)}</a>
+  <a href="#stock/${esc(sym)}" class="back">← ${esc(sym)}</a>
   <h2 style="margin-top:10px">Pre-trade check: ${esc(sym)}</h2>
   ${r.reasons.map((m) => `<div class="note lock">${esc(m)}</div>`).join("")}
   <div class="card">
     <label class="tick"><input type="checkbox" class="c"> <span>This is the tested setup: <b>${esc(p.setup_label)}</b>, ${esc(p.order)}.</span></label>
     <label class="tick"><input type="checkbox" class="c"> <span>I accept losing <b>${pkr(s.risk)}</b> if the stop is hit.</span></label>
     <label class="tick"><input type="checkbox" class="c"> <span>I'm not chasing or trying to win back a loss.</span></label>
-    <label class="field">My fill price (Rs)<input id="fill" type="number" step="0.01" value="${ref.toFixed(2)}"></label>
-    <label class="field">Shares<input id="shares" type="number" step="1" value="${shares}"></label>
+    <label class="field">My fill price (Rs)<input id="fill" type="number" inputmode="decimal" step="0.01" value="${ref.toFixed(2)}"></label>
+    <label class="field">Shares<input id="shares" type="number" inputmode="numeric" step="1" value="${shares}"></label>
     <button class="btn wide" id="in" disabled>I'm in</button>
   </div>
   <div class="card small"><div class="kv">
@@ -298,7 +615,7 @@ function check(sym) {
     <div>Losses in a row</div><div>${r.streak}</div>
     <div>Daily loss limit</div><div>${pkr(s.dailyLoss)}</div>
     <div>This block of 20</div><div>${n} of 20</div>
-  </div><div class="bar" style="margin-top:8px"><div style="width:${n * 5}%"></div></div></div>`;
+  </div><div class="bar-p" style="margin-top:8px"><div style="width:${n * 5}%"></div></div></div>`;
 }
 
 function logView() {
@@ -317,12 +634,13 @@ function logView() {
   <h2>My trades</h2>
   ${r.reasons.map((m) => `<div class="note lock">${esc(m)}</div>`).join("")}
   <div class="card"><div class="row between small"><span>Judge after 20, not after 1</span><b>${n} of 20</b></div>
-    <div class="bar" style="margin-top:6px"><div style="width:${n * 5}%"></div></div></div>
+    <div class="bar-p" style="margin-top:6px"><div style="width:${n * 5}%"></div></div></div>
+  ${open.length ? "" : `<div class="card empty">No open trades. Start one from a Buy plan's pre-trade check.</div>`}
   ${open.map((t) => `
     <div class="card">
       <div class="row between"><b>${esc(t.symbol)}</b><span class="small muted">${esc(t.setup)} · in ${esc(t.entryDate)}</span></div>
       <div class="small">${t.shares} shares at ${rs(t.entry)} · stop ${rs(t.stop)}${t.target ? " · target " + rs(t.target) : ""}</div>
-      <label class="field">Exit price (Rs)<input type="number" step="0.01" id="x-${t.id}"></label>
+      <label class="field">Exit price (Rs)<input type="number" inputmode="decimal" step="0.01" id="x-${t.id}"></label>
       <label class="field">Did you follow the plan?<select id="fp-${t.id}"><option value="yes">Yes</option><option value="no">No</option></select></label>
       <button class="btn wide" data-close="${t.id}">Close trade</button>
     </div>`).join("")}
@@ -376,12 +694,12 @@ function settingsView() {
   return `
   <h2>Settings</h2>
   <div class="card">
-    <label class="field">PKR I'm willing to lose per trade<input id="s-risk" type="number" step="500" value="${s.risk}"></label>
-    <label class="field">Daily loss limit (PKR): no new trades after this<input id="s-dl" type="number" step="500" value="${s.dailyLoss}"></label>
-    <label class="field">Minimum traded value per day (PKR). The tested setups need 2,000,000.<input id="s-mv" type="number" step="500000" value="${s.minValue}"></label>
+    <label class="field">PKR I'm willing to lose per trade<input id="s-risk" type="number" inputmode="numeric" step="500" value="${s.risk}"></label>
+    <label class="field">Daily loss limit (PKR): no new trades after this<input id="s-dl" type="number" inputmode="numeric" step="500" value="${s.dailyLoss}"></label>
+    <label class="field">Minimum traded value per day (PKR). The tested setups need 2,000,000.<input id="s-mv" type="number" inputmode="numeric" step="500000" value="${s.minValue}"></label>
     <div class="filters">
-      <label class="field">Min price (Rs, 0 = any)<input id="s-pmin" type="number" value="${s.minPrice}"></label>
-      <label class="field">Max price (Rs, 0 = any)<input id="s-pmax" type="number" value="${s.maxPrice}"></label>
+      <label class="field">Min price (Rs, 0 = any)<input id="s-pmin" type="number" inputmode="decimal" value="${s.minPrice}"></label>
+      <label class="field">Max price (Rs, 0 = any)<input id="s-pmax" type="number" inputmode="decimal" value="${s.maxPrice}"></label>
     </div>
     <button class="btn wide" id="s-save">Save</button>
     <p class="small muted">Saved on this device only.</p>
@@ -392,7 +710,7 @@ function settingsView() {
     <div id="fcm-out" class="small" style="margin-top:10px"></div></div>
   <div class="card"><h2>Alerts through the ntfy app</h2>
     <p class="small" style="margin:0">Install the free <b>ntfy</b> app and subscribe to your private topic name (kept in <code>ntfy_topic.txt</code> on the computer).</p></div>
-  <div class="card"><h2>Use start-up</h2>
+  <div class="card"><h2>Starting out</h2>
     <p class="small" style="margin:0">Start with a small fixed amount per trade until about 30 live trades match the backtest. Write down before trade 1: "I judge this after 20 trades, and compare live results with the backtest after 30."</p></div>
   <p class="small"><a href="#about">About</a> · <a href="#status">Run log</a></p>`;
 }
@@ -401,28 +719,28 @@ function about() {
   return `
   <h2>About</h2>
   <div class="card small">
-    <p style="margin-top:0"><b>Halal screening.</b> Only stocks on the KMI All Share Index list (list of ${esc(DATA ? DATA.kmi_list_date : "–")}) ever appear here. That list is a screening against SECP's Shariah criteria, <b>not a fatwa</b>. Ask a scholar you trust about your own situation.</p>
+    <p style="margin-top:0"><b>Halal screening.</b> Only stocks on the KMI All Share Index list (list of ${esc(DATA ? fmtDay(DATA.kmi_list_date) : "–")}) ever appear here. That list is a screening against SECP's Shariah criteria, <b>not a fatwa</b>. Ask a scholar you trust about your own situation.</p>
     <p><b>Purification.</b> Many scholars require giving away the small non-compliant part of dividend income. Ask your scholar for the right percentage for each company.</p>
-    <label class="field">Dividend received (PKR)<input id="pu-d" type="number" value="0"></label>
-    <label class="field">Non-compliant share (%), from your scholar or the company's screening data<input id="pu-p" type="number" step="0.1" value="0"></label>
+    <label class="field">Dividend received (PKR)<input id="pu-d" type="number" inputmode="decimal" value="0"></label>
+    <label class="field">Non-compliant share (%), from your scholar or the company's screening data<input id="pu-p" type="number" inputmode="decimal" step="0.1" value="0"></label>
     <div><b>Give away: <span id="pu-r">PKR 0</span></b></div>
   </div>
   <div class="card small">
-    <p style="margin-top:0"><b>How signals are made.</b> A Buy plan appears only when a setup that passed an honest backtest fires: settings chosen on 2019–23, judged on 2024–26 at full PSX costs and at double cost, with the luck check and neighbouring settings. Everything else is for context only.</p>
+    <p style="margin-top:0"><b>How signals are made.</b> A Buy plan appears only when a setup that passed an honest backtest fires: settings chosen on 2019–23, judged on 2024–26 at full AKD Trade costs and at double cost, with the luck check and neighbouring settings. Everything else is for context only.</p>
     <p><b>Timing.</b> PSX trades Mon–Thu 09:32–15:30 and Friday 09:17–12:00 and 14:32–16:30 (Pakistan time). Plans are made from the final daily close and are valid for the next session only.</p>
-    <p><b>Limits.</b> Prices come from the PSX data portal (via psxdata) and can lag or have gaps. The backtest has no delisted stocks and uses today's KMI list for past years, which flatters results. A backtest describes the past; live results usually come in below it. Not investment advice. Start small.</p>
+    <p><b>Limits.</b> Prices come from the PSX data portal (via psxdata) and can lag or have gaps. They are not adjusted for bonus shares or splits. The backtest has no delisted stocks and uses today's KMI list for past years, which flatters results. A backtest describes the past; live results usually come in below it. Not investment advice. Start small.</p>
   </div>`;
 }
 
 function status() {
   if (!STATUS) return `<div class="empty">No runs logged yet.</div>`;
   return `<h2>Run log</h2>${STATUS.runs.map((r) => `
-    <div class="card"><div class="row between"><b>${esc(r.at.replace("T", " "))}</b><span class="small muted">${esc(r.state)} · ${r.new_alerts} new alerts</span></div>
+    <div class="card"><div class="row between"><b>${esc(r.at.replace("T", " ").slice(0, 16))}</b><span class="small muted">${esc(r.state)} · ${r.new_alerts} new alerts</span></div>
     <pre>${esc(r.log.join("\n"))}</pre></div>`).join("")}`;
 }
 
 async function research() {
-  RESEARCH = RESEARCH || await fetch("data/research.json", { cache: "no-store" }).then((r) => r.ok ? r.json() : null).catch(() => null);
+  RESEARCH = RESEARCH || await fetch(`data/research.json?t=${Date.now()}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : null).catch(() => null);
   if (!RESEARCH) return `<div class="empty">No research list yet.</div>`;
   return `<h2>Research list (admin)</h2>
   <p class="small muted">"If you had bought at the next open and sold after 5 days" for untested statuses. This is how untested ideas are proven wrong with live data.</p>
@@ -434,12 +752,13 @@ async function research() {
 // ---------- router ----------
 async function render() {
   const [route, arg] = (location.hash.slice(1) || "hot").split("/");
-  document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("on", a.dataset.r === route));
+  document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("on", a.dataset.r === route || (route === "stock" || route === "check") && a.dataset.r === "hot"));
   const v = document.getElementById("view");
   const screens = { hot, stock: () => stock(arg), check: () => check(arg), log: logView, record,
                     settings: settingsView, about, status, research };
   v.innerHTML = fcmBanner() + await (screens[route] || hot)();
-  window.scrollTo(0, 0);
+  if (store.get("lastRoute", "") !== location.hash) window.scrollTo(0, 0);
+  store.set("lastRoute", location.hash);
   wire(route, arg);
 }
 
@@ -448,6 +767,17 @@ function wire(route, arg) {
   if (route === "hot" || !route) {
     $("f") && ($("f").onchange = (e) => { store.set("filter", e.target.value); render(); });
     $("q") && ($("q").onchange = (e) => { store.set("q", e.target.value.trim()); render(); });
+  }
+  if (route === "stock" && DATA) {
+    const x = DATA.stocks.find((s) => s.symbol === arg);
+    if (x) {
+      renderChart(x);
+      document.querySelectorAll("[data-range]").forEach((b) => b.onclick = () => {
+        store.set("range", +b.dataset.range);
+        document.querySelectorAll("[data-range]").forEach((o) => o.classList.toggle("on", o === b));
+        renderChart(x);
+      });
+    }
   }
   if (route === "check") {
     const boxes = [...document.querySelectorAll("input.c")], btn = $("in");
@@ -489,6 +819,21 @@ function wire(route, arg) {
     $("pu-d").oninput = upd; $("pu-p").oninput = upd;
   }
 }
+
+// ---------- header buttons ----------
+document.getElementById("refresh").onclick = async (e) => {
+  const b = e.currentTarget; b.classList.add("spin");
+  await load(); await render();
+  b.classList.remove("spin");
+};
+document.getElementById("theme").onclick = () => {
+  const dark = getComputedStyle(document.documentElement).colorScheme.includes("dark");
+  const next = dark ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  store.set("theme", next);
+  const [route] = (location.hash.slice(1) || "hot").split("/");
+  if (route === "stock") render();          // redraw the chart in the new colours
+};
 
 // ---------- Firebase push (Step 5) ----------
 const FB = "https://www.gstatic.com/firebasejs/10.14.1/";
@@ -552,6 +897,12 @@ function fcmBanner() {
 }
 
 window.addEventListener("hashchange", render);
+let resizeTimer;
+window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => {
+  const [route, arg] = (location.hash.slice(1) || "hot").split("/");
+  const x = route === "stock" && DATA && DATA.stocks.find((s) => s.symbol === arg);
+  if (x) renderChart(x);
+}, 200); });
 load().then(render).then(checkFcmToken);
 </script>
 </body>

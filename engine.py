@@ -160,9 +160,11 @@ def evaluate(symbol, a, t=-1, passed=None, kse=None, risk_pkr=DEFAULT_RISK_PKR):
         if fired:
             plans.append(trade_plan(setup, info, a, t, risk_pkr))
 
+    clean = a["bars_in_seg"][t]          # days since the last split/bonus or gap
     with np.errstate(invalid="ignore"):
-        running = a["ret5"][t] >= 0.10 and a["c"][t] > a["sma20"][t]
-        fading = t >= 5 and a["c"][t] < a["sma20"][t] and a["sma20"][t] < a["sma20"][t - 5]
+        running = clean >= 20 and a["ret5"][t] >= 0.10 and a["c"][t] > a["sma20"][t]
+        fading = (clean >= 25 and a["c"][t] < a["sma20"][t]
+                  and a["sma20"][t] < a["sma20"][t - 5])
     status = "buy_plan" if plans else "running" if running else "fading" if fading else "no_setup"
     context = []
     if not np.isnan(a["ret5"][t]):
@@ -180,9 +182,12 @@ def evaluate(symbol, a, t=-1, passed=None, kse=None, risk_pkr=DEFAULT_RISK_PKR):
         "plans": plans,
         "reasons": reasons,
         "lights": lights(a, t, kse),
-        "levels": {"sma20": _num(a["sma20"][t]), "sma50": _num(a["sma50"][t]),
-                   "sma200": _num(a["sma200"][t]), "high60": _num(a["hh60"][t]),
-                   "low60": _num(lo60)},
+        # averages only once they span clean days (unadjusted prices across a
+        # split or bonus issue would mix two price scales)
+        "levels": {"sma20": _num(a["sma20"][t]) if clean >= 20 else None,
+                   "sma50": _num(a["sma50"][t]) if clean >= 50 else None,
+                   "sma200": _num(a["sma200"][t]), "high60": _num(a["hh60"][t]) if clean >= 60 else None,
+                   "low60": _num(lo60) if clean >= 60 else None},
         "traded_value_pkr": _num(a["tv20"][t], 0),
         "news_url": f"https://dps.psx.com.pk/company/{symbol}",
     }

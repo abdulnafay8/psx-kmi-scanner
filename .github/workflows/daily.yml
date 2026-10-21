@@ -73,6 +73,10 @@ jobs:
             git push
           fi
 
+      - name: Add price history for the charts
+        if: ${{ !inputs.test_push }}
+        run: mkdir -p app/daily && cp data/daily/*.csv app/daily/
+
       - uses: actions/configure-pages@v5
         if: ${{ !inputs.test_push }}
 

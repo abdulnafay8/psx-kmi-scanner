@@ -7,3 +7,5 @@ ntfy_topic.txt
 # large backtest detail files: re-made by python backtest.py
 results/trades_*.csv
 results/grid_*.csv
+app/_tmp/
+app/daily/

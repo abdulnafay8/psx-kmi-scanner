@@ -4,8 +4,8 @@ Serve the app so you can open it on this computer and on your phone
 
     python serve.py
 
-Only the app/ folder is served (the page and its data files), nothing else
-from the project.
+Only the app/ folder is served (the page and its data files), plus the daily
+price files under /daily/ for the charts; nothing else from the project.
 """
 import functools
 import http.server
@@ -14,6 +14,7 @@ from pathlib import Path
 
 PORT = 8000
 APP_DIR = Path(__file__).parent / "app"
+DAILY_DIR = Path(__file__).parent / "data" / "daily"
 
 
 def lan_ip():
@@ -29,6 +30,15 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
         self.send_header("Cache-Control", "no-store")
         super().end_headers()
+
+    def translate_path(self, path):
+        # /daily/OGDC.csv -> data/daily/OGDC.csv (online, the workflow copies them)
+        clean = path.split("?", 1)[0].split("#", 1)[0]
+        if clean.startswith("/daily/"):
+            name = Path(clean).name
+            if name.endswith(".csv") and (DAILY_DIR / name).is_file():
+                return str(DAILY_DIR / name)
+        return super().translate_path(path)
 
     def log_message(self, *args):
         pass
