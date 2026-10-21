@@ -9,3 +9,7 @@ results/trades_*.csv
 results/grid_*.csv
 app/_tmp/
 app/daily/
+worker/node_modules/
+worker/.wrangler/
+worker/.dev.vars
+node_modules/

@@ -145,6 +145,38 @@ def stats(rows):
     }
 
 
+# ---- learning: confidence from live results ---------------------------------
+PRIOR_TRADES = 30          # the backtest counts as this many trades of evidence
+PAUSE_AFTER = 30           # live closed trades needed before a setup can be paused
+MIN_SIZE_FACTOR = 0.25
+
+
+def confidence(setup, backtest, rows):
+    """Blend the backtest (as PRIOR_TRADES trades) with live graded alerts.
+    Good live results keep full size; weak ones shrink the suggested size;
+    a setup is paused only when 30+ live trades lose money beyond doubt.
+    Nothing is deleted: a weak setup keeps being tracked."""
+    live = [e["result"]["pkr"] for e in rows
+            if e["setup"] == setup and e["result"]["state"] == "closed"]
+    n = len(live)
+    p0, m0 = backtest.get("win_rate") or 0.5, backtest.get("pkr_per_trade") or 0
+    wins = sum(1 for p in live if p > 0)
+    win = (p0 * PRIOR_TRADES + wins) / (PRIOR_TRADES + n)
+    mean = (m0 * PRIOR_TRADES + sum(live)) / (PRIOR_TRADES + n)
+    factor = 1.0 if m0 <= 0 else max(MIN_SIZE_FACTOR, min(1.0, mean / m0))
+    paused = False
+    if n >= PAUSE_AFTER:
+        live_mean = sum(live) / n
+        sd = (sum((p - live_mean) ** 2 for p in live) / (n - 1)) ** 0.5
+        paused = live_mean + 1.645 * sd / n ** 0.5 < 0   # 95% sure it loses money
+    level = "paused" if paused else "high" if factor >= 0.9 else "reduced" if factor > 0.5 else "low"
+    return {"setup": setup, "live_trades": n, "live_wins": wins,
+            "live_avg_pkr": round(sum(live) / n) if n else None,
+            "backtest_win_rate": p0, "backtest_avg_pkr": m0,
+            "win_rate": round(win, 3), "avg_pkr": round(mean), "size_factor": round(factor, 2),
+            "paused": paused, "level": level}
+
+
 # ---- research list: untested statuses, admin only ---------------------------
 def add_research(research, signals, now):
     recent = {}

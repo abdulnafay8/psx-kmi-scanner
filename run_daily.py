@@ -36,6 +36,7 @@ import psxdata
 
 import backtest as bt
 import ledger as lg
+import research as studies
 from engine import evaluate, load_passed
 from kmi import DATA_DIR, DAILY_DIR, load_kmi_list
 from step1_download_data import drop_no_trade_rows
@@ -245,22 +246,78 @@ def alert_text(entry, plan, kmi_date, session):
     return "\n".join(lines)
 
 
-def build_signals(stocks, kse, passed, kmi, risk_pkr, ledger_rows):
+MONTHS = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
+
+
+def load_context():
+    """Seasonal and dividend research for the context notes (both optional)."""
+    seasonal = payouts = None
+    f = bt.RESULTS_DIR / "research_seasonal.csv"
+    if f.exists():
+        seasonal = pd.read_csv(f)
+        seasonal = seasonal[seasonal["consistent"]]
+    if studies.PAYOUTS_FILE.exists():
+        payouts = studies.parse_payouts(pd.read_csv(studies.PAYOUTS_FILE))
+    return seasonal, payouts
+
+
+def context_notes(symbol, sector, as_of, seasonal, payouts):
+    """Plain-language notes that never trigger trades: patterns that held in
+    nearly every year of history, and upcoming dividend book closures."""
+    notes = []
+    day = pd.Timestamp(as_of)
+    months = [day.month] + ([day.month % 12 + 1] if day.day >= 20 else [])
+    if seasonal is not None and sector:
+        for m in months:
+            hit = seasonal[(seasonal["sector"] == sector) & (seasonal["month"] == m)]
+            for _, r in hit.iterrows():
+                side = "beaten" if r["avg_excess"] > 0 else "lagged"
+                times = r["years_beating_market"] if r["avg_excess"] > 0 else r["years"] - r["years_beating_market"]
+                notes.append(f"{sector.title()} has {side} the KMI market in {MONTHS[m - 1]} in "
+                             f"{int(times)} of {int(r['years'])} years (average {r['avg_excess'] * 100:+.1f}%). "
+                             "Seasonal patterns are context only; they failed as buy signals.")
+    if payouts is not None:
+        up = payouts[(payouts["symbol"] == symbol) & (payouts["closure"] >= day)
+                     & (payouts["closure"] <= day + pd.Timedelta(days=30))]
+        for _, r in up.iterrows():
+            notes.append(f"Dividend book closure from {r['closure']:%d %b} ({r['pct_of_face']:g}% = "
+                         f"Rs {r['pct_of_face'] / 10:.2f} a share). In 2025-26 the typical stock lagged the "
+                         "market by about 1.8% in the 9 days after the ex-date (weak evidence).")
+    return notes
+
+
+def build_signals(stocks, kse, passed, kmi, risk_pkr, ledger_rows, context=(None, None)):
     names = dict(zip(kmi["symbol"], kmi["name"]))
     sectors = dict(zip(kmi["symbol"], kmi["sector"]))
     as_of = max(str(pd.Timestamp(a["date"][-1]).date()) for a in stocks.values())
     active = {(e["symbol"]): e for e in ledger_rows if lg.is_active(e)}
+    conf = {k: lg.confidence(k, v["test"], ledger_rows) for k, v in passed.items()}
     rows = []
     for symbol, a in stocks.items():
         s = evaluate(symbol, a, passed=passed, kse=kse, risk_pkr=risk_pkr)
         s["name"], s["sector"] = names.get(symbol), sectors.get(symbol)
         s["stale"] = s["date"] != as_of
+        # learning: weaker live results shrink the size; a paused setup makes no plans
+        kept = []
+        for p in s["plans"]:
+            c = conf[p["setup"]]
+            p["confidence"] = c
+            if c["paused"]:
+                s.setdefault("paused_setups", []).append(p["setup_label"])
+                continue
+            p["position_pkr"] = round(p["position_pkr"] * c["size_factor"])
+            p["shares_est"] = int(p["shares_est"] * c["size_factor"])
+            kept.append(p)
+        s["plans"] = kept
+        if s["status"] == "buy_plan" and not kept:
+            s["status"], s["status_text"], s["tested"] = "no_setup", "No setup: the setup that fired is paused", False
         if symbol in active:
             s["active_plan"] = active[symbol]
             if s["status"] == "buy_plan" and active[symbol]["signal_date"] != as_of:
                 s["status"], s["status_text"] = "in_plan", "Plan active: already alerted, follow that plan"
+        s["notes"] = context_notes(symbol, s["sector"], s["date"], *context)
         rows.append(s)
-    return {"date": as_of, "stocks": rows}
+    return {"date": as_of, "stocks": rows, "confidence": conf}
 
 
 def main():
@@ -295,6 +352,15 @@ def main():
                 "so it is not saved and no alerts are made")
         fetched = update_prices(symbols, keep_today, log)
         log(f"prices updated for {fetched[0]} stocks, {fetched[1]} failed")
+        # dividend dates change slowly: refresh the payout list once a week
+        pf = studies.PAYOUTS_FILE
+        if not pf.exists() or time.time() - pf.stat().st_mtime > 6 * 86400:
+            try:
+                studies.fetch_payouts()
+                log("dividend payout list refreshed")
+            except Exception as e:
+                log(f"payout refresh failed: {type(e).__name__}")
+    context = load_context()
 
     prices = {s: pd.read_csv(DAILY_DIR / f"{s}.csv", parse_dates=["date"])
               for s in symbols if (DAILY_DIR / f"{s}.csv").exists()}
@@ -305,7 +371,7 @@ def main():
     lg.grade_all(ledger_rows, stocks)
     lg.grade_all(research, stocks)
 
-    signals = build_signals(stocks, kse, passed, kmi, config["risk_pkr"], ledger_rows)
+    signals = build_signals(stocks, kse, passed, kmi, config["risk_pkr"], ledger_rows, context)
     # A plan is for the session after the last final candle, so alerts are
     # made only while that session hasn't opened yet.
     as_of = dt.date.fromisoformat(signals["date"])
@@ -327,7 +393,7 @@ def main():
         lg.grade_all(ledger_rows, stocks)
         lg.add_research(research, signals, now)
         lg.grade_all(research, stocks)
-        signals = build_signals(stocks, kse, passed, kmi, config["risk_pkr"], ledger_rows)
+        signals = build_signals(stocks, kse, passed, kmi, config["risk_pkr"], ledger_rows, context)
         for e in new:
             log(f"NEW ALERT {e['symbol']} {e['setup']}: {e['order']}")
     else:
@@ -360,6 +426,7 @@ def main():
         "risk_pkr": config["risk_pkr"],
         "min_traded_value": bt.MIN_TRADED_VALUE,
         "tested_setups": passed,
+        "confidence": signals.get("confidence", {}),
     }
     (APP_DATA / "signals.json").write_text(json.dumps({**meta, "stocks": signals["stocks"]},
                                                       default=str))

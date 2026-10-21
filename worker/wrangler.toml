@@ -1,0 +1,14 @@
+# Cloudflare Worker: live KMI market data and the free AI chat for KMI Scanner.
+# Deploy from this folder:   npx wrangler deploy
+# Set the passcode once:     npx wrangler secret put APP_PASSCODE
+name = "kmi-scanner-api"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+[ai]
+binding = "AI"
+
+[vars]
+SIGNALS_URL = "https://abdulnafay8.github.io/psx-kmi-scanner/data/signals.json"
+ALLOWED_ORIGINS = "https://abdulnafay8.github.io,http://localhost:8000"
+CHAT_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
