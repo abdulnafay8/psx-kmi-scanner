@@ -19,10 +19,10 @@
    "fill_price": 74.0,
    "stop_price": 62.9,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 79.4,
-   "pkr_if_sold_now": 6921
+   "last_price": 80.16,
+   "pkr_if_sold_now": 7946
   }
  },
  {
@@ -45,10 +45,12 @@
    "fill_price": 52.53,
    "stop_price": 46.23,
    "target_price": 57.78,
-   "days_held": 0,
-   "state": "open",
-   "last_price": 52.86,
-   "pkr_if_sold_now": 264
+   "days_held": 1,
+   "state": "closed",
+   "exit_date": "2026-10-22",
+   "exit_price": 57.78,
+   "exit_reason": "target",
+   "pkr": 9619
   }
  },
  {
@@ -71,10 +73,10 @@
    "fill_price": 18.99,
    "stop_price": 16.71,
    "target_price": 20.89,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 18.48,
-   "pkr_if_sold_now": -3300
+   "last_price": 19.08,
+   "pkr_if_sold_now": -140
   }
  },
  {
@@ -97,10 +99,10 @@
    "fill_price": 11.23,
    "stop_price": 9.88,
    "target_price": 12.35,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 11.48,
-   "pkr_if_sold_now": 1184
+   "last_price": 11.12,
+   "pkr_if_sold_now": -2021
   }
  },
  {
@@ -123,10 +125,10 @@
    "fill_price": 29.83,
    "stop_price": 26.25,
    "target_price": 32.81,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 29.96,
-   "pkr_if_sold_now": 37
+   "last_price": 29.63,
+   "pkr_if_sold_now": -1070
   }
  },
  {
@@ -149,10 +151,10 @@
    "fill_price": 106.32,
    "stop_price": 90.37,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 106.32,
-   "pkr_if_sold_now": -363
+   "last_price": 116.95,
+   "pkr_if_sold_now": 9617
   }
  },
  {
@@ -175,10 +177,12 @@
    "fill_price": 59.59,
    "stop_price": 50.65,
    "target_price": null,
-   "days_held": 0,
-   "state": "open",
-   "last_price": 53.78,
-   "pkr_if_sold_now": -10095
+   "days_held": 1,
+   "state": "closed",
+   "exit_date": "2026-10-22",
+   "exit_price": 49.03,
+   "exit_reason": "stop",
+   "pkr": -18052
   }
  },
  {
@@ -197,8 +201,14 @@
   "max_hold_days": 15,
   "kmi_list_date": "2026-10-21",
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-10-22",
+   "fill_price": 68.11,
+   "stop_price": 59.94,
+   "target_price": 74.92,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 65.83,
+   "pkr_if_sold_now": -3704
   }
  }
 ]

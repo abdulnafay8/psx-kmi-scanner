@@ -1,6 +1,21 @@
 {
  "runs": [
   {
+   "at": "2026-10-22T17:38:22+05:00",
+   "state": "after_close",
+   "as_of": "2026-10-22",
+   "new_alerts": 0,
+   "fetch_failed": 0,
+   "log": [
+    "17:38:22  run started Thursday 2026-10-22 17:38 PKT; market state: after_close",
+    "17:51:18  prices updated for 313 stocks, 0 failed",
+    "17:51:22  plans from the 2026-10-22 close are for the session opening Fri 23 Oct 09:15",
+    "17:51:22  checked 307 KMI stocks as of 2026-10-22: {'fading': 205, 'no_setup': 89, 'running': 7, 'in_plan': 5, 'buy_plan': 1}",
+    "17:51:22  washout: 5 stocks miss exactly one check: BUXL, FIMM, FPJM, JDMT, SSOM",
+    "17:51:22  trend_hold: 50 stocks miss exactly one check: ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DADX, DCR, DFSM, DNCC, DWSM"
+   ]
+  },
+  {
    "at": "2026-10-22T08:00:16+05:00",
    "state": "before_final",
    "as_of": "2026-10-21",
