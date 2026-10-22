@@ -1,6 +1,22 @@
 {
  "runs": [
   {
+   "at": "2026-10-22T08:00:16+05:00",
+   "state": "before_final",
+   "as_of": "2026-10-21",
+   "new_alerts": 0,
+   "fetch_failed": 0,
+   "log": [
+    "08:00:16  run started Thursday 2026-10-22 08:00 PKT; market state: before_final",
+    "08:00:16  before 16:15: today's candle isn't final yet, so it is not saved and no alerts are made",
+    "08:11:49  prices updated for 313 stocks, 0 failed",
+    "08:11:52  plans from the 2026-10-21 close are for the session opening Thu 22 Oct 09:15",
+    "08:11:53  checked 307 KMI stocks as of 2026-10-21: {'fading': 191, 'no_setup': 100, 'running': 9, 'in_plan': 6, 'buy_plan': 1}",
+    "08:11:53  washout: 5 stocks miss exactly one check: BUXL, CLOV, FIMM, JDMT, SSOM",
+    "08:11:53  trend_hold: 47 stocks miss exactly one check: ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DADX, DCR, DFSM, DNCC, DWSM, FABL"
+   ]
+  },
+  {
    "at": "2026-10-22T02:50:04+05:00",
    "state": "before_final",
    "as_of": "2026-10-21",
