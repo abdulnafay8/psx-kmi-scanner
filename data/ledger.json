@@ -19,10 +19,10 @@
    "fill_price": 74.0,
    "stop_price": 62.9,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 80.16,
-   "pkr_if_sold_now": 7946
+   "last_price": 77.63,
+   "pkr_if_sold_now": 4534
   }
  },
  {
@@ -73,10 +73,10 @@
    "fill_price": 18.99,
    "stop_price": 16.71,
    "target_price": 20.89,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 19.08,
-   "pkr_if_sold_now": -140
+   "last_price": 18.19,
+   "pkr_if_sold_now": -4827
   }
  },
  {
@@ -99,10 +99,10 @@
    "fill_price": 11.23,
    "stop_price": 9.88,
    "target_price": 12.35,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 11.12,
-   "pkr_if_sold_now": -2021
+   "last_price": 12.03,
+   "pkr_if_sold_now": 6081
   }
  },
  {
@@ -125,10 +125,10 @@
    "fill_price": 29.83,
    "stop_price": 26.25,
    "target_price": 32.81,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 29.63,
-   "pkr_if_sold_now": -1070
+   "last_price": 29.22,
+   "pkr_if_sold_now": -2444
   }
  },
  {
@@ -151,10 +151,10 @@
    "fill_price": 106.32,
    "stop_price": 90.37,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 116.95,
-   "pkr_if_sold_now": 9617
+   "last_price": 128.58,
+   "pkr_if_sold_now": 20536
   }
  },
  {
@@ -205,10 +205,52 @@
    "fill_price": 68.11,
    "stop_price": 59.94,
    "target_price": 74.92,
-   "days_held": 0,
-   "state": "open",
-   "last_price": 65.83,
-   "pkr_if_sold_now": -3704
+   "days_held": 1,
+   "state": "closed",
+   "exit_date": "2026-10-23",
+   "exit_price": 59.94,
+   "exit_reason": "stop",
+   "pkr": -12341
+  }
+ },
+ {
+  "id": "2026-10-23-ASTM-washout",
+  "created_at": "2026-10-23T17:34:41+05:00",
+  "signal_date": "2026-10-23",
+  "symbol": "ASTM",
+  "setup": "washout",
+  "setup_label": "Washout dip in a hot stock",
+  "close_at_signal": 59.08,
+  "order": "Limit buy at Rs 58.49",
+  "order_type": "limit",
+  "order_price": 58.49,
+  "stop_pct": 0.12,
+  "target_pct": 0.1,
+  "max_hold_days": 15,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-10-23-SINDM-trend_hold",
+  "created_at": "2026-10-23T17:34:41+05:00",
+  "signal_date": "2026-10-23",
+  "symbol": "SINDM",
+  "setup": "trend_hold",
+  "setup_label": "Trend hold (weeks)",
+  "close_at_signal": 62.83,
+  "order": "Buy at the opening price",
+  "order_type": "open",
+  "order_price": null,
+  "stop_pct": 0.15,
+  "target_pct": null,
+  "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
   }
  }
 ]

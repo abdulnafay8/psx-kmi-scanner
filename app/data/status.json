@@ -1,6 +1,28 @@
 {
  "runs": [
   {
+   "at": "2026-10-23T17:34:41+05:00",
+   "state": "after_close",
+   "as_of": "2026-10-23",
+   "new_alerts": 2,
+   "fetch_failed": 0,
+   "log": [
+    "17:34:41  run started Friday 2026-10-23 17:34 PKT; market state: after_close",
+    "17:46:26  2 fetches failed; retrying them in 2 minutes",
+    "17:48:37  prices updated for 313 stocks, 0 failed",
+    "17:48:39  plans from the 2026-10-23 close are for the session opening Mon 26 Oct 09:15",
+    "17:48:40  NEW ALERT ASTM washout: Limit buy at Rs 58.49",
+    "17:48:40  NEW ALERT SINDM trend_hold: Buy at the opening price",
+    "17:48:40  checked 307 KMI stocks as of 2026-10-23: {'fading': 216, 'no_setup': 78, 'running': 8, 'buy_plan': 3, 'in_plan': 2}",
+    "17:48:40  washout: 2 stocks miss exactly one check: FIMM, JDMT",
+    "17:48:40  trend_hold: 50 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, CRTM, DAAG, DADX, DCR, DFSM",
+    "17:48:40  ntfy push sent: ASTM: Washout dip in a hot stock",
+    "17:48:41  Firebase push sent to 1 of 1 devices: ASTM: Washout dip in a hot stock",
+    "17:48:41  ntfy push sent: SINDM: Trend hold (weeks)",
+    "17:48:41  Firebase push sent to 1 of 1 devices: SINDM: Trend hold (weeks)"
+   ]
+  },
+  {
    "at": "2026-10-23T08:01:26+05:00",
    "state": "before_final",
    "as_of": "2026-10-22",
