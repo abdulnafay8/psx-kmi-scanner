@@ -19,10 +19,10 @@
    "fill_price": 74.0,
    "stop_price": 62.9,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 73.85,
-   "pkr_if_sold_now": -565
+   "last_price": 76.04,
+   "pkr_if_sold_now": 2389
   }
  },
  {
@@ -73,10 +73,10 @@
    "fill_price": 18.99,
    "stop_price": 16.71,
    "target_price": 20.89,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 18.82,
-   "pkr_if_sold_now": -1509
+   "last_price": 18.15,
+   "pkr_if_sold_now": -5038
   }
  },
  {
@@ -127,10 +127,12 @@
    "fill_price": 29.83,
    "stop_price": 26.25,
    "target_price": 32.81,
-   "days_held": 3,
-   "state": "open",
-   "last_price": 26.3,
-   "pkr_if_sold_now": -12232
+   "days_held": 4,
+   "state": "closed",
+   "exit_date": "2026-10-27",
+   "exit_price": 26.25,
+   "exit_reason": "stop",
+   "pkr": -12402
   }
  },
  {
@@ -153,10 +155,10 @@
    "fill_price": 106.32,
    "stop_price": 90.37,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 139.97,
-   "pkr_if_sold_now": 31229
+   "last_price": 134.21,
+   "pkr_if_sold_now": 25822
   }
  },
  {
@@ -235,10 +237,10 @@
    "fill_price": 58.49,
    "stop_price": 51.47,
    "target_price": 64.34,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 54.64,
-   "pkr_if_sold_now": -6932
+   "last_price": 57.7,
+   "pkr_if_sold_now": -1710
   }
  },
  {
@@ -261,10 +263,10 @@
    "fill_price": 62.99,
    "stop_price": 53.54,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 68.62,
-   "pkr_if_sold_now": 8559
+   "last_price": 73.77,
+   "pkr_if_sold_now": 16720
   }
  },
  {
@@ -283,8 +285,14 @@
   "max_hold_days": 15,
   "kmi_list_date": "2026-10-21",
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-10-27",
+   "fill_price": 51.61,
+   "stop_price": 45.42,
+   "target_price": 56.77,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 49.4,
+   "pkr_if_sold_now": -4637
   }
  }
 ]
