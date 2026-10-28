@@ -19,10 +19,10 @@
    "fill_price": 74.0,
    "stop_price": 62.9,
    "target_price": null,
-   "days_held": 4,
+   "days_held": 5,
    "state": "open",
-   "last_price": 76.04,
-   "pkr_if_sold_now": 2389
+   "last_price": 71.02,
+   "pkr_if_sold_now": -4383
   }
  },
  {
@@ -73,10 +73,10 @@
    "fill_price": 18.99,
    "stop_price": 16.71,
    "target_price": 20.89,
-   "days_held": 4,
+   "days_held": 5,
    "state": "open",
-   "last_price": 18.15,
-   "pkr_if_sold_now": -5038
+   "last_price": 18.08,
+   "pkr_if_sold_now": -5406
   }
  },
  {
@@ -155,10 +155,10 @@
    "fill_price": 106.32,
    "stop_price": 90.37,
    "target_price": null,
-   "days_held": 4,
+   "days_held": 5,
    "state": "open",
-   "last_price": 134.21,
-   "pkr_if_sold_now": 25822
+   "last_price": 120.79,
+   "pkr_if_sold_now": 13222
   }
  },
  {
@@ -237,10 +237,10 @@
    "fill_price": 58.49,
    "stop_price": 51.47,
    "target_price": 64.34,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 57.7,
-   "pkr_if_sold_now": -1710
+   "last_price": 59.01,
+   "pkr_if_sold_now": 526
   }
  },
  {
@@ -263,10 +263,10 @@
    "fill_price": 62.99,
    "stop_price": 53.54,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 73.77,
-   "pkr_if_sold_now": 16720
+   "last_price": 81.15,
+   "pkr_if_sold_now": 28415
   }
  },
  {
@@ -289,10 +289,30 @@
    "fill_price": 51.61,
    "stop_price": 45.42,
    "target_price": 56.77,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 49.4,
-   "pkr_if_sold_now": -4637
+   "last_price": 51.77,
+   "pkr_if_sold_now": -54
+  }
+ },
+ {
+  "id": "2026-10-28-FTSM-washout",
+  "created_at": "2026-10-28T17:47:49+05:00",
+  "signal_date": "2026-10-28",
+  "symbol": "FTSM",
+  "setup": "washout",
+  "setup_label": "Washout dip in a hot stock",
+  "close_at_signal": 27.89,
+  "order": "Limit buy at Rs 27.61",
+  "order_type": "limit",
+  "order_price": 27.61,
+  "stop_pct": 0.12,
+  "target_pct": 0.1,
+  "max_hold_days": 15,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
   }
  }
 ]
