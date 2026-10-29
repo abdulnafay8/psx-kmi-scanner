@@ -19,10 +19,10 @@
    "fill_price": 74.0,
    "stop_price": 62.9,
    "target_price": null,
-   "days_held": 5,
+   "days_held": 6,
    "state": "open",
-   "last_price": 71.02,
-   "pkr_if_sold_now": -4383
+   "last_price": 75.21,
+   "pkr_if_sold_now": 1269
   }
  },
  {
@@ -73,10 +73,10 @@
    "fill_price": 18.99,
    "stop_price": 16.71,
    "target_price": 20.89,
-   "days_held": 5,
+   "days_held": 6,
    "state": "open",
-   "last_price": 18.08,
-   "pkr_if_sold_now": -5406
+   "last_price": 18.14,
+   "pkr_if_sold_now": -5090
   }
  },
  {
@@ -155,10 +155,10 @@
    "fill_price": 106.32,
    "stop_price": 90.37,
    "target_price": null,
-   "days_held": 5,
+   "days_held": 6,
    "state": "open",
-   "last_price": 120.79,
-   "pkr_if_sold_now": 13222
+   "last_price": 108.71,
+   "pkr_if_sold_now": 1881
   }
  },
  {
@@ -237,10 +237,10 @@
    "fill_price": 58.49,
    "stop_price": 51.47,
    "target_price": 64.34,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 59.01,
-   "pkr_if_sold_now": 526
+   "last_price": 57.29,
+   "pkr_if_sold_now": -2410
   }
  },
  {
@@ -263,10 +263,10 @@
    "fill_price": 62.99,
    "stop_price": 53.54,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 81.15,
-   "pkr_if_sold_now": 28415
+   "last_price": 89.27,
+   "pkr_if_sold_now": 41282
   }
  },
  {
@@ -289,10 +289,10 @@
    "fill_price": 51.61,
    "stop_price": 45.42,
    "target_price": 56.77,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 51.77,
-   "pkr_if_sold_now": -54
+   "last_price": 47.52,
+   "pkr_if_sold_now": -8273
   }
  },
  {
@@ -309,6 +309,32 @@
   "stop_pct": 0.12,
   "target_pct": 0.1,
   "max_hold_days": 15,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "fill_date": "2026-10-29",
+   "fill_price": 27.61,
+   "stop_price": 24.3,
+   "target_price": 30.37,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 27.4,
+   "pkr_if_sold_now": -1199
+  }
+ },
+ {
+  "id": "2026-10-29-SZTM-trend_hold",
+  "created_at": "2026-10-29T17:48:28+05:00",
+  "signal_date": "2026-10-29",
+  "symbol": "SZTM",
+  "setup": "trend_hold",
+  "setup_label": "Trend hold (weeks)",
+  "close_at_signal": 176.29,
+  "order": "Buy at the opening price",
+  "order_type": "open",
+  "order_price": null,
+  "stop_pct": 0.15,
+  "target_pct": null,
+  "max_hold_days": 60,
   "kmi_list_date": "2026-10-21",
   "result": {
    "state": "waiting",

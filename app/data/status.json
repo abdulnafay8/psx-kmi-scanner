@@ -1,6 +1,26 @@
 {
  "runs": [
   {
+   "at": "2026-10-29T17:48:28+05:00",
+   "state": "after_close",
+   "as_of": "2026-10-29",
+   "new_alerts": 1,
+   "fetch_failed": 1,
+   "log": [
+    "17:48:28  run started Thursday 2026-10-29 17:48 PKT; market state: after_close",
+    "18:00:46  2 fetches failed; retrying them in 2 minutes",
+    "18:02:50  fetch failed CHCC: no data returned",
+    "18:02:53  prices updated for 312 stocks, 1 failed",
+    "18:02:56  plans from the 2026-10-29 close are for the session opening Fri 30 Oct 09:15",
+    "18:02:56  NEW ALERT SZTM trend_hold: Buy at the opening price",
+    "18:02:56  checked 307 KMI stocks as of 2026-10-29: {'fading': 175, 'no_setup': 116, 'running': 12, 'in_plan': 3, 'buy_plan': 1}",
+    "18:02:56  washout: 6 stocks miss exactly one check: ASTM, ECOP, FIL, JDMT, KPUS, MWMP",
+    "18:02:56  trend_hold: 49 stocks miss exactly one check: ABOT, ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DNCC",
+    "18:02:56  ntfy push sent: SZTM: Trend hold (weeks)",
+    "18:02:57  Firebase push sent to 1 of 1 devices: SZTM: Trend hold (weeks)"
+   ]
+  },
+  {
    "at": "2026-10-29T08:12:46+05:00",
    "state": "before_final",
    "as_of": "2026-10-28",
