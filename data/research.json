@@ -6547,10 +6547,10 @@
    "fill_price": 264.0,
    "stop_price": 2.64,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 266.07,
-   "pkr_if_sold_now": 420
+   "last_price": 268.65,
+   "pkr_if_sold_now": 1395
   }
  },
  {
