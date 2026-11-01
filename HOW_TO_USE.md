@@ -39,6 +39,7 @@ Two channels, both set up:
 | `engine.py` | Status, lights, reasons and trade plans (tested setups only) |
 | `ledger.py` | Locks and grades every alert, and keeps each setup's confidence score |
 | `research.py` | Seasonal and dividend tests; refreshes dividend dates weekly |
+| `dividends.py` | The Dividends tab: meetings, book closures and recent payouts for KMI stocks |
 | `run_daily.py` | The daily job |
 | `app/` | The app |
 | `.github/workflows/daily.yml` | The schedule GitHub runs |

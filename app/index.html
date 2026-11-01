@@ -121,7 +121,7 @@ td, th { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--line
 th { color: var(--muted); font-weight: 600; font-size: 12px; }
 td.num, th.num { text-align: right; }
 input, select, button { font: inherit; }
-input[type=number], input[type=text], input[type=date], select { width: 100%; padding: 10px 11px;
+input[type=number], input[type=text], input[type=date], input[type=search], select { width: 100%; padding: 10px 11px;
   border: 1px solid var(--line); border-radius: 11px; background: var(--card); color: var(--ink); }
 label.field { display: block; margin: 8px 0; font-size: 13px; color: var(--muted); }
 label.tick { display: flex; gap: 10px; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid var(--line); }
@@ -162,6 +162,12 @@ details summary { cursor: pointer; color: var(--brand); font-size: 13px; margin-
 .tip .r { display: flex; align-items: center; gap: 6px; }
 .tip .r b { font-variant-numeric: tabular-nums; }
 .tip .r .k { width: 12px; border-top: 2px solid; }
+/* dividend calendar */
+.datebox { flex: none; width: 48px; text-align: center; border-radius: 10px; background: var(--brand-soft); padding: 5px 0; line-height: 1.1; }
+.datebox b { display: block; font-size: 17px; }
+.datebox span { font-size: 10.5px; color: var(--muted); text-transform: uppercase; }
+.div-meta { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.late { color: var(--bad); font-weight: 600; }
 /* daily tip, above the menu */
 .toast { position: fixed; left: 12px; right: 12px; bottom: calc(66px + env(safe-area-inset-bottom)); z-index: 6;
   max-width: 696px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brand);
@@ -209,8 +215,9 @@ main.has-toast { padding-bottom: calc(190px + env(safe-area-inset-bottom)); }
 <div id="modal-slot"></div>
 <nav id="nav">
   <a href="#hot" data-r="hot"><span class="ico">◎</span>Today</a>
-  <a href="#log" data-r="log"><span class="ico">✎</span>My trades</a>
-  <a href="#record" data-r="record"><span class="ico">▤</span>Track record</a>
+  <a href="#div" data-r="div"><span class="ico">₨</span>Dividends</a>
+  <a href="#log" data-r="log"><span class="ico">✎</span>Trades</a>
+  <a href="#record" data-r="record"><span class="ico">▤</span>Record</a>
   <a href="#settings" data-r="settings"><span class="ico">⚙</span>Settings</a>
 </nav>
 <script>
@@ -246,13 +253,13 @@ const STATUS_ICON = { buy_plan: "▲", in_plan: "●", running: "↗", fading: "
 const ORDER = { buy_plan: 0, in_plan: 1, running: 2, fading: 3, no_setup: 4 };
 const chip = (s) => `<span class="chip ${s}"><span aria-hidden="true">${STATUS_ICON[s]}</span>${STATUS_LABEL[s]}</span>`;
 
-let DATA = null, LEDGER = null, STATUS = null, RESEARCH = null, LOAD_ERROR = null;
+let DATA = null, LEDGER = null, STATUS = null, RESEARCH = null, LOAD_ERROR = null, DIV = null;
 const HIST = {};
 async function load() {
   // a fresh query string on every load: GitHub Pages lets browsers cache files for 10 minutes
   const stamp = Date.now();
   const get = (f) => fetch(`data/${f}?t=${stamp}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : null).catch(() => null);
-  [DATA, LEDGER, STATUS] = await Promise.all([get("signals.json"), get("ledger.json"), get("status.json")]);
+  [DATA, LEDGER, STATUS, DIV] = await Promise.all([get("signals.json"), get("ledger.json"), get("status.json"), get("dividends.json")]);
   RESEARCH = null;
   for (const k in HIST) delete HIST[k];
   LOAD_ERROR = DATA ? null : "Couldn't load today's signals. Check your connection, then tap ↻.";
@@ -808,6 +815,49 @@ async function research() {
     <div>Win rate</div><div>${s.win_rate != null ? pct(s.win_rate, 0) : "–"}</div><div>Avg PKR</div><div>${pkr(s.avg_pkr_per_trade)}</div></div></div>`).join("")}`;
 }
 
+// ---------- dividend calendar ----------
+const DIV_TABS = [["meetings", "Meetings"], ["book_closures", "Book closure"], ["payouts", "Payouts"]];
+const dateBox = (iso) => {
+  const d = new Date(iso + "T00:00:00");
+  return `<div class="datebox"><b>${d.getDate()}</b><span>${d.toLocaleDateString("en-GB", { month: "short" })}</span></div>`;
+};
+const MEETING_NAME = { AGM: "Annual general meeting", EOGM: "Extraordinary general meeting", ARM: "Annual review meeting" };
+
+function divScreen() {
+  if (!DIV) return `<h2>Dividends</h2><div class="card empty">The dividend calendar appears after the next daily run.</div>`;
+  const tab = store.get("divTab", "book_closures"), q = store.get("divQ", "").toLowerCase();
+  const rows = (DIV[tab] || []).filter((e) => !q || (e.symbol + " " + (e.name || "")).toLowerCase().includes(q));
+  const t0 = today();
+  const explain = {
+    meetings: "Shareholder meetings ahead. At the AGM, shareholders approve the year's accounts and the final dividend. ARM is the modaraba version; an EOGM is called for special decisions.",
+    book_closures: `The company closes its <b>shareholder register</b> on these dates to decide who gets the dividend. <b>Trading doesn't stop.</b> To qualify you must own the shares by the close of the <b>last day to buy</b> (2 trading days before, with T+1 settlement). Confirm the date with your broker.`,
+    payouts: "Dividends whose register has closed. Shareholders on the register are paid after this, on a date the company announces (PSX doesn't publish payment dates).",
+  }[tab];
+  const item = (e) => {
+    if (tab === "meetings") return `
+      <a class="item" href="#stock/${esc(e.symbol)}">${dateBox(e.date)}
+        <div class="who"><b>${esc(e.symbol)}</b><span class="name">${esc(e.name || "")}</span>
+          <span class="div-meta">${esc(MEETING_NAME[e.type] || e.type)}${e.time ? " · " + esc(e.time) : ""}${e.city ? " · " + esc(e.city) : ""}${e.period_end ? " · year to " + esc(new Date(e.period_end + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })) : ""}</span></div></a>`;
+    const amount = e.rs_per_share != null ? `Rs ${num2(e.rs_per_share)}/share${e.yield != null ? " · " + pct(e.yield, 1) + " of price" : ""}` : esc(e.announcement);
+    const late = e.last_day_to_buy < t0;
+    return `
+      <a class="item" href="#stock/${esc(e.symbol)}">${dateBox(tab === "payouts" ? e.closure_end : e.closure_start)}
+        <div class="who"><b>${esc(e.symbol)}</b> <span class="small muted">${esc(e.label)} ${e.percent != null ? e.percent + "%" : ""}</span>
+          <span class="name">${esc(e.name || "")}</span>
+          <span class="div-meta"><b style="color:var(--ink)">${amount}</b></span>
+          <span class="div-meta">Books closed ${esc(fmtDay(e.closure_start))}${e.closure_end !== e.closure_start ? "–" + esc(fmtDay(e.closure_end)) : ""}
+            ${tab === "book_closures" ? (late ? ` · <span class="late">too late to qualify</span>` : ` · last day to buy <b style="color:var(--ink)">${esc(fmtDay(e.last_day_to_buy))}</b>`) : " · payment date set by the company"}</span></div></a>`;
+  };
+  return `
+  <h2>Dividends</h2>
+  <div class="seg" role="group" aria-label="Dividend groups" style="display:flex">${DIV_TABS.map(([k, l]) =>
+    `<button data-dt="${k}" class="${k === tab ? "on" : ""}" style="flex:1">${l} (${(DIV[k] || []).length})</button>`).join("")}</div>
+  <p class="small muted" style="margin:8px 2px">${explain}</p>
+  <input id="div-q" type="search" placeholder="Search symbol or name" value="${esc(store.get("divQ", ""))}" aria-label="Search">
+  <div class="list" style="margin-top:8px">${rows.map(item).join("") || `<div class="empty">Nothing ${q ? "matches" : "listed"} right now.</div>`}</div>
+  <p class="small muted" style="margin:8px 2px">KMI All Share stocks only, from the PSX data portal, updated after each daily run (${esc((DIV.generated_at || "").slice(0, 10))}). Rs/share assumes the usual Rs ${DIV.face_value_assumed} face value; a few companies differ. Dividends aren't a buy signal.</p>`;
+}
+
 // ---------- router ----------
 async function render() {
   const [route, arg] = (location.hash.slice(1) || "hot").split("/");
@@ -815,7 +865,7 @@ async function render() {
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("on", a.dataset.r === tab));
   const v = document.getElementById("view");
   const screens = { hot, stock: () => stock(arg), check: () => check(arg), log: logView, record,
-                    settings: settingsView, about, status, research, help };
+                    settings: settingsView, about, status, research, help, div: divScreen };
   v.innerHTML = fcmBanner() + await (screens[route] || hot)();
   if (store.get("lastRoute", "") !== location.hash) window.scrollTo(0, 0);
   store.set("lastRoute", location.hash);
@@ -876,6 +926,14 @@ function wire(route, arg) {
   }
   if (route === "help") {
     $("h-welcome").onclick = () => showWelcome(true);
+  }
+  if (route === "div") {
+    document.querySelectorAll("[data-dt]").forEach((b) => b.onclick = () => { store.set("divTab", b.dataset.dt); render(); });
+    if ($("div-q")) $("div-q").oninput = (e) => {
+      store.set("divQ", e.target.value.trim());
+      const pos = e.target.selectionStart;
+      render().then(() => { const i = $("div-q"); if (i) { i.focus(); i.setSelectionRange(pos, pos); } });
+    };
   }
   if (route === "settings") {
     $("s-tips").onchange = (e) => { store.set("tipsOff", !e.target.checked); store.set("tipDismissed", ""); showTip(); };
@@ -1154,6 +1212,7 @@ function help() {
   <div class="card"><h2>Confidence and context notes</h2>
     <dl class="help-sec">
       <dt>Confidence</dt><dd>Each tested setup starts from its backtest. Every graded live alert updates it: weaker live results shrink the suggested size (down to 25%), and a setup is paused only if it clearly loses money after 30+ live trades.</dd>
+      <dt>Dividends tab</dt><dd>KMI stocks' shareholder meetings ahead, upcoming book closures (with the last day to buy to qualify for the dividend) and recent dividends. Information only, not buy signals.</dd>
       <dt>Context notes</dt><dd>Sector seasonality and dividend book closures that held in past years. They were tested and failed as buy signals, so they're shown as information only.</dd>
     </dl></div>
   <div class="card"><h2>Track record and safety rules</h2>

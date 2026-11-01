@@ -37,6 +37,7 @@ import psxdata
 import backtest as bt
 import ledger as lg
 import research as studies
+from dividends import build_dividends
 from engine import evaluate, load_passed
 from kmi import DATA_DIR, DAILY_DIR, load_kmi_list
 from step1_download_data import drop_no_trade_rows
@@ -436,6 +437,16 @@ def main():
     (APP_DATA / "research.json").write_text(json.dumps({
         "by_status": {k: lg.stats([e for e in research if e["status"] == k]) for k in ("running", "fading")},
         "entries": sorted(research, key=lambda e: e["created_at"], reverse=True)[:300]}, default=str))
+    # dividend calendar: meetings, book closures and payouts for KMI stocks
+    if state != "weekend" or not (APP_DATA / "dividends.json").exists():
+        try:
+            last_close = {s: float(a["c"][-1]) for s, a in stocks.items()}
+            div = build_dividends(set(symbols), last_close, today=now.date())
+            (APP_DATA / "dividends.json").write_text(json.dumps(div, default=str))
+            log(f"dividend calendar: {len(div['meetings'])} meetings, "
+                f"{len(div['book_closures'])} book closures ahead, {len(div['payouts'])} recent payouts")
+        except Exception as e:
+            log(f"dividend calendar failed: {type(e).__name__}")
     history = []
     status_file = APP_DATA / "status.json"
     if status_file.exists():
