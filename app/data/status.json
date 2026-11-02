@@ -1,6 +1,32 @@
 {
  "runs": [
   {
+   "at": "2026-11-02T17:58:32+05:00",
+   "state": "after_close",
+   "as_of": "2026-11-02",
+   "new_alerts": 3,
+   "fetch_failed": 0,
+   "log": [
+    "17:58:32  run started Monday 2026-11-02 17:58 PKT; market state: after_close",
+    "18:10:19  3 fetches failed; retrying them in 2 minutes",
+    "18:12:32  prices updated for 313 stocks, 0 failed",
+    "18:12:34  plans from the 2026-11-02 close are for the session opening Tue 03 Nov 09:15",
+    "18:12:34  NEW ALERT JATM trend_hold: Buy at the opening price",
+    "18:12:34  NEW ALERT KPUS washout: Limit buy at Rs 999.42",
+    "18:12:34  NEW ALERT OML trend_hold: Buy at the opening price",
+    "18:12:34  checked 307 KMI stocks as of 2026-11-02: {'fading': 182, 'no_setup': 103, 'running': 16, 'in_plan': 3, 'buy_plan': 3}",
+    "18:12:34  washout: 10 stocks miss exactly one check: CFL, DADX, ECOP, FIL, GCWL, IPAK, JDMT, MWMP, SPSL, SYM",
+    "18:12:34  trend_hold: 48 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DADX, DCR, DFSM",
+    "18:12:35  ntfy push sent: JATM: Trend hold (weeks)",
+    "18:12:35  Firebase push sent to 1 of 1 devices: JATM: Trend hold (weeks)",
+    "18:12:35  ntfy push sent: KPUS: Washout dip in a hot stock",
+    "18:12:36  Firebase push sent to 1 of 1 devices: KPUS: Washout dip in a hot stock",
+    "18:12:36  ntfy push sent: OML: Trend hold (weeks)",
+    "18:12:36  Firebase push sent to 1 of 1 devices: OML: Trend hold (weeks)",
+    "18:12:49  dividend calendar: 8 meetings, 11 book closures ahead, 85 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-02T08:16:32+05:00",
    "state": "before_final",
    "as_of": "2026-10-30",

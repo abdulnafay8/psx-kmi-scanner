@@ -19,10 +19,10 @@
    "fill_price": 74.0,
    "stop_price": 62.9,
    "target_price": null,
-   "days_held": 7,
+   "days_held": 8,
    "state": "open",
-   "last_price": 75.11,
-   "pkr_if_sold_now": 1134
+   "last_price": 71.58,
+   "pkr_if_sold_now": -3627
   }
  },
  {
@@ -73,10 +73,10 @@
    "fill_price": 18.99,
    "stop_price": 16.71,
    "target_price": 20.89,
-   "days_held": 7,
+   "days_held": 8,
    "state": "open",
-   "last_price": 17.93,
-   "pkr_if_sold_now": -6196
+   "last_price": 17.3,
+   "pkr_if_sold_now": -9514
   }
  },
  {
@@ -155,10 +155,10 @@
    "fill_price": 106.32,
    "stop_price": 90.37,
    "target_price": null,
-   "days_held": 7,
+   "days_held": 8,
    "state": "open",
-   "last_price": 119.58,
-   "pkr_if_sold_now": 12086
+   "last_price": 131.54,
+   "pkr_if_sold_now": 23315
   }
  },
  {
@@ -237,10 +237,10 @@
    "fill_price": 58.49,
    "stop_price": 51.47,
    "target_price": 64.34,
-   "days_held": 4,
+   "days_held": 5,
    "state": "open",
-   "last_price": 56.97,
-   "pkr_if_sold_now": -2956
+   "last_price": 57.22,
+   "pkr_if_sold_now": -2529
   }
  },
  {
@@ -263,10 +263,10 @@
    "fill_price": 62.99,
    "stop_price": 53.54,
    "target_price": null,
-   "days_held": 4,
+   "days_held": 5,
    "state": "open",
-   "last_price": 86.37,
-   "pkr_if_sold_now": 36687
+   "last_price": 82.2,
+   "pkr_if_sold_now": 30079
   }
  },
  {
@@ -289,10 +289,10 @@
    "fill_price": 51.61,
    "stop_price": 45.42,
    "target_price": 56.77,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 50.3,
-   "pkr_if_sold_now": -2897
+   "last_price": 50.99,
+   "pkr_if_sold_now": -1562
   }
  },
  {
@@ -315,10 +315,10 @@
    "fill_price": 27.61,
    "stop_price": 24.3,
    "target_price": 30.37,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 27.79,
-   "pkr_if_sold_now": 213
+   "last_price": 25.58,
+   "pkr_if_sold_now": -7790
   }
  },
  {
@@ -341,10 +341,12 @@
    "fill_price": 183.0,
    "stop_price": 155.55,
    "target_price": null,
-   "days_held": 0,
-   "state": "open",
-   "last_price": 158.66,
-   "pkr_if_sold_now": -13639
+   "days_held": 1,
+   "state": "closed",
+   "exit_date": "2026-11-02",
+   "exit_price": 150.0,
+   "exit_reason": "stop",
+   "pkr": -18363
   }
  },
  {
@@ -355,6 +357,72 @@
   "setup": "trend_hold",
   "setup_label": "Trend hold (weeks)",
   "close_at_signal": 126.65,
+  "order": "Buy at the opening price",
+  "order_type": "open",
+  "order_price": null,
+  "stop_pct": 0.15,
+  "target_pct": null,
+  "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "fill_date": "2026-11-02",
+   "fill_price": 125.99,
+   "stop_price": 107.09,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 133.32,
+   "pkr_if_sold_now": 5444
+  }
+ },
+ {
+  "id": "2026-11-02-JATM-trend_hold",
+  "created_at": "2026-11-02T17:58:32+05:00",
+  "signal_date": "2026-11-02",
+  "symbol": "JATM",
+  "setup": "trend_hold",
+  "setup_label": "Trend hold (weeks)",
+  "close_at_signal": 71.7,
+  "order": "Buy at the opening price",
+  "order_type": "open",
+  "order_price": null,
+  "stop_pct": 0.15,
+  "target_pct": null,
+  "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-02-KPUS-washout",
+  "created_at": "2026-11-02T17:58:32+05:00",
+  "signal_date": "2026-11-02",
+  "symbol": "KPUS",
+  "setup": "washout",
+  "setup_label": "Washout dip in a hot stock",
+  "close_at_signal": 1009.52,
+  "order": "Limit buy at Rs 999.42",
+  "order_type": "limit",
+  "order_price": 999.42,
+  "stop_pct": 0.12,
+  "target_pct": 0.1,
+  "max_hold_days": 15,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-02-OML-trend_hold",
+  "created_at": "2026-11-02T17:58:32+05:00",
+  "signal_date": "2026-11-02",
+  "symbol": "OML",
+  "setup": "trend_hold",
+  "setup_label": "Trend hold (weeks)",
+  "close_at_signal": 115.12,
   "order": "Buy at the opening price",
   "order_type": "open",
   "order_price": null,
