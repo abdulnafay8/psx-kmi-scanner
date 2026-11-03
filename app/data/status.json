@@ -1,6 +1,26 @@
 {
  "runs": [
   {
+   "at": "2026-11-03T17:56:11+05:00",
+   "state": "after_close",
+   "as_of": "2026-11-03",
+   "new_alerts": 1,
+   "fetch_failed": 0,
+   "log": [
+    "17:56:11  run started Tuesday 2026-11-03 17:56 PKT; market state: after_close",
+    "18:09:14  1 fetches failed; retrying them in 2 minutes",
+    "18:11:20  prices updated for 313 stocks, 0 failed",
+    "18:11:24  plans from the 2026-11-03 close are for the session opening Wed 04 Nov 09:15",
+    "18:11:24  NEW ALERT KPUS washout: Limit buy at Rs 1,006.84",
+    "18:11:24  checked 307 KMI stocks as of 2026-11-03: {'fading': 172, 'no_setup': 112, 'running': 16, 'in_plan': 6, 'buy_plan': 1}",
+    "18:11:24  washout: 9 stocks miss exactly one check: DADX, FIL, GCWL, GTYR, IPAK, NRL, SPSL, SYM, ZAL",
+    "18:11:24  trend_hold: 49 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DADX, DCR, DFSM",
+    "18:11:24  ntfy push sent: KPUS: Washout dip in a hot stock",
+    "18:11:25  Firebase push sent to 1 of 1 devices: KPUS: Washout dip in a hot stock",
+    "18:11:38  dividend calendar: 9 meetings, 11 book closures ahead, 86 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-03T08:16:54+05:00",
    "state": "before_final",
    "as_of": "2026-11-02",
@@ -810,34 +830,6 @@
     "01:44:23  checked 307 KMI stocks as of 2026-10-20: {'fading': 185, 'no_setup': 108, 'buy_plan': 7, 'running': 7}",
     "01:44:23  washout: 7 stocks miss exactly one check: BUXL, CLOV, FIMM, JDMT, MACFL, SHCM, SSOM",
     "01:44:23  trend_hold: 48 stocks miss exactly one check: ASL, ASTM, ATRL, BERG, BUXL, CFL, CNERGY, DADX, DCR, DFSM, DWSM, FABL"
-   ]
-  },
-  {
-   "at": "2026-10-21T01:44:04+05:00",
-   "state": "before_final",
-   "as_of": "2026-10-20",
-   "new_alerts": 7,
-   "log": [
-    "01:44:04  run started Wednesday 2026-10-21 01:44 PKT; market state: before_final",
-    "01:44:04  --no-fetch: using saved prices",
-    "01:44:07  plans from the 2026-10-20 close are for the session opening Wed 21 Oct 09:15",
-    "01:44:07  NEW ALERT ARCTM trend_hold: Buy at the opening price",
-    "01:44:07  NEW ALERT ASTM washout: Limit buy at Rs 54.74",
-    "01:44:07  NEW ALERT FPJM washout: Limit buy at Rs 18.99",
-    "01:44:07  NEW ALERT FPRM washout: Limit buy at Rs 11.32",
-    "01:44:07  NEW ALERT FTSM washout: Limit buy at Rs 29.83",
-    "01:44:07  NEW ALERT PIM trend_hold: Buy at the opening price",
-    "01:44:07  NEW ALERT SINDM trend_hold: Buy at the opening price",
-    "01:44:07  checked 307 KMI stocks as of 2026-10-20: {'fading': 185, 'no_setup': 108, 'in_plan': 7, 'running': 7}",
-    "01:44:07  washout: 7 stocks miss exactly one check: BUXL, CLOV, FIMM, JDMT, MACFL, SHCM, SSOM",
-    "01:44:07  trend_hold: 48 stocks miss exactly one check: ASL, ASTM, ATRL, BERG, BUXL, CFL, CNERGY, DADX, DCR, DFSM, DWSM, FABL",
-    "01:44:07  push skipped: no ntfy_topic in config.json",
-    "01:44:07  push skipped: no ntfy_topic in config.json",
-    "01:44:07  push skipped: no ntfy_topic in config.json",
-    "01:44:07  push skipped: no ntfy_topic in config.json",
-    "01:44:07  push skipped: no ntfy_topic in config.json",
-    "01:44:07  push skipped: no ntfy_topic in config.json",
-    "01:44:07  push skipped: no ntfy_topic in config.json"
    ]
   }
  ]

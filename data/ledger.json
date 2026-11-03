@@ -19,10 +19,10 @@
    "fill_price": 74.0,
    "stop_price": 62.9,
    "target_price": null,
-   "days_held": 8,
+   "days_held": 9,
    "state": "open",
-   "last_price": 71.58,
-   "pkr_if_sold_now": -3627
+   "last_price": 78.74,
+   "pkr_if_sold_now": 6031
   }
  },
  {
@@ -73,10 +73,10 @@
    "fill_price": 18.99,
    "stop_price": 16.71,
    "target_price": 20.89,
-   "days_held": 8,
+   "days_held": 9,
    "state": "open",
-   "last_price": 17.3,
-   "pkr_if_sold_now": -9514
+   "last_price": 17.65,
+   "pkr_if_sold_now": -7671
   }
  },
  {
@@ -155,10 +155,10 @@
    "fill_price": 106.32,
    "stop_price": 90.37,
    "target_price": null,
-   "days_held": 8,
+   "days_held": 9,
    "state": "open",
-   "last_price": 131.54,
-   "pkr_if_sold_now": 23315
+   "last_price": 144.69,
+   "pkr_if_sold_now": 35661
   }
  },
  {
@@ -237,10 +237,10 @@
    "fill_price": 58.49,
    "stop_price": 51.47,
    "target_price": 64.34,
-   "days_held": 5,
+   "days_held": 6,
    "state": "open",
-   "last_price": 57.22,
-   "pkr_if_sold_now": -2529
+   "last_price": 56.09,
+   "pkr_if_sold_now": -4458
   }
  },
  {
@@ -263,10 +263,10 @@
    "fill_price": 62.99,
    "stop_price": 53.54,
    "target_price": null,
-   "days_held": 5,
+   "days_held": 6,
    "state": "open",
-   "last_price": 82.2,
-   "pkr_if_sold_now": 30079
+   "last_price": 73.98,
+   "pkr_if_sold_now": 17053
   }
  },
  {
@@ -289,10 +289,10 @@
    "fill_price": 51.61,
    "stop_price": 45.42,
    "target_price": 56.77,
-   "days_held": 4,
+   "days_held": 5,
    "state": "open",
-   "last_price": 50.99,
-   "pkr_if_sold_now": -1562
+   "last_price": 50.8,
+   "pkr_if_sold_now": -1930
   }
  },
  {
@@ -315,10 +315,10 @@
    "fill_price": 27.61,
    "stop_price": 24.3,
    "target_price": 30.37,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 25.58,
-   "pkr_if_sold_now": -7790
+   "last_price": 25.59,
+   "pkr_if_sold_now": -7754
   }
  },
  {
@@ -369,10 +369,10 @@
    "fill_price": 125.99,
    "stop_price": 107.09,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 133.32,
-   "pkr_if_sold_now": 5444
+   "last_price": 146.65,
+   "pkr_if_sold_now": 16005
   }
  },
  {
@@ -391,8 +391,14 @@
   "max_hold_days": 60,
   "kmi_list_date": "2026-10-21",
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-11-03",
+   "fill_price": 73.5,
+   "stop_price": 62.48,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 74.71,
+   "pkr_if_sold_now": 1280
   }
  },
  {
@@ -411,8 +417,8 @@
   "max_hold_days": 15,
   "kmi_list_date": "2026-10-21",
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "state": "not_filled",
+   "session": "2026-11-03"
   }
  },
  {
@@ -429,6 +435,32 @@
   "stop_pct": 0.15,
   "target_pct": null,
   "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "fill_date": "2026-11-03",
+   "fill_price": 119.0,
+   "stop_price": 101.15,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 126.63,
+   "pkr_if_sold_now": 6037
+  }
+ },
+ {
+  "id": "2026-11-03-KPUS-washout",
+  "created_at": "2026-11-03T17:56:11+05:00",
+  "signal_date": "2026-11-03",
+  "symbol": "KPUS",
+  "setup": "washout",
+  "setup_label": "Washout dip in a hot stock",
+  "close_at_signal": 1017.01,
+  "order": "Limit buy at Rs 1,006.84",
+  "order_type": "limit",
+  "order_price": 1006.84,
+  "stop_pct": 0.12,
+  "target_pct": 0.1,
+  "max_hold_days": 15,
   "kmi_list_date": "2026-10-21",
   "result": {
    "state": "waiting",
