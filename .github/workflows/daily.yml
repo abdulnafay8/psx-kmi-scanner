@@ -35,7 +35,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     env:
-      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
       FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
       FCM_TOKENS: ${{ secrets.FCM_TOKENS }}
       APP_URL: ${{ vars.APP_URL }}

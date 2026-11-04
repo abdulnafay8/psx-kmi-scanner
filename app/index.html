@@ -770,12 +770,13 @@ function settingsView() {
     <label class="switch"><span>Show a daily tip</span><input type="checkbox" id="s-tips" ${store.get("tipsOff", false) ? "" : "checked"}></label>
     <div class="switch"><span>Light / dark</span><button class="btn ghost" id="s-theme" style="padding:7px 14px">Switch</button></div>
     <a class="small" href="#help">Open the help guide</a>
-  </div>  <div class="card"><h2>Alerts on this phone (Firebase)</h2>
-    <p class="small" style="margin-top:0">Open this page in Chrome on your phone, then tap the button. Copy the code it shows and save it as the GitHub secret <code>FCM_TOKENS</code>.</p>
-    <button class="btn wide" id="fcm-on">Turn on alerts on this device</button>
+  </div>
+  <div class="card"><h2>Alerts on this phone</h2>
+    ${alertsOn()
+      ? `<p class="small" style="margin:0"><span class="ok">✓ Alerts are on.</span> New Buy plans arrive after each trading day's close. To stop them, block notifications for this site in your browser's settings.</p>`
+      : `<p class="small" style="margin-top:0">Get a notification when a new Buy plan appears. On iPhone, add the app to your Home Screen and open it from there first.</p>
+         <button class="btn wide" id="fcm-on">Turn on alerts</button>`}
     <div id="fcm-out" class="small" style="margin-top:10px"></div></div>
-  <div class="card"><h2>Alerts through the ntfy app</h2>
-    <p class="small" style="margin:0">Install the free <b>ntfy</b> app and subscribe to your private topic name (kept in <code>ntfy_topic.txt</code> on the computer).</p></div>
   <div class="card"><h2>Starting out</h2>
     <p class="small" style="margin:0">Start with a small fixed amount per trade until about 30 live trades match the backtest. Write down before trade 1: "I judge this after 20 trades, and compare live results with the backtest after 30."</p></div>
   <p class="small"><a href="#about">About</a> · <a href="#status">Run log</a></p>`;
@@ -917,7 +918,7 @@ function wire(route, arg) {
     });
   }
   if (route === "settings") {
-    $("fcm-on").onclick = () => enableFcm($("fcm-out"));
+    if ($("fcm-on")) $("fcm-on").onclick = () => enableFcm($("fcm-out"));
     $("s-save").onclick = () => {
       store.set("settings", { risk: +$("s-risk").value || 2000, dailyLoss: +$("s-dl").value || 6000,
         minValue: +$("s-mv").value || 0, minPrice: +$("s-pmin").value || 0, maxPrice: +$("s-pmax").value || 0 });
@@ -966,59 +967,66 @@ const loadScript = (src) => new Promise((ok, fail) => {
   const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = fail;
   document.head.appendChild(s);
 });
+async function phoneToken() {
+  await loadScript(FB + "firebase-app-compat.js");
+  await loadScript(FB + "firebase-messaging-compat.js");
+  if (!firebase.apps.length) firebase.initializeApp(self.FIREBASE_CONFIG);
+  const reg = await navigator.serviceWorker.register("firebase-messaging-sw.js");
+  return firebase.messaging().getToken({ vapidKey: self.FIREBASE_VAPID_KEY, serviceWorkerRegistration: reg });
+}
+
+// The phone saves its own alert code in Firestore (collection "devices",
+// write-only for the public); the daily run reads the list and sends to all.
+async function registerPhone(token) {
+  const c = self.FIREBASE_CONFIG;
+  const url = `https://firestore.googleapis.com/v1/projects/${c.projectId}/databases/(default)/documents/devices/` +
+              `${encodeURIComponent(token)}?key=${c.apiKey}`;
+  const platform = /iphone|ipad/i.test(navigator.userAgent) ? "ios" : /android/i.test(navigator.userAgent) ? "android" : "other";
+  const r = await fetch(url, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ fields: { token: { stringValue: token }, platform: { stringValue: platform },
+                                     updated: { timestampValue: new Date().toISOString() } } }),
+  });
+  if (!r.ok) throw new Error(`the alert list refused this phone (HTTP ${r.status})`);
+  store.set("fcmToken", token);
+  store.set("fcmRegistered", today());
+}
+
+const alertsOn = () => "Notification" in window && Notification.permission === "granted" && !!store.get("fcmToken", null);
+
 async function enableFcm(out) {
   const say = (html) => out.innerHTML = html;
   try {
     if (!self.FIREBASE_CONFIG || !self.FIREBASE_CONFIG.apiKey || !self.FIREBASE_VAPID_KEY)
       return say("Firebase isn't set up yet: firebase-config.js is empty.");
     if (!("serviceWorker" in navigator) || !("Notification" in window))
-      return say("This browser can't receive push alerts. Use Chrome on Android.");
+      return say(/iphone|ipad/i.test(navigator.userAgent)
+        ? "On iPhone, first add this app to your Home Screen (Share → Add to Home Screen), open it from there, then tap this button again."
+        : "This browser can't receive alerts. Use Chrome on Android, or the Home Screen app on iPhone.");
     say("Asking for permission…");
     if (await Notification.requestPermission() !== "granted")
-      return say("Notifications are blocked. Allow them in Chrome's site settings for this page, then try again.");
-    await loadScript(FB + "firebase-app-compat.js");
-    await loadScript(FB + "firebase-messaging-compat.js");
-    if (!firebase.apps.length) firebase.initializeApp(self.FIREBASE_CONFIG);
-    const reg = await navigator.serviceWorker.register("firebase-messaging-sw.js");
-    const token = await firebase.messaging().getToken({ vapidKey: self.FIREBASE_VAPID_KEY, serviceWorkerRegistration: reg });
-    store.set("fcmToken", token);
-    store.set("fcmChanged", false);
-    say(`<b>Alerts are on for this device.</b> Copy this code and save it as the GitHub secret <code>FCM_TOKENS</code> (replace the old one):
-      <textarea id="fcm-token" readonly style="width:100%;height:90px;margin-top:6px;font-size:11px">${esc(token)}</textarea>
-      <button class="btn ghost wide" id="fcm-copy">Copy code</button>`);
-    document.getElementById("fcm-copy").onclick = async () => {
-      try { await navigator.clipboard.writeText(token); document.getElementById("fcm-copy").textContent = "Copied"; }
-      catch { document.getElementById("fcm-token").select(); }
-    };
+      return say("Notifications are blocked for this site. Allow them in your browser's site settings, then tap the button again.");
+    say("Turning on alerts…");
+    await registerPhone(await phoneToken());
+    say(`<span class="ok">✓ Alerts are on for this phone.</span> New Buy plans will arrive after each trading day's close.`);
+    render();
   } catch (e) {
     say("Couldn't turn on alerts: " + esc(e.message || e));
   }
 }
 
-// Chrome sometimes replaces a phone's push subscription; then the saved
-// FCM_TOKENS code stops working. Check quietly on each visit.
+// Chrome or iOS can replace a phone's alert code; re-save it quietly so
+// alerts keep arriving (and refresh it once a day).
 async function checkFcmToken() {
   try {
-    const saved = store.get("fcmToken", null);
-    if (!saved || !("Notification" in window) || Notification.permission !== "granted" || !self.FIREBASE_CONFIG.apiKey) return;
-    await loadScript(FB + "firebase-app-compat.js");
-    await loadScript(FB + "firebase-messaging-compat.js");
-    if (!firebase.apps.length) firebase.initializeApp(self.FIREBASE_CONFIG);
-    const reg = await navigator.serviceWorker.register("firebase-messaging-sw.js");
-    const now = await firebase.messaging().getToken({ vapidKey: self.FIREBASE_VAPID_KEY, serviceWorkerRegistration: reg });
-    if (now && now !== saved) {
-      store.set("fcmToken", now);
-      store.set("fcmChanged", true);
-      render();
-    }
+    if (!alertsOn() || !self.FIREBASE_CONFIG.apiKey) return;
+    const now = await phoneToken();
+    if (now && (now !== store.get("fcmToken", null) || store.get("fcmRegistered", "") !== today())) await registerPhone(now);
   } catch {}
 }
 
-function fcmBanner() {
-  return store.get("fcmChanged", false)
-    ? `<div class="note lock">Chrome changed this phone's alert code, so Firebase alerts to it will stop. Open <a href="#settings">Settings</a>, tap "Turn on alerts on this device" and save the new code as <code>FCM_TOKENS</code>.</div>`
-    : "";
-}
+function fcmBanner() { return ""; }
 
 // ---------- help: status glossary, welcome pop-up, guide, daily tip ----------
 const GLOSSARY = [
@@ -1117,9 +1125,11 @@ function tutorialSteps() {
         </ul>` },
     { title: "Last step: alerts on your phone", body: `
         <ol style="padding-left:20px;margin:6px 0">
-          <li><b>Add to home screen:</b> in Chrome, tap ⋮ → <i>Add to Home screen</i>, so the app opens like any other.</li>
-          <li><b>Turn on alerts:</b> open <i>Settings</i> → <i>Turn on alerts on this device</i> and allow notifications.</li>
+          <li><b>Add to home screen:</b> Android: Chrome → ⋮ → <i>Add to Home screen</i>. iPhone: Safari → Share → <i>Add to Home Screen</i>, then open the app from that icon.</li>
+          <li><b>Turn on alerts:</b> tap the button below and choose <i>Allow</i>.</li>
         </ol>
+        ${alertsOn() ? `<p class="small"><span class="ok">✓ Alerts are already on for this phone.</span></p>`
+          : `<button class="btn wide" id="tut-alerts">Turn on alerts</button><div class="small" id="tut-alerts-out" style="margin-top:8px"></div>`}
         <p class="small muted">Tips will appear at the bottom now and then; tap × to hide one. The full guide is always behind the <b>?</b> button.</p>` },
   ];
 }
@@ -1161,7 +1171,6 @@ function showWelcome(force = false) {
             ${i > 0 ? `<button class="btn ghost" style="flex:1" id="w-back">Back</button>` : ""}
             <button class="btn" style="flex:2" id="w-next">${last ? "Start using the app" : "Next"}</button>
           </div>
-          ${last ? `<a class="btn ghost wide" href="#settings" id="w-alerts">Go to Settings to turn on alerts</a>` : ""}
         </div>
       </div>`;
     const modal = slot.querySelector(".modal");
@@ -1169,7 +1178,8 @@ function showWelcome(force = false) {
     document.getElementById("w-skip").onclick = close;
     document.getElementById("w-next").onclick = () => { saveRisk(); if (last) close(); else { i++; draw(); } };
     if (i > 0) document.getElementById("w-back").onclick = () => { saveRisk(); i--; draw(); };
-    if (last) document.getElementById("w-alerts").onclick = close;
+    const ta = document.getElementById("tut-alerts");
+    if (ta) ta.onclick = () => enableFcm(document.getElementById("tut-alerts-out"));
     document.getElementById("w-next").focus({ preventScroll: true });
   };
   document.addEventListener("keydown", onKey);

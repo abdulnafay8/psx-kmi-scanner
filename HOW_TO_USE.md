@@ -21,12 +21,11 @@ alerts once the session a plan was meant for has opened.
 
 ## Phone alerts
 
-Two channels, both set up:
-- **Chrome notifications (Firebase):** in the app, Settings -> "Turn on alerts on
-  this device", then save the code it shows as the GitHub secret `FCM_TOKENS`.
-  If the app shows a red banner saying the code changed, repeat this.
-- **ntfy app:** subscribe to the topic name in `ntfy_topic.txt` (kept on this
-  computer only; anyone who knows it can read the alerts).
+Anyone using the app taps **Turn on alerts** (in the tutorial or in Settings)
+and chooses Allow. The phone saves its own alert code in the Firebase project's
+Firestore `devices` list; the daily run sends to every phone on it and removes
+codes that stop working. On iPhone, add the app to the Home Screen first and
+open it from there (iOS 16.4 or newer).
 
 ## Files
 

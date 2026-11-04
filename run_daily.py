@@ -19,7 +19,7 @@ Each run:
  1. updates daily prices for KMI stocks (and the KSE-100) from psxdata
  2. runs the engine on every KMI stock -> app/data/signals.json
  3. locks new Buy plans in the ledger and grades all open alerts
- 4. pushes new alerts to your phone (if config.json has an ntfy topic)
+ 4. pushes new alerts to every phone that turned on alerts in the app
  5. writes what it saw and why things were skipped -> app/data/status.json
 """
 import datetime as dt
@@ -50,8 +50,7 @@ PKT = dt.timezone(dt.timedelta(hours=5))
 # a candle counts as final only after this time (close + time for PSX to publish)
 FINAL_AFTER = {0: dt.time(16, 15), 1: dt.time(16, 15), 2: dt.time(16, 15),
                3: dt.time(16, 15), 4: dt.time(17, 0)}
-DEFAULT_CONFIG = {"risk_pkr": 2000, "ntfy_server": "https://ntfy.sh", "ntfy_topic": None,
-                  "app_url": None}
+DEFAULT_CONFIG = {"risk_pkr": 2000, "app_url": None}
 
 
 class RunLog:
@@ -65,14 +64,13 @@ class RunLog:
 
 
 def load_config():
-    """config.json, with NTFY_TOPIC / APP_URL environment variables taking
-    priority (online, the topic is a GitHub secret, never in the repository)."""
+    """config.json, with the APP_URL environment variable (a GitHub variable
+    online) taking priority."""
     if not CONFIG_FILE.exists():
         CONFIG_FILE.write_text(json.dumps(DEFAULT_CONFIG, indent=2))
     config = {**DEFAULT_CONFIG, **json.loads(CONFIG_FILE.read_text())}
-    for key, env in (("ntfy_topic", "NTFY_TOPIC"), ("app_url", "APP_URL")):
-        if clean_env(env):
-            config[key] = clean_env(env)
+    if clean_env("APP_URL"):
+        config["app_url"] = clean_env("APP_URL")
     return config
 
 
@@ -159,80 +157,124 @@ def update_prices(symbols, keep_today, log):
     return ok, len(failed)
 
 
-def push(config, title, message, log, click=None):
-    """Send one alert through every channel that is set up. True if any worked."""
-    sent_ntfy = push_ntfy(config, title, message, log, click)
-    sent_fcm = push_fcm(title, message, log, click)
-    return sent_ntfy or sent_fcm
+class Firebase:
+    """Push alerts with Firebase Cloud Messaging (HTTP v1).
 
+    Phones register themselves: tapping "Turn on alerts" in the app saves the
+    phone's code in the Firestore collection `devices`. This reads that list
+    (plus any codes left in the older FCM_TOKENS secret), and deletes a phone
+    from Firestore once Firebase reports its code as dead.
+    Needs the FCM_SERVICE_ACCOUNT GitHub secret (the service-account JSON key)."""
 
-def push_fcm(title, message, log, click=None):
-    """Firebase Cloud Messaging (HTTP v1). Needs two GitHub secrets:
-    FCM_SERVICE_ACCOUNT (the service-account JSON key) and FCM_TOKENS (one
-    device code per line, from the app's Settings page)."""
-    key, tokens = clean_env("FCM_SERVICE_ACCOUNT"), clean_env("FCM_TOKENS")
-    tokens = [t.strip() for t in tokens.split() if t.strip()]
-    if not key or not tokens:
-        log("Firebase push skipped: FCM_SERVICE_ACCOUNT or FCM_TOKENS not set")
-        return False
-    try:
-        from google.oauth2 import service_account
-        from google.auth.transport.requests import Request
-        info = json.loads(key)
-        creds = service_account.Credentials.from_service_account_info(
-            info, scopes=["https://www.googleapis.com/auth/firebase.messaging"])
-        creds.refresh(Request())
-    except Exception as e:
-        log(f"Firebase push FAILED: could not sign in with the service account ({type(e).__name__})")
-        return False
-    url = f"https://fcm.googleapis.com/v1/projects/{info['project_id']}/messages:send"
-    sent = 0
-    for i, token in enumerate(tokens, 1):
-        msg = {"message": {"token": token,
-                           "notification": {"title": title, "body": message},
-                           "webpush": {"notification": {"icon": "icon.svg"},
-                                       **({"fcm_options": {"link": click}} if click else {})}}}
-        req = urllib.request.Request(url, data=json.dumps(msg).encode("utf-8"), method="POST",
-                                     headers={"Authorization": f"Bearer {creds.token}",
-                                              "Content-Type": "application/json"})
+    SCOPES = ["https://www.googleapis.com/auth/firebase.messaging",
+              "https://www.googleapis.com/auth/datastore"]
+
+    def __init__(self, log):
+        self.log, self.creds, self.project, self.devices = log, None, None, None
+
+    def _ready(self):
+        if self.creds is not None:
+            return True
+        key = clean_env("FCM_SERVICE_ACCOUNT")
+        if not key:
+            self.log("Firebase push skipped: FCM_SERVICE_ACCOUNT not set")
+            return False
         try:
-            urllib.request.urlopen(req, timeout=20).read()
-            sent += 1
-        except urllib.error.HTTPError as e:
-            try:
-                err = json.loads(e.read().decode("utf-8"))["error"]
-                detail = err.get("status", "") + ": " + err.get("message", "")
-                codes = [d.get("errorCode") for d in err.get("details", []) if d.get("errorCode")]
-                detail += f" [{', '.join(codes)}]" if codes else ""
-            except Exception:
-                detail = ""
-            hint = (" (this phone's code is no longer valid: turn alerts on again in the app "
-                    "and update FCM_TOKENS)" if e.code == 404 else "")
-            log(f"Firebase push FAILED for device {i}: HTTP {e.code} {detail}{hint}")
+            from google.oauth2 import service_account
+            from google.auth.transport.requests import Request
+            info = json.loads(key)
+            self.creds = service_account.Credentials.from_service_account_info(info, scopes=self.SCOPES)
+            self.creds.refresh(Request())
+            self.project = info["project_id"]
+            return True
         except Exception as e:
-            log(f"Firebase push FAILED for device {i}: {type(e).__name__}")
-    if sent:
-        log(f"Firebase push sent to {sent} of {len(tokens)} devices: {title}")
-    return sent > 0
+            self.log(f"Firebase push FAILED: could not sign in with the service account ({type(e).__name__})")
+            self.creds = None
+            return False
+
+    def _call(self, method, url, body=None):
+        req = urllib.request.Request(url, method=method,
+                                     data=json.dumps(body).encode("utf-8") if body is not None else None,
+                                     headers={"Authorization": f"Bearer {self.creds.token}",
+                                              "Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=20) as r:
+            raw = r.read()
+        return json.loads(raw) if raw else {}
+
+    def _load_devices(self):
+        """{token: firestore document name or None} for every registered phone."""
+        devices = {t: None for t in clean_env("FCM_TOKENS").split() if t}
+        base = f"https://firestore.googleapis.com/v1/projects/{self.project}/databases/(default)/documents/devices"
+        page = ""
+        try:
+            while True:
+                j = self._call("GET", f"{base}?pageSize=300" + (f"&pageToken={page}" if page else ""))
+                for doc in j.get("documents", []):
+                    t = doc.get("fields", {}).get("token", {}).get("stringValue")
+                    if t:
+                        devices[t] = doc["name"]
+                page = j.get("nextPageToken")
+                if not page:
+                    break
+        except urllib.error.HTTPError as e:
+            self.log(f"couldn't read registered phones from Firestore: HTTP {e.code}")
+        except Exception as e:
+            self.log(f"couldn't read registered phones from Firestore: {type(e).__name__}")
+        return devices
+
+    def send(self, title, message, click=None):
+        if not self._ready():
+            return False
+        if self.devices is None:
+            self.devices = self._load_devices()
+            self.log(f"Firebase: {len(self.devices)} phones registered for alerts")
+        if not self.devices:
+            self.log("Firebase push skipped: no phone has turned on alerts yet")
+            return False
+        url = f"https://fcm.googleapis.com/v1/projects/{self.project}/messages:send"
+        sent = dropped = 0
+        for token, doc in list(self.devices.items()):
+            msg = {"message": {"token": token,
+                               "notification": {"title": title, "body": message},
+                               "webpush": {"notification": {"icon": "icon.svg"},
+                                           **({"fcm_options": {"link": click}} if click else {})}}}
+            try:
+                self._call("POST", url, msg)
+                sent += 1
+            except urllib.error.HTTPError as e:
+                try:
+                    reason = e.read().decode("utf-8", "ignore")
+                except Exception:
+                    reason = ""
+                # 404 UNREGISTERED: the phone's code is dead. 400 about the token:
+                # the code was never valid (junk added to the public list).
+                dead = e.code == 404 or (e.code == 400 and "registration token" in reason.lower())
+                if dead:
+                    del self.devices[token]
+                    dropped += 1
+                    if doc:
+                        try:
+                            self._call("DELETE", f"https://firestore.googleapis.com/v1/{doc}")
+                        except Exception:
+                            pass
+                else:
+                    self.log(f"Firebase push FAILED for one phone: HTTP {e.code}")
+            except Exception as e:
+                self.log(f"Firebase push FAILED for one phone: {type(e).__name__}")
+        self.log(f"Firebase push sent to {sent} phones: {title}"
+                 + (f" ({dropped} dead phone codes removed)" if dropped else ""))
+        return sent > 0
 
 
-def push_ntfy(config, title, message, log, click=None):
-    topic = config.get("ntfy_topic")
-    if not topic:
-        log("ntfy push skipped: no ntfy topic set")
-        return False
-    req = urllib.request.Request(f"{config['ntfy_server'].rstrip('/')}/{topic}",
-                                 data=message.encode("utf-8"), method="POST")
-    req.add_header("Title", title.encode("utf-8").decode("latin-1", "ignore"))
-    if click:
-        req.add_header("Click", click)
-    try:
-        urllib.request.urlopen(req, timeout=20).read()
-        log(f"ntfy push sent: {title}")
-        return True
-    except Exception as e:
-        log(f"ntfy push FAILED: {type(e).__name__}")
-        return False
+_firebase = None
+
+
+def push(config, title, message, log, click=None):
+    """Send one alert to every phone that turned on alerts. True if any got it."""
+    global _firebase
+    if _firebase is None:
+        _firebase = Firebase(log)
+    return _firebase.send(title, message, click)
 
 
 def alert_text(entry, plan, kmi_date, session):
