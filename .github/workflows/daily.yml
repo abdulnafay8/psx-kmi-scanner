@@ -36,7 +36,6 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     env:
       FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
-      FCM_TOKENS: ${{ secrets.FCM_TOKENS }}
       APP_URL: ${{ vars.APP_URL }}
       PYTHONIOENCODING: utf-8
     steps:

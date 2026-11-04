@@ -162,8 +162,7 @@ class Firebase:
 
     Phones register themselves: tapping "Turn on alerts" in the app saves the
     phone's code in the Firestore collection `devices`. This reads that list
-    (plus any codes left in the older FCM_TOKENS secret), and deletes a phone
-    from Firestore once Firebase reports its code as dead.
+    and deletes a phone from it once Firebase reports its code as dead.
     Needs the FCM_SERVICE_ACCOUNT GitHub secret (the service-account JSON key)."""
 
     SCOPES = ["https://www.googleapis.com/auth/firebase.messaging",
@@ -203,7 +202,7 @@ class Firebase:
 
     def _load_devices(self):
         """{token: firestore document name or None} for every registered phone."""
-        devices = {t: None for t in clean_env("FCM_TOKENS").split() if t}
+        devices = {}
         base = f"https://firestore.googleapis.com/v1/projects/{self.project}/databases/(default)/documents/devices"
         page = ""
         try:
