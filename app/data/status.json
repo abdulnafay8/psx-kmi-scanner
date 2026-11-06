@@ -1,6 +1,26 @@
 {
  "runs": [
   {
+   "at": "2026-11-06T17:57:38+05:00",
+   "state": "after_close",
+   "as_of": "2026-11-06",
+   "new_alerts": 1,
+   "fetch_failed": 0,
+   "log": [
+    "17:57:38  run started Friday 2026-11-06 17:57 PKT; market state: after_close",
+    "18:09:40  4 fetches failed; retrying them in 2 minutes",
+    "18:11:55  prices updated for 313 stocks, 0 failed",
+    "18:11:58  plans from the 2026-11-06 close are for the session opening Mon 09 Nov 09:15",
+    "18:11:58  NEW ALERT DAAG trend_hold: Buy at the opening price",
+    "18:11:58  checked 307 KMI stocks as of 2026-11-06: {'no_setup': 175, 'fading': 101, 'running': 23, 'in_plan': 7, 'buy_plan': 1}",
+    "18:11:58  washout: 6 stocks miss exactly one check: ATRL, FIL, NRL, SELECT, SINDM, SYM",
+    "18:11:58  trend_hold: 46 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BPL, BUXL, CNERGY, DADX, DCR, DFSM, DNCC",
+    "18:12:00  Firebase: 2 phones registered for alerts",
+    "18:12:00  Firebase push sent to 2 phones: DAAG: Trend hold (weeks)",
+    "18:12:13  dividend calendar: 14 meetings, 7 book closures ahead, 90 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-06T08:16:30+05:00",
    "state": "before_final",
    "as_of": "2026-11-05",
@@ -524,23 +544,6 @@
     "08:30:16  checked 307 KMI stocks as of 2026-10-20: {'fading': 183, 'no_setup': 110, 'buy_plan': 7, 'running': 7}",
     "08:30:16  washout: 7 stocks miss exactly one check: BUXL, CLOV, FIMM, JDMT, MACFL, SHCM, SSOM",
     "08:30:16  trend_hold: 48 stocks miss exactly one check: ASL, ASTM, ATRL, BERG, BUXL, CFL, CNERGY, DADX, DCR, DFSM, DWSM, FABL"
-   ]
-  },
-  {
-   "at": "2026-10-21T07:59:18+05:00",
-   "state": "before_final",
-   "as_of": "2026-10-20",
-   "new_alerts": 0,
-   "fetch_failed": 0,
-   "log": [
-    "07:59:18  run started Wednesday 2026-10-21 07:59 PKT; market state: before_final",
-    "07:59:18  before 16:15: today's candle isn't final yet, so it is not saved and no alerts are made",
-    "08:10:16  1 fetches failed; retrying them in 2 minutes",
-    "08:12:23  prices updated for 313 stocks, 0 failed",
-    "08:12:24  plans from the 2026-10-20 close are for the session opening Wed 21 Oct 09:15",
-    "08:12:24  checked 307 KMI stocks as of 2026-10-20: {'fading': 185, 'no_setup': 108, 'buy_plan': 7, 'running': 7}",
-    "08:12:24  washout: 7 stocks miss exactly one check: BUXL, CLOV, FIMM, JDMT, MACFL, SHCM, SSOM",
-    "08:12:24  trend_hold: 48 stocks miss exactly one check: ASL, ASTM, ATRL, BERG, BUXL, CFL, CNERGY, DADX, DCR, DFSM, DWSM, FABL"
    ]
   }
  ]
