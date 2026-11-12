@@ -1,6 +1,23 @@
 {
  "runs": [
   {
+   "at": "2026-11-12T18:02:45+05:00",
+   "state": "after_close",
+   "as_of": "2026-11-12",
+   "new_alerts": 0,
+   "fetch_failed": 0,
+   "log": [
+    "18:02:45  run started Thursday 2026-11-12 18:02 PKT; market state: after_close",
+    "18:14:33  1 fetches failed; retrying them in 2 minutes",
+    "18:16:42  prices updated for 313 stocks, 0 failed",
+    "18:16:43  plans from the 2026-11-12 close are for the session opening Fri 13 Nov 09:15",
+    "18:16:43  checked 307 KMI stocks as of 2026-11-12: {'no_setup': 199, 'fading': 72, 'running': 32, 'in_plan': 4}",
+    "18:16:43  washout: 2 stocks miss exactly one check: DYNO, FIL",
+    "18:16:43  trend_hold: 55 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BAFS, BERG, BPL, BUXL, CNERGY, DAAG, DADX",
+    "18:16:56  dividend calendar: 16 meetings, 2 book closures ahead, 90 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-12T08:16:51+05:00",
    "state": "before_final",
    "as_of": "2026-11-11",
@@ -538,22 +555,6 @@
     "17:48:41  Firebase push sent to 1 of 1 devices: ASTM: Washout dip in a hot stock",
     "17:48:41  ntfy push sent: SINDM: Trend hold (weeks)",
     "17:48:41  Firebase push sent to 1 of 1 devices: SINDM: Trend hold (weeks)"
-   ]
-  },
-  {
-   "at": "2026-10-23T08:01:26+05:00",
-   "state": "before_final",
-   "as_of": "2026-10-22",
-   "new_alerts": 0,
-   "fetch_failed": 0,
-   "log": [
-    "08:01:26  run started Friday 2026-10-23 08:01 PKT; market state: before_final",
-    "08:01:26  before 17:00: today's candle isn't final yet, so it is not saved and no alerts are made",
-    "08:13:47  prices updated for 313 stocks, 0 failed",
-    "08:13:50  plans from the 2026-10-22 close are for the session opening Fri 23 Oct 09:15",
-    "08:13:51  checked 307 KMI stocks as of 2026-10-22: {'fading': 205, 'no_setup': 89, 'running': 7, 'in_plan': 5, 'buy_plan': 1}",
-    "08:13:51  washout: 5 stocks miss exactly one check: BUXL, FIMM, FPJM, JDMT, SSOM",
-    "08:13:51  trend_hold: 50 stocks miss exactly one check: ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DADX, DCR, DFSM, DNCC, DWSM"
    ]
   }
  ]
