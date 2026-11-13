@@ -19,10 +19,10 @@
    "fill_price": 74.0,
    "stop_price": 62.9,
    "target_price": null,
-   "days_held": 15,
+   "days_held": 16,
    "state": "open",
-   "last_price": 68.57,
-   "pkr_if_sold_now": -7688
+   "last_price": 66.82,
+   "pkr_if_sold_now": -10048
   }
  },
  {
@@ -157,10 +157,10 @@
    "fill_price": 106.32,
    "stop_price": 90.37,
    "target_price": null,
-   "days_held": 15,
+   "days_held": 16,
    "state": "open",
-   "last_price": 152.93,
-   "pkr_if_sold_now": 43397
+   "last_price": 164.25,
+   "pkr_if_sold_now": 54025
   }
  },
  {
@@ -267,10 +267,10 @@
    "fill_price": 62.99,
    "stop_price": 53.54,
    "target_price": null,
-   "days_held": 12,
+   "days_held": 13,
    "state": "open",
-   "last_price": 70.28,
-   "pkr_if_sold_now": 11189
+   "last_price": 72.87,
+   "pkr_if_sold_now": 15294
   }
  },
  {
@@ -377,10 +377,10 @@
    "fill_price": 125.99,
    "stop_price": 107.09,
    "target_price": null,
-   "days_held": 7,
+   "days_held": 8,
    "state": "open",
-   "last_price": 205.13,
-   "pkr_if_sold_now": 62338
+   "last_price": 220.2,
+   "pkr_if_sold_now": 74277
   }
  },
  {
@@ -403,10 +403,10 @@
    "fill_price": 73.5,
    "stop_price": 62.48,
    "target_price": null,
-   "days_held": 6,
+   "days_held": 7,
    "state": "open",
-   "last_price": 77.98,
-   "pkr_if_sold_now": 5721
+   "last_price": 73.72,
+   "pkr_if_sold_now": -64
   }
  },
  {
@@ -449,10 +449,10 @@
    "fill_price": 119.0,
    "stop_price": 101.15,
    "target_price": null,
-   "days_held": 6,
+   "days_held": 7,
    "state": "open",
-   "last_price": 224.32,
-   "pkr_if_sold_now": 87981
+   "last_price": 246.75,
+   "pkr_if_sold_now": 106795
   }
  },
  {
@@ -555,10 +555,10 @@
    "fill_price": 57.99,
    "stop_price": 49.29,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 61.54,
-   "pkr_if_sold_now": 5748
+   "last_price": 61.71,
+   "pkr_if_sold_now": 6040
   }
  },
  {
@@ -581,10 +581,10 @@
    "fill_price": 1054.11,
    "stop_price": 927.62,
    "target_price": 1159.52,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 1024.48,
-   "pkr_if_sold_now": -3169
+   "last_price": 1016.24,
+   "pkr_if_sold_now": -3949
   }
  },
  {
@@ -607,10 +607,10 @@
    "fill_price": 7.13,
    "stop_price": 6.06,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 7.16,
-   "pkr_if_sold_now": -1210
+   "last_price": 7.36,
+   "pkr_if_sold_now": 1595
   }
  },
  {
@@ -661,10 +661,70 @@
    "fill_price": 298.99,
    "stop_price": 254.14,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 332.79,
-   "pkr_if_sold_now": 10921
+   "last_price": 366.07,
+   "pkr_if_sold_now": 22032
+  }
+ },
+ {
+  "id": "2026-11-13-BPL-trend_hold",
+  "created_at": "2026-11-13T18:00:22+05:00",
+  "signal_date": "2026-11-13",
+  "symbol": "BPL",
+  "setup": "trend_hold",
+  "setup_label": "Trend hold (weeks)",
+  "close_at_signal": 99.84,
+  "order": "Buy at the opening price",
+  "order_type": "open",
+  "order_price": null,
+  "stop_pct": 0.15,
+  "target_pct": null,
+  "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-13-DWSM-trend_hold",
+  "created_at": "2026-11-13T18:00:22+05:00",
+  "signal_date": "2026-11-13",
+  "symbol": "DWSM",
+  "setup": "trend_hold",
+  "setup_label": "Trend hold (weeks)",
+  "close_at_signal": 8.77,
+  "order": "Buy at the opening price",
+  "order_type": "open",
+  "order_price": null,
+  "stop_pct": 0.15,
+  "target_pct": null,
+  "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-13-PSEL-trend_hold",
+  "created_at": "2026-11-13T18:00:22+05:00",
+  "signal_date": "2026-11-13",
+  "symbol": "PSEL",
+  "setup": "trend_hold",
+  "setup_label": "Trend hold (weeks)",
+  "close_at_signal": 1370.42,
+  "order": "Buy at the opening price",
+  "order_type": "open",
+  "order_price": null,
+  "stop_pct": 0.15,
+  "target_pct": null,
+  "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
   }
  }
 ]
