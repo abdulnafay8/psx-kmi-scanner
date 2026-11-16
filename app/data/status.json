@@ -1,6 +1,24 @@
 {
  "runs": [
   {
+   "at": "2026-11-16T08:33:29+05:00",
+   "state": "before_final",
+   "as_of": "2026-11-13",
+   "new_alerts": 0,
+   "fetch_failed": 0,
+   "log": [
+    "08:33:29  run started Monday 2026-11-16 08:33 PKT; market state: before_final",
+    "08:33:29  before 16:15: today's candle isn't final yet, so it is not saved and no alerts are made",
+    "08:44:50  1 fetches failed; retrying them in 2 minutes",
+    "08:46:58  prices updated for 313 stocks, 0 failed",
+    "08:47:00  plans from the 2026-11-13 close are for the session opening Mon 16 Nov 09:15",
+    "08:47:00  checked 307 KMI stocks as of 2026-11-13: {'no_setup': 219, 'fading': 55, 'running': 25, 'in_plan': 5, 'buy_plan': 3}",
+    "08:47:00  washout: 0 stocks miss exactly one check: ",
+    "08:47:00  trend_hold: 51 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BAFS, BERG, BUXL, CFL, CNERGY, DAAG, DADX",
+    "08:47:12  dividend calendar: 17 meetings, 2 book closures ahead, 89 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-13T18:00:22+05:00",
    "state": "after_close",
    "as_of": "2026-11-13",
@@ -540,24 +558,6 @@
     "08:15:02  checked 307 KMI stocks as of 2026-10-26: {'fading': 215, 'no_setup': 79, 'running': 8, 'in_plan': 4, 'buy_plan': 1}",
     "08:15:02  washout: 3 stocks miss exactly one check: CFL, ECOP, JDMT",
     "08:15:02  trend_hold: 46 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DWSM, FABL"
-   ]
-  },
-  {
-   "at": "2026-10-26T19:43:39+05:00",
-   "state": "after_close",
-   "as_of": "2026-10-26",
-   "new_alerts": 1,
-   "fetch_failed": 0,
-   "log": [
-    "19:43:39  run started Monday 2026-10-26 19:43 PKT; market state: after_close",
-    "19:58:06  prices updated for 313 stocks, 0 failed",
-    "19:58:10  plans from the 2026-10-26 close are for the session opening Tue 27 Oct 09:15",
-    "19:58:10  NEW ALERT MACFL washout: Limit buy at Rs 52.80",
-    "19:58:10  checked 307 KMI stocks as of 2026-10-26: {'fading': 215, 'no_setup': 79, 'running': 8, 'in_plan': 4, 'buy_plan': 1}",
-    "19:58:10  washout: 3 stocks miss exactly one check: CFL, ECOP, JDMT",
-    "19:58:10  trend_hold: 46 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DWSM, FABL",
-    "19:58:11  ntfy push sent: MACFL: Washout dip in a hot stock",
-    "19:58:12  Firebase push sent to 1 of 1 devices: MACFL: Washout dip in a hot stock"
    ]
   }
  ]
