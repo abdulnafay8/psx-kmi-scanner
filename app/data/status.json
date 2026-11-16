@@ -1,6 +1,30 @@
 {
  "runs": [
   {
+   "at": "2026-11-16T19:59:59+05:00",
+   "state": "after_close",
+   "as_of": "2026-11-16",
+   "new_alerts": 3,
+   "fetch_failed": 0,
+   "log": [
+    "19:59:59  run started Monday 2026-11-16 19:59 PKT; market state: after_close",
+    "20:14:16  1 fetches failed; retrying them in 2 minutes",
+    "20:16:23  prices updated for 313 stocks, 0 failed",
+    "20:16:27  plans from the 2026-11-16 close are for the session opening Tue 17 Nov 09:15",
+    "20:16:27  NEW ALERT DNCC trend_hold: Buy at the opening price",
+    "20:16:27  NEW ALERT LEUL trend_hold: Buy at the opening price",
+    "20:16:27  NEW ALERT OTSU trend_hold: Buy at the opening price",
+    "20:16:27  checked 307 KMI stocks as of 2026-11-16: {'no_setup': 213, 'fading': 48, 'running': 40, 'in_plan': 3, 'buy_plan': 3}",
+    "20:16:27  washout: 2 stocks miss exactly one check: FANM, KPUS",
+    "20:16:27  trend_hold: 57 stocks miss exactly one check: ACPL, AGTL, ARCTM, ASL, ASTM, ATRL, BAFS, BERG, BUXL, CHAS, CNERGY, DAAG",
+    "20:16:30  Firebase: 6 phones registered for alerts",
+    "20:16:33  Firebase push sent to 4 phones: DNCC: Trend hold (weeks) (2 dead phone codes removed)",
+    "20:16:34  Firebase push sent to 4 phones: LEUL: Trend hold (weeks)",
+    "20:16:35  Firebase push sent to 4 phones: OTSU: Trend hold (weeks)",
+    "20:16:47  dividend calendar: 17 meetings, 2 book closures ahead, 89 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-16T08:33:29+05:00",
    "state": "before_final",
    "as_of": "2026-11-13",
@@ -542,22 +566,6 @@
     "17:56:24  checked 307 KMI stocks as of 2026-10-27: {'fading': 208, 'no_setup': 87, 'running': 9, 'in_plan': 2, 'buy_plan': 1}",
     "17:56:24  washout: 6 stocks miss exactly one check: ASTM, CFL, ECOP, FIL, JDMT, KPUS",
     "17:56:24  trend_hold: 48 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DNCC, DWSM"
-   ]
-  },
-  {
-   "at": "2026-10-27T08:02:38+05:00",
-   "state": "before_final",
-   "as_of": "2026-10-26",
-   "new_alerts": 0,
-   "fetch_failed": 0,
-   "log": [
-    "08:02:38  run started Tuesday 2026-10-27 08:02 PKT; market state: before_final",
-    "08:02:38  before 16:15: today's candle isn't final yet, so it is not saved and no alerts are made",
-    "08:14:58  prices updated for 313 stocks, 0 failed",
-    "08:15:02  plans from the 2026-10-26 close are for the session opening Tue 27 Oct 09:15",
-    "08:15:02  checked 307 KMI stocks as of 2026-10-26: {'fading': 215, 'no_setup': 79, 'running': 8, 'in_plan': 4, 'buy_plan': 1}",
-    "08:15:02  washout: 3 stocks miss exactly one check: CFL, ECOP, JDMT",
-    "08:15:02  trend_hold: 46 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DWSM, FABL"
    ]
   }
  ]

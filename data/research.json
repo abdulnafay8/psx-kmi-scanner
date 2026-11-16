@@ -17499,10 +17499,12 @@
    "fill_price": 297.39,
    "stop_price": 2.97,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 302.06,
-   "pkr_if_sold_now": 1204
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 300.95,
+   "exit_reason": "time",
+   "pkr": 832
   }
  },
  {
@@ -17521,10 +17523,12 @@
    "fill_price": 11.98,
    "stop_price": 0.12,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 11.73,
-   "pkr_if_sold_now": -3065
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 11.71,
+   "exit_reason": "time",
+   "pkr": -3231
   }
  },
  {
@@ -17543,10 +17547,12 @@
    "fill_price": 199.97,
    "stop_price": 2.0,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 204.07,
-   "pkr_if_sold_now": 1684
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 202.01,
+   "exit_reason": "time",
+   "pkr": 655
   }
  },
  {
@@ -17565,10 +17571,12 @@
    "fill_price": 27.25,
    "stop_price": 0.27,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 29.49,
-   "pkr_if_sold_now": 7779
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 29.41,
+   "exit_reason": "time",
+   "pkr": 7486
   }
  },
  {
@@ -17587,10 +17595,12 @@
    "fill_price": 545.0,
    "stop_price": 5.45,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 563.09,
-   "pkr_if_sold_now": 2950
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 553.51,
+   "exit_reason": "time",
+   "pkr": 1196
   }
  },
  {
@@ -17609,10 +17619,12 @@
    "fill_price": 159.99,
    "stop_price": 1.6,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 220.2,
-   "pkr_if_sold_now": 37202
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 228.08,
+   "exit_reason": "time",
+   "pkr": 42119
   }
  },
  {
@@ -17631,10 +17643,12 @@
    "fill_price": 93.8,
    "stop_price": 0.94,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 95.94,
-   "pkr_if_sold_now": 1914
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 96.03,
+   "exit_reason": "time",
+   "pkr": 2010
   }
  },
  {
@@ -17653,10 +17667,12 @@
    "fill_price": 41.85,
    "stop_price": 0.42,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 40.79,
-   "pkr_if_sold_now": -2891
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 42.37,
+   "exit_reason": "time",
+   "pkr": 877
   }
  },
  {
@@ -17675,10 +17691,12 @@
    "fill_price": 100.01,
    "stop_price": 1.0,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 103.93,
-   "pkr_if_sold_now": 3549
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 104.9,
+   "exit_reason": "time",
+   "pkr": 4518
   }
  },
  {
@@ -17697,10 +17715,12 @@
    "fill_price": 264.99,
    "stop_price": 2.65,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 271.12,
-   "pkr_if_sold_now": 1946
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 273.53,
+   "exit_reason": "time",
+   "pkr": 2854
   }
  },
  {
@@ -17719,10 +17739,12 @@
    "fill_price": 54.58,
    "stop_price": 0.55,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 73.47,
-   "pkr_if_sold_now": 34184
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 66.12,
+   "exit_reason": "time",
+   "pkr": 20742
   }
  },
  {
@@ -17741,10 +17763,12 @@
    "fill_price": 899.98,
    "stop_price": 9.0,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 901.53,
-   "pkr_if_sold_now": -191
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 909.37,
+   "exit_reason": "time",
+   "pkr": 678
   }
  },
  {
@@ -17763,10 +17787,12 @@
    "fill_price": 17.89,
    "stop_price": 0.18,
    "target_price": null,
-   "days_held": 4,
-   "state": "open",
-   "last_price": 17.05,
-   "pkr_if_sold_now": -5356
+   "days_held": 5,
+   "state": "closed",
+   "exit_date": "2026-11-16",
+   "exit_price": 16.79,
+   "exit_reason": "time",
+   "pkr": -6809
   }
  },
  {
@@ -17785,10 +17811,10 @@
    "fill_price": 500.0,
    "stop_price": 5.0,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 637.53,
-   "pkr_if_sold_now": 27093
+   "last_price": 685.42,
+   "pkr_if_sold_now": 36654
   }
  },
  {
@@ -17807,10 +17833,10 @@
    "fill_price": 27.83,
    "stop_price": 0.28,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 25.28,
-   "pkr_if_sold_now": -9593
+   "last_price": 23.75,
+   "pkr_if_sold_now": -15090
   }
  },
  {
@@ -17829,10 +17855,10 @@
    "fill_price": 67.0,
    "stop_price": 0.67,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 84.52,
-   "pkr_if_sold_now": 25739
+   "last_price": 76.78,
+   "pkr_if_sold_now": 14208
   }
  },
  {
@@ -17851,10 +17877,10 @@
    "fill_price": 166.99,
    "stop_price": 1.67,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 164.62,
-   "pkr_if_sold_now": -1780
+   "last_price": 159.0,
+   "pkr_if_sold_now": -5139
   }
  },
  {
@@ -17873,7 +17899,7 @@
    "fill_price": 326.73,
    "stop_price": 3.27,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
    "last_price": 305.0,
    "pkr_if_sold_now": -7002
@@ -17895,10 +17921,10 @@
    "fill_price": 59.55,
    "stop_price": 0.6,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 61.71,
-   "pkr_if_sold_now": 3258
+   "last_price": 60.64,
+   "pkr_if_sold_now": 1464
   }
  },
  {
@@ -17917,10 +17943,10 @@
    "fill_price": 11.69,
    "stop_price": 0.12,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 11.41,
-   "pkr_if_sold_now": -3397
+   "last_price": 11.32,
+   "pkr_if_sold_now": -4167
   }
  },
  {
@@ -17961,10 +17987,10 @@
    "fill_price": 116.99,
    "stop_price": 1.17,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 123.01,
-   "pkr_if_sold_now": 4773
+   "last_price": 123.27,
+   "pkr_if_sold_now": 4995
   }
  },
  {
@@ -17983,10 +18009,10 @@
    "fill_price": 179.82,
    "stop_price": 1.8,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 167.59,
-   "pkr_if_sold_now": -7152
+   "last_price": 168.05,
+   "pkr_if_sold_now": -6897
   }
  },
  {
@@ -18005,10 +18031,10 @@
    "fill_price": 50.14,
    "stop_price": 0.5,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 49.29,
-   "pkr_if_sold_now": -2055
+   "last_price": 49.6,
+   "pkr_if_sold_now": -1438
   }
  },
  {
@@ -18027,10 +18053,10 @@
    "fill_price": 114.99,
    "stop_price": 1.15,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 113.56,
-   "pkr_if_sold_now": -1604
+   "last_price": 113.38,
+   "pkr_if_sold_now": -1761
   }
  },
  {
@@ -18049,10 +18075,10 @@
    "fill_price": 64.0,
    "stop_price": 0.64,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 58.55,
-   "pkr_if_sold_now": -8863
+   "last_price": 52.77,
+   "pkr_if_sold_now": -17878
   }
  },
  {
@@ -18071,10 +18097,10 @@
    "fill_price": 37.62,
    "stop_price": 0.38,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 37.5,
-   "pkr_if_sold_now": -681
+   "last_price": 37.03,
+   "pkr_if_sold_now": -1928
   }
  },
  {
@@ -18093,10 +18119,10 @@
    "fill_price": 15.1,
    "stop_price": 0.15,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 14.54,
-   "pkr_if_sold_now": -4488
+   "last_price": 14.58,
+   "pkr_if_sold_now": -4223
   }
  },
  {
@@ -18115,10 +18141,10 @@
    "fill_price": 56.0,
    "stop_price": 0.56,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 62.73,
-   "pkr_if_sold_now": 11633
+   "last_price": 63.0,
+   "pkr_if_sold_now": 12114
   }
  },
  {
@@ -18137,10 +18163,10 @@
    "fill_price": 950.0,
    "stop_price": 9.5,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 963.89,
-   "pkr_if_sold_now": 1096
+   "last_price": 953.21,
+   "pkr_if_sold_now": -26
   }
  },
  {
@@ -18159,10 +18185,10 @@
    "fill_price": 24.9,
    "stop_price": 0.25,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 27.65,
-   "pkr_if_sold_now": 10563
+   "last_price": 26.61,
+   "pkr_if_sold_now": 6387
   }
  },
  {
@@ -18181,10 +18207,10 @@
    "fill_price": 797.89,
    "stop_price": 7.98,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 786.66,
-   "pkr_if_sold_now": -1768
+   "last_price": 784.18,
+   "pkr_if_sold_now": -2078
   }
  },
  {
@@ -18203,10 +18229,10 @@
    "fill_price": 4.26,
    "stop_price": 0.04,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 4.35,
-   "pkr_if_sold_now": 475
+   "last_price": 4.32,
+   "pkr_if_sold_now": -229
   }
  },
  {
@@ -18241,10 +18267,10 @@
    "fill_price": 6.29,
    "stop_price": 0.06,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 6.13,
-   "pkr_if_sold_now": -4390
+   "last_price": 6.15,
+   "pkr_if_sold_now": -4072
   }
  },
  {
@@ -18263,10 +18289,10 @@
    "fill_price": 82.49,
    "stop_price": 0.82,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 99.84,
-   "pkr_if_sold_now": 20632
+   "last_price": 109.82,
+   "pkr_if_sold_now": 32708
   }
  },
  {
@@ -18285,10 +18311,10 @@
    "fill_price": 38.1,
    "stop_price": 0.38,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 37.8,
-   "pkr_if_sold_now": -1149
+   "last_price": 37.82,
+   "pkr_if_sold_now": -1097
   }
  },
  {
@@ -18307,10 +18333,10 @@
    "fill_price": 303.0,
    "stop_price": 3.03,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 330.41,
-   "pkr_if_sold_now": 8667
+   "last_price": 320.29,
+   "pkr_if_sold_now": 5333
   }
  },
  {
@@ -18329,10 +18355,10 @@
    "fill_price": 40.88,
    "stop_price": 0.41,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 47.09,
-   "pkr_if_sold_now": 14800
+   "last_price": 51.8,
+   "pkr_if_sold_now": 26301
   }
  },
  {
@@ -18351,10 +18377,10 @@
    "fill_price": 23.63,
    "stop_price": 0.24,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 23.73,
-   "pkr_if_sold_now": -82
+   "last_price": 23.5,
+   "pkr_if_sold_now": -1055
   }
  },
  {
@@ -18373,10 +18399,10 @@
    "fill_price": 313.0,
    "stop_price": 3.13,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 302.06,
-   "pkr_if_sold_now": -3852
+   "last_price": 300.95,
+   "pkr_if_sold_now": -4206
   }
  },
  {
@@ -18395,10 +18421,10 @@
    "fill_price": 11.61,
    "stop_price": 0.12,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 11.73,
-   "pkr_if_sold_now": 25
+   "last_price": 11.71,
+   "pkr_if_sold_now": -147
   }
  },
  {
@@ -18417,10 +18443,10 @@
    "fill_price": 93.0,
    "stop_price": 0.93,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 89.52,
-   "pkr_if_sold_now": -4098
+   "last_price": 92.45,
+   "pkr_if_sold_now": -953
   }
  },
  {
@@ -18439,10 +18465,10 @@
    "fill_price": 89.0,
    "stop_price": 0.89,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 89.33,
-   "pkr_if_sold_now": 7
+   "last_price": 87.96,
+   "pkr_if_sold_now": -1529
   }
  },
  {
@@ -18461,10 +18487,10 @@
    "fill_price": 153.99,
    "stop_price": 1.54,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 158.65,
-   "pkr_if_sold_now": 2658
+   "last_price": 152.99,
+   "pkr_if_sold_now": -1011
   }
  },
  {
@@ -18483,10 +18509,10 @@
    "fill_price": 150.0,
    "stop_price": 1.5,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 164.62,
-   "pkr_if_sold_now": 9366
+   "last_price": 159.0,
+   "pkr_if_sold_now": 5626
   }
  },
  {
@@ -18505,10 +18531,10 @@
    "fill_price": 9.79,
    "stop_price": 0.1,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 9.61,
-   "pkr_if_sold_now": -3031
+   "last_price": 9.89,
+   "pkr_if_sold_now": -171
   }
  },
  {
@@ -18527,10 +18553,10 @@
    "fill_price": 12.92,
    "stop_price": 0.13,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 13.18,
-   "pkr_if_sold_now": 1104
+   "last_price": 13.69,
+   "pkr_if_sold_now": 5051
   }
  },
  {
@@ -18549,10 +18575,10 @@
    "fill_price": 212.0,
    "stop_price": 2.12,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 204.07,
-   "pkr_if_sold_now": -4097
+   "last_price": 202.01,
+   "pkr_if_sold_now": -5067
   }
  },
  {
@@ -18571,10 +18597,10 @@
    "fill_price": 55.55,
    "stop_price": 0.56,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 58.45,
-   "pkr_if_sold_now": 4848
+   "last_price": 61.96,
+   "pkr_if_sold_now": 11155
   }
  },
  {
@@ -18593,10 +18619,10 @@
    "fill_price": 248.1,
    "stop_price": 2.48,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 245.12,
-   "pkr_if_sold_now": -1562
+   "last_price": 253.24,
+   "pkr_if_sold_now": 1705
   }
  },
  {
@@ -18615,10 +18641,10 @@
    "fill_price": 41.68,
    "stop_price": 0.42,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 41.99,
-   "pkr_if_sold_now": 379
+   "last_price": 42.0,
+   "pkr_if_sold_now": 403
   }
  },
  {
@@ -18637,10 +18663,10 @@
    "fill_price": 235.38,
    "stop_price": 2.35,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 235.38,
-   "pkr_if_sold_now": -363
+   "last_price": 235.0,
+   "pkr_if_sold_now": -524
   }
  },
  {
@@ -18675,10 +18701,10 @@
    "fill_price": 151.97,
    "stop_price": 1.52,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 152.86,
-   "pkr_if_sold_now": 222
+   "last_price": 152.15,
+   "pkr_if_sold_now": -245
   }
  },
  {
@@ -18697,10 +18723,10 @@
    "fill_price": 23.51,
    "stop_price": 0.24,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 23.1,
-   "pkr_if_sold_now": -2251
+   "last_price": 23.54,
+   "pkr_if_sold_now": -380
   }
  },
  {
@@ -18719,7 +18745,7 @@
    "fill_price": 208.98,
    "stop_price": 2.09,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
    "last_price": 194.73,
    "pkr_if_sold_now": -7169
@@ -18741,10 +18767,10 @@
    "fill_price": 42.99,
    "stop_price": 0.43,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 43.0,
-   "pkr_if_sold_now": -340
+   "last_price": 45.05,
+   "pkr_if_sold_now": 4420
   }
  },
  {
@@ -18763,10 +18789,10 @@
    "fill_price": 41.0,
    "stop_price": 0.41,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 40.76,
-   "pkr_if_sold_now": -947
+   "last_price": 41.25,
+   "pkr_if_sold_now": 246
   }
  },
  {
@@ -18785,10 +18811,10 @@
    "fill_price": 19.13,
    "stop_price": 0.19,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 18.3,
-   "pkr_if_sold_now": -4957
+   "last_price": 18.14,
+   "pkr_if_sold_now": -5794
   }
  },
  {
@@ -18807,10 +18833,10 @@
    "fill_price": 12.63,
    "stop_price": 0.13,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 12.9,
-   "pkr_if_sold_now": 1209
+   "last_price": 12.33,
+   "pkr_if_sold_now": -3304
   }
  },
  {
@@ -18829,10 +18855,10 @@
    "fill_price": 93.0,
    "stop_price": 0.93,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 101.41,
-   "pkr_if_sold_now": 8664
+   "last_price": 97.0,
+   "pkr_if_sold_now": 3930
   }
  },
  {
@@ -18851,10 +18877,10 @@
    "fill_price": 31.89,
    "stop_price": 0.32,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 29.49,
-   "pkr_if_sold_now": -7904
+   "last_price": 29.41,
+   "pkr_if_sold_now": -8155
   }
  },
  {
@@ -18873,10 +18899,10 @@
    "fill_price": 571.55,
    "stop_price": 5.72,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 563.09,
-   "pkr_if_sold_now": -1840
+   "last_price": 553.51,
+   "pkr_if_sold_now": -3514
   }
  },
  {
@@ -18895,10 +18921,10 @@
    "fill_price": 85.5,
    "stop_price": 0.86,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 84.11,
-   "pkr_if_sold_now": -1986
+   "last_price": 83.37,
+   "pkr_if_sold_now": -2850
   }
  },
  {
@@ -18917,10 +18943,10 @@
    "fill_price": 11.36,
    "stop_price": 0.11,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 11.56,
-   "pkr_if_sold_now": 730
+   "last_price": 11.83,
+   "pkr_if_sold_now": 3107
   }
  },
  {
@@ -18939,10 +18965,10 @@
    "fill_price": 17.29,
    "stop_price": 0.17,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 18.18,
-   "pkr_if_sold_now": 4464
+   "last_price": 17.87,
+   "pkr_if_sold_now": 2671
   }
  },
  {
@@ -18961,7 +18987,7 @@
    "fill_price": 32.15,
    "stop_price": 0.32,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
    "last_price": 35.25,
    "pkr_if_sold_now": 9255
@@ -18983,10 +19009,10 @@
    "fill_price": 25.02,
    "stop_price": 0.25,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 25.8,
-   "pkr_if_sold_now": 2640
+   "last_price": 25.85,
+   "pkr_if_sold_now": 2839
   }
  },
  {
@@ -19005,10 +19031,10 @@
    "fill_price": 24.17,
    "stop_price": 0.24,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 24.1,
-   "pkr_if_sold_now": -783
+   "last_price": 24.23,
+   "pkr_if_sold_now": -246
   }
  },
  {
@@ -19027,10 +19053,10 @@
    "fill_price": 50.3,
    "stop_price": 0.5,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 49.47,
-   "pkr_if_sold_now": -2010
+   "last_price": 49.6,
+   "pkr_if_sold_now": -1752
   }
  },
  {
@@ -19049,10 +19075,10 @@
    "fill_price": 246.13,
    "stop_price": 2.46,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 252.72,
-   "pkr_if_sold_now": 2310
+   "last_price": 250.53,
+   "pkr_if_sold_now": 1421
   }
  },
  {
@@ -19071,10 +19097,10 @@
    "fill_price": 41.5,
    "stop_price": 0.42,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 40.83,
-   "pkr_if_sold_now": -1975
+   "last_price": 40.92,
+   "pkr_if_sold_now": -1758
   }
  },
  {
@@ -19093,10 +19119,10 @@
    "fill_price": 106.0,
    "stop_price": 1.06,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 101.63,
-   "pkr_if_sold_now": -4478
+   "last_price": 102.19,
+   "pkr_if_sold_now": -3951
   }
  },
  {
@@ -19115,10 +19141,10 @@
    "fill_price": 22.21,
    "stop_price": 0.22,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 21.69,
-   "pkr_if_sold_now": -2877
+   "last_price": 21.79,
+   "pkr_if_sold_now": -2427
   }
  },
  {
@@ -19137,10 +19163,10 @@
    "fill_price": 29.6,
    "stop_price": 0.3,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 30.5,
-   "pkr_if_sold_now": 2634
+   "last_price": 31.39,
+   "pkr_if_sold_now": 5640
   }
  },
  {
@@ -19159,10 +19185,10 @@
    "fill_price": 1799.0,
    "stop_price": 17.99,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 1788.5,
-   "pkr_if_sold_now": -946
+   "last_price": 1770.95,
+   "pkr_if_sold_now": -1919
   }
  },
  {
@@ -19181,10 +19207,10 @@
    "fill_price": 105.79,
    "stop_price": 1.06,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 109.48,
-   "pkr_if_sold_now": 3119
+   "last_price": 117.0,
+   "pkr_if_sold_now": 10214
   }
  },
  {
@@ -19203,10 +19229,10 @@
    "fill_price": 52.51,
    "stop_price": 0.53,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 59.86,
-   "pkr_if_sold_now": 13609
+   "last_price": 60.42,
+   "pkr_if_sold_now": 14673
   }
  },
  {
@@ -19225,10 +19251,10 @@
    "fill_price": 6.24,
    "stop_price": 0.06,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 6.32,
-   "pkr_if_sold_now": -579
+   "last_price": 6.34,
+   "pkr_if_sold_now": -259
   }
  },
  {
@@ -19247,10 +19273,10 @@
    "fill_price": 1598.69,
    "stop_price": 15.99,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 1707.97,
-   "pkr_if_sold_now": 6460
+   "last_price": 1793.64,
+   "pkr_if_sold_now": 11809
   }
  },
  {
@@ -19269,10 +19295,10 @@
    "fill_price": 101.0,
    "stop_price": 1.01,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 95.94,
-   "pkr_if_sold_now": -5364
+   "last_price": 96.03,
+   "pkr_if_sold_now": -5275
   }
  },
  {
@@ -19291,10 +19317,10 @@
    "fill_price": 43.2,
    "stop_price": 0.43,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 40.79,
-   "pkr_if_sold_now": -5932
+   "last_price": 42.37,
+   "pkr_if_sold_now": -2281
   }
  },
  {
@@ -19313,10 +19339,10 @@
    "fill_price": 38.08,
    "stop_price": 0.38,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 39.19,
-   "pkr_if_sold_now": 2547
+   "last_price": 43.11,
+   "pkr_if_sold_now": 12822
   }
  },
  {
@@ -19335,10 +19361,10 @@
    "fill_price": 449.99,
    "stop_price": 4.5,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 443.04,
-   "pkr_if_sold_now": -1905
+   "last_price": 444.52,
+   "pkr_if_sold_now": -1576
   }
  },
  {
@@ -19357,10 +19383,10 @@
    "fill_price": 149.0,
    "stop_price": 1.49,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 148.03,
-   "pkr_if_sold_now": -1013
+   "last_price": 147.05,
+   "pkr_if_sold_now": -1669
   }
  },
  {
@@ -19379,10 +19405,10 @@
    "fill_price": 41.39,
    "stop_price": 0.41,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 42.75,
-   "pkr_if_sold_now": 2917
+   "last_price": 42.25,
+   "pkr_if_sold_now": 1711
   }
  },
  {
@@ -19401,10 +19427,10 @@
    "fill_price": 30.02,
    "stop_price": 0.3,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 32.19,
-   "pkr_if_sold_now": 6827
+   "last_price": 31.96,
+   "pkr_if_sold_now": 6061
   }
  },
  {
@@ -19423,10 +19449,10 @@
    "fill_price": 106.99,
    "stop_price": 1.07,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 103.93,
-   "pkr_if_sold_now": -3218
+   "last_price": 104.9,
+   "pkr_if_sold_now": -2313
   }
  },
  {
@@ -19445,10 +19471,10 @@
    "fill_price": 23.95,
    "stop_price": 0.24,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 22.31,
-   "pkr_if_sold_now": -7345
+   "last_price": 22.56,
+   "pkr_if_sold_now": -6301
   }
  },
  {
@@ -19467,10 +19493,10 @@
    "fill_price": 63.9,
    "stop_price": 0.64,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 62.06,
-   "pkr_if_sold_now": -3237
+   "last_price": 62.0,
+   "pkr_if_sold_now": -3331
   }
  },
  {
@@ -19489,10 +19515,10 @@
    "fill_price": 66.65,
    "stop_price": 0.67,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 73.98,
-   "pkr_if_sold_now": 10615
+   "last_price": 72.17,
+   "pkr_if_sold_now": 7904
   }
  },
  {
@@ -19511,10 +19537,10 @@
    "fill_price": 14.0,
    "stop_price": 0.14,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 14.72,
-   "pkr_if_sold_now": 4303
+   "last_price": 15.0,
+   "pkr_if_sold_now": 6303
   }
  },
  {
@@ -19533,10 +19559,10 @@
    "fill_price": 6984.99,
    "stop_price": 69.85,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 7011.35,
-   "pkr_if_sold_now": 14
+   "last_price": 7008.19,
+   "pkr_if_sold_now": -31
   }
  },
  {
@@ -19555,10 +19581,10 @@
    "fill_price": 117.97,
    "stop_price": 1.18,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 117.4,
-   "pkr_if_sold_now": -845
+   "last_price": 116.72,
+   "pkr_if_sold_now": -1421
   }
  },
  {
@@ -19577,10 +19603,10 @@
    "fill_price": 136.98,
    "stop_price": 1.37,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 131.13,
-   "pkr_if_sold_now": -4626
+   "last_price": 131.88,
+   "pkr_if_sold_now": -4079
   }
  },
  {
@@ -19599,7 +19625,7 @@
    "fill_price": 21.0,
    "stop_price": 0.21,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
    "last_price": 20.89,
    "pkr_if_sold_now": -1089
@@ -19621,10 +19647,10 @@
    "fill_price": 446.0,
    "stop_price": 4.46,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 451.33,
-   "pkr_if_sold_now": 830
+   "last_price": 451.34,
+   "pkr_if_sold_now": 832
   }
  },
  {
@@ -19643,10 +19669,10 @@
    "fill_price": 25.98,
    "stop_price": 0.26,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 27.45,
-   "pkr_if_sold_now": 5197
+   "last_price": 26.72,
+   "pkr_if_sold_now": 2387
   }
  },
  {
@@ -19665,10 +19691,10 @@
    "fill_price": 10.96,
    "stop_price": 0.11,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 11.0,
-   "pkr_if_sold_now": -702
+   "last_price": 10.99,
+   "pkr_if_sold_now": -794
   }
  },
  {
@@ -19687,10 +19713,10 @@
    "fill_price": 198.99,
    "stop_price": 1.99,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 164.25,
-   "pkr_if_sold_now": -17789
+   "last_price": 157.7,
+   "pkr_if_sold_now": -21075
   }
  },
  {
@@ -19709,10 +19735,10 @@
    "fill_price": 279.0,
    "stop_price": 2.79,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 271.12,
-   "pkr_if_sold_now": -3182
+   "last_price": 273.53,
+   "pkr_if_sold_now": -2320
   }
  },
  {
@@ -19731,10 +19757,10 @@
    "fill_price": 624.22,
    "stop_price": 6.24,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 626.6,
-   "pkr_if_sold_now": 18
+   "last_price": 628.62,
+   "pkr_if_sold_now": 341
   }
  },
  {
@@ -19753,10 +19779,10 @@
    "fill_price": 409.93,
    "stop_price": 4.1,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 374.71,
-   "pkr_if_sold_now": -8939
+   "last_price": 406.64,
+   "pkr_if_sold_now": -1164
   }
  },
  {
@@ -19775,10 +19801,10 @@
    "fill_price": 122.0,
    "stop_price": 1.22,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 133.13,
-   "pkr_if_sold_now": 8743
+   "last_price": 129.11,
+   "pkr_if_sold_now": 5454
   }
  },
  {
@@ -19797,10 +19823,10 @@
    "fill_price": 31.01,
    "stop_price": 0.31,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 30.96,
-   "pkr_if_sold_now": -550
+   "last_price": 32.02,
+   "pkr_if_sold_now": 2868
   }
  },
  {
@@ -19819,10 +19845,10 @@
    "fill_price": 78.0,
    "stop_price": 0.78,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 80.28,
-   "pkr_if_sold_now": 2555
+   "last_price": 80.87,
+   "pkr_if_sold_now": 3310
   }
  },
  {
@@ -19841,10 +19867,10 @@
    "fill_price": 1239.75,
    "stop_price": 12.4,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 1370.42,
-   "pkr_if_sold_now": 10158
+   "last_price": 1423.36,
+   "pkr_if_sold_now": 14420
   }
  },
  {
@@ -19863,10 +19889,10 @@
    "fill_price": 296.09,
    "stop_price": 2.96,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 299.5,
-   "pkr_if_sold_now": 787
+   "last_price": 271.1,
+   "pkr_if_sold_now": -8788
   }
  },
  {
@@ -19885,10 +19911,10 @@
    "fill_price": 34.0,
    "stop_price": 0.34,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 34.03,
-   "pkr_if_sold_now": -275
+   "last_price": 34.12,
+   "pkr_if_sold_now": -11
   }
  },
  {
@@ -19907,10 +19933,10 @@
    "fill_price": 19.6,
    "stop_price": 0.2,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 19.32,
-   "pkr_if_sold_now": -2033
+   "last_price": 19.2,
+   "pkr_if_sold_now": -2645
   }
  },
  {
@@ -19929,10 +19955,10 @@
    "fill_price": 26.6,
    "stop_price": 0.27,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 25.89,
-   "pkr_if_sold_now": -3119
+   "last_price": 26.07,
+   "pkr_if_sold_now": -2443
   }
  },
  {
@@ -19951,10 +19977,10 @@
    "fill_price": 23.05,
    "stop_price": 0.23,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 23.5,
-   "pkr_if_sold_now": 1435
+   "last_price": 23.7,
+   "pkr_if_sold_now": 2303
   }
  },
  {
@@ -19973,10 +19999,10 @@
    "fill_price": 22.69,
    "stop_price": 0.23,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 22.8,
-   "pkr_if_sold_now": -40
+   "last_price": 21.97,
+   "pkr_if_sold_now": -3698
   }
  },
  {
@@ -19995,10 +20021,10 @@
    "fill_price": 35.37,
    "stop_price": 0.35,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 34.94,
-   "pkr_if_sold_now": -1577
+   "last_price": 35.15,
+   "pkr_if_sold_now": -984
   }
  },
  {
@@ -20017,10 +20043,10 @@
    "fill_price": 79.0,
    "stop_price": 0.79,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 69.87,
-   "pkr_if_sold_now": -11899
+   "last_price": 66.56,
+   "pkr_if_sold_now": -16081
   }
  },
  {
@@ -20039,10 +20065,10 @@
    "fill_price": 438.99,
    "stop_price": 4.39,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 446.16,
-   "pkr_if_sold_now": 1267
+   "last_price": 460.28,
+   "pkr_if_sold_now": 4478
   }
  },
  {
@@ -20061,10 +20087,10 @@
    "fill_price": 1542.01,
    "stop_price": 15.42,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 1553.45,
-   "pkr_if_sold_now": 378
+   "last_price": 1549.59,
+   "pkr_if_sold_now": 128
   }
  },
  {
@@ -20083,10 +20109,10 @@
    "fill_price": 620.98,
    "stop_price": 6.21,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 601.09,
-   "pkr_if_sold_now": -3560
+   "last_price": 601.55,
+   "pkr_if_sold_now": -3486
   }
  },
  {
@@ -20105,10 +20131,10 @@
    "fill_price": 22.61,
    "stop_price": 0.23,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 24.18,
-   "pkr_if_sold_now": 6417
+   "last_price": 23.77,
+   "pkr_if_sold_now": 4603
   }
  },
  {
@@ -20127,7 +20153,7 @@
    "fill_price": 88.0,
    "stop_price": 0.88,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
    "last_price": 83.19,
    "pkr_if_sold_now": -5819
@@ -20149,10 +20175,10 @@
    "fill_price": 27.5,
    "stop_price": 0.28,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 29.11,
-   "pkr_if_sold_now": 5418
+   "last_price": 27.74,
+   "pkr_if_sold_now": 436
   }
  },
  {
@@ -20171,10 +20197,10 @@
    "fill_price": 13.18,
    "stop_price": 0.13,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 13.39,
-   "pkr_if_sold_now": 703
+   "last_price": 13.32,
+   "pkr_if_sold_now": 172
   }
  },
  {
@@ -20193,10 +20219,10 @@
    "fill_price": 9.32,
    "stop_price": 0.09,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 10.1,
-   "pkr_if_sold_now": 7116
+   "last_price": 9.18,
+   "pkr_if_sold_now": -2754
   }
  },
  {
@@ -20215,10 +20241,10 @@
    "fill_price": 64.0,
    "stop_price": 0.64,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 73.47,
-   "pkr_if_sold_now": 14407
+   "last_price": 66.12,
+   "pkr_if_sold_now": 2943
   }
  },
  {
@@ -20237,10 +20263,10 @@
    "fill_price": 161.02,
    "stop_price": 1.61,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 167.95,
-   "pkr_if_sold_now": 3933
+   "last_price": 184.75,
+   "pkr_if_sold_now": 14348
   }
  },
  {
@@ -20259,10 +20285,10 @@
    "fill_price": 132.0,
    "stop_price": 1.32,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 131.18,
-   "pkr_if_sold_now": -983
+   "last_price": 131.75,
+   "pkr_if_sold_now": -552
   }
  },
  {
@@ -20281,10 +20307,10 @@
    "fill_price": 10.35,
    "stop_price": 0.1,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 10.46,
-   "pkr_if_sold_now": -66
+   "last_price": 10.41,
+   "pkr_if_sold_now": -549
   }
  },
  {
@@ -20303,10 +20329,10 @@
    "fill_price": 144.9,
    "stop_price": 1.45,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 141.48,
-   "pkr_if_sold_now": -2719
+   "last_price": 139.46,
+   "pkr_if_sold_now": -4110
   }
  },
  {
@@ -20325,10 +20351,10 @@
    "fill_price": 7.32,
    "stop_price": 0.07,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 7.55,
-   "pkr_if_sold_now": 1553
+   "last_price": 7.48,
+   "pkr_if_sold_now": 597
   }
  },
  {
@@ -20347,10 +20373,10 @@
    "fill_price": 910.21,
    "stop_price": 9.1,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 901.53,
-   "pkr_if_sold_now": -1315
+   "last_price": 909.37,
+   "pkr_if_sold_now": -455
   }
  },
  {
@@ -20369,10 +20395,10 @@
    "fill_price": 5.24,
    "stop_price": 0.05,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 5.98,
-   "pkr_if_sold_now": 11908
+   "last_price": 5.68,
+   "pkr_if_sold_now": 6184
   }
  },
  {
@@ -20391,10 +20417,10 @@
    "fill_price": 30.77,
    "stop_price": 0.31,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 29.37,
-   "pkr_if_sold_now": -4941
+   "last_price": 29.45,
+   "pkr_if_sold_now": -4681
   }
  },
  {
@@ -20413,10 +20439,10 @@
    "fill_price": 14.59,
    "stop_price": 0.15,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 14.1,
-   "pkr_if_sold_now": -4164
+   "last_price": 15.22,
+   "pkr_if_sold_now": 3511
   }
  },
  {
@@ -20435,10 +20461,10 @@
    "fill_price": 26.98,
    "stop_price": 0.27,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 26.62,
-   "pkr_if_sold_now": -1778
+   "last_price": 25.15,
+   "pkr_if_sold_now": -7226
   }
  },
  {
@@ -20457,10 +20483,10 @@
    "fill_price": 15.55,
    "stop_price": 0.16,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 16.68,
-   "pkr_if_sold_now": 6509
+   "last_price": 16.03,
+   "pkr_if_sold_now": 2329
   }
  },
  {
@@ -20479,7 +20505,7 @@
    "fill_price": 90.29,
    "stop_price": 0.9,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
    "last_price": 91.27,
    "pkr_if_sold_now": 720
@@ -20501,10 +20527,10 @@
    "fill_price": 8.65,
    "stop_price": 0.09,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 8.39,
-   "pkr_if_sold_now": -4353
+   "last_price": 9.33,
+   "pkr_if_sold_now": 6513
   }
  },
  {
@@ -20523,10 +20549,10 @@
    "fill_price": 15.19,
    "stop_price": 0.15,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 13.96,
-   "pkr_if_sold_now": -8872
+   "last_price": 14.05,
+   "pkr_if_sold_now": -8279
   }
  },
  {
@@ -20545,10 +20571,10 @@
    "fill_price": 9.27,
    "stop_price": 0.09,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 9.32,
-   "pkr_if_sold_now": -719
+   "last_price": 9.27,
+   "pkr_if_sold_now": -1259
   }
  },
  {
@@ -20567,10 +20593,10 @@
    "fill_price": 56.88,
    "stop_price": 0.57,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 58.93,
-   "pkr_if_sold_now": 3235
+   "last_price": 62.77,
+   "pkr_if_sold_now": 9973
   }
  },
  {
@@ -20589,10 +20615,10 @@
    "fill_price": 33.33,
    "stop_price": 0.33,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 33.06,
-   "pkr_if_sold_now": -1173
+   "last_price": 33.18,
+   "pkr_if_sold_now": -813
   }
  },
  {
@@ -20611,10 +20637,10 @@
    "fill_price": 293.01,
    "stop_price": 2.93,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 285.73,
-   "pkr_if_sold_now": -2843
+   "last_price": 287.33,
+   "pkr_if_sold_now": -2298
   }
  },
  {
@@ -20633,10 +20659,10 @@
    "fill_price": 17.01,
    "stop_price": 0.17,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 17.05,
-   "pkr_if_sold_now": -459
+   "last_price": 16.79,
+   "pkr_if_sold_now": -1987
   }
  },
  {
@@ -20655,10 +20681,10 @@
    "fill_price": 570.0,
    "stop_price": 5.7,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 637.53,
-   "pkr_if_sold_now": 11463
+   "last_price": 685.42,
+   "pkr_if_sold_now": 19849
   }
  },
  {
@@ -20677,10 +20703,10 @@
    "fill_price": 113.8,
    "stop_price": 1.14,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 109.78,
-   "pkr_if_sold_now": -3889
+   "last_price": 108.93,
+   "pkr_if_sold_now": -4635
   }
  },
  {
@@ -20699,10 +20725,10 @@
    "fill_price": 28.5,
    "stop_price": 0.29,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 25.28,
-   "pkr_if_sold_now": -11719
+   "last_price": 23.75,
+   "pkr_if_sold_now": -17087
   }
  },
  {
@@ -20721,10 +20747,10 @@
    "fill_price": 5.51,
    "stop_price": 0.06,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 5.56,
-   "pkr_if_sold_now": -1198
+   "last_price": 5.43,
+   "pkr_if_sold_now": -3557
   }
  },
  {
@@ -20743,10 +20769,10 @@
    "fill_price": 339.99,
    "stop_price": 3.4,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 330.41,
-   "pkr_if_sold_now": -3176
+   "last_price": 320.29,
+   "pkr_if_sold_now": -6147
   }
  },
  {
@@ -20765,10 +20791,10 @@
    "fill_price": 70.66,
    "stop_price": 0.71,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 84.52,
-   "pkr_if_sold_now": 19216
+   "last_price": 76.78,
+   "pkr_if_sold_now": 8282
   }
  },
  {
@@ -20787,10 +20813,10 @@
    "fill_price": 8.04,
    "stop_price": 0.08,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 8.77,
-   "pkr_if_sold_now": 7630
+   "last_price": 8.1,
+   "pkr_if_sold_now": -702
   }
  },
  {
@@ -20809,10 +20835,10 @@
    "fill_price": 62.7,
    "stop_price": 0.63,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 61.71,
-   "pkr_if_sold_now": -1939
+   "last_price": 60.64,
+   "pkr_if_sold_now": -3643
   }
  },
  {
@@ -20831,10 +20857,10 @@
    "fill_price": 17.25,
    "stop_price": 0.17,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 17.41,
-   "pkr_if_sold_now": 243
+   "last_price": 17.7,
+   "pkr_if_sold_now": 1924
   }
  },
  {
@@ -20853,10 +20879,10 @@
    "fill_price": 14.8,
    "stop_price": 0.15,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 14.79,
-   "pkr_if_sold_now": -863
+   "last_price": 14.77,
+   "pkr_if_sold_now": -998
   }
  },
  {
@@ -20875,10 +20901,10 @@
    "fill_price": 14.98,
    "stop_price": 0.15,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 15.18,
-   "pkr_if_sold_now": 549
+   "last_price": 14.94,
+   "pkr_if_sold_now": -1053
   }
  },
  {
@@ -20897,10 +20923,10 @@
    "fill_price": 300.0,
    "stop_price": 3.0,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 297.02,
-   "pkr_if_sold_now": -1355
+   "last_price": 298.21,
+   "pkr_if_sold_now": -959
   }
  },
  {
@@ -20919,10 +20945,10 @@
    "fill_price": 18.6,
    "stop_price": 0.19,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 18.3,
-   "pkr_if_sold_now": -2249
+   "last_price": 18.14,
+   "pkr_if_sold_now": -3109
   }
  },
  {
@@ -20941,10 +20967,10 @@
    "fill_price": 87.0,
    "stop_price": 0.87,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 73.72,
-   "pkr_if_sold_now": -15600
+   "last_price": 69.38,
+   "pkr_if_sold_now": -20579
   }
  },
  {
@@ -20963,10 +20989,10 @@
    "fill_price": 89.56,
    "stop_price": 0.9,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 89.47,
-   "pkr_if_sold_now": -463
+   "last_price": 90.18,
+   "pkr_if_sold_now": 328
   }
  },
  {
@@ -20985,10 +21011,10 @@
    "fill_price": 56.0,
    "stop_price": 0.56,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 56.35,
-   "pkr_if_sold_now": 261
+   "last_price": 53.56,
+   "pkr_if_sold_now": -4712
   }
  },
  {
@@ -21008,9 +21034,11 @@
    "stop_price": 2.5,
    "target_price": null,
    "days_held": 1,
-   "state": "open",
-   "last_price": 262.54,
-   "pkr_if_sold_now": 4518
+   "state": "closed",
+   "exit_date": "2026-11-13",
+   "exit_price": 262.54,
+   "exit_reason": "data_break",
+   "pkr": 4518
   }
  },
  {
@@ -21029,10 +21057,10 @@
    "fill_price": 9.37,
    "stop_price": 0.09,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 9.23,
-   "pkr_if_sold_now": -2739
+   "last_price": 9.04,
+   "pkr_if_sold_now": -4767
   }
  },
  {
@@ -21051,10 +21079,10 @@
    "fill_price": 82.4,
    "stop_price": 0.82,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 85.01,
-   "pkr_if_sold_now": 2799
+   "last_price": 92.59,
+   "pkr_if_sold_now": 11981
   }
  },
  {
@@ -21073,10 +21101,10 @@
    "fill_price": 35.71,
    "stop_price": 0.36,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 35.58,
-   "pkr_if_sold_now": -726
+   "last_price": 35.56,
+   "pkr_if_sold_now": -782
   }
  },
  {
@@ -21095,10 +21123,10 @@
    "fill_price": 114.16,
    "stop_price": 1.14,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 123.01,
-   "pkr_if_sold_now": 7375
+   "last_price": 123.27,
+   "pkr_if_sold_now": 7603
   }
  },
  {
@@ -21117,10 +21145,10 @@
    "fill_price": 27.0,
    "stop_price": 0.27,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 27.46,
-   "pkr_if_sold_now": 1260
+   "last_price": 27.0,
+   "pkr_if_sold_now": -444
   }
  },
  {
@@ -21139,10 +21167,10 @@
    "fill_price": 81.73,
    "stop_price": 0.82,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 79.22,
-   "pkr_if_sold_now": -3429
+   "last_price": 79.43,
+   "pkr_if_sold_now": -3172
   }
  },
  {
@@ -21161,10 +21189,10 @@
    "fill_price": 43.94,
    "stop_price": 0.44,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 42.25,
-   "pkr_if_sold_now": -4202
+   "last_price": 41.85,
+   "pkr_if_sold_now": -5111
   }
  },
  {
@@ -21183,10 +21211,10 @@
    "fill_price": 48.2,
    "stop_price": 0.48,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 49.69,
-   "pkr_if_sold_now": 2723
+   "last_price": 48.78,
+   "pkr_if_sold_now": 838
   }
  },
  {
@@ -21205,7 +21233,7 @@
    "fill_price": 18.41,
    "stop_price": 0.18,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
    "last_price": 19.01,
    "pkr_if_sold_now": 2616
@@ -21227,10 +21255,10 @@
    "fill_price": 8.57,
    "stop_price": 0.09,
    "target_price": null,
-   "days_held": 1,
+   "days_held": 2,
    "state": "open",
-   "last_price": 8.47,
-   "pkr_if_sold_now": -2527
+   "last_price": 8.94,
+   "pkr_if_sold_now": 2957
   }
  },
  {
@@ -21249,10 +21277,10 @@
    "fill_price": 70.49,
    "stop_price": 0.7,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 62.73,
-   "pkr_if_sold_now": -11352
+   "last_price": 63.0,
+   "pkr_if_sold_now": -10969
   }
  },
  {
@@ -21271,10 +21299,10 @@
    "fill_price": 169.0,
    "stop_price": 1.69,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 151.06,
-   "pkr_if_sold_now": -10959
+   "last_price": 156.09,
+   "pkr_if_sold_now": -7988
   }
  },
  {
@@ -21293,10 +21321,10 @@
    "fill_price": 5.04,
    "stop_price": 0.05,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 5.36,
-   "pkr_if_sold_now": 4049
+   "last_price": 5.05,
+   "pkr_if_sold_now": -2101
   }
  },
  {
@@ -21315,10 +21343,10 @@
    "fill_price": 11.6,
    "stop_price": 0.12,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 11.41,
-   "pkr_if_sold_now": -2647
+   "last_price": 11.32,
+   "pkr_if_sold_now": -3423
   }
  },
  {
@@ -21353,10 +21381,10 @@
    "fill_price": 151.15,
    "stop_price": 1.51,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 150.47,
-   "pkr_if_sold_now": -812
+   "last_price": 152.1,
+   "pkr_if_sold_now": 264
   }
  },
  {
@@ -21375,10 +21403,10 @@
    "fill_price": 98.0,
    "stop_price": 0.98,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 93.0,
-   "pkr_if_sold_now": -5456
+   "last_price": 92.46,
+   "pkr_if_sold_now": -6006
   }
  },
  {
@@ -21397,10 +21425,10 @@
    "fill_price": 43.03,
    "stop_price": 0.43,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 44.13,
-   "pkr_if_sold_now": 2189
+   "last_price": 43.17,
+   "pkr_if_sold_now": -38
   }
  },
  {
@@ -21419,10 +21447,10 @@
    "fill_price": 157.0,
    "stop_price": 1.57,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 161.05,
-   "pkr_if_sold_now": 2212
+   "last_price": 177.16,
+   "pkr_if_sold_now": 12454
   }
  },
  {
@@ -21441,10 +21469,10 @@
    "fill_price": 80.86,
    "stop_price": 0.81,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 82.39,
-   "pkr_if_sold_now": 1526
+   "last_price": 79.93,
+   "pkr_if_sold_now": -1511
   }
  },
  {
@@ -21463,10 +21491,10 @@
    "fill_price": 310.0,
    "stop_price": 3.1,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 292.96,
-   "pkr_if_sold_now": -5850
+   "last_price": 296.84,
+   "pkr_if_sold_now": -4600
   }
  },
  {
@@ -21485,7 +21513,7 @@
    "fill_price": 47.8,
    "stop_price": 0.48,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
    "last_price": 48.75,
    "pkr_if_sold_now": 1621
@@ -21507,10 +21535,10 @@
    "fill_price": 26.45,
    "stop_price": 0.26,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 25.98,
-   "pkr_if_sold_now": -2230
+   "last_price": 26.64,
+   "pkr_if_sold_now": 265
   }
  },
  {
@@ -21525,8 +21553,14 @@
   "target_pct": null,
   "max_hold_days": 5,
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-11-16",
+   "fill_price": 127.05,
+   "stop_price": 1.27,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 127.41,
+   "pkr_if_sold_now": -80
   }
  },
  {
@@ -21541,8 +21575,14 @@
   "target_pct": null,
   "max_hold_days": 5,
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-11-16",
+   "fill_price": 27.63,
+   "stop_price": 0.28,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 26.61,
+   "pkr_if_sold_now": -4126
   }
  },
  {
@@ -21557,8 +21597,14 @@
   "target_pct": null,
   "max_hold_days": 5,
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-11-16",
+   "fill_price": 803.18,
+   "stop_price": 8.03,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 826.18,
+   "pkr_if_sold_now": 2495
   }
  },
  {
@@ -21573,8 +21619,14 @@
   "target_pct": null,
   "max_hold_days": 5,
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-11-16",
+   "fill_price": 49.89,
+   "stop_price": 0.5,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 51.8,
+   "pkr_if_sold_now": 3458
   }
  },
  {
@@ -21589,8 +21641,14 @@
   "target_pct": null,
   "max_hold_days": 5,
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-11-16",
+   "fill_price": 169.99,
+   "stop_price": 1.7,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 159.0,
+   "pkr_if_sold_now": -6816
   }
  },
  {
@@ -21605,8 +21663,14 @@
   "target_pct": null,
   "max_hold_days": 5,
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-11-16",
+   "fill_price": 26.25,
+   "stop_price": 0.26,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 27.76,
+   "pkr_if_sold_now": 5296
   }
  },
  {
@@ -21621,8 +21685,14 @@
   "target_pct": null,
   "max_hold_days": 5,
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "fill_date": "2026-11-16",
+   "fill_price": 32.8,
+   "stop_price": 0.33,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 33.88,
+   "pkr_if_sold_now": 2921
   }
  },
  {
@@ -21637,8 +21707,8 @@
   "target_pct": null,
   "max_hold_days": 5,
   "result": {
-   "state": "waiting",
-   "note": "order is for the next session"
+   "state": "not_filled",
+   "session": "2026-11-16"
   }
  },
  {
@@ -21648,6 +21718,1212 @@
   "symbol": "MWMP",
   "status": "running",
   "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "fill_date": "2026-11-16",
+   "fill_price": 75.04,
+   "stop_price": 0.75,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 72.17,
+   "pkr_if_sold_now": -4181
+  }
+ },
+ {
+  "id": "2026-11-16-AGTL-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "AGTL",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-AIRLINK-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "AIRLINK",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-ANTM-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "ANTM",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-ASHT-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "ASHT",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-ATRL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "ATRL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-BAFS-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "BAFS",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-BATA-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "BATA",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-BHAT-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "BHAT",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-BIFO-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "BIFO",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-BRRG-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "BRRG",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-CEPB-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "CEPB",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-CFL-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "CFL",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-CHAS-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "CHAS",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-CNERGY-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "CNERGY",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-DINT-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "DINT",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-DWSM-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "DWSM",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-DYNO-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "DYNO",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-FFL-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "FFL",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-FIL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "FIL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-FIMM-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "FIMM",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-FLYNG-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "FLYNG",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-FPJM-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "FPJM",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-GATM-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "GATM",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-GDL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "GDL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-GEMBCEM-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "GEMBCEM",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-GEMMEL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "GEMMEL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-GOC-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "GOC",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-GVGL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "GVGL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-ICCI-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "ICCI",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-IMAGE-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "IMAGE",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-IPAK-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "IPAK",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-ISIL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "ISIL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-JDMT-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "JDMT",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-JSML-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "JSML",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-KCL-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "KCL",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-KHYT-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "KHYT",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-KOHTM-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "KOHTM",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-LIVEN-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "LIVEN",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-MACFL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "MACFL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-MARI-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "MARI",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-MFFL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "MFFL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-MFL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "MFL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-MSCL-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "MSCL",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-NATM-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "NATM",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-NETSOL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "NETSOL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-NNAR-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "NNAR",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-NRL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "NRL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-NSRM-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "NSRM",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-OML-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "OML",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-PAKQATAR-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "PAKQATAR",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-PKGS-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "PKGS",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-PRL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "PRL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-RUBY-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "RUBY",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-RUPL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "RUPL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SELECT-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SELECT",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SERT-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SERT",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SHDT-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SHDT",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SIEM-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SIEM",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SITC-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SITC",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SKRS-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SKRS",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SML-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SML",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SOYASUP-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SOYASUP",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SPEL-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SPEL",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-STML-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "STML",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SUHJ-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SUHJ",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SYM-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SYM",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-SZTM-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "SZTM",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-TATM-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "TATM",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-TISL-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "TISL",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-TRSM-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "TRSM",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-UDPL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "UDPL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-UNITY-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "UNITY",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-ZAHID-running",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "ZAHID",
+  "status": "running",
+  "setup": "running",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-ZAL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "ZAL",
+  "status": "fading",
+  "setup": "fading",
+  "order_type": "open",
+  "stop_pct": 0.99,
+  "target_pct": null,
+  "max_hold_days": 5,
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-16-ZIL-fading",
+  "created_at": "2026-11-16T19:59:59+05:00",
+  "signal_date": "2026-11-16",
+  "symbol": "ZIL",
+  "status": "fading",
+  "setup": "fading",
   "order_type": "open",
   "stop_pct": 0.99,
   "target_pct": null,
