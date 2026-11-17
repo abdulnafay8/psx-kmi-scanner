@@ -82,7 +82,7 @@ nav a.on { color: var(--brand); font-weight: 650; }
 .num { font-variant-numeric: tabular-nums; }
 h2 { font-size: 16px; margin: 4px 0 8px; }
 h3 { font-size: 12px; margin: 14px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-.section-title { display: flex; align-items: baseline; justify-content: space-between; margin: 18px 2px 6px; }
+.section-title { display: flex; align-items: baseline; justify-content: space-between; margin: 18px 2px 6px; scroll-margin-top: 90px; }
 .section-title h2 { margin: 0; font-size: 15px; }
 .chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 99px; font-size: 12px;
   font-weight: 650; color: #fff; white-space: nowrap; }
@@ -168,10 +168,9 @@ details summary { cursor: pointer; color: var(--brand); font-size: 13px; margin-
 .datebox span { font-size: 10.5px; color: var(--muted); text-transform: uppercase; }
 .div-meta { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
 .late { color: var(--bad); font-weight: 600; }
-/* daily tip, above the menu */
-.toast { position: fixed; left: 12px; right: 12px; bottom: calc(66px + env(safe-area-inset-bottom)); z-index: 6;
-  max-width: 696px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brand);
-  border-radius: 14px; padding: 11px 40px 10px 13px; box-shadow: 0 6px 24px rgba(0, 0, 0, .16); font-size: 13.5px; }
+/* daily tip: an inline card on the Today screen, never covering content */
+.toast { position: relative; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brand);
+  border-radius: 14px; padding: 11px 40px 10px 13px; font-size: 13.5px; margin: 10px 0; }
 .toast .t-title { font-weight: 700; font-size: 12px; color: var(--brand); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
 .toast .t-actions { display: flex; gap: 14px; margin-top: 6px; font-size: 12.5px; }
 .toast .t-actions button { border: 0; background: none; color: var(--brand); padding: 4px 0; cursor: pointer; font-weight: 600; }
@@ -195,6 +194,66 @@ main.has-toast { padding-bottom: calc(190px + env(safe-area-inset-bottom)); }
 .help-sec dd { margin: 2px 0 0; color: var(--ink-2); font-size: 13.5px; }
 .switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; }
 .switch input { width: 22px; height: 22px; accent-color: var(--brand); }
+/* ---- clarity layer ---- */
+header .fresh { display: inline-flex; align-items: center; gap: 6px; }
+header .fresh .pulse { width: 7px; height: 7px; border-radius: 50%; background: #9ff0c8; flex: none; }
+header .fresh.old .pulse { background: #ffc46b; }
+nav a .ico { display: grid; place-items: center; height: 24px; }
+nav a .ico svg { width: 22px; height: 22px; }
+nav a.on .ico { background: var(--brand-soft); border-radius: 99px; width: 52px; margin: 0 auto; }
+.hero { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; margin: 10px 0;
+  box-shadow: var(--shadow); }
+.hero .eyebrow { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 650; }
+.hero .headline { font-family: "Manrope", system-ui, sans-serif; font-weight: 800; font-size: 20px; line-height: 1.25; margin: 4px 0 6px; }
+.hero .what { font-size: 14px; color: var(--ink-2); margin: 0; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+.tile { background: var(--bg); border-radius: 12px; padding: 9px 10px; text-decoration: none; color: inherit; min-width: 0; display: block; }
+.tile b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.tile span { font-size: 11.5px; color: var(--muted); display: block; }
+.tile.hl { background: var(--brand-soft); }
+.pills { display: flex; gap: 6px; overflow-x: auto; padding: 2px 2px 6px; margin: 0 -2px; scrollbar-width: none; }
+.pills::-webkit-scrollbar { display: none; }
+.pill { flex: none; border: 1px solid var(--line); background: var(--card); color: var(--ink-2); border-radius: 99px;
+  padding: 7px 12px; font-size: 13px; cursor: pointer; white-space: nowrap; }
+.pill.on { background: var(--ink); color: var(--bg); border-color: var(--ink); font-weight: 650; }
+.pill .n { opacity: .65; margin-left: 3px; font-variant-numeric: tabular-nums; }
+.sec-help { font-size: 12.5px; color: var(--muted); margin: -2px 2px 8px; }
+.todo { border-left: 4px solid var(--brand); }
+.todo ol, .todo ul { margin: 6px 0 0; padding-left: 20px; }
+.todo li { margin: 3px 0; }
+.plan-grid.four { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.plan-grid .buy b { color: var(--brand); }
+.plan-grid .stp b { color: var(--bad); }
+.plan-grid .tgt b { color: var(--good); }
+.step-line { font-size: 13.5px; margin-top: 8px; padding: 8px 10px; background: var(--brand-soft); border-radius: 10px; }
+.acc { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); margin: 10px 0; box-shadow: var(--shadow); }
+.acc > summary { list-style: none; cursor: pointer; padding: 13px 14px; display: flex; justify-content: space-between; align-items: center;
+  gap: 10px; color: var(--ink); font-size: 15px; font-weight: 650; margin: 0; }
+.acc > summary::-webkit-details-marker { display: none; }
+.acc > summary::after { content: "›"; font-size: 20px; color: var(--muted); transition: transform .15s; line-height: 1; }
+.acc[open] > summary::after { transform: rotate(90deg); }
+.acc > summary .hint { font-weight: 400; font-size: 12.5px; color: var(--muted); margin-left: auto; }
+.acc > .body { padding: 0 14px 14px; }
+.meter { display: flex; gap: 3px; margin: 4px 0 2px; }
+.meter i { flex: 1; height: 5px; border-radius: 99px; background: var(--line); }
+.meter i.on { background: var(--good); }
+.state { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 11.5px; font-weight: 650; background: var(--bg); color: var(--ink-2); white-space: nowrap; }
+.state.won { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+.state.lost { background: color-mix(in srgb, var(--bad) 16%, transparent); color: var(--bad); }
+.state.open { background: color-mix(in srgb, var(--chip-plan) 18%, transparent); color: var(--chip-plan); }
+.dot-key { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); margin: 8px 2px; }
+.dot-key span { display: inline-flex; align-items: center; gap: 5px; }
+.dot-key em { font-style: normal; display: inline-grid; place-items: center; width: 15px; height: 15px; border-radius: 50%;
+  background: var(--line); color: var(--ink-2); font-size: 10px; font-weight: 700; }
+.flash { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(76px + env(safe-area-inset-bottom)); z-index: 30;
+  background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 99px; font-size: 13.5px; font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .2); }
+.pnl { font-size: 13px; margin-top: 6px; }
+.page-title { font-family: "Manrope", system-ui, sans-serif; font-weight: 800; font-size: 20px; margin: 10px 2px 2px; }
+.page-sub { font-size: 13px; color: var(--muted); margin: 0 2px 8px; }
+.list a.more { justify-content: center; color: var(--brand); font-weight: 600; font-size: 14px; }
+.ticks-left { font-size: 12.5px; color: var(--muted); text-align: center; margin-top: 6px; }
+@media (max-width: 380px) { .plan-grid.four { grid-template-columns: repeat(2, 1fr); } .tile b { font-size: 18px; } }
 </style>
 </head>
 <body>
@@ -214,11 +273,11 @@ main.has-toast { padding-bottom: calc(190px + env(safe-area-inset-bottom)); }
 <div id="toast-slot"></div>
 <div id="modal-slot"></div>
 <nav id="nav">
-  <a href="#hot" data-r="hot"><span class="ico">◎</span>Today</a>
-  <a href="#div" data-r="div"><span class="ico">₨</span>Dividends</a>
-  <a href="#log" data-r="log"><span class="ico">✎</span>Trades</a>
-  <a href="#record" data-r="record"><span class="ico">▤</span>Record</a>
-  <a href="#settings" data-r="settings"><span class="ico">⚙</span>Settings</a>
+  <a href="#hot" data-r="hot"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></span>Today</a>
+  <a href="#div" data-r="div"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>Dividends</a>
+  <a href="#log" data-r="log"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>My trades</a>
+  <a href="#record" data-r="record"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>Results</a>
+  <a href="#settings" data-r="settings"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>Settings</a>
 </nav>
 <script>
 "use strict";
@@ -265,7 +324,28 @@ async function load() {
   LOAD_ERROR = DATA ? null : "Couldn't load today's signals. Check your connection, then tap ↻.";
   const sub = document.getElementById("sub");
   if (!DATA) { sub.textContent = "Offline or no data yet"; return; }
-  sub.textContent = `Prices of ${fmtDay(DATA.as_of)} close · KMI All Share list of ${fmtDay(DATA.kmi_list_date)}`;
+  const age = daysOld(DATA.as_of);
+  sub.innerHTML = `<span class="fresh ${age > 4 ? "old" : ""}"><span class="pulse"></span>` +
+    (age > 4 ? `Data is ${age} days old · tap ↻ to refresh` : `Updated after the ${esc(fmtDay(DATA.as_of))} close`) + `</span>`;
+}
+const daysOld = (iso) => Math.round((new Date(today() + "T00:00:00") - new Date(iso + "T00:00:00")) / 86400000);
+
+// plain-language result of an alert or plan
+const STATE_TEXT = { waiting: "Waiting to fill", not_filled: "Not filled", open: "Holding", closed: "Closed" };
+function stateBadge(res) {
+  const st = res.state || "";
+  if (st === "closed") {
+    const won = (res.pkr ?? 0) > 0;
+    const why = { stop: "stop hit", target: "target hit", time: "time up" }[res.exit_reason] || res.exit_reason;
+    return `<span class="state ${won ? "won" : "lost"}">${won ? "Won" : "Lost"}${why ? " · " + esc(why) : ""}</span>`;
+  }
+  return `<span class="state ${st === "open" || st === "waiting" ? "open" : ""}">${esc(STATE_TEXT[st] || st.replace("_", " "))}</span>`;
+}
+function flash(msg) {
+  const el = document.createElement("div");
+  el.className = "flash"; el.setAttribute("role", "status"); el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2200);
 }
 
 // ---------- risk rules (Step 8) ----------
@@ -307,16 +387,18 @@ function planHero(x) {
       <div style="text-align:right"><div class="num" style="font-weight:650">${rs(x.close)}</div>
         <div class="small ${x.change_pct >= 0 ? "up" : "down"}">${signPct(x.change_pct)}</div></div>
     </div>
-    <div class="small" style="margin-top:8px"><b>${esc(p.setup_label)}</b> · ${esc(p.order)}</div>
-    <div class="plan-grid">
-      <div><span>Stop</span><b>${num2(ref * (1 - p.stop_pct))}</b><span>−${pct(p.stop_pct, 0)}</span></div>
-      <div><span>Target</span><b>${p.target_pct ? num2(ref * (1 + p.target_pct)) : "none"}</b><span>${p.target_pct ? "+" + pct(p.target_pct, 0) : "hold " + p.max_hold_days + "d"}</span></div>
-      <div><span>Shares</span><b>${shares.toLocaleString()}</b><span>risk ${pkr(s.risk).replace("PKR ", "Rs ")}</span></div>
+    <div class="step-line"><b>${esc(p.order)}</b> on ${esc(DATA.plans_for_session || "the next session")} only.</div>
+    <div class="plan-grid four">
+      <div class="buy"><span>Buy at</span><b>${p.order_price ? num2(p.order_price) : "Open"}</b><span>${p.order_type === "limit" ? "limit order" : "market open"}</span></div>
+      <div class="stp"><span>Stop loss</span><b>${num2(ref * (1 - p.stop_pct))}</b><span>−${pct(p.stop_pct, 0)}</span></div>
+      <div class="tgt"><span>Target</span><b>${p.target_pct ? num2(ref * (1 + p.target_pct)) : "—"}</b><span>${p.target_pct ? "+" + pct(p.target_pct, 0) : "no fixed target"}</span></div>
+      <div><span>Shares</span><b>${shares.toLocaleString()}</b><span>risk ${pkr(s.risk * sizeFactor(p)).replace("PKR ", "Rs ")}</span></div>
     </div>
+    <div class="small muted">${esc(p.setup_label)} · sell by day ${p.max_hold_days} if neither stop nor target is hit</div>
     ${confidenceLine(p)}
-    <div class="row" style="gap:8px;margin-top:8px">
-      <a class="btn ghost" style="flex:1" href="#stock/${esc(x.symbol)}">Details & chart</a>
-      <a class="btn" style="flex:1" href="#check/${esc(x.symbol)}">Pre-trade check</a>
+    <div class="row" style="gap:8px;margin-top:10px">
+      <a class="btn ghost" style="flex:1" href="#stock/${esc(x.symbol)}">Why & chart</a>
+      <a class="btn" style="flex:1" href="#check/${esc(x.symbol)}">I want to trade this</a>
     </div>
   </div>`;
 }
@@ -327,39 +409,71 @@ function hot() {
   const tested = Object.keys(DATA.tested_setups || {}).length;
   const plans = DATA.stocks.filter((x) => x.status === "buy_plan" && !x.stale)
     .sort((a, b) => (b.traded_value_pkr || 0) - (a.traded_value_pkr || 0));
+  const running = DATA.stocks.filter((x) => x.status === "in_plan" && x.active_plan)
+    .sort((a, b) => (b.active_plan.signal_date || "").localeCompare(a.active_plan.signal_date || ""));
+  const live = DATA.alerts_made, myOpen = trades().filter((t) => t.exit == null).length;
+  const counts = {}; DATA.stocks.forEach((x) => counts[x.status] = (counts[x.status] || 0) + 1);
+  const session = esc(DATA.plans_for_session || "the next session");
+  let headline, what;
+  if (!tested) { headline = "No tested setups yet"; what = "Nothing has passed the backtest, so there's nothing to buy. Everything below is for context only."; }
+  else if (!live) { headline = "No new plans from this run"; what = `${esc(DATA.no_alert_reason)}. The plans below are from the ${esc(fmtDay(DATA.as_of))} close and are no longer for buying.`; }
+  else if (plans.length) { headline = `${plans.length} new Buy plan${plans.length > 1 ? "s" : ""} for ${session}`; what = `Read each plan, tap <b>I want to trade this</b>, then place the order in AKD Trade before the market opens.`; }
+  else { headline = "Nothing to buy today"; what = `No tested setup fired at the ${esc(fmtDay(DATA.as_of))} close. That's normal: there are about 26 plans a month across all KMI stocks.${running.length ? " Keep following the plans already running below." : ""}`; }
+  return `
+  <div class="hero">
+    <div class="eyebrow">${live ? "Plans for " + session : "Last scan: " + esc(fmtDay(DATA.as_of))}</div>
+    <div class="headline">${headline}</div>
+    <p class="what">${what}</p>
+    <div class="tiles">
+      <a class="tile ${plans.length ? "hl" : ""}" href="#hot" data-jump="plans"><b>${plans.length}</b><span>new Buy plans</span></a>
+      <a class="tile" href="#hot" data-jump="running"><b>${running.length}</b><span>plans running</span></a>
+      <a class="tile" href="#log"><b>${myOpen}</b><span>my open trades</span></a>
+    </div>
+  </div>
+  <div id="tip-slot"></div>
+  ${plans.length ? `<div class="section-title" id="plans"><h2>${live ? "New Buy plans" : "Last Buy plans (expired)"}</h2>
+    <span class="small muted">${live ? "valid " + session + " only" : "not live"}</span></div>
+    ${plans.map(planHero).join("")}` : ""}
+  ${running.length ? `<div class="section-title" id="running"><h2>Plans already running</h2><span class="small muted">don't buy again</span></div>
+    <p class="sec-help">Alerted on an earlier day. If you took one, manage it with its stop and target; if you didn't, it's too late to join.</p>
+    <div class="list">${running.map((x) => { const ap = x.active_plan, r = ap.result || {};
+      const pnl = r.pkr_if_sold_now;
+      return `<a class="item" href="#stock/${esc(x.symbol)}">
+        <div class="who"><b>${esc(x.symbol)}</b><span class="name">${esc(ap.setup_label)} · alerted ${esc(fmtDay(ap.signal_date))}</span></div>
+        <div class="px">${stateBadge(r)}${pnl != null ? `<div class="small ${pnl >= 0 ? "up" : "down"}">${pkr(pnl)}</div>` : ""}</div></a>`; }).join("")}</div>
+    <p class="small muted" style="margin:6px 2px">PKR shows the result per PKR 100,000 if sold at the last close.</p>` : ""}
+  <div class="section-title"><h2>Browse all KMI stocks</h2><span class="small muted">information only</span></div>
+  <p class="sec-help">Only a <b>Buy plan</b> means "consider buying". Tap a stock to see its chart and why it has its status.</p>
+  <input id="q" type="search" placeholder="Search symbol or company name" value="${esc(q)}" aria-label="Search stocks">
+  <div class="pills" role="group" aria-label="Filter by status" style="margin-top:8px">${["all", "running", "fading", "no_setup", "in_plan"].map((k) =>
+    `<button class="pill ${k === f ? "on" : ""}" data-f="${k}">${k === "all" ? "All" : STATUS_LABEL[k]}<span class="n">${k === "all" ? DATA.stocks.length : counts[k] || 0}</span></button>`).join("")}</div>
+  <div id="stock-list">${stockList()}</div>
+  <div class="dot-key" aria-label="What the four dots mean"><span><em>1</em>Above 20-day avg</span><span><em>2</em>Volume above normal</span>
+    <span><em>3</em>KSE-100 rising</span><span><em>4</em>Room to 60-day high</span><a href="#help">More</a></div>`;
+}
+
+let listLimit = 40;
+function stockList() {
+  const s = settings(), f = store.get("filter", "all"), q = store.get("q", "").toLowerCase();
   let list = DATA.stocks.filter((x) => !x.stale && x.status !== "buy_plan");
   if (s.minPrice) list = list.filter((x) => x.close >= s.minPrice);
   if (s.maxPrice) list = list.filter((x) => x.close <= s.maxPrice);
-  if (s.minValue) list = list.filter((x) => (x.traded_value_pkr || 0) >= s.minValue || x.status === "in_plan");
+  if (s.minValue && !q) list = list.filter((x) => (x.traded_value_pkr || 0) >= s.minValue || x.status === "in_plan");
   if (f !== "all") list = list.filter((x) => x.status === f);
-  if (q) list = list.filter((x) => (x.symbol + " " + (x.name || "")).toLowerCase().includes(q.toLowerCase()));
+  if (q) list = list.filter((x) => (x.symbol + " " + (x.name || "")).toLowerCase().includes(q));
   list.sort((a, b) => ORDER[a.status] - ORDER[b.status] || (b.traded_value_pkr || 0) - (a.traded_value_pkr || 0));
-  const counts = {}; DATA.stocks.forEach((x) => counts[x.status] = (counts[x.status] || 0) + 1);
-  const live = DATA.alerts_made;
   return `
-  ${tested ? "" : `<div class="note lock">No setup has passed the backtest, so there are no Buy plans. Everything shown is for context only.</div>`}
-  <div class="section-title"><h2>${live ? "Today's plans" : "Last plans"}</h2>
-    <span class="small muted">${live ? "valid " + esc(DATA.plans_for_session) + " only" : "not live"}</span></div>
-  ${live ? "" : `<div class="note lock">No new alerts from this run: ${esc(DATA.no_alert_reason)}. These are from the ${esc(fmtDay(DATA.as_of))} close; check the Track record for which are still live.</div>`}
-  ${plans.length ? plans.map(planHero).join("") :
-    `<div class="card empty">No tested setup fired at the ${esc(fmtDay(DATA.as_of))} close. That's normal: there are about 26 plans a month across all KMI stocks.</div>`}
-  <div class="section-title"><h2>All KMI stocks</h2><span class="small muted">for context only</span></div>
-  <div class="filters">
-    <select id="f" aria-label="Filter by status">${["all", "in_plan", "running", "fading", "no_setup"].map((k) =>
-      `<option value="${k}" ${k === f ? "selected" : ""}>${k === "all" ? "All statuses" : STATUS_LABEL[k] + " (" + (counts[k] || 0) + ")"}</option>`).join("")}</select>
-    <input id="q" type="search" placeholder="Search symbol or name" value="${esc(q)}" aria-label="Search">
-  </div>
-  <div class="small muted" style="margin:6px 2px">${list.length} stocks trading ≥ ${pkr(s.minValue)}/day · change in Settings</div>
+  <div class="small muted" style="margin:2px 2px 6px">${list.length} stock${list.length === 1 ? "" : "s"}${q ? " match" + (list.length === 1 ? "es" : "") + " your search" : s.minValue ? ` trading ≥ ${pkr(s.minValue)}/day (<a href="#settings">change</a>)` : ""}</div>
   <div class="list">
-  ${list.slice(0, 200).map((x) => `
+  ${list.slice(0, listLimit).map((x) => `
     <a class="item" href="#stock/${esc(x.symbol)}">
       <div class="who"><b>${esc(x.symbol)}</b><span class="name">${esc(x.name || "")}</span></div>
-      <div class="dots" aria-hidden="true">${x.lights.map((l) => `<span class="dot ${l.on ? "on" : ""}"></span>`).join("")}</div>
+      <div class="dots" title="${x.lights.filter((l) => l.on).length} of 4 lights green" aria-label="${x.lights.filter((l) => l.on).length} of 4 lights green">${x.lights.map((l) => `<span class="dot ${l.on ? "on" : ""}"></span>`).join("")}</div>
       <div class="px">${num2(x.close)}<div class="small ${x.change_pct >= 0 ? "up" : "down"}">${signPct(x.change_pct)}</div></div>
       ${chip(x.status)}
-    </a>`).join("") || `<div class="empty">Nothing matches these filters.</div>`}
-  </div>
-  <p class="small muted" style="margin:8px 2px">Dots: above 20-day average · volume vs normal · KSE-100 trend · room to 60-day high.</p>`;
+    </a>`).join("") || `<div class="empty">No stocks match. Try another word or the <b>All</b> filter.</div>`}
+  ${list.length > listLimit ? `<a class="item more" href="#" id="more">Show ${Math.min(40, list.length - listLimit)} more of ${list.length - listLimit}</a>` : ""}
+  </div>`;
 }
 
 function planCard(p, risk) {
@@ -367,8 +481,8 @@ function planCard(p, risk) {
   const shares = Math.floor(pos / ref);
   const bt = p.backtest;
   return `
-  <div class="card">
-    <h2>Trade plan: ${esc(p.setup_label)}</h2>
+  <div class="card todo">
+    <h2>The plan: ${esc(p.setup_label)}</h2>
     <div class="kv">
       <div>Order</div><div>${esc(p.order)}</div>
       <div>Valid</div><div>${esc(DATA.plans_for_session || "next session")} only</div>
@@ -425,11 +539,11 @@ function stock(sym) {
     running: ["Don't chase: buying after a strong run is not a tested setup.", "If you already own it, stick to your own exit plan.", "Check again after it cools down."],
     fading: ["Avoid new buys: it has lost its trend.", "If you own it, consider exiting.", "This status is for context only; it has not been tested."],
     no_setup: ["Nothing to do today.", "It will show a Buy plan only if a tested setup fires."],
-    in_plan: ["A plan for this stock is already running: follow that one.", "Don't add a second position."],
+    in_plan: ["If you bought it: keep your stop and target orders in place and sell when one is hit or the days run out.", "If you didn't buy it: don't buy now. The plan was only for its own session.", "Never add a second position."],
   };
   const ap = x.active_plan;
   return `
-  <a href="#hot" class="back">← Today</a>
+  <a href="#hot" class="back" onclick="if (history.length > 1) { history.back(); return false; }">← Back</a>
   <div class="banner ${x.status}">
     <div class="row between"><b style="font-size:20px">${esc(x.symbol)}</b>
       <span class="num" style="font-weight:650">${rs(x.close)} <span style="opacity:.9">${signPct(x.change_pct)}</span></span></div>
@@ -437,42 +551,46 @@ function stock(sym) {
     <div style="margin-top:8px;font-weight:650">${STATUS_ICON[x.status]} ${esc(x.status_text)}</div>
     <div class="small" style="opacity:.9">KMI All Share, list of ${esc(fmtDay(DATA.kmi_list_date))} · prices of ${esc(fmtDay(x.date))}</div>
   </div>
-  ${x.tested ? "" : `<div class="note">${x.status === "in_plan" ? "Tracking a tested plan." : "For context only: this status is not a tested setup and never a buy signal."}</div>`}
   ${x.status === "buy_plan" ? x.plans.map((p) => planCard(p, s.risk)).join("") +
-     `<a class="btn wide" href="#check/${esc(x.symbol)}">Pre-trade check</a>` : ""}
-  ${chartCard(x)}
-  ${(x.notes || []).length ? `<div class="card"><h2>Context notes</h2>
-    ${x.notes.map((n) => `<div class="check"><span class="muted">ⓘ</span><div class="small">${esc(n)}</div></div>`).join("")}
-    <p class="small muted" style="margin-bottom:0">Patterns from history. They don't create Buy plans.</p></div>` : ""}
-  ${ap ? `<div class="card"><h2>Active plan (alerted ${esc(fmtDay(ap.signal_date))})</h2><div class="kv">
-      <div>Setup</div><div>${esc(ap.setup_label)}</div>
-      <div>Order</div><div>${esc(ap.order)}</div>
-      <div>State</div><div>${esc(ap.result.state.replace("_", " "))}</div>
-      ${ap.result.fill_price ? `<div>Filled</div><div>${rs(ap.result.fill_price)} on ${esc(ap.result.fill_date)}</div>
-      <div>Stop / target</div><div>${rs(ap.result.stop_price)} / ${ap.result.target_price ? rs(ap.result.target_price) : "none"}</div>
-      <div>Day</div><div>${ap.result.days_held} of ${ap.max_hold_days}</div>` : ""}
+     `<a class="btn wide" href="#check/${esc(x.symbol)}">I want to trade this</a>` : ""}
+  ${ap ? `<div class="card todo"><h2>Plan running since ${esc(fmtDay(ap.signal_date))}</h2>
+    <div class="row between" style="margin-bottom:8px"><span class="small">${esc(ap.setup_label)} · ${esc(ap.order)}</span>${stateBadge(ap.result)}</div>
+    <div class="kv">
+      ${ap.result.fill_price ? `<div>Bought at</div><div>${rs(ap.result.fill_price)} on ${esc(fmtDay(ap.result.fill_date))}</div>
+      <div>Sell if it falls to</div><div class="down">${rs(ap.result.stop_price)}</div>
+      <div>Sell if it rises to</div><div class="up">${ap.result.target_price ? rs(ap.result.target_price) : "no fixed target"}</div>
+      <div>Days held</div><div>${ap.result.days_held} of ${ap.max_hold_days}</div>` : ""}
+      ${ap.result.pkr_if_sold_now != null ? `<div>If sold at last close</div><div class="${ap.result.pkr_if_sold_now >= 0 ? "up" : "down"}">${pkr(ap.result.pkr_if_sold_now)} <span class="small muted">per 100k</span></div>` : ""}
     </div></div>` : ""}
-  ${handle[x.status] ? `<div class="card"><h2>How to handle it</h2><ol style="margin:0;padding-left:20px">${handle[x.status].map((h) => `<li>${esc(h)}</li>`).join("")}</ol></div>` : ""}
-  <div class="card"><h2>Why this status</h2>
-    ${Object.entries(x.reasons).map(([k, rows]) => `
-      <h3>${esc((DATA.tested_setups[k] || {}).label || k)}</h3>
+  ${handle[x.status] ? `<div class="card todo"><h2>What should I do?</h2><ol>${handle[x.status].map((h) => `<li>${esc(h)}</li>`).join("")}</ol>
+    ${x.tested || x.status === "in_plan" ? "" : `<p class="small muted" style="margin:8px 0 0">This status is information only: it is not a tested setup and never a buy signal.</p>`}</div>` : ""}
+  ${chartCard(x)}
+  ${(x.notes || []).length ? `<div class="card"><h2>Good to know</h2>
+    ${x.notes.map((n) => `<div class="check"><span class="muted">ⓘ</span><div class="small">${esc(n)}</div></div>`).join("")}
+    <p class="small muted" style="margin-bottom:0">Patterns from past years. They don't create Buy plans.</p></div>` : ""}
+  <div class="section-title"><h2>The details</h2><span class="small muted">tap to open</span></div>
+  ${Object.entries(x.reasons).map(([k, rows]) => { const met = rows.filter((r) => r.ok).length;
+    return `<details class="acc"><summary><span>${esc((DATA.tested_setups[k] || {}).label || k)}</span>
+      <span class="hint">${met} of ${rows.length} rules met</span></summary><div class="body">
+      <div class="meter" aria-hidden="true">${rows.map((r) => `<i class="${r.ok ? "on" : ""}"></i>`).join("")}</div>
+      <p class="small muted" style="margin:4px 0 6px">A Buy plan appears only when <b>every</b> rule is met.</p>
       ${rows.map((r) => `<div class="check"><span class="${r.ok ? "ok" : "no"}">${r.ok ? "✓" : "✗"}</span>
-        <div>${esc(r.check)} <span class="muted small">(${esc(r.rule)})</span></div></div>`).join("")}`).join("")}
-    ${x.context.length ? `<p class="small muted">${x.context.map(esc).join(" · ")}</p>` : ""}
-  </div>
-  <div class="card"><h2>Lights</h2><p class="small muted" style="margin-top:0">They explain the picture; they don't trigger trades.</p>
+        <div class="small">${esc(r.check)} <span class="muted">(${esc(r.rule)})</span></div></div>`).join("")}</div></details>`; }).join("")}
+  <details class="acc"><summary><span>The four lights</span><span class="hint">${x.lights.filter((l) => l.on).length} of 4 green</span></summary><div class="body">
+    <p class="small muted" style="margin-top:0">They describe the picture; they don't trigger trades.</p>
     ${x.lights.map((l) => `<div class="check"><span class="dot ${l.on ? "on" : ""}" style="margin-top:6px"></span>
       <div><b>${esc(l.name)}</b> <span class="muted">${esc(l.text)}</span></div></div>`).join("")}
-  </div>
-  <div class="card"><h2>Key levels</h2><div class="kv">
+    ${x.context.length ? `<p class="small muted">${x.context.map(esc).join(" · ")}</p>` : ""}
+  </div></details>
+  <details class="acc"><summary><span>Key price levels</span></summary><div class="body"><div class="kv">
     <div>20-day average</div><div>${rs(x.levels.sma20)}</div>
     <div>50-day average</div><div>${rs(x.levels.sma50)}</div>
     <div>200-day average</div><div>${rs(x.levels.sma200)}</div>
     <div>60-day high (close)</div><div>${rs(x.levels.high60)}</div>
     <div>60-day low (close)</div><div>${rs(x.levels.low60)}</div>
     <div>Traded per day</div><div>${pkr(x.traded_value_pkr)}</div>
-  </div>
-  <a class="btn ghost wide" href="${esc(x.news_url)}" target="_blank" rel="noopener">Company page and news on PSX</a></div>`;
+  </div></div></details>
+  <a class="btn ghost wide" href="${esc(x.news_url)}" target="_blank" rel="noopener">Company page and news on PSX ↗</a>`;
 }
 
 // ---------- price chart ----------
@@ -662,21 +780,35 @@ function check(sym) {
   const n = r.closed % 20;
   return `
   <a href="#stock/${esc(sym)}" class="back">← ${esc(sym)}</a>
-  <h2 style="margin-top:10px">Pre-trade check: ${esc(sym)}</h2>
+  <div class="page-title">Before you trade ${esc(sym)}</div>
+  <p class="page-sub">Three quick checks, then log the trade so the app can track it for you.</p>
   ${r.reasons.map((m) => `<div class="note lock">${esc(m)}</div>`).join("")}
+  <div class="card todo"><h2 style="margin-top:0">Your order in AKD Trade</h2><div class="kv">
+    <div>Order</div><div>${esc(p.order)}</div>
+    <div>When</div><div>${esc(DATA.plans_for_session || "next session")} only</div>
+    <div>Shares</div><div>${shares.toLocaleString()}</div>
+    <div>Stop loss</div><div class="down">−${pct(p.stop_pct, 0)} from your fill</div>
+    <div>Target</div><div class="up">${p.target_pct ? "+" + pct(p.target_pct, 0) + " from your fill" : "none: hold up to " + p.max_hold_days + " days"}</div>
+  </div></div>
   <div class="card">
+    <h2 style="margin-top:0">1 · Tick all three</h2>
     <label class="tick"><input type="checkbox" class="c"> <span>This is the tested setup: <b>${esc(p.setup_label)}</b>, ${esc(p.order)}.</span></label>
-    <label class="tick"><input type="checkbox" class="c"> <span>I accept losing <b>${pkr(s.risk)}</b> if the stop is hit.</span></label>
-    <label class="tick"><input type="checkbox" class="c"> <span>I'm not chasing or trying to win back a loss.</span></label>
-    <label class="field">My fill price (Rs)<input id="fill" type="number" inputmode="decimal" step="0.01" value="${ref.toFixed(2)}"></label>
-    <label class="field">Shares<input id="shares" type="number" inputmode="numeric" step="1" value="${shares}"></label>
-    <button class="btn wide" id="in" disabled>I'm in</button>
+    <label class="tick"><input type="checkbox" class="c"> <span>I accept losing about <b>${pkr(s.risk * sizeFactor(p))}</b> if the stop is hit.</span></label>
+    <label class="tick" style="border-bottom:0"><input type="checkbox" class="c"> <span>I'm not chasing or trying to win back a loss.</span></label>
+    <h2>2 · Enter your fill</h2>
+    <p class="small muted" style="margin:0">After your order fills, enter the actual price. Stop and target are set from it.</p>
+    <div class="filters">
+      <label class="field">Fill price (Rs)<input id="fill" type="number" inputmode="decimal" step="0.01" value="${ref.toFixed(2)}"></label>
+      <label class="field">Shares<input id="shares" type="number" inputmode="numeric" step="1" value="${shares}"></label>
+    </div>
+    <button class="btn wide" id="in" disabled>Log this trade</button>
+    <div class="ticks-left" id="ticks-left">${r.blocked ? "Trading is locked for today." : "Tick all three boxes to continue."}</div>
   </div>
   <div class="card small"><div class="kv">
     <div>Today's result</div><div>${pkr(r.todayPKR)}</div>
     <div>Losses in a row</div><div>${r.streak}</div>
     <div>Daily loss limit</div><div>${pkr(s.dailyLoss)}</div>
-    <div>This block of 20</div><div>${n} of 20</div>
+    <div>Trades in this block of 20</div><div>${n} of 20</div>
   </div><div class="bar-p" style="margin-top:8px"><div style="width:${n * 5}%"></div></div></div>`;
 }
 
@@ -692,23 +824,45 @@ function logView() {
   const split = (yes) => { const b = closed.filter((t) => t.followed === yes); const sum = b.reduce((a, t) => a + tradePKR(t), 0);
     return `<tr><td>${yes ? "Followed the plan" : "Didn't follow"}</td><td class="num">${b.length}</td><td class="num">${b.length ? pkr(sum / b.length) : "–"}</td></tr>`; };
   const n = closed.length % 20;
+  const totalPKR = closed.reduce((a, t) => a + tradePKR(t), 0);
+  const lastClose = (sym) => { const x = DATA && DATA.stocks.find((s) => s.symbol === sym); return x ? x.close : null; };
   return `
-  <h2>My trades</h2>
+  <div class="page-title">My trades</div>
+  <p class="page-sub">Trades you logged from a Buy plan. Saved on this phone only.</p>
   ${r.reasons.map((m) => `<div class="note lock">${esc(m)}</div>`).join("")}
-  <div class="card"><div class="row between small"><span>Judge after 20, not after 1</span><b>${n} of 20</b></div>
+  <div class="tiles" style="margin-top:4px">
+    <div class="tile"><b>${open.length}</b><span>open now</span></div>
+    <div class="tile"><b class="${r.todayPKR > 0 ? "up" : r.todayPKR < 0 ? "down" : ""}">${pkr(r.todayPKR).replace("PKR ", "")}</b><span>today (PKR)</span></div>
+    <div class="tile"><b class="${totalPKR > 0 ? "up" : totalPKR < 0 ? "down" : ""}">${pkr(totalPKR).replace("PKR ", "")}</b><span>all closed (PKR)</span></div>
+  </div>
+  <div class="card"><div class="row between small"><span>Judge the scanner after 20 trades, not after 1</span><b>${n} of 20</b></div>
     <div class="bar-p" style="margin-top:6px"><div style="width:${n * 5}%"></div></div></div>
-  ${open.length ? "" : `<div class="card empty">No open trades. Start one from a Buy plan's pre-trade check.</div>`}
-  ${open.map((t) => `
+  <div class="section-title"><h2>Open trades</h2></div>
+  ${open.length ? "" : `<div class="card empty">No open trades.<br><span class="small">When a Buy plan appears on <a href="#hot">Today</a>, tap <b>I want to trade this</b> to log it here.</span></div>`}
+  ${open.map((t) => { const lc = lastClose(t.symbol), now = lc ? tradePKR({ ...t, exit: lc }) : null;
+    const near = lc && (lc <= t.stop ? `<span class="down"><b>At or below your stop</b>: sell per the plan.</span>` :
+      t.target && lc >= t.target ? `<span class="up"><b>Target reached</b>: sell per the plan.</span>` : "");
+    return `
     <div class="card">
-      <div class="row between"><b>${esc(t.symbol)}</b><span class="small muted">${esc(t.setup)} · in ${esc(t.entryDate)}</span></div>
-      <div class="small">${t.shares} shares at ${rs(t.entry)} · stop ${rs(t.stop)}${t.target ? " · target " + rs(t.target) : ""}</div>
-      <label class="field">Exit price (Rs)<input type="number" inputmode="decimal" step="0.01" id="x-${t.id}"></label>
-      <label class="field">Did you follow the plan?<select id="fp-${t.id}"><option value="yes">Yes</option><option value="no">No</option></select></label>
-      <button class="btn wide" data-close="${t.id}">Close trade</button>
-    </div>`).join("")}
+      <div class="row between"><a href="#stock/${esc(t.symbol)}" style="font-weight:750;font-size:17px;text-decoration:none">${esc(t.symbol)}</a><span class="small muted">${esc(t.setup)} · in ${esc(fmtDay(t.entryDate))}</span></div>
+      <div class="plan-grid four">
+        <div><span>Bought</span><b>${num2(t.entry)}</b><span>${t.shares.toLocaleString()} sh</span></div>
+        <div class="stp"><span>Stop</span><b>${num2(t.stop)}</b><span>sell below</span></div>
+        <div class="tgt"><span>Target</span><b>${t.target ? num2(t.target) : "—"}</b><span>${t.target ? "sell above" : "time exit"}</span></div>
+        <div><span>Last close</span><b>${lc ? num2(lc) : "–"}</b><span class="${now > 0 ? "up" : now < 0 ? "down" : ""}">${now != null ? pkr(now).replace("PKR ", "Rs ") : ""}</span></div>
+      </div>
+      ${near ? `<div class="pnl">${near}</div>` : ""}
+      <details style="margin-top:4px"><summary>I sold it: close this trade</summary>
+        <div class="filters">
+          <label class="field">Sell price (Rs)<input type="number" inputmode="decimal" step="0.01" id="x-${t.id}" value="${lc ? lc.toFixed(2) : ""}"></label>
+          <label class="field">Followed the plan?<select id="fp-${t.id}"><option value="yes">Yes</option><option value="no">No</option></select></label>
+        </div>
+        <button class="btn wide" data-close="${t.id}">Close trade</button>
+      </details>
+    </div>`; }).join("")}
   <div class="card"><h2>Results per 20 trades</h2>
     <table><tr><th>Block</th><th class="num">Wins</th><th class="num">PKR</th></tr>${blocks.join("") || `<tr><td colspan="3" class="muted">No closed trades yet.</td></tr>`}</table>
-    <h3>By "followed the plan?"</h3>
+    <h3>Did following the plan pay?</h3>
     <table><tr><th></th><th class="num">Trades</th><th class="num">Avg PKR</th></tr>${split(true)}${split(false)}</table>
   </div>
   <div class="card"><h2>Closed trades</h2>
@@ -722,54 +876,71 @@ function logView() {
 function record() {
   const T = DATA && DATA.tested_setups || {};
   const st = LEDGER && LEDGER.stats;
+  const C = (DATA && DATA.confidence) || {};
+  const avg = st ? st.avg_pkr_per_trade : null;
   return `
-  <h2>Track record</h2>
-  <p class="small muted">Every Buy plan alert is locked when it is sent and graded automatically from real prices, losers included. A limit buy that never fills counts as "not filled", not as a win.</p>
-  <div class="card"><div class="kv">
-    <div>Alerts</div><div>${st ? st.total_alerts : 0}</div>
-    <div>Filled / not filled</div><div>${st ? st.filled + " / " + st.not_filled : "–"}</div>
-    <div>Open now</div><div>${st ? st.open : 0}</div>
-    <div>Win rate (closed)</div><div>${st && st.win_rate != null ? pct(st.win_rate, 0) : "–"}</div>
-    <div>Average per trade</div><div>${st ? pkr(st.avg_pkr_per_trade) : "–"}</div>
-  </div><p class="small muted">Per PKR 100,000 trade, after trading costs, before capital gains tax.</p></div>
+  <div class="page-title">Results</div>
+  <p class="page-sub">Every Buy plan is locked when it's sent and graded automatically from real prices, losers included.</p>
+  <div class="tiles">
+    <div class="tile"><b>${st ? st.closed : 0}</b><span>finished trades</span></div>
+    <div class="tile"><b>${st && st.win_rate != null ? pct(st.win_rate, 0) : "–"}</b><span>won</span></div>
+    <div class="tile"><b class="${avg > 0 ? "up" : avg < 0 ? "down" : ""}">${avg != null ? pkr(avg).replace("PKR ", "") : "–"}</b><span>avg PKR / trade</span></div>
+  </div>
+  <p class="small muted" style="margin:6px 2px">${st ? `${st.total_alerts} alerts so far: ${st.open} still open, ${st.not_filled} never filled (limit price not reached). ` : ""}PKR per 100,000 traded, after costs, before capital gains tax.</p>
+  ${st && st.closed < 20 ? `<div class="note">Only ${st.closed} finished trade${st.closed === 1 ? "" : "s"} so far. That's too few to judge: wait for 20–30 before comparing with the backtest.</div>` : ""}
+  <div class="section-title"><h2>Each setup, live vs tested</h2></div>
+  ${Object.entries(T).map(([k, v]) => { const c = C[k] || {}, b = (LEDGER && LEDGER.by_setup || {})[k] || {};
+    return `<div class="card"><div class="row between"><h2 style="margin:0">${esc(v.label)}</h2>${c.level ? `<span class="state ${c.paused ? "lost" : c.size_factor < 1 ? "" : "won"}">${esc(c.paused ? "paused" : c.level)}</span>` : ""}</div>
+      <table style="margin-top:6px"><tr><th></th><th class="num">Trades</th><th class="num">Won</th><th class="num">Avg PKR</th></tr>
+        <tr><td>Live</td><td class="num">${b.closed ?? 0}</td><td class="num">${b.win_rate != null ? pct(b.win_rate, 0) : "–"}</td><td class="num ${b.avg_pkr_per_trade > 0 ? "up" : b.avg_pkr_per_trade < 0 ? "down" : ""}">${b.closed ? pkr(b.avg_pkr_per_trade) : "–"}</td></tr>
+        <tr><td>Backtest 2024–26</td><td class="num">${v.test.trades}</td><td class="num">${pct(v.test.win_rate, 0)}</td><td class="num">${pkr(v.test.pkr_per_trade)}</td></tr></table>
+      ${c.size_factor && c.size_factor < 1 ? `<p class="small muted" style="margin-bottom:0">Live results are weaker than tested, so suggested size is cut to ${Math.round(c.size_factor * 100)}%.</p>` : ""}
+    </div>`; }).join("")}
+  <div class="section-title"><h2>Alerts, newest first</h2></div>
+  <div class="card">
+    ${(LEDGER && LEDGER.alerts.length) ? `<table><tr><th>Date</th><th>Stock</th><th>Result</th><th class="num">PKR</th></tr>
+      ${LEDGER.alerts.map((e) => `<tr><td class="small">${esc(fmtDay(e.signal_date))}</td><td><a href="#stock/${esc(e.symbol)}">${esc(e.symbol)}</a></td>
+        <td>${stateBadge(e.result)}</td>
+        <td class="num ${(e.result.pkr ?? e.result.pkr_if_sold_now ?? 0) > 0 ? "up" : "down"}">${e.result.pkr != null ? pkr(e.result.pkr) : e.result.pkr_if_sold_now != null ? pkr(e.result.pkr_if_sold_now) + "*" : "–"}</td></tr>`).join("")}</table>
+      <p class="small muted">* still open: value if sold at the last close.</p>` : `<div class="empty">No live alerts yet. The first ones come after a trading day's close.</div>`}
+  </div>
+  <div class="section-title"><h2>Backtest details</h2><span class="small muted">for the curious</span></div>
   ${Object.entries(T).map(([k, v]) => `
-    <div class="card"><h2>${esc(v.label)}: backtest</h2>
+    <details class="acc"><summary><span>${esc(v.label)}</span><span class="hint">year by year</span></summary><div class="body">
       <table><tr><th>Years</th><th class="num">Trades</th><th class="num">PKR/trade</th><th class="num">Wins</th></tr>
       <tr><td>2019–23 (settings chosen here)</td><td class="num">${v.train.trades}</td><td class="num">${pkr(v.train.pkr_per_trade)}</td><td class="num">${pct(v.train.win_rate, 0)}</td></tr>
       <tr><td><b>2024–26 (unseen test)</b></td><td class="num">${v.test.trades}</td><td class="num"><b>${pkr(v.test.pkr_per_trade)}</b></td><td class="num">${pct(v.test.win_rate, 0)}</td></tr>
       ${Object.entries(v.by_year || {}).map(([y, r]) => `<tr><td class="muted">${y}</td><td class="num muted">${r.trades}</td><td class="num ${r.pkr_per_trade > 0 ? "up" : "down"}">${pkr(r.pkr_per_trade)}</td><td class="num muted">${pct(r.win_rate, 0)}</td></tr>`).join("")}
       </table>
       <p class="small muted">Test years at double cost: ${pkr(v.test_double_cost_pkr_per_trade)}/trade · without the best 1% of trades: ${pkr(v.test.pkr_per_trade_without_best_1pct)} · worst losing streak ${v.test.worst_losing_streak} · biggest drop ${pkr(v.test.biggest_drop_pkr)} · neighbouring settings positive: ${esc(v.neighbours_positive_in_test)}</p>
-    </div>`).join("")}
-  <div class="card"><h2>Alerts, newest first</h2>
-    ${(LEDGER && LEDGER.alerts.length) ? `<table><tr><th>Date</th><th>Stock</th><th>State</th><th class="num">PKR</th></tr>
-      ${LEDGER.alerts.map((e) => `<tr><td>${esc(e.signal_date)}</td><td><a href="#stock/${esc(e.symbol)}">${esc(e.symbol)}</a> <span class="small muted">${esc(e.setup)}</span></td>
-        <td>${esc(e.result.state.replace("_", " "))}${e.result.exit_reason ? " (" + esc(e.result.exit_reason) + ")" : ""}</td>
-        <td class="num ${(e.result.pkr ?? e.result.pkr_if_sold_now ?? 0) > 0 ? "up" : "down"}">${e.result.pkr != null ? pkr(e.result.pkr) : e.result.pkr_if_sold_now != null ? pkr(e.result.pkr_if_sold_now) + "*" : "–"}</td></tr>`).join("")}</table>
-      <p class="small muted">* still open: value if sold at the last close.</p>` : `<div class="empty">No live alerts yet. The first ones come after a trading day's close.</div>`}
-  </div>
+    </div></details>`).join("")}
   <p class="small"><a href="#status">Run log</a> · <a href="#about">About</a></p>`;
 }
 
 function settingsView() {
   const s = settings();
   return `
-  <h2>Settings</h2>
-  <div class="card">
-    <label class="field">PKR I'm willing to lose per trade<input id="s-risk" type="number" inputmode="numeric" step="500" value="${s.risk}"></label>
-    <label class="field">Daily loss limit (PKR): no new trades after this<input id="s-dl" type="number" inputmode="numeric" step="500" value="${s.dailyLoss}"></label>
-    <label class="field">Minimum traded value per day (PKR). The tested setups need 2,000,000.<input id="s-mv" type="number" inputmode="numeric" step="500000" value="${s.minValue}"></label>
+  <div class="page-title">Settings</div>
+  <p class="page-sub">Saved on this phone only.</p>
+  <div class="card"><h2>My risk</h2>
+    <label class="field">How much can I lose on one trade? (PKR)<input id="s-risk" type="number" inputmode="numeric" step="500" value="${s.risk}"></label>
+    <p class="small muted" style="margin:-4px 0 6px">Buy plans size the shares so hitting the stop loses about this much.</p>
+    <label class="field">Stop trading for the day after losing (PKR)<input id="s-dl" type="number" inputmode="numeric" step="500" value="${s.dailyLoss}"></label>
+  </div>
+  <div class="card"><h2>Which stocks to show in the list</h2>
+    <label class="field">Minimum traded per day (PKR)<input id="s-mv" type="number" inputmode="numeric" step="500000" value="${s.minValue}"></label>
+    <p class="small muted" style="margin:-4px 0 6px">The tested setups only use stocks trading 2,000,000+ a day. Searching always shows every stock.</p>
     <div class="filters">
       <label class="field">Min price (Rs, 0 = any)<input id="s-pmin" type="number" inputmode="decimal" value="${s.minPrice}"></label>
       <label class="field">Max price (Rs, 0 = any)<input id="s-pmax" type="number" inputmode="decimal" value="${s.maxPrice}"></label>
     </div>
-    <button class="btn wide" id="s-save">Save</button>
-    <p class="small muted">Saved on this device only.</p>
   </div>
-  <div class="card">
-    <label class="switch"><span>Show a daily tip</span><input type="checkbox" id="s-tips" ${store.get("tipsOff", false) ? "" : "checked"}></label>
-    <div class="switch"><span>Light / dark</span><button class="btn ghost" id="s-theme" style="padding:7px 14px">Switch</button></div>
-    <a class="small" href="#help">Open the help guide</a>
+  <button class="btn wide" id="s-save">Save settings</button>
+  <div class="card"><h2>Display</h2>
+    <label class="switch"><span>Show a tip of the day on Today</span><input type="checkbox" id="s-tips" ${store.get("tipsOff", false) ? "" : "checked"}></label>
+    <div class="switch"><span>Theme</span><div class="seg" role="group" aria-label="Theme">${[["", "Auto"], ["light", "Light"], ["dark", "Dark"]].map(([k, l]) =>
+      `<button data-theme-set="${k}" class="${(store.get("theme", "") || "") === k ? "on" : ""}">${l}</button>`).join("")}</div></div>
+    <div class="row" style="gap:16px;margin-top:6px"><a class="small" href="#help">Help guide</a><a class="small" href="#" id="s-tour">Replay the tour</a></div>
   </div>
   <div class="card"><h2>Alerts on this phone</h2>
     ${alertsOn()
@@ -867,17 +1038,33 @@ async function render() {
   const v = document.getElementById("view");
   const screens = { hot, stock: () => stock(arg), check: () => check(arg), log: logView, record,
                     settings: settingsView, about, status, research, help, div: divScreen };
-  v.innerHTML = fcmBanner() + await (screens[route] || hot)();
+  const r = screens[route] ? route : "hot";
+  if (r !== "hot") listLimit = 40;
+  v.innerHTML = fcmBanner() + await screens[r]();
   if (store.get("lastRoute", "") !== location.hash) window.scrollTo(0, 0);
   store.set("lastRoute", location.hash);
-  wire(route, arg);
+  wire(r, arg);
 }
 
 function wire(route, arg) {
   const $ = (id) => document.getElementById(id);
-  if (route === "hot" || !route) {
-    $("f") && ($("f").onchange = (e) => { store.set("filter", e.target.value); render(); });
-    $("q") && ($("q").onchange = (e) => { store.set("q", e.target.value.trim()); render(); });
+  if (route === "hot" && DATA) {
+    const redraw = () => { $("stock-list").innerHTML = stockList(); wireMore(); };
+    const wireMore = () => { if ($("more")) $("more").onclick = (e) => { e.preventDefault(); listLimit += 40; redraw(); }; };
+    wireMore();
+    document.querySelectorAll("[data-f]").forEach((b) => b.onclick = () => {
+      store.set("filter", b.dataset.f); listLimit = 40;
+      document.querySelectorAll("[data-f]").forEach((o) => o.classList.toggle("on", o === b));
+      redraw();
+    });
+    if ($("q")) $("q").oninput = (e) => { store.set("q", e.target.value.trim()); listLimit = 40; redraw(); };
+    document.querySelectorAll("[data-jump]").forEach((a) => a.onclick = (e) => {
+      e.preventDefault();
+      const t = $(a.dataset.jump);
+      if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+      else flash(a.dataset.jump === "plans" ? "No new Buy plans today" : "No plans are running");
+    });
+    showTip();
   }
   if (route === "stock" && DATA) {
     const x = DATA.stocks.find((s) => s.symbol === arg);
@@ -894,7 +1081,11 @@ function wire(route, arg) {
     const boxes = [...document.querySelectorAll("input.c")], btn = $("in");
     if (!btn) return;
     const blocked = riskState().blocked;
-    const upd = () => btn.disabled = blocked || !boxes.every((b) => b.checked);
+    const upd = () => {
+      const left = boxes.filter((b) => !b.checked).length;
+      btn.disabled = blocked || left > 0;
+      $("ticks-left").textContent = blocked ? "Trading is locked for today." : left ? `${left} more box${left > 1 ? "es" : ""} to tick.` : "Ready. Tap after your order fills.";
+    };
     boxes.forEach((b) => b.onchange = upd);
     btn.onclick = () => {
       const x = DATA.stocks.find((s) => s.symbol === arg), p = x.plans[0];
@@ -905,6 +1096,7 @@ function wire(route, arg) {
         stop: +(entry * (1 - p.stop_pct)).toFixed(2), target: p.target_pct ? +(entry * (1 + p.target_pct)).toFixed(2) : null,
         entryDate: today(), exit: null, exitDate: null, followed: null, noChase: true });
       saveTrades(all);
+      flash(`${arg} logged. Set your stop and target in AKD Trade.`);
       location.hash = "#log";
     };
   }
@@ -915,6 +1107,8 @@ function wire(route, arg) {
       const all = trades(), t = all.find((t) => t.id === id);
       t.exit = px; t.exitDate = today(); t.followed = $("fp-" + id).value === "yes";
       saveTrades(all); render();
+      const res = tradePKR(t);
+      flash(`${t.symbol} closed: ${res >= 0 ? "+" : ""}${pkr(res)}`);
     });
   }
   if (route === "settings") {
@@ -922,8 +1116,15 @@ function wire(route, arg) {
     $("s-save").onclick = () => {
       store.set("settings", { risk: +$("s-risk").value || 2000, dailyLoss: +$("s-dl").value || 6000,
         minValue: +$("s-mv").value || 0, minPrice: +$("s-pmin").value || 0, maxPrice: +$("s-pmax").value || 0 });
-      location.hash = "#hot";
+      flash("Settings saved");
     };
+    $("s-tour").onclick = (e) => { e.preventDefault(); showWelcome(true); };
+    document.querySelectorAll("[data-theme-set]").forEach((b) => b.onclick = () => {
+      const t = b.dataset.themeSet;
+      if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
+      store.set("theme", t);
+      render();
+    });
   }
   if (route === "help") {
     $("h-welcome").onclick = () => showWelcome(true);
@@ -937,8 +1138,7 @@ function wire(route, arg) {
     };
   }
   if (route === "settings") {
-    $("s-tips").onchange = (e) => { store.set("tipsOff", !e.target.checked); store.set("tipDismissed", ""); showTip(); };
-    $("s-theme").onclick = toggleTheme;
+    $("s-tips").onchange = (e) => { store.set("tipsOff", !e.target.checked); store.set("tipDismissed", ""); };
   }
   if (route === "about") {
     const upd = () => $("pu-r").textContent = pkr((+$("pu-d").value || 0) * (+$("pu-p").value || 0) / 100);
@@ -1046,12 +1246,12 @@ const TIPS = [
   "A plan is valid for <b>one session</b>. If your limit buy doesn't fill, let it go: \"not filled\" is part of the tested plan.",
   "Set the stop and target from <b>your actual fill price</b>, not the alert's estimate.",
   "Judge the scanner after <b>20 trades</b>, not after one. Single trades win only about half the time.",
-  "Tap <b>Pre-trade check</b> before every trade. It sizes the position so a stop-out loses only your chosen amount.",
+  "Tap <b>I want to trade this</b> on a plan before every trade. It sizes the position so a stop-out loses only your chosen amount.",
   "The <b>daily loss lock</b> stops new trades after your limit. Change the limit in Settings.",
   "The four dots are: above 20-day average · volume vs normal · KSE-100 trend · room to the 60-day high. They explain, they don't trigger trades.",
   "Plans come from the <b>final close</b>. New ones appear after about 17:00 on trading days.",
   "PSX prices aren't adjusted for bonus shares or splits, so charts start after the latest one.",
-  "The <b>Track record</b> grades every alert automatically, losers included. Compare it with the backtest after 20–30 trades.",
+  "The <b>Results</b> tab grades every alert automatically, losers included. Compare it with the backtest after 20–30 trades.",
   "KMI All Share is a Shariah <b>screening</b>, not a fatwa. See About for the purification calculator.",
   "Trend hold trades can last up to <b>60 trading days</b>. Expect long waits and some long losing runs.",
 ];
@@ -1062,18 +1262,18 @@ function tipIndex() {
 }
 
 function showTip() {
-  const slot = document.getElementById("toast-slot"), main = document.getElementById("view");
+  const slot = document.getElementById("tip-slot");
+  if (!slot) return;                            // tips live on the Today screen only
   const off = store.get("tipsOff", false) || store.get("tipDismissed", "") === today() || !store.get("seenGuide", false);
-  if (off) { slot.innerHTML = ""; main.classList.remove("has-toast"); return; }
+  if (off) { slot.innerHTML = ""; return; }
   slot.innerHTML = `
     <div class="toast" role="status" aria-live="polite">
-      <div class="t-title">Tip</div>
+      <div class="t-title">Tip of the day</div>
       <div>${TIPS[tipIndex()]}</div>
       <div class="t-actions"><button id="t-next">Next tip</button><a href="#help" style="padding:4px 0;font-weight:600">Help guide</a>
         <button class="quiet" id="t-off">Turn off tips</button></div>
       <button class="x" id="t-x" aria-label="Dismiss tip for today">×</button>
     </div>`;
-  main.classList.add("has-toast");
   document.getElementById("t-next").onclick = () => { store.set("tipOffset", store.get("tipOffset", 0) + 1); showTip(); };
   document.getElementById("t-x").onclick = () => { store.set("tipDismissed", today()); showTip(); };
   document.getElementById("t-off").onclick = () => { store.set("tipsOff", true); showTip(); };
@@ -1108,10 +1308,10 @@ function tutorialSteps() {
     { title: "How to trade a plan", body: `
         <ol style="padding-left:20px;margin:6px 0">
           <li><b>Get the alert</b> after the close (about 17:00 on trading days).</li>
-          <li><b>Open the plan</b>: tap <i>Details &amp; chart</i> to see why it fired.</li>
-          <li><b>Do the pre-trade check</b>: three ticks, then <i>I'm in</i> logs the trade.</li>
+          <li><b>Open the plan</b>: tap <i>Why &amp; chart</i> to see why it fired.</li>
+          <li><b>Tap <i>I want to trade this</i></b>: three ticks, then <i>Log this trade</i> once your order fills.</li>
           <li><b>Place the order in AKD Trade</b> for the next session only. Add the stop and target once filled.</li>
-          <li><b>Close it</b> in <i>My trades</i> when the stop, the target or the hold time is reached.</li>
+          <li><b>Close it</b> in <i>My trades</i> (tap <i>I sold it</i>) when the stop, the target or the hold time is reached.</li>
         </ol>
         <p class="small muted">The app never trades for you. The plan is only valid for the session it names.</p>` },
     { title: "Your risk and the safety rules", body: `
@@ -1130,7 +1330,7 @@ function tutorialSteps() {
         </ol>
         ${alertsOn() ? `<p class="small"><span class="ok">✓ Alerts are already on for this phone.</span></p>`
           : `<button class="btn wide" id="tut-alerts">Turn on alerts</button><div class="small" id="tut-alerts-out" style="margin-top:8px"></div>`}
-        <p class="small muted">Tips will appear at the bottom now and then; tap × to hide one. The full guide is always behind the <b>?</b> button.</p>` },
+        <p class="small muted">A tip of the day appears on the Today screen; tap × to hide it. The full guide is always behind the <b>?</b> button.</p>` },
   ];
 }
 
@@ -1225,10 +1425,10 @@ function help() {
       <dt>Dividends tab</dt><dd>KMI stocks' shareholder meetings ahead, upcoming book closures (with the last day to buy to qualify for the dividend) and recent dividends. Information only, not buy signals.</dd>
       <dt>Context notes</dt><dd>Sector seasonality and dividend book closures that held in past years. They were tested and failed as buy signals, so they're shown as information only.</dd>
     </dl></div>
-  <div class="card"><h2>Track record and safety rules</h2>
+  <div class="card"><h2>Results and safety rules</h2>
     <dl class="help-sec">
-      <dt>Track record</dt><dd>Every alert is locked when sent and graded from real prices after AKD's costs: filled or not, then stop, target or time exit.</dd>
-      <dt>Pre-trade check</dt><dd>Three ticks before "I'm in": it's the tested setup, you accept the loss at the stop, you're not chasing.</dd>
+      <dt>Results tab</dt><dd>Every alert is locked when sent and graded from real prices after AKD's costs: filled or not, then stop, target or time exit.</dd>
+      <dt>I want to trade this</dt><dd>Opens a pre-trade check with three ticks before you can log the trade: it's the tested setup, you accept the loss at the stop, you're not chasing.</dd>
       <dt>Daily loss lock</dt><dd>After your daily loss limit, new trades are blocked until tomorrow. Three losses in a row also end the day.</dd>
     </dl></div>
   <button class="btn ghost wide" id="h-welcome">Replay the tutorial</button>
