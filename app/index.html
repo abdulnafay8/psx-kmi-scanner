@@ -253,6 +253,15 @@ nav a.on .ico { background: var(--brand-soft); border-radius: 99px; width: 52px;
 .page-sub { font-size: 13px; color: var(--muted); margin: 0 2px 8px; }
 .list a.more { justify-content: center; color: var(--brand); font-weight: 600; font-size: 14px; }
 .ticks-left { font-size: 12.5px; color: var(--muted); text-align: center; margin-top: 6px; }
+.list .irow { display: flex; align-items: center; border-top: 1px solid var(--line); }
+.list .irow:first-child { border-top: 0; }
+.list .irow a.item { flex: 1; min-width: 0; border-top: 0; padding-right: 8px; }
+.buy-btn { flex: none; margin-right: 12px; padding: 7px 12px; border-radius: 10px; border: 1px solid var(--brand);
+  color: var(--brand); font-weight: 650; font-size: 13px; text-decoration: none; }
+.buy-btn:active { background: var(--brand-soft); }
+.own { display: inline-block; padding: 1px 7px; border-radius: 99px; font-size: 11px; font-weight: 650;
+  background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+@media (max-width: 420px) { .irow .dots, .dot-key { display: none; } }
 @media (max-width: 380px) { .plan-grid.four { grid-template-columns: repeat(2, 1fr); } .tile b { font-size: 18px; } }
 </style>
 </head>
@@ -466,12 +475,12 @@ function stockList() {
   <div class="small muted" style="margin:2px 2px 6px">${list.length} stock${list.length === 1 ? "" : "s"}${q ? " match" + (list.length === 1 ? "es" : "") + " your search" : s.minValue ? ` trading ≥ ${pkr(s.minValue)}/day (<a href="#settings">change</a>)` : ""}</div>
   <div class="list">
   ${list.slice(0, listLimit).map((x) => `
-    <a class="item" href="#stock/${esc(x.symbol)}">
+    <div class="irow"><a class="item" href="#stock/${esc(x.symbol)}">
       <div class="who"><b>${esc(x.symbol)}</b><span class="name">${esc(x.name || "")}</span></div>
       <div class="dots" title="${x.lights.filter((l) => l.on).length} of 4 lights green" aria-label="${x.lights.filter((l) => l.on).length} of 4 lights green">${x.lights.map((l) => `<span class="dot ${l.on ? "on" : ""}"></span>`).join("")}</div>
       <div class="px">${num2(x.close)}<div class="small ${x.change_pct >= 0 ? "up" : "down"}">${signPct(x.change_pct)}</div></div>
       ${chip(x.status)}
-    </a>`).join("") || `<div class="empty">No stocks match. Try another word or the <b>All</b> filter.</div>`}
+    </a><a class="buy-btn" href="${buyHref(x)}" aria-label="Buy ${esc(x.symbol)}">Buy</a></div>`).join("") || `<div class="empty">No stocks match. Try another word or the <b>All</b> filter.</div>`}
   ${list.length > listLimit ? `<a class="item more" href="#" id="more">Show ${Math.min(40, list.length - listLimit)} more of ${list.length - listLimit}</a>` : ""}
   </div>`;
 }
@@ -563,7 +572,8 @@ function stock(sym) {
       ${ap.result.pkr_if_sold_now != null ? `<div>If sold at last close</div><div class="${ap.result.pkr_if_sold_now >= 0 ? "up" : "down"}">${pkr(ap.result.pkr_if_sold_now)} <span class="small muted">per 100k</span></div>` : ""}
     </div></div>` : ""}
   ${handle[x.status] ? `<div class="card todo"><h2>What should I do?</h2><ol>${handle[x.status].map((h) => `<li>${esc(h)}</li>`).join("")}</ol>
-    ${x.tested || x.status === "in_plan" ? "" : `<p class="small muted" style="margin:8px 0 0">This status is information only: it is not a tested setup and never a buy signal.</p>`}</div>` : ""}
+    ${x.tested || x.status === "in_plan" ? "" : `<p class="small muted" style="margin:8px 0 0">This status is information only: it is not a tested setup and never a buy signal.</p>`}
+    <a class="btn ghost wide" href="${buyHref(x)}">I bought / want to buy ${esc(x.symbol)} anyway</a></div>` : ""}
   ${chartCard(x)}
   ${(x.notes || []).length ? `<div class="card"><h2>Good to know</h2>
     ${x.notes.map((n) => `<div class="check"><span class="muted">ⓘ</span><div class="small">${esc(n)}</div></div>`).join("")}
@@ -812,63 +822,106 @@ function check(sym) {
   </div><div class="bar-p" style="margin-top:8px"><div style="width:${n * 5}%"></div></div></div>`;
 }
 
+// ---------- own pick: log a buy of any KMI stock (not a tested plan) ----------
+const buyHref = (x) => x.status === "buy_plan" && !x.stale ? `#check/${encodeURIComponent(x.symbol)}` : `#buy/${encodeURIComponent(x.symbol)}`;
+const OWN_WARN = {
+  running: "It's up a lot recently. Buying after a strong run was tested and lost money on average.",
+  fading: "It's below a falling 20-day average: the trend is down.",
+  in_plan: "A tested plan for this stock is already running. Don't double up.",
+  no_setup: "No tested setup has fired for it.",
+};
+function buyView(sym) {
+  const x = DATA && DATA.stocks.find((s) => s.symbol === sym);
+  if (!x) return `<div class="empty">${esc(sym)} is not on the KMI All Share list, so it can't be logged here.</div>`;
+  const s = settings(), r = riskState();
+  const stop = +(x.close * 0.9).toFixed(2), shares = Math.max(1, Math.floor(s.risk / (x.close - stop)));
+  return `
+  <a href="#stock/${esc(sym)}" class="back">← ${esc(sym)}</a>
+  <div class="page-title">Buy ${esc(sym)}: your own pick</div>
+  <p class="page-sub">${esc(x.name || "")} · last close ${rs(x.close)}</p>
+  ${r.reasons.map((m) => `<div class="note lock">${esc(m)}</div>`).join("")}
+  <div class="note"><b>The scanner has not recommended this.</b> ${esc(OWN_WARN[x.status] || "")} It will be tracked in My trades as an <b>own pick</b>, apart from the tested plans.</div>
+  <div class="card">
+    <h2 style="margin-top:0">1 · Your buy</h2>
+    <div class="filters">
+      <label class="field">Buy price (Rs)<input id="ob-px" type="number" inputmode="decimal" step="0.01" value="${x.close.toFixed(2)}"></label>
+      <label class="field">Shares<input id="ob-sh" type="number" inputmode="numeric" step="1" value="${shares}"></label>
+    </div>
+    <h2>2 · Your exit plan</h2>
+    <p class="small muted" style="margin:0">Decide now where you'll sell. A stop caps the loss.</p>
+    <div class="filters">
+      <label class="field">Stop loss (Rs)<input id="ob-stop" type="number" inputmode="decimal" step="0.01" value="${stop.toFixed(2)}"></label>
+      <label class="field">Target (Rs, optional)<input id="ob-tgt" type="number" inputmode="decimal" step="0.01" placeholder="none"></label>
+    </div>
+    <div class="step-line" id="ob-sum"></div>
+    <h2>3 · Tick both</h2>
+    <label class="tick"><input type="checkbox" class="c"> <span>I know this is not a tested setup and the scanner did not suggest it.</span></label>
+    <label class="tick" style="border-bottom:0"><input type="checkbox" class="c"> <span>I'm not chasing or trying to win back a loss.</span></label>
+    <button class="btn wide" id="ob-in" disabled>Log this buy</button>
+    <div class="ticks-left" id="ob-left">${r.blocked ? "Trading is locked for today." : "Tick both boxes to continue."}</div>
+  </div>`;
+}
+
 function logView() {
   const all = trades(), r = riskState();
   const closed = all.filter((t) => t.exit != null).sort((a, b) => (a.exitDate + a.id).localeCompare(b.exitDate + b.id));
   const open = all.filter((t) => t.exit == null);
+  // the "judge after 20" blocks are about the tested plans; own picks are counted on their own
+  const planClosed = closed.filter((t) => !t.own), ownClosed = closed.filter((t) => t.own);
   const blocks = [];
-  for (let i = 0; i < closed.length; i += 20) {
-    const b = closed.slice(i, i + 20), sum = b.reduce((a, t) => a + tradePKR(t), 0);
+  for (let i = 0; i < planClosed.length; i += 20) {
+    const b = planClosed.slice(i, i + 20), sum = b.reduce((a, t) => a + tradePKR(t), 0);
     blocks.push(`<tr><td>Trades ${i + 1}–${i + b.length}</td><td class="num">${b.filter((t) => tradePKR(t) > 0).length}/${b.length}</td><td class="num">${pkr(sum)}</td></tr>`);
   }
-  const split = (yes) => { const b = closed.filter((t) => t.followed === yes); const sum = b.reduce((a, t) => a + tradePKR(t), 0);
-    return `<tr><td>${yes ? "Followed the plan" : "Didn't follow"}</td><td class="num">${b.length}</td><td class="num">${b.length ? pkr(sum / b.length) : "–"}</td></tr>`; };
-  const n = closed.length % 20;
+  const row = (label, b) => { const sum = b.reduce((a, t) => a + tradePKR(t), 0);
+    return `<tr><td>${label}</td><td class="num">${b.length}</td><td class="num ${sum > 0 ? "up" : sum < 0 ? "down" : ""}">${b.length ? pkr(sum / b.length) : "–"}</td></tr>`; };
+  const split = (yes) => row(yes ? "Plan, followed it" : "Plan, didn't follow", planClosed.filter((t) => t.followed === yes));
+  const n = planClosed.length % 20;
   const totalPKR = closed.reduce((a, t) => a + tradePKR(t), 0);
   const lastClose = (sym) => { const x = DATA && DATA.stocks.find((s) => s.symbol === sym); return x ? x.close : null; };
   return `
   <div class="page-title">My trades</div>
-  <p class="page-sub">Trades you logged from a Buy plan. Saved on this phone only.</p>
+  <p class="page-sub">Trades you logged from a Buy plan or as your own pick. Saved on this phone only.</p>
   ${r.reasons.map((m) => `<div class="note lock">${esc(m)}</div>`).join("")}
   <div class="tiles" style="margin-top:4px">
     <div class="tile"><b>${open.length}</b><span>open now</span></div>
     <div class="tile"><b class="${r.todayPKR > 0 ? "up" : r.todayPKR < 0 ? "down" : ""}">${pkr(r.todayPKR).replace("PKR ", "")}</b><span>today (PKR)</span></div>
     <div class="tile"><b class="${totalPKR > 0 ? "up" : totalPKR < 0 ? "down" : ""}">${pkr(totalPKR).replace("PKR ", "")}</b><span>all closed (PKR)</span></div>
   </div>
-  <div class="card"><div class="row between small"><span>Judge the scanner after 20 trades, not after 1</span><b>${n} of 20</b></div>
+  <div class="card"><div class="row between small"><span>Judge the scanner after 20 plan trades, not after 1</span><b>${n} of 20</b></div>
     <div class="bar-p" style="margin-top:6px"><div style="width:${n * 5}%"></div></div></div>
   <div class="section-title"><h2>Open trades</h2></div>
-  ${open.length ? "" : `<div class="card empty">No open trades.<br><span class="small">When a Buy plan appears on <a href="#hot">Today</a>, tap <b>I want to trade this</b> to log it here.</span></div>`}
+  ${open.length ? "" : `<div class="card empty">No open trades.<br><span class="small">When a Buy plan appears on <a href="#hot">Today</a>, tap <b>I want to trade this</b> to log it here. To log any other stock, tap <b>Buy</b> next to it in the list.</span></div>`}
   ${open.map((t) => { const lc = lastClose(t.symbol), now = lc ? tradePKR({ ...t, exit: lc }) : null;
     const near = lc && (lc <= t.stop ? `<span class="down"><b>At or below your stop</b>: sell per the plan.</span>` :
       t.target && lc >= t.target ? `<span class="up"><b>Target reached</b>: sell per the plan.</span>` : "");
     return `
     <div class="card">
-      <div class="row between"><a href="#stock/${esc(t.symbol)}" style="font-weight:750;font-size:17px;text-decoration:none">${esc(t.symbol)}</a><span class="small muted">${esc(t.setup)} · in ${esc(fmtDay(t.entryDate))}</span></div>
+      <div class="row between"><a href="#stock/${esc(t.symbol)}" style="font-weight:750;font-size:17px;text-decoration:none">${esc(t.symbol)}</a><span class="small muted">${t.own ? `<span class="own">Own pick</span>` : esc(t.setup)} · in ${esc(fmtDay(t.entryDate))}</span></div>
       <div class="plan-grid four">
         <div><span>Bought</span><b>${num2(t.entry)}</b><span>${t.shares.toLocaleString()} sh</span></div>
         <div class="stp"><span>Stop</span><b>${num2(t.stop)}</b><span>sell below</span></div>
-        <div class="tgt"><span>Target</span><b>${t.target ? num2(t.target) : "—"}</b><span>${t.target ? "sell above" : "time exit"}</span></div>
+        <div class="tgt"><span>Target</span><b>${t.target ? num2(t.target) : "—"}</b><span>${t.target ? "sell above" : t.own ? "none set" : "time exit"}</span></div>
         <div><span>Last close</span><b>${lc ? num2(lc) : "–"}</b><span class="${now > 0 ? "up" : now < 0 ? "down" : ""}">${now != null ? pkr(now).replace("PKR ", "Rs ") : ""}</span></div>
       </div>
       ${near ? `<div class="pnl">${near}</div>` : ""}
       <details style="margin-top:4px"><summary>I sold it: close this trade</summary>
         <div class="filters">
           <label class="field">Sell price (Rs)<input type="number" inputmode="decimal" step="0.01" id="x-${t.id}" value="${lc ? lc.toFixed(2) : ""}"></label>
-          <label class="field">Followed the plan?<select id="fp-${t.id}"><option value="yes">Yes</option><option value="no">No</option></select></label>
+          <label class="field">${t.own ? "Stuck to my stop/target?" : "Followed the plan?"}<select id="fp-${t.id}"><option value="yes">Yes</option><option value="no">No</option></select></label>
         </div>
         <button class="btn wide" data-close="${t.id}">Close trade</button>
       </details>
     </div>`; }).join("")}
   <div class="card"><h2>Results per 20 trades</h2>
     <table><tr><th>Block</th><th class="num">Wins</th><th class="num">PKR</th></tr>${blocks.join("") || `<tr><td colspan="3" class="muted">No closed trades yet.</td></tr>`}</table>
-    <h3>Did following the plan pay?</h3>
-    <table><tr><th></th><th class="num">Trades</th><th class="num">Avg PKR</th></tr>${split(true)}${split(false)}</table>
+    <h3>Plans vs your own picks</h3>
+    <table><tr><th></th><th class="num">Trades</th><th class="num">Avg PKR</th></tr>${split(true)}${split(false)}${row("Own picks", ownClosed)}</table>
   </div>
   <div class="card"><h2>Closed trades</h2>
     <table><tr><th>Stock</th><th>Out</th><th class="num">PKR</th><th>Plan?</th></tr>
     ${[...closed].reverse().map((t) => { const p = tradePKR(t);
-      return `<tr><td>${esc(t.symbol)}</td><td>${esc(t.exitDate)}</td><td class="num ${p > 0 ? "up" : "down"}">${pkr(p)}</td><td>${t.followed ? "yes" : "no"}</td></tr>`; }).join("") ||
+      return `<tr><td>${esc(t.symbol)}</td><td>${esc(t.exitDate)}</td><td class="num ${p > 0 ? "up" : "down"}">${pkr(p)}</td><td>${t.own ? `<span class="own">own</span>` : t.followed ? "yes" : "no"}</td></tr>`; }).join("") ||
       `<tr><td colspan="4" class="muted">None yet.</td></tr>`}</table>
     <p class="small muted">PKR after brokerage (AKD Trade rates), sales tax and exchange fees, before capital gains tax.</p></div>`;
 }
@@ -1033,10 +1086,10 @@ function divScreen() {
 // ---------- router ----------
 async function render() {
   const [route, arg] = (location.hash.slice(1) || "hot").split("/");
-  const tab = { stock: "hot", check: "hot" }[route] || route;
+  const tab = { stock: "hot", check: "hot", buy: "hot" }[route] || route;
   document.querySelectorAll("nav a").forEach((a) => a.classList.toggle("on", a.dataset.r === tab));
   const v = document.getElementById("view");
-  const screens = { hot, stock: () => stock(arg), check: () => check(arg), log: logView, record,
+  const screens = { hot, stock: () => stock(arg), check: () => check(arg), buy: () => buyView(arg), log: logView, record,
                     settings: settingsView, about, status, research, help, div: divScreen };
   const r = screens[route] ? route : "hot";
   if (r !== "hot") listLimit = 40;
@@ -1076,6 +1129,34 @@ function wire(route, arg) {
         renderChart(x);
       });
     }
+  }
+  if (route === "buy" && $("ob-in")) {
+    const boxes = [...document.querySelectorAll("input.c")], btn = $("ob-in"), blocked = riskState().blocked;
+    const vals = () => ({ px: parseFloat($("ob-px").value), sh: parseInt($("ob-sh").value, 10),
+                          stop: parseFloat($("ob-stop").value), tgt: parseFloat($("ob-tgt").value) || null });
+    const upd = () => {
+      const v = vals(), left = boxes.filter((b) => !b.checked).length;
+      const okNums = v.px > 0 && v.sh > 0 && v.stop > 0 && v.stop < v.px && (!v.tgt || v.tgt > v.px);
+      $("ob-sum").innerHTML = okNums
+        ? `Cost ≈ <b>${pkr(v.px * v.sh)}</b> · if the stop hits you lose ≈ <b class="down">${pkr(Math.abs(tradePKR({ entry: v.px, exit: v.stop, shares: v.sh })))}</b>` +
+          (v.tgt ? ` · at target you make ≈ <b class="up">${pkr(tradePKR({ entry: v.px, exit: v.tgt, shares: v.sh }))}</b>` : "")
+        : `<span class="down">Enter a price and shares, a stop below the price${v.tgt ? " and a target above it" : ""}.</span>`;
+      btn.disabled = blocked || left > 0 || !okNums;
+      $("ob-left").textContent = blocked ? "Trading is locked for today." : !okNums ? "Fix the numbers above." :
+        left ? `${left} more box${left > 1 ? "es" : ""} to tick.` : "Ready.";
+    };
+    boxes.forEach((b) => b.onchange = upd);
+    ["ob-px", "ob-sh", "ob-stop", "ob-tgt"].forEach((id) => $(id).oninput = upd);
+    upd();
+    btn.onclick = () => {
+      const v = vals(), all = trades();
+      all.push({ id: Date.now().toString(36), symbol: arg, setup: "Own pick", own: true, entry: v.px, shares: v.sh,
+        stop: +v.stop.toFixed(2), target: v.tgt ? +v.tgt.toFixed(2) : null,
+        entryDate: today(), exit: null, exitDate: null, followed: null, noChase: true });
+      saveTrades(all);
+      flash(`${arg} logged as an own pick.`);
+      location.hash = "#log";
+    };
   }
   if (route === "check") {
     const boxes = [...document.querySelectorAll("input.c")], btn = $("in");
@@ -1429,6 +1510,7 @@ function help() {
     <dl class="help-sec">
       <dt>Results tab</dt><dd>Every alert is locked when sent and graded from real prices after AKD's costs: filled or not, then stop, target or time exit.</dd>
       <dt>I want to trade this</dt><dd>Opens a pre-trade check with three ticks before you can log the trade: it's the tested setup, you accept the loss at the stop, you're not chasing.</dd>
+      <dt>Buy button (own picks)</dt><dd>Lets you log a buy of any KMI stock in the list, with your own stop and optional target. It's tracked in My trades as an <b>own pick</b>, kept apart from the tested plans, so you can see whether your own picks do better or worse.</dd>
       <dt>Daily loss lock</dt><dd>After your daily loss limit, new trades are blocked until tomorrow. Three losses in a row also end the day.</dd>
     </dl></div>
   <button class="btn ghost wide" id="h-welcome">Replay the tutorial</button>
