@@ -1,6 +1,23 @@
 {
  "runs": [
   {
+   "at": "2026-11-17T11:44:06+05:00",
+   "state": "before_final",
+   "as_of": "2026-11-16",
+   "new_alerts": 0,
+   "fetch_failed": 0,
+   "log": [
+    "11:44:06  run started Tuesday 2026-11-17 11:44 PKT; market state: before_final",
+    "11:44:06  before 16:15: today's candle isn't final yet, so it is not saved and no alerts are made",
+    "11:57:34  prices updated for 313 stocks, 0 failed",
+    "11:57:37  no new alerts: the last final candle is 2026-11-16 and the next session opened at Tue 17 Nov 09:15; today's candle isn't final until after the close",
+    "11:57:37  checked 307 KMI stocks as of 2026-11-16: {'no_setup': 213, 'fading': 48, 'running': 40, 'in_plan': 3, 'buy_plan': 3}",
+    "11:57:37  washout: 2 stocks miss exactly one check: FANM, KPUS",
+    "11:57:37  trend_hold: 57 stocks miss exactly one check: ACPL, AGTL, ARCTM, ASL, ASTM, ATRL, BAFS, BERG, BUXL, CHAS, CNERGY, DAAG",
+    "11:57:50  dividend calendar: 16 meetings, 2 book closures ahead, 84 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-17T08:15:35+05:00",
    "state": "before_final",
    "as_of": "2026-11-16",
@@ -550,23 +567,6 @@
     "18:00:15  trend_hold: 49 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DWSM, EFERT",
     "18:00:23  ntfy push sent: FTSM: Washout dip in a hot stock",
     "18:00:24  Firebase push sent to 1 of 1 devices: FTSM: Washout dip in a hot stock"
-   ]
-  },
-  {
-   "at": "2026-10-28T08:11:10+05:00",
-   "state": "before_final",
-   "as_of": "2026-10-27",
-   "new_alerts": 0,
-   "fetch_failed": 0,
-   "log": [
-    "08:11:10  run started Wednesday 2026-10-28 08:11 PKT; market state: before_final",
-    "08:11:10  before 16:15: today's candle isn't final yet, so it is not saved and no alerts are made",
-    "08:21:52  39 fetches failed; retrying them in 2 minutes",
-    "08:25:28  prices updated for 313 stocks, 0 failed",
-    "08:25:30  plans from the 2026-10-27 close are for the session opening Wed 28 Oct 09:15",
-    "08:25:30  checked 307 KMI stocks as of 2026-10-27: {'fading': 208, 'no_setup': 87, 'running': 9, 'in_plan': 2, 'buy_plan': 1}",
-    "08:25:30  washout: 6 stocks miss exactly one check: ASTM, CFL, ECOP, FIL, JDMT, KPUS",
-    "08:25:30  trend_hold: 48 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DNCC, DWSM"
    ]
   }
  ]
