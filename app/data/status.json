@@ -1,6 +1,23 @@
 {
  "runs": [
   {
+   "at": "2026-11-19T18:09:24+05:00",
+   "state": "after_close",
+   "as_of": "2026-11-19",
+   "new_alerts": 0,
+   "fetch_failed": 0,
+   "log": [
+    "18:09:24  run started Thursday 2026-11-19 18:09 PKT; market state: after_close",
+    "18:22:04  4 fetches failed; retrying them in 2 minutes",
+    "18:24:21  prices updated for 313 stocks, 0 failed",
+    "18:24:25  plans from the 2026-11-19 close are for the session opening Fri 20 Nov 09:15",
+    "18:24:26  checked 307 KMI stocks as of 2026-11-19: {'no_setup': 222, 'fading': 55, 'running': 28, 'in_plan': 2}",
+    "18:24:26  washout: 4 stocks miss exactly one check: KPUS, MACTER, OML, PIM",
+    "18:24:26  trend_hold: 64 stocks miss exactly one check: ABOT, AGTL, ARCTM, ASL, ASTM, ATRL, BAFS, BERG, BFBIO, BPL, BUXL, CNERGY",
+    "18:24:39  dividend calendar: 18 meetings, 1 book closures ahead, 85 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-19T08:20:21+05:00",
    "state": "before_final",
    "as_of": "2026-11-18",
@@ -552,22 +569,6 @@
     "18:04:20  trend_hold: 51 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DNCC, DWSM",
     "18:04:21  ntfy push sent: INKL: Trend hold (weeks)",
     "18:04:21  Firebase push sent to 1 of 1 devices: INKL: Trend hold (weeks)"
-   ]
-  },
-  {
-   "at": "2026-10-30T08:13:05+05:00",
-   "state": "before_final",
-   "as_of": "2026-10-29",
-   "new_alerts": 0,
-   "fetch_failed": 0,
-   "log": [
-    "08:13:05  run started Friday 2026-10-30 08:13 PKT; market state: before_final",
-    "08:13:05  before 17:00: today's candle isn't final yet, so it is not saved and no alerts are made",
-    "08:25:51  prices updated for 313 stocks, 0 failed",
-    "08:25:55  plans from the 2026-10-29 close are for the session opening Fri 30 Oct 09:15",
-    "08:25:55  checked 307 KMI stocks as of 2026-10-29: {'fading': 174, 'no_setup': 117, 'running': 12, 'in_plan': 3, 'buy_plan': 1}",
-    "08:25:55  washout: 6 stocks miss exactly one check: ASTM, ECOP, FIL, JDMT, KPUS, MWMP",
-    "08:25:55  trend_hold: 49 stocks miss exactly one check: ABOT, ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DNCC"
    ]
   }
  ]
