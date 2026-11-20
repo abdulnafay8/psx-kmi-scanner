@@ -1,6 +1,23 @@
 {
  "runs": [
   {
+   "at": "2026-11-20T18:04:22+05:00",
+   "state": "after_close",
+   "as_of": "2026-11-20",
+   "new_alerts": 0,
+   "fetch_failed": 0,
+   "log": [
+    "18:04:22  run started Friday 2026-11-20 18:04 PKT; market state: after_close",
+    "18:16:36  1 fetches failed; retrying them in 2 minutes",
+    "18:18:43  prices updated for 313 stocks, 0 failed",
+    "18:18:46  plans from the 2026-11-20 close are for the session opening Mon 23 Nov 09:15",
+    "18:18:46  checked 307 KMI stocks as of 2026-11-20: {'no_setup': 228, 'fading': 54, 'running': 23, 'in_plan': 2}",
+    "18:18:46  washout: 2 stocks miss exactly one check: MACTER, OML",
+    "18:18:46  trend_hold: 61 stocks miss exactly one check: ABOT, ARCTM, ASL, ASTM, ATRL, BERG, BPL, BUXL, CNERGY, DAAG, DADX, DCR",
+    "18:18:58  dividend calendar: 19 meetings, 0 book closures ahead, 85 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-20T08:12:39+05:00",
    "state": "before_final",
    "as_of": "2026-11-19",
@@ -551,22 +568,6 @@
     "08:27:39  washout: 6 stocks miss exactly one check: ASTM, ECOP, FIL, JDMT, KPUS, MWMP",
     "08:27:39  trend_hold: 51 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DNCC, DWSM",
     "08:27:51  dividend calendar: 8 meetings, 11 book closures ahead, 85 recent payouts"
-   ]
-  },
-  {
-   "at": "2026-11-01T15:40:10+05:00",
-   "state": "weekend",
-   "as_of": "2026-10-30",
-   "new_alerts": 0,
-   "fetch_failed": 0,
-   "log": [
-    "15:40:10  run started Sunday 2026-11-01 15:40 PKT; market state: weekend",
-    "15:40:10  weekend: PSX is closed, nothing new to fetch",
-    "15:40:11  plans from the 2026-10-30 close are for the session opening Mon 02 Nov 09:15",
-    "15:40:12  checked 307 KMI stocks as of 2026-10-30: {'fading': 175, 'no_setup': 108, 'running': 21, 'in_plan': 2, 'buy_plan': 1}",
-    "15:40:12  washout: 6 stocks miss exactly one check: ASTM, ECOP, FIL, JDMT, KPUS, MWMP",
-    "15:40:12  trend_hold: 51 stocks miss exactly one check: ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DCR, DFSM, DNCC, DWSM",
-    "15:40:22  dividend calendar: 6 meetings, 13 book closures ahead, 83 recent payouts"
    ]
   }
  ]

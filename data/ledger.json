@@ -19,10 +19,10 @@
    "fill_price": 74.0,
    "stop_price": 62.9,
    "target_price": null,
-   "days_held": 20,
+   "days_held": 21,
    "state": "open",
-   "last_price": 74.81,
-   "pkr_if_sold_now": 730
+   "last_price": 73.6,
+   "pkr_if_sold_now": -903
   }
  },
  {
@@ -157,10 +157,10 @@
    "fill_price": 106.32,
    "stop_price": 90.37,
    "target_price": null,
-   "days_held": 20,
+   "days_held": 21,
    "state": "open",
-   "last_price": 129.46,
-   "pkr_if_sold_now": 21362
+   "last_price": 140.62,
+   "pkr_if_sold_now": 31840
   }
  },
  {
@@ -267,10 +267,10 @@
    "fill_price": 62.99,
    "stop_price": 53.54,
    "target_price": null,
-   "days_held": 17,
+   "days_held": 18,
    "state": "open",
-   "last_price": 62.4,
-   "pkr_if_sold_now": -1298
+   "last_price": 63.71,
+   "pkr_if_sold_now": 778
   }
  },
  {
@@ -377,10 +377,10 @@
    "fill_price": 125.99,
    "stop_price": 107.09,
    "target_price": null,
-   "days_held": 12,
+   "days_held": 13,
    "state": "open",
-   "last_price": 209.84,
-   "pkr_if_sold_now": 66069
+   "last_price": 202.37,
+   "pkr_if_sold_now": 60151
   }
  },
  {
@@ -403,10 +403,10 @@
    "fill_price": 73.5,
    "stop_price": 62.48,
    "target_price": null,
-   "days_held": 11,
+   "days_held": 12,
    "state": "open",
-   "last_price": 68.81,
-   "pkr_if_sold_now": -6732
+   "last_price": 68.55,
+   "pkr_if_sold_now": -7085
   }
  },
  {
@@ -449,10 +449,10 @@
    "fill_price": 119.0,
    "stop_price": 101.15,
    "target_price": null,
-   "days_held": 11,
+   "days_held": 12,
    "state": "open",
-   "last_price": 161.89,
-   "pkr_if_sold_now": 35614
+   "last_price": 145.7,
+   "pkr_if_sold_now": 22033
   }
  },
  {
@@ -555,10 +555,10 @@
    "fill_price": 57.99,
    "stop_price": 49.29,
    "target_price": null,
-   "days_held": 8,
+   "days_held": 9,
    "state": "open",
-   "last_price": 59.29,
-   "pkr_if_sold_now": 1875
+   "last_price": 59.93,
+   "pkr_if_sold_now": 2976
   }
  },
  {
@@ -581,10 +581,10 @@
    "fill_price": 1054.11,
    "stop_price": 927.62,
    "target_price": 1159.52,
-   "days_held": 8,
+   "days_held": 9,
    "state": "open",
-   "last_price": 1018.54,
-   "pkr_if_sold_now": -3732
+   "last_price": 1016.27,
+   "pkr_if_sold_now": -3946
   }
  },
  {
@@ -607,10 +607,10 @@
    "fill_price": 7.13,
    "stop_price": 6.06,
    "target_price": null,
-   "days_held": 8,
+   "days_held": 9,
    "state": "open",
-   "last_price": 7.72,
-   "pkr_if_sold_now": 6643
+   "last_price": 7.51,
+   "pkr_if_sold_now": 3698
   }
  },
  {
@@ -689,10 +689,10 @@
    "fill_price": 103.99,
    "stop_price": 88.39,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 106.5,
-   "pkr_if_sold_now": 2046
+   "last_price": 95.85,
+   "pkr_if_sold_now": -8176
   }
  },
  {
@@ -715,10 +715,10 @@
    "fill_price": 9.1,
    "stop_price": 7.73,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 8.59,
-   "pkr_if_sold_now": -6886
+   "last_price": 8.19,
+   "pkr_if_sold_now": -11281
   }
  },
  {
@@ -741,10 +741,10 @@
    "fill_price": 1370.02,
    "stop_price": 1164.52,
    "target_price": null,
-   "days_held": 3,
+   "days_held": 4,
    "state": "open",
-   "last_price": 1314.07,
-   "pkr_if_sold_now": -4439
+   "last_price": 1249.78,
+   "pkr_if_sold_now": -9124
   }
  },
  {
@@ -767,10 +767,10 @@
    "fill_price": 27.7,
    "stop_price": 23.54,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 31.05,
-   "pkr_if_sold_now": 11660
+   "last_price": 29.85,
+   "pkr_if_sold_now": 7328
   }
  },
  {
@@ -793,10 +793,10 @@
    "fill_price": 100.31,
    "stop_price": 85.26,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 121.37,
-   "pkr_if_sold_now": 20594
+   "last_price": 133.51,
+   "pkr_if_sold_now": 32674
   }
  },
  {
@@ -819,10 +819,10 @@
    "fill_price": 467.7,
    "stop_price": 397.54,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 454.59,
-   "pkr_if_sold_now": -3161
+   "last_price": 448.14,
+   "pkr_if_sold_now": -4538
   }
  },
  {
@@ -845,10 +845,10 @@
    "fill_price": 250.0,
    "stop_price": 212.5,
    "target_price": null,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 248.09,
-   "pkr_if_sold_now": -1126
+   "last_price": 243.73,
+   "pkr_if_sold_now": -2866
   }
  },
  {
@@ -871,10 +871,10 @@
    "fill_price": 63.03,
    "stop_price": 55.47,
    "target_price": 69.33,
-   "days_held": 0,
+   "days_held": 1,
    "state": "open",
-   "last_price": 62.4,
-   "pkr_if_sold_now": -1361
+   "last_price": 63.71,
+   "pkr_if_sold_now": 714
   }
  }
 ]
