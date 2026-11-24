@@ -1,6 +1,23 @@
 {
  "runs": [
   {
+   "at": "2026-11-25T03:17:45+05:00",
+   "state": "before_final",
+   "as_of": "2026-11-24",
+   "new_alerts": 0,
+   "fetch_failed": 0,
+   "log": [
+    "03:17:45  run started Wednesday 2026-11-25 03:17 PKT; market state: before_final",
+    "03:17:45  before 16:15: today's candle isn't final yet, so it is not saved and no alerts are made",
+    "03:29:49  prices updated for 313 stocks, 0 failed",
+    "03:29:51  plans from the 2026-11-24 close are for the session opening Wed 25 Nov 09:15",
+    "03:29:52  checked 307 KMI stocks as of 2026-11-24: {'no_setup': 239, 'fading': 45, 'running': 16, 'buy_plan': 5, 'in_plan': 2}",
+    "03:29:52  washout: 4 stocks miss exactly one check: MACTER, PIM, SINDM, STML",
+    "03:29:52  trend_hold: 62 stocks miss exactly one check: ABOT, ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BPL, BUXL, CNERGY, COLG, DAAG",
+    "03:30:03  dividend calendar: 21 meetings, 0 book closures ahead, 79 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-24T17:47:21+05:00",
    "state": "after_close",
    "as_of": "2026-11-24",
@@ -554,26 +571,6 @@
     "08:33:00  washout: 9 stocks miss exactly one check: DADX, FIL, GCWL, GTYR, IPAK, NRL, SPSL, SYM, ZAL",
     "08:33:00  trend_hold: 49 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DADX, DCR, DFSM",
     "08:33:13  dividend calendar: 9 meetings, 10 book closures ahead, 87 recent payouts"
-   ]
-  },
-  {
-   "at": "2026-11-03T17:56:11+05:00",
-   "state": "after_close",
-   "as_of": "2026-11-03",
-   "new_alerts": 1,
-   "fetch_failed": 0,
-   "log": [
-    "17:56:11  run started Tuesday 2026-11-03 17:56 PKT; market state: after_close",
-    "18:09:14  1 fetches failed; retrying them in 2 minutes",
-    "18:11:20  prices updated for 313 stocks, 0 failed",
-    "18:11:24  plans from the 2026-11-03 close are for the session opening Wed 04 Nov 09:15",
-    "18:11:24  NEW ALERT KPUS washout: Limit buy at Rs 1,006.84",
-    "18:11:24  checked 307 KMI stocks as of 2026-11-03: {'fading': 172, 'no_setup': 112, 'running': 16, 'in_plan': 6, 'buy_plan': 1}",
-    "18:11:24  washout: 9 stocks miss exactly one check: DADX, FIL, GCWL, GTYR, IPAK, NRL, SPSL, SYM, ZAL",
-    "18:11:24  trend_hold: 49 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DADX, DCR, DFSM",
-    "18:11:24  ntfy push sent: KPUS: Washout dip in a hot stock",
-    "18:11:25  Firebase push sent to 1 of 1 devices: KPUS: Washout dip in a hot stock",
-    "18:11:38  dividend calendar: 9 meetings, 11 book closures ahead, 86 recent payouts"
    ]
   }
  ]
