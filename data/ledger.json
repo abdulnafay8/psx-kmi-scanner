@@ -19,10 +19,10 @@
    "fill_price": 74.0,
    "stop_price": 62.9,
    "target_price": null,
-   "days_held": 22,
+   "days_held": 23,
    "state": "open",
-   "last_price": 70.89,
-   "pkr_if_sold_now": -4558
+   "last_price": 73.39,
+   "pkr_if_sold_now": -1186
   }
  },
  {
@@ -157,10 +157,10 @@
    "fill_price": 106.32,
    "stop_price": 90.37,
    "target_price": null,
-   "days_held": 22,
+   "days_held": 23,
    "state": "open",
-   "last_price": 126.56,
-   "pkr_if_sold_now": 18639
+   "last_price": 124.81,
+   "pkr_if_sold_now": 16996
   }
  },
  {
@@ -267,10 +267,10 @@
    "fill_price": 62.99,
    "stop_price": 53.54,
    "target_price": null,
-   "days_held": 19,
+   "days_held": 20,
    "state": "open",
-   "last_price": 63.21,
-   "pkr_if_sold_now": -14
+   "last_price": 63.37,
+   "pkr_if_sold_now": 239
   }
  },
  {
@@ -377,10 +377,10 @@
    "fill_price": 125.99,
    "stop_price": 107.09,
    "target_price": null,
-   "days_held": 14,
+   "days_held": 15,
    "state": "open",
-   "last_price": 200.02,
-   "pkr_if_sold_now": 58289
+   "last_price": 210.26,
+   "pkr_if_sold_now": 66402
   }
  },
  {
@@ -403,10 +403,10 @@
    "fill_price": 73.5,
    "stop_price": 62.48,
    "target_price": null,
-   "days_held": 13,
+   "days_held": 14,
    "state": "open",
-   "last_price": 68.48,
-   "pkr_if_sold_now": -7181
+   "last_price": 68.79,
+   "pkr_if_sold_now": -6760
   }
  },
  {
@@ -449,10 +449,10 @@
    "fill_price": 119.0,
    "stop_price": 101.15,
    "target_price": null,
-   "days_held": 13,
+   "days_held": 14,
    "state": "open",
-   "last_price": 152.17,
-   "pkr_if_sold_now": 27460
+   "last_price": 136.95,
+   "pkr_if_sold_now": 14694
   }
  },
  {
@@ -555,10 +555,10 @@
    "fill_price": 57.99,
    "stop_price": 49.29,
    "target_price": null,
-   "days_held": 10,
+   "days_held": 11,
    "state": "open",
-   "last_price": 60.21,
-   "pkr_if_sold_now": 3458
+   "last_price": 61.01,
+   "pkr_if_sold_now": 4835
   }
  },
  {
@@ -581,10 +581,10 @@
    "fill_price": 1054.11,
    "stop_price": 927.62,
    "target_price": 1159.52,
-   "days_held": 10,
+   "days_held": 11,
    "state": "open",
-   "last_price": 1005.74,
-   "pkr_if_sold_now": -4944
+   "last_price": 997.09,
+   "pkr_if_sold_now": -5763
   }
  },
  {
@@ -607,7 +607,7 @@
    "fill_price": 7.13,
    "stop_price": 6.06,
    "target_price": null,
-   "days_held": 10,
+   "days_held": 11,
    "state": "open",
    "last_price": 7.25,
    "pkr_if_sold_now": 52
@@ -717,10 +717,10 @@
    "fill_price": 9.1,
    "stop_price": 7.73,
    "target_price": null,
-   "days_held": 5,
+   "days_held": 6,
    "state": "open",
-   "last_price": 8.02,
-   "pkr_if_sold_now": -13149
+   "last_price": 8.05,
+   "pkr_if_sold_now": -12819
   }
  },
  {
@@ -743,10 +743,10 @@
    "fill_price": 1370.02,
    "stop_price": 1164.52,
    "target_price": null,
-   "days_held": 5,
+   "days_held": 6,
    "state": "open",
-   "last_price": 1288.23,
-   "pkr_if_sold_now": -6322
+   "last_price": 1249.19,
+   "pkr_if_sold_now": -9167
   }
  },
  {
@@ -769,10 +769,10 @@
    "fill_price": 27.7,
    "stop_price": 23.54,
    "target_price": null,
-   "days_held": 4,
+   "days_held": 5,
    "state": "open",
-   "last_price": 32.84,
-   "pkr_if_sold_now": 18121
+   "last_price": 36.12,
+   "pkr_if_sold_now": 29944
   }
  },
  {
@@ -795,10 +795,10 @@
    "fill_price": 100.31,
    "stop_price": 85.26,
    "target_price": null,
-   "days_held": 4,
+   "days_held": 5,
    "state": "open",
-   "last_price": 146.86,
-   "pkr_if_sold_now": 45959
+   "last_price": 161.4,
+   "pkr_if_sold_now": 60428
   }
  },
  {
@@ -821,10 +821,10 @@
    "fill_price": 467.7,
    "stop_price": 397.54,
    "target_price": null,
-   "days_held": 4,
+   "days_held": 5,
    "state": "open",
-   "last_price": 455.0,
-   "pkr_if_sold_now": -3073
+   "last_price": 460.22,
+   "pkr_if_sold_now": -1959
   }
  },
  {
@@ -847,10 +847,10 @@
    "fill_price": 250.0,
    "stop_price": 212.5,
    "target_price": null,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 247.46,
-   "pkr_if_sold_now": -1377
+   "last_price": 239.81,
+   "pkr_if_sold_now": -4432
   }
  },
  {
@@ -873,10 +873,10 @@
    "fill_price": 63.03,
    "stop_price": 55.47,
    "target_price": 69.33,
-   "days_held": 2,
+   "days_held": 3,
    "state": "open",
-   "last_price": 63.21,
-   "pkr_if_sold_now": -78
+   "last_price": 63.37,
+   "pkr_if_sold_now": 175
   }
  },
  {
@@ -893,6 +893,112 @@
   "stop_pct": 0.15,
   "target_pct": null,
   "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "fill_date": "2026-11-24",
+   "fill_price": 179.0,
+   "stop_price": 152.15,
+   "target_price": null,
+   "days_held": 0,
+   "state": "open",
+   "last_price": 165.04,
+   "pkr_if_sold_now": -8148
+  }
+ },
+ {
+  "id": "2026-11-24-FPRM-trend_hold",
+  "created_at": "2026-11-24T17:47:21+05:00",
+  "signal_date": "2026-11-24",
+  "symbol": "FPRM",
+  "setup": "trend_hold",
+  "setup_label": "Trend hold (weeks)",
+  "close_at_signal": 16.59,
+  "order": "Buy at the opening price",
+  "order_type": "open",
+  "order_price": null,
+  "stop_pct": 0.15,
+  "target_pct": null,
+  "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-24-GCIL-trend_hold",
+  "created_at": "2026-11-24T17:47:21+05:00",
+  "signal_date": "2026-11-24",
+  "symbol": "GCIL",
+  "setup": "trend_hold",
+  "setup_label": "Trend hold (weeks)",
+  "close_at_signal": 34.95,
+  "order": "Buy at the opening price",
+  "order_type": "open",
+  "order_price": null,
+  "stop_pct": 0.15,
+  "target_pct": null,
+  "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-24-GOC-washout",
+  "created_at": "2026-11-24T17:47:21+05:00",
+  "signal_date": "2026-11-24",
+  "symbol": "GOC",
+  "setup": "washout",
+  "setup_label": "Washout dip in a hot stock",
+  "close_at_signal": 238.25,
+  "order": "Limit buy at Rs 235.87",
+  "order_type": "limit",
+  "order_price": 235.87,
+  "stop_pct": 0.12,
+  "target_pct": 0.1,
+  "max_hold_days": 15,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-24-MLCF-trend_hold",
+  "created_at": "2026-11-24T17:47:21+05:00",
+  "signal_date": "2026-11-24",
+  "symbol": "MLCF",
+  "setup": "trend_hold",
+  "setup_label": "Trend hold (weeks)",
+  "close_at_signal": 107.79,
+  "order": "Buy at the opening price",
+  "order_type": "open",
+  "order_price": null,
+  "stop_pct": 0.15,
+  "target_pct": null,
+  "max_hold_days": 60,
+  "kmi_list_date": "2026-10-21",
+  "result": {
+   "state": "waiting",
+   "note": "order is for the next session"
+  }
+ },
+ {
+  "id": "2026-11-24-OML-washout",
+  "created_at": "2026-11-24T17:47:21+05:00",
+  "signal_date": "2026-11-24",
+  "symbol": "OML",
+  "setup": "washout",
+  "setup_label": "Washout dip in a hot stock",
+  "close_at_signal": 136.95,
+  "order": "Limit buy at Rs 135.58",
+  "order_type": "limit",
+  "order_price": 135.58,
+  "stop_pct": 0.12,
+  "target_pct": 0.1,
+  "max_hold_days": 15,
   "kmi_list_date": "2026-10-21",
   "result": {
    "state": "waiting",
