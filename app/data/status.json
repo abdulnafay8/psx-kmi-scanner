@@ -1,6 +1,27 @@
 {
  "runs": [
   {
+   "at": "2026-11-24T04:45:40+05:00",
+   "state": "before_final",
+   "as_of": "2026-11-23",
+   "new_alerts": 1,
+   "fetch_failed": 0,
+   "log": [
+    "04:45:40  run started Tuesday 2026-11-24 04:45 PKT; market state: before_final",
+    "04:45:40  before 16:15: today's candle isn't final yet, so it is not saved and no alerts are made",
+    "04:57:35  1 fetches failed; retrying them in 2 minutes",
+    "04:59:44  prices updated for 313 stocks, 0 failed",
+    "04:59:48  plans from the 2026-11-23 close are for the session opening Tue 24 Nov 09:15",
+    "04:59:48  NEW ALERT SZTM trend_hold: Buy at the opening price",
+    "04:59:48  checked 307 KMI stocks as of 2026-11-23: {'no_setup': 231, 'fading': 55, 'running': 18, 'in_plan': 2, 'buy_plan': 1}",
+    "04:59:48  washout: 5 stocks miss exactly one check: ANTM, GOC, OML, PIM, SINDM",
+    "04:59:48  trend_hold: 62 stocks miss exactly one check: ABOT, ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BPL, BUXL, CNERGY, COLG, DAAG",
+    "04:59:50  Firebase: 5 phones registered for alerts",
+    "04:59:52  Firebase push sent to 4 phones: SZTM: Trend hold (weeks) (1 dead phone codes removed)",
+    "05:00:03  dividend calendar: 19 meetings, 0 book closures ahead, 79 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-23T15:59:55+05:00",
    "state": "before_final",
    "as_of": "2026-11-20",
@@ -543,32 +564,6 @@
     "08:28:54  washout: 10 stocks miss exactly one check: CFL, DADX, ECOP, FIL, GCWL, IPAK, JDMT, MWMP, SPSL, SYM",
     "08:28:54  trend_hold: 48 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DADX, DCR, DFSM",
     "08:29:07  dividend calendar: 9 meetings, 11 book closures ahead, 86 recent payouts"
-   ]
-  },
-  {
-   "at": "2026-11-02T17:58:32+05:00",
-   "state": "after_close",
-   "as_of": "2026-11-02",
-   "new_alerts": 3,
-   "fetch_failed": 0,
-   "log": [
-    "17:58:32  run started Monday 2026-11-02 17:58 PKT; market state: after_close",
-    "18:10:19  3 fetches failed; retrying them in 2 minutes",
-    "18:12:32  prices updated for 313 stocks, 0 failed",
-    "18:12:34  plans from the 2026-11-02 close are for the session opening Tue 03 Nov 09:15",
-    "18:12:34  NEW ALERT JATM trend_hold: Buy at the opening price",
-    "18:12:34  NEW ALERT KPUS washout: Limit buy at Rs 999.42",
-    "18:12:34  NEW ALERT OML trend_hold: Buy at the opening price",
-    "18:12:34  checked 307 KMI stocks as of 2026-11-02: {'fading': 182, 'no_setup': 103, 'running': 16, 'in_plan': 3, 'buy_plan': 3}",
-    "18:12:34  washout: 10 stocks miss exactly one check: CFL, DADX, ECOP, FIL, GCWL, IPAK, JDMT, MWMP, SPSL, SYM",
-    "18:12:34  trend_hold: 48 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DAAG, DADX, DCR, DFSM",
-    "18:12:35  ntfy push sent: JATM: Trend hold (weeks)",
-    "18:12:35  Firebase push sent to 1 of 1 devices: JATM: Trend hold (weeks)",
-    "18:12:35  ntfy push sent: KPUS: Washout dip in a hot stock",
-    "18:12:36  Firebase push sent to 1 of 1 devices: KPUS: Washout dip in a hot stock",
-    "18:12:36  ntfy push sent: OML: Trend hold (weeks)",
-    "18:12:36  Firebase push sent to 1 of 1 devices: OML: Trend hold (weeks)",
-    "18:12:49  dividend calendar: 8 meetings, 11 book closures ahead, 85 recent payouts"
    ]
   }
  ]
