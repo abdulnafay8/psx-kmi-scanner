@@ -1,6 +1,23 @@
 {
  "runs": [
   {
+   "at": "2026-11-27T02:21:26+05:00",
+   "state": "before_final",
+   "as_of": "2026-11-26",
+   "new_alerts": 0,
+   "fetch_failed": 0,
+   "log": [
+    "02:21:26  run started Friday 2026-11-27 02:21 PKT; market state: before_final",
+    "02:21:26  before 17:00: today's candle isn't final yet, so it is not saved and no alerts are made",
+    "02:32:28  prices updated for 313 stocks, 0 failed",
+    "02:32:30  plans from the 2026-11-26 close are for the session opening Fri 27 Nov 09:15",
+    "02:32:30  checked 307 KMI stocks as of 2026-11-26: {'no_setup': 233, 'fading': 45, 'running': 20, 'in_plan': 8, 'buy_plan': 1}",
+    "02:32:30  washout: 4 stocks miss exactly one check: MACTER, PIM, SINDM, STML",
+    "02:32:30  trend_hold: 66 stocks miss exactly one check: ABOT, ACPL, ARCTM, ASL, ASTM, ATRL, BCL, BERG, BPL, BUXL, CCM, CNERGY",
+    "02:32:40  dividend calendar: 20 meetings, 0 book closures ahead, 78 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-26T16:16:00+05:00",
    "state": "after_close",
    "as_of": "2026-11-26",
@@ -556,24 +573,6 @@
     "08:29:13  Firebase push sent to 2 phones: KPUS: Washout dip in a hot stock",
     "08:29:13  Firebase push sent to 2 phones: WASL: Trend hold (weeks)",
     "08:29:26  dividend calendar: 9 meetings, 7 book closures ahead, 90 recent payouts"
-   ]
-  },
-  {
-   "at": "2026-11-05T08:15:09+05:00",
-   "state": "before_final",
-   "as_of": "2026-11-04",
-   "new_alerts": 0,
-   "fetch_failed": 0,
-   "log": [
-    "08:15:09  run started Thursday 2026-11-05 08:15 PKT; market state: before_final",
-    "08:15:09  before 16:15: today's candle isn't final yet, so it is not saved and no alerts are made",
-    "08:27:38  prices updated for 313 stocks, 0 failed",
-    "08:33:36  dividend payout list refreshed",
-    "08:33:40  plans from the 2026-11-04 close are for the session opening Thu 05 Nov 09:15",
-    "08:33:40  checked 307 KMI stocks as of 2026-11-04: {'fading': 143, 'no_setup': 139, 'running': 18, 'in_plan': 5, 'buy_plan': 2}",
-    "08:33:40  washout: 8 stocks miss exactly one check: ATRL, DADX, FIL, IPAK, NRL, SPSL, SYM, ZAL",
-    "08:33:40  trend_hold: 53 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BPL, BUXL, CNERGY, DAAG, DADX, DCR",
-    "08:33:54  dividend calendar: 9 meetings, 8 book closures ahead, 89 recent payouts"
    ]
   }
  ]
