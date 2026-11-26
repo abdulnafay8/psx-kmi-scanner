@@ -1,6 +1,27 @@
 {
  "runs": [
   {
+   "at": "2026-11-26T16:16:00+05:00",
+   "state": "after_close",
+   "as_of": "2026-11-26",
+   "new_alerts": 1,
+   "fetch_failed": 0,
+   "log": [
+    "16:16:00  run started Thursday 2026-11-26 16:16 PKT; market state: after_close",
+    "16:28:11  1 fetches failed; retrying them in 2 minutes",
+    "16:30:19  prices updated for 313 stocks, 0 failed",
+    "16:36:22  dividend payout list refreshed",
+    "16:36:25  plans from the 2026-11-26 close are for the session opening Fri 27 Nov 09:15",
+    "16:36:25  NEW ALERT FCEPL trend_hold: Buy at the opening price",
+    "16:36:25  checked 307 KMI stocks as of 2026-11-26: {'no_setup': 233, 'fading': 45, 'running': 20, 'in_plan': 8, 'buy_plan': 1}",
+    "16:36:25  washout: 4 stocks miss exactly one check: MACTER, PIM, SINDM, STML",
+    "16:36:25  trend_hold: 66 stocks miss exactly one check: ABOT, ACPL, ARCTM, ASL, ASTM, ATRL, BCL, BERG, BPL, BUXL, CCM, CNERGY",
+    "16:36:28  Firebase: 4 phones registered for alerts",
+    "16:36:28  Firebase push sent to 4 phones: FCEPL: Trend hold (weeks)",
+    "16:36:40  dividend calendar: 22 meetings, 0 book closures ahead, 79 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-26T02:34:08+05:00",
    "state": "before_final",
    "as_of": "2026-11-25",
@@ -553,23 +574,6 @@
     "08:33:40  washout: 8 stocks miss exactly one check: ATRL, DADX, FIL, IPAK, NRL, SPSL, SYM, ZAL",
     "08:33:40  trend_hold: 53 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BPL, BUXL, CNERGY, DAAG, DADX, DCR",
     "08:33:54  dividend calendar: 9 meetings, 8 book closures ahead, 89 recent payouts"
-   ]
-  },
-  {
-   "at": "2026-11-04T23:42:21+05:00",
-   "state": "after_close",
-   "as_of": "2026-11-04",
-   "new_alerts": 0,
-   "fetch_failed": 0,
-   "log": [
-    "23:42:21  run started Wednesday 2026-11-04 23:42 PKT; market state: after_close",
-    "23:54:49  3 fetches failed; retrying them in 2 minutes",
-    "23:57:04  prices updated for 313 stocks, 0 failed",
-    "23:57:08  plans from the 2026-11-04 close are for the session opening Thu 05 Nov 09:15",
-    "23:57:08  checked 307 KMI stocks as of 2026-11-04: {'fading': 143, 'no_setup': 139, 'running': 18, 'in_plan': 5, 'buy_plan': 2}",
-    "23:57:08  washout: 8 stocks miss exactly one check: ATRL, DADX, FIL, IPAK, NRL, SPSL, SYM, ZAL",
-    "23:57:08  trend_hold: 53 stocks miss exactly one check: ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BPL, BUXL, CNERGY, DAAG, DADX, DCR",
-    "23:57:21  dividend calendar: 9 meetings, 10 book closures ahead, 87 recent payouts"
    ]
   }
  ]
