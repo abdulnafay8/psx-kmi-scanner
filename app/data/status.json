@@ -1,6 +1,24 @@
 {
  "runs": [
   {
+   "at": "2026-11-27T16:10:08+05:00",
+   "state": "before_final",
+   "as_of": "2026-11-26",
+   "new_alerts": 0,
+   "fetch_failed": 0,
+   "log": [
+    "16:10:08  run started Friday 2026-11-27 16:10 PKT; market state: before_final",
+    "16:10:08  before 17:00: today's candle isn't final yet, so it is not saved and no alerts are made",
+    "16:24:49  1 fetches failed; retrying them in 2 minutes",
+    "16:26:57  prices updated for 313 stocks, 0 failed",
+    "16:27:01  no new alerts: the last final candle is 2026-11-26 and the next session opened at Fri 27 Nov 09:15; today's candle isn't final until after the close",
+    "16:27:01  checked 307 KMI stocks as of 2026-11-26: {'no_setup': 233, 'fading': 45, 'running': 20, 'in_plan': 8, 'buy_plan': 1}",
+    "16:27:01  washout: 4 stocks miss exactly one check: MACTER, PIM, SINDM, STML",
+    "16:27:01  trend_hold: 66 stocks miss exactly one check: ABOT, ACPL, ARCTM, ASL, ASTM, ATRL, BCL, BERG, BPL, BUXL, CCM, CNERGY",
+    "16:27:14  dividend calendar: 20 meetings, 0 book closures ahead, 78 recent payouts"
+   ]
+  },
+  {
    "at": "2026-11-27T02:21:26+05:00",
    "state": "before_final",
    "as_of": "2026-11-26",
@@ -547,32 +565,6 @@
     "18:12:00  Firebase: 2 phones registered for alerts",
     "18:12:00  Firebase push sent to 2 phones: DAAG: Trend hold (weeks)",
     "18:12:13  dividend calendar: 14 meetings, 7 book closures ahead, 90 recent payouts"
-   ]
-  },
-  {
-   "at": "2026-11-06T08:16:30+05:00",
-   "state": "before_final",
-   "as_of": "2026-11-05",
-   "new_alerts": 4,
-   "fetch_failed": 0,
-   "log": [
-    "08:16:30  run started Friday 2026-11-06 08:16 PKT; market state: before_final",
-    "08:16:30  before 17:00: today's candle isn't final yet, so it is not saved and no alerts are made",
-    "08:29:05  prices updated for 313 stocks, 0 failed",
-    "08:29:09  plans from the 2026-11-05 close are for the session opening Fri 06 Nov 09:15",
-    "08:29:09  NEW ALERT DAAG trend_hold: Buy at the opening price",
-    "08:29:09  NEW ALERT FCCL trend_hold: Buy at the opening price",
-    "08:29:09  NEW ALERT KPUS washout: Limit buy at Rs 1,054.11",
-    "08:29:09  NEW ALERT WASL trend_hold: Buy at the opening price",
-    "08:29:09  checked 307 KMI stocks as of 2026-11-05: {'no_setup': 181, 'fading': 97, 'running': 21, 'buy_plan': 4, 'in_plan': 4}",
-    "08:29:09  washout: 9 stocks miss exactly one check: ATRL, DADX, FIL, FTSM, NRL, SELECT, SPSL, SYM, ZAL",
-    "08:29:09  trend_hold: 51 stocks miss exactly one check: ABOT, ACPL, ARCTM, ASL, ASTM, ATRL, BERG, BUXL, CNERGY, DADX, DCR, DFSM",
-    "08:29:11  Firebase: 2 phones registered for alerts",
-    "08:29:12  Firebase push sent to 2 phones: DAAG: Trend hold (weeks)",
-    "08:29:12  Firebase push sent to 2 phones: FCCL: Trend hold (weeks)",
-    "08:29:13  Firebase push sent to 2 phones: KPUS: Washout dip in a hot stock",
-    "08:29:13  Firebase push sent to 2 phones: WASL: Trend hold (weeks)",
-    "08:29:26  dividend calendar: 9 meetings, 7 book closures ahead, 90 recent payouts"
    ]
   }
  ]
